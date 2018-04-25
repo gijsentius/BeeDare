@@ -48,6 +48,10 @@
 
 \input{structure} % Insert the commands.tex file which contains the majority of the structure behind the template
 
+\newcommand{\titleText}{Leuke titel voor project} % to set the title
+\newcommand{\subtitleText}{Documentatie verslag van project 2.4} % to set the subtitle
+\newcommand{\authorText}{Dagmar Hoogendorp \\ Jelmer Wessels \\ Stèphan Hilbers \\ Roy van Kampen \\ Gijs Entius \\}
+
 \begin{document}
 
 %----------------------------------------------------------------------------------------
@@ -56,11 +60,12 @@
 
 \begingroup
 \thispagestyle{empty}
+\noindent\makebox[\textwidth]{\includegraphics[width=\textwidth]{hanzehogeschool_image}}\\
 \begin{tikzpicture}[remember picture,overlay]
-\node[inner sep=0pt] (background) at (current page.center) {\includegraphics[width=\paperwidth]{background}};
-\draw (current page.center) node [fill=ocre!30!white,fill opacity=0.6,text opacity=1,inner sep=1cm]{\Huge\centering\bfseries\sffamily\parbox[c][][t]{\paperwidth}{\centering The Search for a Title\\[15pt] % Book title
-{\Large A Profound Subtitle}\\[20pt] % Subtitle
-{\huge Gijs Entius}}}; % Author name
+% \node[inner sep=0pt] (background) at (current page.center) {\includegraphics[width=\paperwidth]{background_hanze}};
+\draw (current page.center) node [fill=ocre!30!white,fill opacity=0.6,text opacity=1,inner sep=1cm]{\Huge\centering\bfseries\sffamily\parbox[c][][t]{\paperwidth}{\centering \titleText \\[15pt] % Book title
+{\Large \subtitleText}\\[20pt] % Subtitle
+{\huge \authorText}}}; % Author name
 \end{tikzpicture}
 \vfill
 \endgroup
@@ -70,29 +75,49 @@
 %----------------------------------------------------------------------------------------
 
 \newpage
-~\vfill
 \thispagestyle{empty}
 
-\noindent Copyright \copyright\ 2018 Gijs Entius\\ % Copyright notice
+\noindent\makebox[\textwidth]{\includegraphics[width=\textwidth]{hanzehogeschool_image}}\\
 
-% \noindent \textsc{Published by Publisher}\\ % Publisher
+\begin{tabbing}
+    \textbf{Titel:} \hspace{2cm} \= \titleText \\
+    \textbf{Ondertitel:} \> \subtitleText \\
+    \textbf{Opleiding:} \> HBO-ICT, software engineering,leerjaar 2 \\
+    \textbf{Auteurs:} \> Dagmar Hoogendorp (000000) \\
+    \> Jelmer Wessels (000000) \\
+    \> Roy van Kampen (000000) \\
+    \> Gijs Entius (357665) \\
+    \> Stèphan Hilberts (000000) \\
+    \textbf{Plaats \& Datum:} \> Groningen, \today 
+\end{tabbing}
 
-% \noindent \textsc{book-website.com}\\ % URL
+% \begin{center}
+%     \textbf{Titel:}\tab \titleText \par
+%     \textbf{Ondertitel:}\tab \subtitleText \par
+%     \textbf{Opleiding:}\tab HBO-ICT, software engineering,leerjaar 2 \par
+%     \textbf{Autheur:}\tab \authorText \space (357665) \par
+%     \textbf{Plaats \& Datum:}\tab Groningen, \today 
+% \end{center}
 
-\noindent Het copyright van het rapport berust bij de student en de Hanzehogeschool is verantwoordelijk voor
-de inhoud van het rapport. Voorzie het rapport daarom van de tekst:
-Dit afstudeerrapport is geschreven onder verantwoordelijkheid van de Hanzehogeschool Groningen.
-Het copyright berust bij de auteur. Zowel de Hanzehogeschool Groningen als de auteur verklaren, dat
-zij eventuele gegevens van derden die voor dit afstudeeronderzoek zijn gebruikt en die door deze
-derden als vertrouwelijk zijn aangemerkt, als zodanig zullen behandelen.\\ % License information
+\vfill
+% ~\vfill % gebruik als er niks voor komt maar er wel vfill nodig is
 
-% \noindent \textit{First printing, March 2013} % Printing/edition date
+\begin{center}
+Copyright \copyright\ 2018 \\ Dagmar Hoogendorp, Jelmer Wessels, Stéphan Hilbers, Roy van Kampen \& Gijs Entius % Copyright notice
+\end{center}
+
+\begin{center}
+    Dit rapport is geschreven onder verantwoordelijkheid van de Hanzehogeschool Groningen.
+    Het copyright berust bij de auteur(s). Zowel de Hanzehogeschool Groningen als de auteur(s) verklaren, dat
+    zij eventuele gegevens van derden die voor dit rapport zijn gebruikt en die door deze
+    derden als vertrouwelijk zijn aangemerkt, als zodanig zullen behandelen.\\ % License information
+\end{center}
 
 %----------------------------------------------------------------------------------------
 %	TABLE OF CONTENTS
 %----------------------------------------------------------------------------------------
 
-%\usechapterimagefalse % If you don't want to include a chapter image, use this to toggle images off - it can be enabled later with \usechapterimagetrue
+\usechapterimagefalse % If you don't want to include a chapter image, use this to toggle images off - it can be enabled later with \usechapterimagetrue
 
 \chapterimage{chapter_head_1.pdf} % Table of contents heading image
 
@@ -100,15 +125,34 @@ derden als vertrouwelijk zijn aangemerkt, als zodanig zullen behandelen.\\ % Lic
 
 \tableofcontents % Print the table of contents itself
 
-\cleardoublepage % Forces the first chapter to start on an odd page so it's on the right
+% \cleardoublepage % Forces the first chapter to start on an odd page so it's on the right
 
 \pagestyle{fancy} % Print headers again
 
 %----------------------------------------------------------------------------------------
-%	PART
+%   Chapters
 %----------------------------------------------------------------------------------------
 
-\part{Part One}
+\chapter{Inleiding}
+
+\chapter{Projectopzet}
+
+\section{Concept}
+
+\section{Eigenschappen}
+
+%----------------------------------------------------------------------------------------
+%	APPENDICES
+%----------------------------------------------------------------------------------------
+
+\chapter*{Bijlagen}
+
+
+%----------------------------------------------------------------------------------------
+%	Examples
+%----------------------------------------------------------------------------------------
+
+\part{Examples}
 
 %----------------------------------------------------------------------------------------
 %	CHAPTER 1
@@ -124,9 +168,9 @@ derden als vertrouwelijk zijn aangemerkt, als zodanig zullen behandelen.\\ % Lic
 
 %------------------------------------------------
 
-\section{Citation}\index{Citation}
+% \section{Citation}\index{Citation}
 
-This statement requires citation \cite{article_key}; this one is more specific \cite[162]{book_key}.
+% This statement requires citation \cite{article_key}; this one is more specific \cite[162]{book_key}.
 
 %------------------------------------------------
 
@@ -308,12 +352,6 @@ Definition of word.
 \end{vocabulary}
 
 %----------------------------------------------------------------------------------------
-%	PART
-%----------------------------------------------------------------------------------------
-
-\part{Part Two}
-
-%----------------------------------------------------------------------------------------
 %	CHAPTER 3
 %----------------------------------------------------------------------------------------
 
@@ -350,31 +388,19 @@ Treatment 3 & 0.0009271 & 0.296 \\
 %	BIBLIOGRAPHY
 %----------------------------------------------------------------------------------------
 
-\chapter*{Bibliography}
-\addcontentsline{toc}{chapter}{\textcolor{ocre}{Bibliography}}
+% \chapter*{Bibliography}
+% \addcontentsline{toc}{chapter}{\textcolor{ocre}{Bibliography}}
 
 %------------------------------------------------
 
-\section*{Articles}
-\addcontentsline{toc}{section}{Articles}
-\printbibliography[heading=bibempty,type=article]
+% \section*{Articles}
+% \addcontentsline{toc}{section}{Articles}
+% \printbibliography[heading=bibempty,type=article]
 
-%------------------------------------------------
+% %------------------------------------------------
 
-\section*{Books}
-\addcontentsline{toc}{section}{Books}
-\printbibliography[heading=bibempty,type=book]
-
-%----------------------------------------------------------------------------------------
-%	INDEX
-%----------------------------------------------------------------------------------------
-
-\cleardoublepage
-\phantomsection
-\setlength{\columnsep}{0.75cm}
-\addcontentsline{toc}{chapter}{\textcolor{ocre}{Index}}
-\printindex
-
-%----------------------------------------------------------------------------------------
+% \section*{Books}
+% \addcontentsline{toc}{section}{Books}
+% \printbibliography[heading=bibempty,type=book]
 
 \end{document}
