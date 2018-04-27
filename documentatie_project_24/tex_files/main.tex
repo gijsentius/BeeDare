@@ -53,7 +53,7 @@
 \newcommand{\authorText}{Dagmar Hoogendorp \\ Jelmer Wessels \\ Stèphan Hilbers \\ Roy van Kampen \\ Gijs Entius \\}
 
 \begin{document}
-
+% \lstset{language=Java} % set your global programming language here or define locally (see examples)   
 %----------------------------------------------------------------------------------------
 %	TITLE PAGE
 %----------------------------------------------------------------------------------------
@@ -140,6 +140,36 @@ Copyright \copyright\ 2018 \\ Dagmar Hoogendorp, Jelmer Wessels, Stéphan Hilber
 \section{Concept}
 
 \section{Eigenschappen}
+
+\chapter{Sprint 1}
+
+\section{Mock-ups}
+
+\section{Front-end framework }
+
+\chapter{Sprint 2}
+
+\section{Interactieschema}
+
+\section{Rest-implementatie}
+
+\section{ORM-implementatie}
+
+\chapter{Sprint 3}
+
+\section{ORM met SQLAlchemy}
+
+\section{NoSQL toevoeging}
+
+\section{Keuze distributie}
+
+\section{Implementatie van ...}
+
+\chapter{Sprint 4}
+
+\section{Native app}
+
+\section{Architectuur diagram}
 
 %----------------------------------------------------------------------------------------
 %	APPENDICES
@@ -383,6 +413,36 @@ Treatment 3 & 0.0009271 & 0.296 \\
 \centering\includegraphics[scale=0.5]{placeholder}
 \caption{Figure caption}
 \end{figure}
+
+
+%----------------------------------------------------------------------------------------
+%	CHAPTER 3
+%----------------------------------------------------------------------------------------
+
+\chapter{Listing code snippets}
+
+\section{examples}
+
+% \lstinputlisting{source_filename.py} % input a file
+\begin{mdframed}[style=code_box]
+\lstinputlisting[language=Python, caption=python snippet]{/home/entix/Documents/project_2_4/documentatie_project_24/code_snippets/example.py} % local language identifier
+\end{mdframed}
+
+\lstset{language=Java} % change programming language
+
+\begin{mdframed}[style=code_box]
+\begin{lstlisting}[caption={Java snippet},captionpos=b]
+// Hello.java
+import javax.swing.JApplet;
+import java.awt.Graphics;
+
+public class Hello extends JApplet {
+    public void paintComponent(Graphics g) {
+        g.drawString("Hello, world!", 65, 95);
+    }    
+}
+\end{lstlisting}
+\end{mdframed}
 
 %----------------------------------------------------------------------------------------
 %	BIBLIOGRAPHY

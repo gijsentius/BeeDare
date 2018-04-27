@@ -24,6 +24,20 @@
 \usepackage{graphicx} % Required for including pictures
 \graphicspath{{Pictures/}} % Specifies the directory where pictures are stored
 
+%----------------------------------------------------------------------------------------
+%	FONTS
+%----------------------------------------------------------------------------------------
+
+\usepackage{avant} % Use the Avantgarde font for headings
+%\usepackage{times} % Use the Times font for headings
+\usepackage{mathptmx} % Use the Adobe Times Roman as the default text font together with math symbols from the Sym­bol, Chancery and Com­puter Modern fonts
+
+\usepackage{microtype} % Slightly tweak font spacing for aesthetics
+\usepackage[utf8]{inputenc} % Required for including letters with accents
+\usepackage[T1]{fontenc} % Use 8-bit encoding that has 256 glyphs
+
+%----------------------------------------------------------------------------------------
+
 \usepackage{lipsum} % Inserts dummy text
 
 \usepackage{tikz} % Required for drawing custom shapes
@@ -45,18 +59,6 @@
 
 \usepackage{xcolor} % Required for specifying colors by name
 \definecolor{ocre}{RGB}{243,102,25} % Define the orange color used for highlighting throughout the book
-
-%----------------------------------------------------------------------------------------
-%	FONTS
-%----------------------------------------------------------------------------------------
-
-\usepackage{avant} % Use the Avantgarde font for headings
-%\usepackage{times} % Use the Times font for headings
-\usepackage{mathptmx} % Use the Adobe Times Roman as the default text font together with math symbols from the Sym­bol, Chancery and Com­puter Modern fonts
-
-\usepackage{microtype} % Slightly tweak font spacing for aesthetics
-\usepackage[utf8]{inputenc} % Required for including letters with accents
-\usepackage[T1]{fontenc} % Use 8-bit encoding that has 256 glyphs
 
 %----------------------------------------------------------------------------------------
 %	BIBLIOGRAPHY AND INDEX
@@ -258,6 +260,24 @@
 
 \RequirePackage[framemethod=default]{mdframed} % Required for creating the theorem, definition, exercise and corollary boxes
 
+\mdfdefinestyle{code_box}{backgroundcolor=light-gray, 
+roundcorner=10pt,leftmargin=1, 
+rightmargin=1, 
+innerleftmargin=15, 
+innertopmargin=15,
+innerbottommargin=15, 
+outerlinewidth=1, 
+linecolor=light-gray}
+
+% \newmdenv[backgroundcolor=light-gray, 
+% roundcorner=10pt,leftmargin=1, 
+% rightmargin=1, 
+% innerleftmargin=15, 
+% innertopmargin=15,
+% innerbottommargin=15, 
+% outerlinewidth=1, 
+% linecolor=light-gray]{code_box}
+
 % Theorem box
 \newmdenv[skipabove=7pt,
 skipbelow=7pt,
@@ -326,6 +346,35 @@ innerbottommargin=5pt]{cBox}
 \newenvironment{definition}{\begin{dBox}\begin{definitionT}}{\end{definitionT}\end{dBox}}	
 \newenvironment{example}{\begin{exampleT}}{\hfill{\tiny\ensuremath{\blacksquare}}\end{exampleT}}		
 \newenvironment{corollary}{\begin{cBox}\begin{corollaryT}}{\end{corollaryT}\end{cBox}}	
+
+%----------------------------------------------------------------------------------------
+%	CODE
+% https://stackoverflow.com/questions/3175105/writing-code-in-latex-document
+%----------------------------------------------------------------------------------------
+
+\usepackage{listings}
+% \usepackage{mdframed} %nice frames
+\usepackage{color}
+
+\definecolor{dkgreen}{rgb}{0,0.6,0}
+\definecolor{gray}{rgb}{0.5,0.5,0.5}
+\definecolor{mauve}{rgb}{0.58,0,0.82}
+\definecolor{light-gray}{gray}{0.95}
+
+\lstset{
+    language=Python,
+    aboveskip=3mm,
+    belowskip=3mm,
+    showstringspaces=false,
+    columns=flexible,
+    basicstyle={\small\ttfamily},
+    numbers=none,
+    numberstyle=\tiny\color{gray},
+    keywordstyle=\color{blue},
+    commentstyle=\color{dkgreen},
+    stringstyle=\color{mauve},
+    tabsize=2
+}
 
 %----------------------------------------------------------------------------------------
 %	REMARK ENVIRONMENT
