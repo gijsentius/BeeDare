@@ -1,101 +1,82 @@
 \boolfalse {citerequest}\boolfalse {citetracker}\boolfalse {pagetracker}\boolfalse {backtracker}\relax 
-\defcounter {refsection}{0}\relax 
-\select@language {dutch}
+\babel@toc {dutch}{}
 \defcounter {refsection}{0}\relax 
 \contentsline {chapter}{\numberline {1}Inleiding}{5}{chapter.1}
 \defcounter {refsection}{0}\relax 
 \contentsline {chapter}{\numberline {2}Projectopzet}{6}{chapter.2}
 \defcounter {refsection}{0}\relax 
-\contentsline {section}{\numberline {2.1}Concept}{6}{section.2.1}
+\contentsline {chapter}{\numberline {3}Case}{7}{chapter.3}
 \defcounter {refsection}{0}\relax 
-\contentsline {section}{\numberline {2.2}Eigenschappen}{6}{section.2.2}
+\contentsline {section}{\numberline {3.1}Weekplannig}{7}{section.3.1}
 \defcounter {refsection}{0}\relax 
-\contentsline {chapter}{\numberline {3}Sprint 1}{7}{chapter.3}
+\contentsline {subsection}{\numberline {3.1.1}Sprintverdeling}{7}{subsection.3.1.1}
 \defcounter {refsection}{0}\relax 
-\contentsline {section}{\numberline {3.1}Mock-ups}{7}{section.3.1}
+\contentsline {section}{\numberline {3.2}Concept}{7}{section.3.2}
 \defcounter {refsection}{0}\relax 
-\contentsline {section}{\numberline {3.2}Front-end framework }{7}{section.3.2}
+\contentsline {section}{\numberline {3.3}Gameification}{7}{section.3.3}
 \defcounter {refsection}{0}\relax 
-\contentsline {chapter}{\numberline {4}Sprint 2}{8}{chapter.4}
+\contentsline {section}{\numberline {3.4}Froud}{7}{section.3.4}
 \defcounter {refsection}{0}\relax 
-\contentsline {section}{\numberline {4.1}Interactieschema}{8}{section.4.1}
+\contentsline {section}{\numberline {3.5}Integratie met andere websites}{7}{section.3.5}
 \defcounter {refsection}{0}\relax 
-\contentsline {section}{\numberline {4.2}Rest-implementatie}{8}{section.4.2}
+\contentsline {section}{\numberline {3.6}Vinden van gebruikers}{7}{section.3.6}
 \defcounter {refsection}{0}\relax 
-\contentsline {section}{\numberline {4.3}ORM-implementatie}{8}{section.4.3}
+\contentsline {section}{\numberline {3.7}Uitgeschreven case}{7}{section.3.7}
 \defcounter {refsection}{0}\relax 
-\contentsline {chapter}{\numberline {5}Sprint 3}{9}{chapter.5}
+\contentsline {section}{\numberline {3.8}Eigenschappen}{8}{section.3.8}
 \defcounter {refsection}{0}\relax 
-\contentsline {section}{\numberline {5.1}ORM met SQLAlchemy}{9}{section.5.1}
-\defcounter {refsection}{0}\relax 
-\contentsline {section}{\numberline {5.2}NoSQL toevoeging}{9}{section.5.2}
-\defcounter {refsection}{0}\relax 
-\contentsline {section}{\numberline {5.3}Keuze distributie}{9}{section.5.3}
-\defcounter {refsection}{0}\relax 
-\contentsline {section}{\numberline {5.4}Implementatie van ...}{9}{section.5.4}
-\defcounter {refsection}{0}\relax 
-\contentsline {chapter}{\numberline {6}Sprint 4}{10}{chapter.6}
-\defcounter {refsection}{0}\relax 
-\contentsline {section}{\numberline {6.1}Native app}{10}{section.6.1}
-\defcounter {refsection}{0}\relax 
-\contentsline {section}{\numberline {6.2}Architectuur diagram}{10}{section.6.2}
-\defcounter {refsection}{0}\relax 
-\contentsline {part}{\@mypartnumtocformat {I}{Examples}}{12}{part.1}
+\contentsline {part}{\@mypartnumtocformat {I}{Examples}}{10}{part.1}
 \ttl@starttoc {default@1}
 \defcounter {refsection}{0}\relax 
-\contentsline {chapter}{\numberline {7}Text Chapter}{13}{chapter.7}
+\contentsline {chapter}{\numberline {4}Text Chapter}{11}{chapter.4}
 \defcounter {refsection}{0}\relax 
-\contentsline {section}{\numberline {7.1}Paragraphs of Text}{13}{section.7.1}
+\contentsline {section}{\numberline {4.1}Paragraphs of Text}{11}{section.4.1}
 \defcounter {refsection}{0}\relax 
-\contentsline {section}{\numberline {7.2}Lists}{14}{section.7.2}
+\contentsline {section}{\numberline {4.2}Lists}{12}{section.4.2}
 \defcounter {refsection}{0}\relax 
-\contentsline {subsection}{\numberline {7.2.1}Numbered List}{14}{subsection.7.2.1}
+\contentsline {subsection}{\numberline {4.2.1}Numbered List}{12}{subsection.4.2.1}
 \defcounter {refsection}{0}\relax 
-\contentsline {subsection}{\numberline {7.2.2}Bullet Points}{14}{subsection.7.2.2}
+\contentsline {subsection}{\numberline {4.2.2}Bullet Points}{12}{subsection.4.2.2}
 \defcounter {refsection}{0}\relax 
-\contentsline {subsection}{\numberline {7.2.3}Descriptions and Definitions}{14}{subsection.7.2.3}
+\contentsline {subsection}{\numberline {4.2.3}Descriptions and Definitions}{12}{subsection.4.2.3}
 \defcounter {refsection}{0}\relax 
-\contentsline {chapter}{\numberline {8}In-text Elements}{15}{chapter.8}
+\contentsline {chapter}{\numberline {5}In-text Elements}{13}{chapter.5}
 \defcounter {refsection}{0}\relax 
-\contentsline {section}{\numberline {8.1}Theorems}{15}{section.8.1}
+\contentsline {section}{\numberline {5.1}Theorems}{13}{section.5.1}
 \defcounter {refsection}{0}\relax 
-\contentsline {subsection}{\numberline {8.1.1}Several equations}{15}{subsection.8.1.1}
+\contentsline {subsection}{\numberline {5.1.1}Several equations}{13}{subsection.5.1.1}
 \defcounter {refsection}{0}\relax 
-\contentsline {subsection}{\numberline {8.1.2}Single Line}{15}{subsection.8.1.2}
+\contentsline {subsection}{\numberline {5.1.2}Single Line}{13}{subsection.5.1.2}
 \defcounter {refsection}{0}\relax 
-\contentsline {section}{\numberline {8.2}Definitions}{15}{section.8.2}
+\contentsline {section}{\numberline {5.2}Definitions}{13}{section.5.2}
 \defcounter {refsection}{0}\relax 
-\contentsline {section}{\numberline {8.3}Notations}{15}{section.8.3}
+\contentsline {section}{\numberline {5.3}Notations}{13}{section.5.3}
 \defcounter {refsection}{0}\relax 
-\contentsline {section}{\numberline {8.4}Remarks}{15}{section.8.4}
+\contentsline {section}{\numberline {5.4}Remarks}{13}{section.5.4}
 \defcounter {refsection}{0}\relax 
-\contentsline {section}{\numberline {8.5}Corollaries}{16}{section.8.5}
+\contentsline {section}{\numberline {5.5}Corollaries}{14}{section.5.5}
 \defcounter {refsection}{0}\relax 
-\contentsline {section}{\numberline {8.6}Propositions}{16}{section.8.6}
+\contentsline {section}{\numberline {5.6}Propositions}{14}{section.5.6}
 \defcounter {refsection}{0}\relax 
-\contentsline {subsection}{\numberline {8.6.1}Several equations}{16}{subsection.8.6.1}
+\contentsline {subsection}{\numberline {5.6.1}Several equations}{14}{subsection.5.6.1}
 \defcounter {refsection}{0}\relax 
-\contentsline {subsection}{\numberline {8.6.2}Single Line}{16}{subsection.8.6.2}
+\contentsline {subsection}{\numberline {5.6.2}Single Line}{14}{subsection.5.6.2}
 \defcounter {refsection}{0}\relax 
-\contentsline {section}{\numberline {8.7}Examples}{16}{section.8.7}
+\contentsline {section}{\numberline {5.7}Examples}{14}{section.5.7}
 \defcounter {refsection}{0}\relax 
-\contentsline {subsection}{\numberline {8.7.1}Equation and Text}{16}{subsection.8.7.1}
+\contentsline {subsection}{\numberline {5.7.1}Equation and Text}{14}{subsection.5.7.1}
 \defcounter {refsection}{0}\relax 
-\contentsline {subsection}{\numberline {8.7.2}Paragraph of Text}{16}{subsection.8.7.2}
+\contentsline {subsection}{\numberline {5.7.2}Paragraph of Text}{14}{subsection.5.7.2}
 \defcounter {refsection}{0}\relax 
-\contentsline {section}{\numberline {8.8}Exercises}{16}{section.8.8}
+\contentsline {section}{\numberline {5.8}Exercises}{14}{section.5.8}
 \defcounter {refsection}{0}\relax 
-\contentsline {section}{\numberline {8.9}Problems}{17}{section.8.9}
+\contentsline {section}{\numberline {5.9}Problems}{15}{section.5.9}
 \defcounter {refsection}{0}\relax 
-\contentsline {section}{\numberline {8.10}Vocabulary}{17}{section.8.10}
+\contentsline {section}{\numberline {5.10}Vocabulary}{15}{section.5.10}
 \defcounter {refsection}{0}\relax 
-\contentsline {chapter}{\numberline {9}Presenting Information}{18}{chapter.9}
+\contentsline {chapter}{\numberline {6}Presenting Information}{16}{chapter.6}
 \defcounter {refsection}{0}\relax 
-\contentsline {section}{\numberline {9.1}Table}{18}{section.9.1}
+\contentsline {section}{\numberline {6.1}Table}{16}{section.6.1}
 \defcounter {refsection}{0}\relax 
-\contentsline {section}{\numberline {9.2}Figure}{18}{section.9.2}
-\defcounter {refsection}{0}\relax 
-\contentsline {chapter}{\numberline {10}Listing code snippets}{19}{chapter.10}
-\defcounter {refsection}{0}\relax 
-\contentsline {section}{\numberline {10.1}examples}{19}{section.10.1}
+\contentsline {section}{\numberline {6.2}Figure}{16}{section.6.2}
 \contentsfinish 
