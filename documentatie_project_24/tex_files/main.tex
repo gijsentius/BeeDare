@@ -52,6 +52,12 @@
 \newcommand{\subtitleText}{Documentatie verslag van project 2.4} % to set the subtitle
 \newcommand{\authorText}{Dagmar Hoogendorp \\ Jelmer Wessels \\ Stèphan Hilbers \\ Roy van Kampen \\ Gijs Entius \\}
 
+% Examples variable
+
+\newif\ifexamples
+% show the examples uncomment the next line
+% \examplestrue
+
 \begin{document}
 
 %----------------------------------------------------------------------------------------
@@ -103,7 +109,7 @@
 % ~\vfill % gebruik als er niks voor komt maar er wel vfill nodig is
 
 \begin{center}
-Copyright \copyright\ 2018 \\ Dagmar Hoogendorp, Jelmer Wessels, Stéphan Hilbers, Roy van Kampen \& Gijs Entius % Copyright notice
+Copyright \copyright\ 2018 \\ Dagmar Hoogendorp, Jelmer Wessels, Stèphan Hilbers, Roy van Kampen \& Gijs Entius % Copyright notice
 \end{center}
 
 \begin{center}
@@ -135,8 +141,6 @@ Copyright \copyright\ 2018 \\ Dagmar Hoogendorp, Jelmer Wessels, Stéphan Hilber
 
 \chapter{Inleiding}
 
-\chapter{Projectopzet}
-
 \chapter{Case}
 \section{Weekplannig}
 \subsection{Sprintverdeling}
@@ -146,38 +150,13 @@ Sprint 3: Roy \\
 Sprint 4: Gijs \\
 Sprint 5: Stèphan \\
 
-\section{Concept}
-Vrienden toevoegen
-Bedrijfs integration
-
-Pagina voor inloggen, webpagina (profiel), homepagina / newsfeed
-
-\section{Gameification}
-Uitdagingen halen -> punten scoren
-Uitdagingen door bedrijven, users en developers
-User uitdgingen -> punten toekennen op basis van categoriën en evntueel moeilijkheidsgraad
-Uitdagingen delen met vrienden via newsfeed, maar ook via twitter
-Badges halen
-
-\section{Froud}
-Er kan niks gewonnen worden
-Vertrouwen
-
-\section{Integratie met andere websites}
-Google account
-Integratie met Facebook
-
-\section{Vinden van gebruikers}
-Facebook vrienden
-Andere gebruikers
-
 \section{Uitgeschreven case}
 Case <naam>
-Concept
+\subsection{Concept}
 De applicatie is een social network rond het concept van ‘groen doen’. Er kunnen ervaringen en tips gedeeld worden met vrienden met betrekking tot milieuvriendelijk, duurzaam of groen bezig zijn. Daarnaast is het volbrengen van challenges een van de features. Het doel van de applicatie is mensen bewust maken van hoe ze duurzaam bezig kunnen zijn op hun eigen manier en een platform bieden waarop ze hun ervaringen kunnen delen. De challenges dienen als een methode om gebruikers te motiveren en te interesseren in het concept.
 
 De webversie van de applicatie bevat alle verschillende onderdelen van de applicatie, zoals een newsfeed, profielpagina, pagina voor challenges etcetera. Een mobiele versie bevat dezelfde functionaliteit in beknopte vorm en focust meer op de challenges. Zo wordt er een functie geïmplementeerd waarmee de gebruiker een foto kan maken en deze meteen bij een challenge kan voegen.
-Gamification
+\subsection{Gamification}
 Het game component van de applicatie bestaat uit challenges. Voorbeelden van deze challenges zijn een vegetarisch recept maken of het gebruiken van een droogmolen in plaats van een droger. Met deze challenges kunnen punten worden verdiend. Het behalen van een challenge kan ook gedeeld worden met vrienden op het platform of een geïntegreerd platform, zoals twitter of facebook.
 
 Met de punten die gescoord worden kunnen badges behaald worden, welke weergeven worden op het profiel van de gebruiker. Er zijn verder geen beloningen voor het halen van challenges.
@@ -185,20 +164,20 @@ Met de punten die gescoord worden kunnen badges behaald worden, welke weergeven 
 De challenges worden door drie partijen gemaakt. Allereerst door de developers van de applicatie. Daarnaast door bedrijven in samenwerking met de developers, en ten slotte door de gebruikers zelf. Bedrijven mogen hun groene, milieuvriendelijke of duurzame producten promoten door ze aan te bevelen binnen een challenge voor een kleine vergoeding.
 
 Het aantal punten dat aan een challenge wordt toegekend wordt berekend aan de hand van categorieën en moeilijkheidsgraad. De challenges van gebruikers kunnen ingestuurd worden via de applicatie of automatisch ingevoerd worden door middel van een systeem met verschillende opties dat een acceptabel puntenaantal toekent.
-Fraude
+\subsection{Fraude}
 Gebruikers kunnen zelf aangeven wanneer ze een challenge gehaald hebben. Het is moeilijk te controleren of de gebruikers eerlijk zijn. Daarom is ervoor gekozen om geen beloningen uit te geven behalve de badges. Het is aan de gebruiker zelf om eerlijk te zijn. Bij het delen van challenges zal dan ook een foto toegevoegd moeten worden waar dit relevant is.
 Het is uiteindelijk aan de gebruikers zelf om eerlijk te zijn tegenover zichzelf en zijn of haar vrienden en heeft alleen zichzelf ermee als challenges niet eerlijk worden volbracht.
 
-Verdienmodel
+\subsection{Verdienmodel}
 Om de applicatie te kunnen ontwikkelen en onderhouden is geld nodig. Dit wordt verdiend door middel van samenwerkingen met bedrijven. Deze bedrijven mogen hun producten promoten in ruil voor een kleine vergoeding. De producten zullen dan worden genoemd in challenges als bijvoorbeeld suggesties. Op deze manier is de applicatie voor de gebruiker gratis en hoeft er ook geen of weinig gebruik gemaakt te worden van advertenties.
 
-Integratie met andere websites
+\subsection{Integratie met andere websites}
 Er zijn verschillende websites waar de applicatie mee samen werkt. Dit zijn bijvoorbeeld twitter of facebook, waar de gebruikers hun challenges ervaringen of tips kunnen delen. Daarnaast is er de mogelijkheid met een Google, facebook of twitter account in te loggen. Zo is het makkelijk voor de gebruiker om accounts te beheren. Ook is het mogelijk een eigen account aan te maken dat losstaat van andere al bestaande accounts en alleen gelinkt is aan een email adres.
 
-Vinden van nieuwe gebruikers
+\subsection{Vinden van nieuwe gebruikers}
 Gebruikers kunnen vrienden die de applicatie al gebruiken vinden door middel van een zoekfunctie. Nieuwe gebruikers kunnen worden aangetrokken doordat challenges gedeeld kunnen worden op andere platformen en zo groeit de bekendheid van de applicatie. Daarnaast kan een gebruiker potentiële gebruikers uitnodigen om een account aan te maken.
 
-Privacy
+\subsection{Privacy}
 Natuurlijk speelt privacy een grote rol in een social network. Persoonsgegevens zullen daarom niet verkocht worden of gebruikt voor gerichte challenges. Ook zal er om zo weinig persoonlijke informatie gevraagd worden is is deze informatie per definitie niet toegankelijk voor gebruikers, tenzij de gebruiker zelf anders aangeeft. Dit kan gedaan worden via instellingen.
 
 \section{Eigenschappen}
@@ -213,7 +192,7 @@ Natuurlijk speelt privacy een grote rol in een social network. Persoonsgegevens 
 %----------------------------------------------------------------------------------------
 %	Examples
 %----------------------------------------------------------------------------------------
-
+\ifexamples
 \part{Examples}
 
 %----------------------------------------------------------------------------------------
@@ -445,6 +424,8 @@ Treatment 3 & 0.0009271 & 0.296 \\
 \centering\includegraphics[scale=0.5]{placeholder}
 \caption{Figure caption}
 \end{figure}
+
+\fi
 
 %----------------------------------------------------------------------------------------
 %	BIBLIOGRAPHY
