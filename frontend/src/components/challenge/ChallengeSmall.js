@@ -5,9 +5,7 @@ import './Challenge.css'
 class ChallengeSmall extends Component {
 	render() {
 		return (
-			<div>
-				
-			</div>
+			<Icon image={this.props.image}/>
 		);
   	}
 }
