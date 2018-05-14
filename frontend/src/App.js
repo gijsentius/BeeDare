@@ -1,21 +1,23 @@
-import React, { Component } from 'react';
-import logo from './logo.svg';
+import React, {Component} from 'react';
 import './App.css';
+import {Icon, Friends} from './components/components.js'
 
 class App extends Component {
-  render() {
-    return (
-      <div className="App">
-        <header className="App-header">
-          <img src={logo} className="App-logo" alt="logo" />
-          <h1 className="App-title">Welcome to React</h1>
-        </header>
-        <p className="App-intro">
-          To get started, edit <code>src/App.js</code> and save to reload.
-        </p>
-      </div>
-    );
-  }
+    render() {
+        return (
+            <div>
+                <table width="100%">
+                    <tbody>
+                    <tr>
+                        <td align="center"><Icon online={true}/></td>
+                        <td align="center"><Icon action={() => alert('This value has been changed.')}/></td>
+                    </tr>
+                    </tbody>
+                </table>
+                <Friends friends={[' Dit is Piet', 'Henk', 'Klaas', 'Kees', 'Tom', 'Nick', 'Henk2', "Piet3"]}/>
+            </div>
+        );
+    }
 }
 
 export default App;
