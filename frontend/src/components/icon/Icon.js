@@ -1,6 +1,6 @@
 import React from 'react';
-import personPlaceholder from './images/personPlaceholder.png';
-import './components.css';
+import personPlaceholder from '../../images/personPlaceholder.png';
+import './Icon.css';
 
 class Icon extends React.Component {
     constructor(props) {
