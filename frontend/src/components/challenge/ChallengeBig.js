@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 
-class challengeBig extends Component {
+class ChallengeBig extends Component {
 	render() {
 		return (
 			<div>
@@ -10,4 +10,4 @@ class challengeBig extends Component {
 	}
 }
 
-export default challengeBig;
+export default ChallengeBig;

@@ -1,26 +1,16 @@
 import React, {Component} from 'react';
 import './App.css';
-import logo from '../../images/logo.svg';
-import Icon from '../icon/Icon.js'
+import ChallengeSmall from '../challenge/ChallengeSmall';
 
 class App extends Component {
     render() {
         return (
             <div className="App">
-                <header className="App-header">
-                    <img src={logo} className="App-logo" alt="logo" />
-                    <h1 className="App-title">Welcome to React</h1>
-                </header>
-                <table width="100%">
-                    <tbody>
-                    <tr>
-                        <td align="center"><Icon/></td>
-                        <td align="center"><Icon action={() => alert('This value has been changed.')}/></td>
-                        <td align="center"><Icon image='https://i.redd.it/g5fz99po32u01.png'
-                                                 action={() => alert('THIS ... IS ... SPARTA !!!.')}/></td>
-                    </tr>
-                    </tbody>
-                </table>
+                <ChallengeSmall 
+                    title="test" 
+                    image="https://media.licdn.com/dms/image/C4D03AQE24YuGOp9V9A/profile-displayphoto-shrink_200_200/0?e=1529874000&v=beta&t=AE91RlciXSQqE1NXfTJVISYa2bIi8--XmW2N_2ftMcw" 
+                    description="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vivamus eu mauris malesuada, convallis eros at, commodo quam. Phasellus non mollis neque. Vestibulum rhoncus metus facilisis justo accumsan euismod. Fusce placerat pretium arcu, ac cursus est. Sed efficitur enim id pretium condimentum. Pellentesque sollicitudin, lorem at vehicula facilisis, sem lectus mattis orci, a lacinia odio est eget neque. Proin ultricies consequat ligula ut ultrices. Sed laoreet, neque id porta ullamcorper, est elit lacinia lorem, sed euismod erat dolor aliquet tellus. Maecenas mi odio, vehicula placerat convallis ac, mattis non lacus. Sed quis lacus orci." 
+                    reward="test"/>
             </div>
         );
     }
