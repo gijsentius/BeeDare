@@ -1,5 +1,25 @@
 body {
   margin: 0;
   padding: 0;
-  font-family: sans-serif;
+  font-family: "roboto";
+}
+
+.text {
+  color: #343434;
+}
+
+.main {
+  background-color: #8F6593;
+}
+
+.main-light {
+  background-color: #AEA4BF;
+}
+
+.background-light {
+  background-color: #E3E4DB;
+}
+
+.background-darker {
+  background-color: #CDCDCD;
 }
