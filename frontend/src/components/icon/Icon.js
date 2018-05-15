@@ -25,12 +25,12 @@ class Icon extends React.Component {
         if (this.state.online) {
             return (
                 <img className='icon' src={this.state.image} onClick={this.state.action} alt=''
-                     style={{'border': '3px solid black', 'margin-left': '1%', 'margin-right': '1%'}}/>
+                     style={{'border': '3px solid black', 'marginLeft': '1%', 'marginRight': '1%'}}/>
             )
         }
         else{
             return (
-                <img className='icon' src={this.state.image} onClick={this.state.action} style={{'margin-left': '1%', 'margin-right': '1%'}} alt=''/>
+                <img className='icon' src={this.state.image} onClick={this.state.action} style={{'marginLeft': '1%', 'marginRight': '1%'}} alt=''/>
             )
         }
     }
