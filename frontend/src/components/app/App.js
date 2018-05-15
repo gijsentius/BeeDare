@@ -1,6 +1,7 @@
 import React, {Component} from 'react';
 import './App.css';
 import { BrowserRouter as Router, Route, Link } from "react-router-dom";
+import BeeDareLogo from './BeeDare_nobg.png';
 
 class App extends Component {
 	render() {
@@ -8,7 +9,7 @@ class App extends Component {
 			<Router>
 				<nav>
 					<div class="nav-wrapper amber darken-1">
-						<Link to="/"><a href="#" class="brand-logo">Logo</a></Link>
+						<Link to="/"><a href="#" class="brand-logo"><img src={BeeDareLogo} className="col s1"/></a></Link>
 						<ul id="nav-mobile" class="right hide-on-med-and-down">
 							<li><Link to="/">Sass</Link></li>
 							<li><Link to="/">Components</Link></li>
