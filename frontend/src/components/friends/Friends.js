@@ -26,7 +26,7 @@ class Friends extends React.Component {
         }
         return (
             <div className='friendsList'>
-                <h3>Active Friends</h3>
+                <h3 className='text'>Active Friends</h3>
                 <div className='friends'>{list}</div>
             </div>
         )
