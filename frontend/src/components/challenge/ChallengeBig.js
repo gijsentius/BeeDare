@@ -26,6 +26,7 @@ class ChallengeBig extends Component {
 					<p className="text center-align">{this.props.description}</p>
 					<p className="text center-align"><b>Reward</b></p>
 					<p className="text center-align">{this.props.reward}</p>
+					<a class="waves-effect waves-light btn amber darken-1 center-component">Dare</a>
 				</div>
 			</div>
 		) : (
