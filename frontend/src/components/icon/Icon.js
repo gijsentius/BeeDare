@@ -22,7 +22,7 @@ class Icon extends React.Component {
     }
 
     render() {
-        if (this.state.online) {
+        if (!this.state.online) {
             return (
                 <img className='icon' src={this.state.image} onClick={this.state.action} alt=''
                      style={{'border': '3px solid black', 'margin-left': '1%', 'margin-right': '1%'}}/>
