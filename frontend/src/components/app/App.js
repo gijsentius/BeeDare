@@ -8,7 +8,7 @@ class App extends Component {
             <div>
             <div className="row">
                 <div className="col s6 m3 l2">
-                    <ChallengeBig 
+                    <ChallengeBig
                         title="Install solar panels"
                         image="https://d1nhio0ox7pgb.cloudfront.net/_img/g_collection_png/standard/256x256/solar_panel.png"
                         reward="200 gallons of honey"
@@ -16,7 +16,7 @@ class App extends Component {
                     />
                 </div>
                 <div className="col s6 m3 l2">
-                    <ChallengeBig 
+                    <ChallengeBig
                         title="Install solar panels"
                         image="https://d1nhio0ox7pgb.cloudfront.net/_img/g_collection_png/standard/256x256/solar_panel.png"
                         reward="200 gallons of honey"
@@ -24,7 +24,7 @@ class App extends Component {
                     />
                 </div>
                 <div className="col s6 m3 l2">
-                    <ChallengeBig 
+                    <ChallengeBig
                         title="Install solar panels"
                         image="https://d1nhio0ox7pgb.cloudfront.net/_img/g_collection_png/standard/256x256/solar_panel.png"
                         reward="200 gallons of honey"
@@ -32,7 +32,7 @@ class App extends Component {
                     />
                 </div>
                 <div className="col s6 m3 l2">
-                    <ChallengeBig 
+                    <ChallengeBig
                         title="Install solar panels"
                         image="https://d1nhio0ox7pgb.cloudfront.net/_img/g_collection_png/standard/256x256/solar_panel.png"
                         reward="200 gallons of honey"
