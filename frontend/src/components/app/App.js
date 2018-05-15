@@ -7,19 +7,19 @@ class App extends Component {
 		return (
 			<Router>
 				<nav>
-					<div class="nav-wrapper">
-						<a href="#" class="brand-logo">Logo</a>
+					<div class="nav-wrapper amber darken-1">
+						<Link to="/"><a href="#" class="brand-logo">Logo</a></Link>
 						<ul id="nav-mobile" class="right hide-on-med-and-down">
-							<li><a href="sass.html">Sass</a></li>
-							<li><a href="badges.html">Components</a></li>
-							<li><a href="collapsible.html">JavaScript</a></li>
+							<li><Link to="/">Sass</Link></li>
+							<li><Link to="/">Components</Link></li>
+							<li><Link to="/">JavaScript</Link></li>
 						</ul>
 					</div>
 				</nav>
 
-				<Route exact path="/" component={Home} />
+				{/* <Route exact path="/" component={Home} />
       	<Route path="/about" component={About} />
-      	<Route path="/topics" component={Topics} />
+      	<Route path="/topics" component={Topics} /> */}
 			</Router>
 		);
 	}
