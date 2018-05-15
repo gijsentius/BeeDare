@@ -22,14 +22,17 @@ class Icon extends React.Component {
     }
 
     render() {
-        let color = '#343434';
         if (this.state.online) {
-            color = '#8F6593';
+            return (
+                <img className='icon' src={this.state.image} onClick={this.state.action} alt=''
+                     style={{'border': '3px solid black', 'margin-left': '1%', 'margin-right': '1%'}}/>
+            )
         }
-        return (
-            <img className='icon' src={this.state.image} onClick={this.state.action} alt=''
-                 style={{'borderColor': color}}/>
-        )
+        else{
+            return (
+                <img className='icon' src={this.state.image} onClick={this.state.action} style={{'margin-left': '1%', 'margin-right': '1%'}} alt=''/>
+            )
+        }
     }
 }
 
