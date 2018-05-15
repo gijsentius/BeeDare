@@ -8,6 +8,7 @@ class Icon extends React.Component {
         this.state = {
             image: props.image,
             action: props.action,
+            online: props.online,
         };
     }
 
@@ -15,14 +16,19 @@ class Icon extends React.Component {
         if (this.state.image === undefined) {
             this.setState({image: personPlaceholder});
         }
-        if (this.state.action === undefined) {
-            this.setState({action: () => alert("No action set.")});
+        if (this.state.online === undefined) {
+            this.setState({online: false});
         }
     }
 
     render() {
+        let color = '#343434';
+        if (this.state.online) {
+            color = '#8F6593';
+        }
         return (
-            <img className='icon' src={this.state.image} onClick={this.state.action} alt=''/>
+            <img className='icon' src={this.state.image} onClick={this.state.action} alt=''
+                 style={{'borderColor': color}}/>
         )
     }
 }
