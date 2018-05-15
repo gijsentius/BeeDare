@@ -4,63 +4,27 @@
 \defcounter {refsection}{0}\relax 
 \contentsline {chapter}{\numberline {1}Inleiding}{4}{chapter.1}
 \defcounter {refsection}{0}\relax 
-\contentsline {chapter}{\numberline {2}Projectopzet}{5}{chapter.2}
+\contentsline {chapter}{\numberline {2}Case}{5}{chapter.2}
 \defcounter {refsection}{0}\relax 
-\contentsline {section}{\numberline {2.1}Concept}{5}{section.2.1}
+\contentsline {section}{\numberline {2.1}Weekplannig}{5}{section.2.1}
 \defcounter {refsection}{0}\relax 
-\contentsline {section}{\numberline {2.2}Eigenschappen}{5}{section.2.2}
+\contentsline {subsection}{\numberline {2.1.1}Sprintverdeling}{5}{subsection.2.1.1}
 \defcounter {refsection}{0}\relax 
-\contentsline {part}{\@mypartnumtocformat {I}{Examples}}{7}{part.1}
+\contentsline {section}{\numberline {2.2}Uitgeschreven case}{5}{section.2.2}
 \defcounter {refsection}{0}\relax 
-\contentsline {chapter}{\numberline {3}Text Chapter}{8}{chapter.3}
+\contentsline {subsection}{\numberline {2.2.1}Concept}{5}{subsection.2.2.1}
 \defcounter {refsection}{0}\relax 
-\contentsline {section}{\numberline {3.1}Paragraphs of Text}{8}{section.3.1}
+\contentsline {subsection}{\numberline {2.2.2}Gamification}{5}{subsection.2.2.2}
 \defcounter {refsection}{0}\relax 
-\contentsline {section}{\numberline {3.2}Lists}{9}{section.3.2}
+\contentsline {subsection}{\numberline {2.2.3}Fraude}{6}{subsection.2.2.3}
 \defcounter {refsection}{0}\relax 
-\contentsline {subsection}{\numberline {3.2.1}Numbered List}{9}{subsection.3.2.1}
+\contentsline {subsection}{\numberline {2.2.4}Verdienmodel}{6}{subsection.2.2.4}
 \defcounter {refsection}{0}\relax 
-\contentsline {subsection}{\numberline {3.2.2}Bullet Points}{9}{subsection.3.2.2}
+\contentsline {subsection}{\numberline {2.2.5}Integratie met andere websites}{6}{subsection.2.2.5}
 \defcounter {refsection}{0}\relax 
-\contentsline {subsection}{\numberline {3.2.3}Descriptions and Definitions}{9}{subsection.3.2.3}
+\contentsline {subsection}{\numberline {2.2.6}Vinden van nieuwe gebruikers}{6}{subsection.2.2.6}
 \defcounter {refsection}{0}\relax 
-\contentsline {chapter}{\numberline {4}In-text Elements}{10}{chapter.4}
+\contentsline {subsection}{\numberline {2.2.7}Privacy}{6}{subsection.2.2.7}
 \defcounter {refsection}{0}\relax 
-\contentsline {section}{\numberline {4.1}Theorems}{10}{section.4.1}
-\defcounter {refsection}{0}\relax 
-\contentsline {subsection}{\numberline {4.1.1}Several equations}{10}{subsection.4.1.1}
-\defcounter {refsection}{0}\relax 
-\contentsline {subsection}{\numberline {4.1.2}Single Line}{10}{subsection.4.1.2}
-\defcounter {refsection}{0}\relax 
-\contentsline {section}{\numberline {4.2}Definitions}{10}{section.4.2}
-\defcounter {refsection}{0}\relax 
-\contentsline {section}{\numberline {4.3}Notations}{10}{section.4.3}
-\defcounter {refsection}{0}\relax 
-\contentsline {section}{\numberline {4.4}Remarks}{10}{section.4.4}
-\defcounter {refsection}{0}\relax 
-\contentsline {section}{\numberline {4.5}Corollaries}{11}{section.4.5}
-\defcounter {refsection}{0}\relax 
-\contentsline {section}{\numberline {4.6}Propositions}{11}{section.4.6}
-\defcounter {refsection}{0}\relax 
-\contentsline {subsection}{\numberline {4.6.1}Several equations}{11}{subsection.4.6.1}
-\defcounter {refsection}{0}\relax 
-\contentsline {subsection}{\numberline {4.6.2}Single Line}{11}{subsection.4.6.2}
-\defcounter {refsection}{0}\relax 
-\contentsline {section}{\numberline {4.7}Examples}{11}{section.4.7}
-\defcounter {refsection}{0}\relax 
-\contentsline {subsection}{\numberline {4.7.1}Equation and Text}{11}{subsection.4.7.1}
-\defcounter {refsection}{0}\relax 
-\contentsline {subsection}{\numberline {4.7.2}Paragraph of Text}{11}{subsection.4.7.2}
-\defcounter {refsection}{0}\relax 
-\contentsline {section}{\numberline {4.8}Exercises}{11}{section.4.8}
-\defcounter {refsection}{0}\relax 
-\contentsline {section}{\numberline {4.9}Problems}{12}{section.4.9}
-\defcounter {refsection}{0}\relax 
-\contentsline {section}{\numberline {4.10}Vocabulary}{12}{section.4.10}
-\defcounter {refsection}{0}\relax 
-\contentsline {chapter}{\numberline {5}Presenting Information}{13}{chapter.5}
-\defcounter {refsection}{0}\relax 
-\contentsline {section}{\numberline {5.1}Table}{13}{section.5.1}
-\defcounter {refsection}{0}\relax 
-\contentsline {section}{\numberline {5.2}Figure}{13}{section.5.2}
+\contentsline {section}{\numberline {2.3}Eigenschappen}{6}{section.2.3}
 \contentsfinish 
