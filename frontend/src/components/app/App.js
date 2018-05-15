@@ -1,11 +1,14 @@
 import React, {Component} from 'react';
 import './App.css';
-import ChallengeSmall from '../challenge/ChallengeSmall';
+import '../user_interaction/login-register.css'
+import LoginRegisterPage from "../user_interaction/login-registerpage";
 
 class App extends Component {
     render() {
         return (
-            <div>
+
+            <div className="container">
+             <LoginRegisterPage/>
             </div>
         );
     }
