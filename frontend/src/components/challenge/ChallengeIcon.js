@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import Icon from '../icon/Icon.js'
 import './Challenge.css'
 
-class ChallengeSmall extends Component {
+class ChallengeIcon extends Component {
 	render() {
 		return (
 			<Icon image={this.props.image}/>
@@ -10,4 +10,4 @@ class ChallengeSmall extends Component {
   	}
 }
 
-export default ChallengeSmall;
+export default ChallengeIcon;
