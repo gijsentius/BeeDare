@@ -1,0 +1,66 @@
+import React from 'react';
+import './Challenge.css';
+import ChallengeIcon from "./ChallengeIcon";
+
+
+// Make sure to bind modal to your appElement (http://reactcommunity.org/react-modal/accessibility/)
+// source code = https://github.com/reactjs/react-modal
+
+
+export default class CompletedChallenges extends React.Component{
+    constructor(props){
+        super(props);
+        this.state = {};
+    }
+
+    render(){
+
+        // source onderstaande functie: https://stackoverflow.com/questions/42391499/
+        // react-render-new-row-every-4th-column
+        // het zorgt er voor dat er elke vierde element een nieuwe rij aangemaakt wordt.
+        function createRows(props) {
+            let listItems = [];
+            props.completedChallenges.forEach((challenge, i) =>{
+                if((i+1) % 4 == 0){
+                    listItems.push(
+                        <div className="row" >
+                            <div className="col m3">
+                                <ChallengeIcon image={challenge.url}/>
+                                <p className="center-align">{challenge.id + ' points'}</p>
+                            </div>
+                        </div>
+                    )
+                }else{
+                    listItems.push(<div className="col m3">
+                        <ChallengeIcon image={challenge.url}/>
+                        <p className="center-align">{challenge.id + ' points'}</p>
+                    </div>);
+                }
+            });
+            return (
+                <div>
+                    {listItems}
+                </div>
+            );
+        }
+
+
+
+        return(
+            <div>
+                <div className="droppedShadowBox">
+                    <div className="section">
+                    {createRows(this.props)}
+                    </div>
+                </div>
+            </div>
+        )
+    }
+}
+
+
+
+
+
+
+
