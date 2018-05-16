@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import Icon from '../icon/Icon.js'
 import './Challenge.css'
 
-class ChallengeBig extends Component {
+class ChallengeCard extends Component {
 	constructor(props) {
 		super(props);
 		this.state = {isExpanded: false}
@@ -40,4 +40,4 @@ class ChallengeBig extends Component {
   	}
 }
 
-export default ChallengeBig;
+export default ChallengeCard;
