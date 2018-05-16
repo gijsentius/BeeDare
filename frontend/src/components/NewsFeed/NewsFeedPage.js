@@ -11,13 +11,13 @@ class NewsFeedPage extends React.Component {
     render() {
         return (
             <div className="row">
-                <div className="col s4">
+                <div className="col s12 m4">
                     <Hives className="col s4" hives={[<Hive/>, <Hive/>, <Hive/>]}/>
                 </div>
-                <div className="col s4">
+                <div className="col s12 m4">
                     <Hives className="col s4" hives={[<Hive/>, <Hive/>, <Hive/>]}/>
                 </div>
-                <div className="col s4">
+                <div className="col s12 m4">
                     <Hives className="col s4" hives={[<Hive/>, <Hive/>, <Hive/>]}/>
                 </div>
             </div>
