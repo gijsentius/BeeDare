@@ -19,7 +19,6 @@ class ChallengeList extends Component {
 
 	render() {
 		let challengePairs = [];
-		let index = 0;
 		let challenges = this.state.challenges.map((challenge) => 
 			<div className="col s6 m3">
 				<ChallengeCard
@@ -30,13 +29,24 @@ class ChallengeList extends Component {
 				/>
 			</div>
 		);
-		// for(let i=0;i<challenges.length;i++) {
-			
-		// }
-		// );
-		return (
+		let index = 0;
+		let tempItems = []
+		for(let i=0;i<challenges.length;i++) {
+			if(i%4==0 && i>0) {
+				index++;
+				challengePairs.push(tempItems);
+				tempItems = [];
+			}
+			tempItems.push(challenges[i]);
+		}
+		let challengesFixed = challengePairs.map((challenges) => 
 			<div className="row">
 				{challenges}
+			</div>
+		);
+		return (
+			<div>
+				{challengesFixed}
 			</div>
 		);
 	}
