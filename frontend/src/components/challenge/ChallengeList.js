@@ -15,7 +15,8 @@ class ChallengeList extends Component {
 
 	render() {
 		return (
-			<div>
+			<div className="row">
+				{challenges}
 			</div>
 		);
 	}
