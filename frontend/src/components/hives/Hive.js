@@ -7,7 +7,8 @@ class Hive extends React.Component {
         super(props);
         this.state = {
             name: props.name,
-            content: props.content
+            content: props.content,
+            image: props.image,
         }
     }
 
@@ -28,7 +29,7 @@ class Hive extends React.Component {
                         <p className="text">{this.state.content}</p>
                     </div>
                     <div className="col s4">
-                        <Icon/>
+                        <Icon image={this.state.image} action={undefined}/>
                         <a className="waves-effect #4dd0e1 btn-small s12 col">Join!</a>
                     </div>
                 </div>
