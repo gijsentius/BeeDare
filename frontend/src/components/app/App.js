@@ -2,6 +2,8 @@ import React, {Component} from 'react';
 import './App.css';
 import {BrowserRouter as Router, Route, Link} from "react-router-dom";
 import LoginRegisterPage from '../user_interaction/login-registerpage';
+import HiveMembers from "../hives/HiveMembers";
+import Icon from "../icon/Icon";
 
 class App extends Component {
     render() {
