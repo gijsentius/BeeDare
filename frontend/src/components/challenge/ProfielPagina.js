@@ -8,7 +8,7 @@ class ProfielPagina extends Component {
     constructor(){
         super();
         this.state = {
-            hits: [],
+            openChallenges: [],
             isLoading: true,
         };
     }
@@ -17,13 +17,13 @@ class ProfielPagina extends Component {
     {
         fetch('https://jsonplaceholder.typicode.com/photos?albumId=1')
             .then(response => response.json())
-            .then(data => this.setState({hits: data, isLoading: false}))
+            .then(data => this.setState({openChallenges: data, isLoading: false}))
             .catch(error => console.log(error));
     }
 
     render() {
 
-        const {hits, isLoading} = this.state;
+        const {openChallenges, isLoading} = this.state;
 
 
 
@@ -31,7 +31,7 @@ class ProfielPagina extends Component {
             <div>
                 <p>{console.log(isLoading)}</p>
 
-                <OpenChallenges hits={hits}/>
+                <OpenChallenges openChallenges={openChallenges}/>
 
             </div>
 
