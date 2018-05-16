@@ -4,7 +4,6 @@ import {BrowserRouter as Router, Route, Link} from "react-router-dom";
 import LoginRegisterPage from '../user_interaction/login-registerpage';
 import HiveMembers from "../hives/HiveMembers";
 import Icon from "../icon/Icon";
-import NewsFeedPage from "../NewsFeed/NewsFeedPage";
 
 class App extends Component {
     render() {
@@ -22,7 +21,7 @@ class App extends Component {
                         </div>
                     </nav>
                     <div className="content">
-                        <Route exact path="/" component={NewsFeedPage}/>
+                        <Route exact path="/" component={LoginRegisterPage}/>
                     </div>
                 </div>
             </Router>

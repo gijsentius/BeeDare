@@ -17,3 +17,24 @@
     overflow: auto;
     white-space: nowrap;
 }
+
+.friendsList1 {
+    overflow: hidden;
+    text-align: center;
+    font-size: 2%;
+    margin-left: 70%;
+    margin-right: 70%;
+    width: 25%;
+    border: 2px solid;
+    border-radius: 15px;
+    position: absolute;
+    bottom: 70%;
+    background-color: #ffca28;
+}
+
+.friends1 {
+    max-height: 90vh;
+    overflow-y: auto;
+    overflow-x: hidden;
+    white-space: nowrap;
+}
