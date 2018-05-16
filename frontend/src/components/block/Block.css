@@ -1,0 +1,17 @@
+.list {
+    border: 3px solid #ff6f00;
+    border-radius: 10px;
+    background-color: #ff6f00;
+}
+
+.item {
+    border: 2px solid #ff8f00;
+    background-color: #ffd54f;
+    border-radius: 10px;
+}
+
+.apiary {
+    max-height: 69.1vh;
+    overflow: auto;
+    white-space: nowrap;
+}
