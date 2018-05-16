@@ -10,7 +10,7 @@ class App extends Component {
                 <div>
                     <nav>
                         <div className="nav-wrapper amber darken-1">
-                            <Link to="/"><a className="brand-logo">Logo</a></Link>
+                            <Link to="/"><a className="brand-logo">BeeDare</a></Link>
                             <ul id="nav-mobile" className="right hide-on-med-and-down">
                                 <li><Link to="/">Sass</Link></li>
                                 <li><Link to="/">Components</Link></li>
