@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-import Icon from '../icon/Icon.js'
 import './Challenge.css'
 
 class ChallengeCard extends Component {
