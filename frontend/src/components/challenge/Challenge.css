@@ -12,3 +12,33 @@
     margin-right: auto;
     /* width: 50%; */
 }
+
+.droppedShadowBox{
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+    border-radius: 10px;
+    background: #FFFFFF;
+    max-height: 80vh;
+    overflow-x: hidden;
+    overflow-y: auto;
+
+    /*top: 40%;*/
+    /*top nu voor development, later verwijderen*/
+}
+
+#imgCH{
+    border-radius: 50%;
+    display: block;
+    margin: auto;
+    width: 50%;
+    height: 50%;
+}
+
+.rightnext{
+    position: relative;
+    left: 50%;
+}
+
+#greenShadow{
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+    border-radius: 10px;
+}

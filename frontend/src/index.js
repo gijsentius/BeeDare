@@ -2,8 +2,11 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import './index.css';
 import App from './components/app/App.js'
-import Friendslist from "./components/friends/Friendslist";
+import ProfielPagina from "./components/challenge/ProfielPagina";
 
-ReactDOM.render(<App />, document.getElementById('root'));
+// ReactDOM.render(<App />, document.getElementById('root'));
 
-//ReactDOM.render(<App />
+ReactDOM.render(
+    <ProfielPagina />,
+    document.getElementById('root')
+);
