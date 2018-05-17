@@ -5,6 +5,7 @@ import LoginRegisterPage from '../user_interaction/login-registerpage';
 import ChallengeList from '../challenge/ChallengeList';
 import ChallengeIconBox from '../challenge/ChallengeIconBox';
 import NewsFeedPage from "../NewsFeed/NewsFeedPage";
+import LandingPage from "../landingPage/LandingPage";
 
 class App extends Component {
     render() {
@@ -24,6 +25,8 @@ class App extends Component {
                     <div className="content">
                         <Route exact path="/account" component={LoginRegisterPage}/>
 						<Route path="/challenges" component={ChallengeList}/>
+                        <Route path="/" component={LandingPage}/>
+
                     </div>
                 </div>
             </Router>
