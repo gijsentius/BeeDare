@@ -20,17 +20,20 @@ componentDidMount() {
 
 render() {
   let messages = this.state.messages.map((message) =>
-        <div className = "message">
+        <div className="center">
           <Message
             body={message.body}
             name={message.name}
           />
         </div>
-      ) //end map
+      ); //end map
       return(
-        <div id="messages">
-          {messages}
-        </div>
+          <div className="droppedShadowBoxNoScroll">
+              <div className="center">
+                  {messages}
+              </div>
+          </div>
+
       ); //end return
 }//end render
 }
