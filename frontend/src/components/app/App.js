@@ -1,4 +1,5 @@
 import React, {Component} from 'react';
+import './App.css';
 import {BrowserRouter as Router, Route, Link} from "react-router-dom";
 import LoginRegisterPage from '../user_interaction/login-registerpage';
 import ChallengeList from '../challenge/ChallengeList';
@@ -28,6 +29,8 @@ class App extends Component {
 						<Route path="/challenges" component={ChallengeList}/>
                         <Route path="/newsfeed" component={NewsFeedPage}/>
                         <Route path="/profile" component={ProfilePage}/>
+                        <Route path="/" component={LandingPage}/>
+
                     </div>
                 </div>
             </Router>
