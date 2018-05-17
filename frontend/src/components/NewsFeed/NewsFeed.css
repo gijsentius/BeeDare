@@ -20,6 +20,7 @@
     max-height: 80vh;
     overflow-x: hidden;
     overflow-y: auto;
+    /*margin-top: 10vh;*/
 
     /*top: 40%;*/
     /*top nu voor development, later verwijderen*/
@@ -28,7 +29,6 @@
 .sticky{
     position: -webkit-sticky; /* Safari */
     position: sticky;
-    top: 200px;
 }
 
 
