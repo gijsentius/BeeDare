@@ -5,6 +5,7 @@ import Profile from "../user_interaction/Profile";
 import CompletedChallenges from "./completedChallenges";
 import Friends from "../friends/Friends";
 import Block from "../block/Block";
+import Friendslist from "../friends/Friendslist";
 
 class ProfielPagina extends Component {
 
@@ -14,6 +15,7 @@ class ProfielPagina extends Component {
             openChallenges: [],
             completedChallenges: [],
             profileInfo: [],
+            activeFriends: [],
             isLoading: true,
         };
     }
@@ -34,13 +36,16 @@ class ProfielPagina extends Component {
             .then(response => response.json())
             .then(data => this.setState({completedChallenges: data, isLoading: false}))
             .catch(error => console.log(error));
+
+        fetch('https://jsonplaceholder.typicode.com/users')
+            .then(response => response.json())
+            .then(data => this.setState({activeFriends: data, isLoading: false}))
+            .catch(error => console.log(error));
     }
 
     render() {
 
-        const {openChallenges, isLoading, profileInfo, completedChallenges} = this.state;
-
-
+        const {openChallenges, isLoading, profileInfo, completedChallenges, activeFriends} = this.state;
 
         return (
             <div>
@@ -60,7 +65,9 @@ class ProfielPagina extends Component {
                         <Profile profileInfo={profileInfo}/>
                     </div>
                 </div>
-                
+                <div className="row">
+                    {/*<Friends friends={activeFriends}/>*/}
+                </div>
             </div>
 
         );
