@@ -2,6 +2,7 @@ import React, {Component} from 'react';
 import './App.css';
 import {BrowserRouter as Router, Route, Link} from "react-router-dom";
 import LoginRegisterPage from '../user_interaction/login-registerpage';
+import NewsFeedPage from "../NewsFeed/NewsFeedPage";
 
 class App extends Component {
     render() {
@@ -19,7 +20,7 @@ class App extends Component {
                         </div>
                     </nav>
                     <div className="content">
-                        <Route exact path="/" component={LoginRegisterPage}/>
+                        <Route exact path="/" component={NewsFeedPage}/>
                     </div>
                 </div>
             </Router>
