@@ -2,22 +2,36 @@ import React from 'react';
 import './NewsFeed.css';
 import Hives from "../hives/Hives";
 import Hive from "../hives/Hive";
+import Newsfeed from "./Newsfeed";
+import Profile from "../user_interaction/Profile";
 
 class NewsFeedPage extends React.Component {
     constructor(props) {
         super(props);
+        this.state = {profileInfo: {},
+        };
+    }
+
+    componentDidMount(){
+        fetch('https://jsonplaceholder.typicode.com/users/1')
+            .then(response => response.json())
+            .then(data => this.setState({profileInfo: data}))
+            .catch(error => console.log(error));
     }
 
     render() {
+
+        const profileInfo = this.state.profileInfo;
+
         return (
             <div className="row">
-                <div className="col s12 m4">
-                    <Hives className="col s4" hives={[<Hive/>, <Hive/>, <Hive/>]}/>
+                <div className="col s12 m3 sticky">
+                    <Profile profileInfo={profileInfo}/>
                 </div>
-                <div className="col s12 m4">
-                    <Hives className="col s4" hives={[<Hive/>, <Hive/>, <Hive/>]}/>
+                <div className="col s12 m6">
+                    <Newsfeed/>
                 </div>
-                <div className="col s12 m4">
+                <div className="col s12 m3 sticky">
                     <Hives className="col s4" hives={[<Hive/>, <Hive/>, <Hive/>]}/>
                 </div>
             </div>

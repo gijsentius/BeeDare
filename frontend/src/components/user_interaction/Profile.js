@@ -18,7 +18,6 @@ class Profile extends Component {
     render() {
 
         let profile;
-        let listItems;
         if (this.props.profileInfo !== undefined) {
             profile = this.props.profileInfo;
             console.log(profile);
