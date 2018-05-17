@@ -1,5 +1,4 @@
 import React, {Component} from 'react';
-import {Link} from "react-router-dom";
 import ChallengeCard from './ChallengeCard';
 
 class ChallengeList extends Component {
@@ -29,11 +28,9 @@ class ChallengeList extends Component {
 				/>
 			</div>
 		);
-		let index = 0;
 		let tempItems = []
 		for(let i=0;i<challenges.length;i++) {
-			if(i%4==0 && i>0) {
-				index++;
+			if(i%4 === 0 && i>0) {
 				challengePairs.push(tempItems);
 				tempItems = [];
 			}
