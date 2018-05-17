@@ -2,7 +2,7 @@ import React from 'react';
 import personPlaceholder from '../../images/personPlaceholder.png';
 import './Icon.css';
 
-class Icon extends React.Component {
+class Icon1 extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
@@ -24,16 +24,16 @@ class Icon extends React.Component {
     render() {
         if (this.state.online) {
             return (
-                <img className='icon' src={this.state.image} onClick={this.state.action} alt=''
+                <img className='icon1' src={this.state.image} onClick={this.state.action} alt=''
                      style={{'border': '3px solid black', 'marginLeft': '1%', 'marginRight': '1%'}}/>
             )
         }
         else{
             return (
-                <img className='icon' src={this.state.image} onClick={this.state.action} style={{'marginLeft': '1%', 'marginRight': '1%'}} alt=''/>
+                <img className='icon1' src={this.state.image} onClick={this.state.action} style={{'marginLeft': '1%', 'marginRight': '1%'}} alt=''/>
             )
         }
     }
 }
 
-export default Icon;
+export default Icon1;

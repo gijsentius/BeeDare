@@ -1,8 +1,7 @@
 import React, { Component } from 'react';
-import Icon from '../icon/Icon.js'
-import './ChallengeSmall.css'
+import './Challenge.css'
 
-class ChallengeSmall extends Component {
+class ChallengeCard extends Component {
 	constructor(props) {
 		super(props);
 		this.state = {isExpanded: false}
@@ -20,23 +19,24 @@ class ChallengeSmall extends Component {
 	
 	render() {
 		return this.state.isExpanded ? (
-			<div className="card challenge-box hoverable center-component" onClick={this.handleCollapseInfo}>
+			<div className="card challenge-box hoverable" onClick={this.handleCollapseInfo}>
 				<div className="card-content">
-					<h2 className="text center-align">Description</h2>
+					<p className="text center-align"><b>Description</b></p>
 					<p className="text center-align">{this.props.description}</p>
-					<h2 className="text center-align">Reward</h2>
+					<p className="text center-align"><b>Reward</b></p>
 					<p className="text center-align">{this.props.reward}</p>
+					<a class="waves-effect waves-light btn amber darken-1 center-component">Dare</a>
 				</div>
 			</div>
 		) : (
-			<div className="card challenge-box hoverable center-component" onClick={this.handleExpandInfo}>
+			<div className="card challenge-box hoverable" onClick={this.handleExpandInfo}>
 				<div className="card-content">
-					<h1 className="text center-align">{this.props.title}</h1>
-					<Icon image={this.props.image}/>
+					<h6 className="text center-align">{this.props.title}</h6>
+					<img src={this.props.image} alt="" class="circle responsive-img center-component"/>
 				</div>
 			</div>
 		);
   	}
 }
 
-export default ChallengeSmall;
+export default ChallengeCard;

@@ -1,0 +1,20 @@
+.list {
+    box-shadow: 0 2px 4px 0 #ffecb3, 0 6px 20px 0 #ffb300;
+    /*border: 3px solid #ff6f00;*/
+    border-radius: 10px;
+    background-color: #ff6f00;
+}
+
+.item {
+    border: 1px solid #ffc107;
+    border-radius: 10px;
+    box-shadow: 0 2px 4px 0 #ffecb3, 0 3px 10px 0 #ffb300;
+    border-radius: 10px;
+    padding: 5px;
+}
+
+.apiary {
+    max-height: 52vh;
+    overflow: auto;
+    white-space: nowrap;
+}
