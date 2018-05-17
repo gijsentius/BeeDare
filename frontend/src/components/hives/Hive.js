@@ -20,19 +20,15 @@ class Hive extends React.Component {
 
     render() {
         return (
-            <div>
                 <div className="row">
-                </div>
-                <div className="row">
-                    <div className="col s8">
+                    <div className="col s8 section">
                         <b className="text">{this.state.name}</b>
                         <p className="text">{this.state.content}</p>
                     </div>
                     <div className="col s4">
                         <Icon image={this.state.image} action={undefined}/>
-                        <a className="waves-effect #4dd0e1 btn-small s12 col">Join!</a>
+                        <a className="waves-effect #4dd0e1 btn-small amber darken-1 s12 col">Join!</a>
                     </div>
-                </div>
             </div>
         )
     }

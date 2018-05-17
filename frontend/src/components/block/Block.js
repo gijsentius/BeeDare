@@ -11,12 +11,13 @@ class Block extends React.Component {
     }
 
     render() {
+        // className="list"
+        //className="item"
+
         return (
-            <ul className="list">
-                <li className="item"><h3 className="text">{this.state.title}</h3></li>
-                <div className="row">
+            <ul >
+                <li ><h3 className="text center-align">{this.state.title}</h3></li>
                     <div className="apiary col">{this.state.content}</div>
-                </div>
             </ul>
 
         )

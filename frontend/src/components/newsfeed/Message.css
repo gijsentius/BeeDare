@@ -2,16 +2,22 @@
 font-weight: bold;
 }
 
+
+.messageCard{
+  color: black;
+  width: 80%;
+  margin: 0 auto;
+
+
+}
+
 .row {
-  max-width: 800px;
+  /*max-width: 800px;*/
 }
 
 .card-content {
 
 }
 
-.card-action {
-  color: black;
-}
 
 .action { background:none;border:none; }
