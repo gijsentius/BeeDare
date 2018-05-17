@@ -1,13 +1,13 @@
 import React, { Component } from 'react';
-import './Challenge.css'
-import OpenChallenges from "./OpenChallenges";
+import OpenChallenges from "../challenge/OpenChallenges";
 import Profile from "../user_interaction/Profile";
-import CompletedChallenges from "./completedChallenges";
+import CompletedChallenges from "../challenge/completedChallenges";
 import Friends from "../friends/Friends";
 import Block from "../block/Block";
 import Friendslist from "../friends/Friendslist";
+import './Common.css'
 
-class ProfielPagina extends Component {
+class ProfilePage extends Component {
 
     constructor(){
         super();
@@ -74,4 +74,4 @@ class ProfielPagina extends Component {
     }
 }
 
-export default ProfielPagina;
+export default ProfilePage;
