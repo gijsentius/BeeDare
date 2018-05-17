@@ -4,9 +4,4 @@ import './index.css';
 import App from './components/app/App.js'
 import ProfielPagina from "./components/challenge/ProfielPagina";
 
-// ReactDOM.render(<App />, document.getElementById('root'));
-
-ReactDOM.render(
-    <ProfielPagina />,
-    document.getElementById('root')
-);
+ReactDOM.render(<App />, document.getElementById('root'));

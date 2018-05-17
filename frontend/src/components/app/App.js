@@ -23,7 +23,6 @@ class App extends Component {
                     <div className="content">
                         <Route exact path="/account" component={LoginRegisterPage}/>
 						<Route path="/challenges" component={ChallengeList}/>
-                        <Route path="/challenges/challengeIconBox" component={ChallengeIconBox}/>
                     </div>
                 </div>
             </Router>
