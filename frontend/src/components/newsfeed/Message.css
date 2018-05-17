@@ -1,22 +1,11 @@
 .username {
-font-weight: bold;
+  font-weight: bold;
 }
-
 
 .messageCard{
   color: black;
   width: 80%;
   margin: 0 auto;
-
-
-}
-
-.row {
-  /*max-width: 800px;*/
-}
-
-.card-content {
-
 }
 
 
