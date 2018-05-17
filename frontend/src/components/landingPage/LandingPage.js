@@ -1,7 +1,7 @@
 import React from 'react';
 import Friends from "../friends/Friends";
-import NewsFeedPage from "../NewsFeed/NewsFeedPage";
-import Newsfeed from "../NewsFeed/Newsfeed";
+import NewsFeedPage from "../newsFeed/NewsFeedPage";
+import Newsfeed from "../newsFeed/Newsfeed";
 import ProfielPagina from "../challenge/ProfielPagina";
 import Profile from "../user_interaction/Profile";
 

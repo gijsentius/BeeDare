@@ -1,9 +1,9 @@
 import React from 'react';
-import './NewsFeed.css';
 import Hives from "../hives/Hives";
 import Hive from "../hives/Hive";
 import Newsfeed from "./Newsfeed";
 import Profile from "../user_interaction/Profile";
+import './NewsFeed.css';
 
 class NewsFeedPage extends React.Component {
     constructor(props) {

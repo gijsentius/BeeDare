@@ -31,7 +31,7 @@ class ChallengeCard extends Component {
 		) : (
 			<div className="card challenge-box hoverable" onClick={this.handleExpandInfo}>
 				<div className="card-content">
-					<h3 className="text center-align">{this.props.title}</h3>
+					<h6 className="text center-align">{this.props.title}</h6>
 					<img src={this.props.image} alt="" class="circle responsive-img center-component"/>
 				</div>
 			</div>
