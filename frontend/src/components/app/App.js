@@ -3,10 +3,9 @@ import './App.css';
 import {BrowserRouter as Router, Route, Link} from "react-router-dom";
 import LoginRegisterPage from '../user_interaction/login-registerpage';
 import ChallengeList from '../challenge/ChallengeList';
-import ChallengeIconBox from '../challenge/ChallengeIconBox';
 import NewsFeedPage from '../newsFeed/NewsFeedPage';
 import ProfilePage from '../profile/ProfilePage';
-import './App.css';
+import LandingPage from '../landingPage/LandingPage';
 
 class App extends Component {
     render() {
@@ -25,11 +24,11 @@ class App extends Component {
                         </div>
                     </nav>
                     <div className="content">
-                        <Route exact path="/account" component={LoginRegisterPage}/>
+                        <Route exact path="/" component={LandingPage}/>
+                        <Route path="/account" component={LoginRegisterPage}/>
 						<Route path="/challenges" component={ChallengeList}/>
                         <Route path="/newsfeed" component={NewsFeedPage}/>
                         <Route path="/profile" component={ProfilePage}/>
-                        <Route path="/" component={LandingPage}/>
 
                     </div>
                 </div>
