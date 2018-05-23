@@ -20,10 +20,12 @@ componentDidMount() {
 
 render() {
   let messages = this.state.messages.map((message) =>
+        <div className = "message">
           <Message
             body={message.body}
             name={message.name}
           />
+        </div>
       ) //end map
       return(
         <div id="messages">
