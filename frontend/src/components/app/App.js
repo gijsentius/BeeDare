@@ -3,11 +3,9 @@ import './App.css';
 import {BrowserRouter as Router, Route, Link} from "react-router-dom";
 import LoginRegisterPage from '../user_interaction/login-registerpage';
 import ChallengeList from '../challenge/ChallengeList';
-import ChallengeIconBox from '../challenge/ChallengeIconBox';
-import NewsFeedPage from '../NewsFeed/NewsFeedPage';
+import NewsFeedPage from '../newsFeed/NewsFeedPage';
 import ProfilePage from '../profile/ProfilePage';
 import LandingPage from '../landingPage/LandingPage';
-import './App.css';
 
 class App extends Component {
     render() {
@@ -31,6 +29,7 @@ class App extends Component {
 						<Route path="/challenges" component={ChallengeList}/>
                         <Route path="/newsfeed" component={NewsFeedPage}/>
                         <Route path="/profile" component={ProfilePage}/>
+
                     </div>
                 </div>
             </Router>

@@ -1,6 +1,6 @@
 .icon {
     max-width: 99%;
-    height: auto;
+    /*height: auto;*/
     border-radius: 50%;
     transition: 0.24s ease-in-out;
 }
