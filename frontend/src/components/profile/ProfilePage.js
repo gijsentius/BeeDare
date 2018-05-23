@@ -37,7 +37,7 @@ class ProfilePage extends Component {
             .then(data => this.setState({completedChallenges: data, isLoading: false}))
             .catch(error => console.log(error));
 
-        fetch('https://jsonplaceholder.typicode.com/users')
+        fetch('https://jsonplaceholder.typicode.com/photos?albumId=20')
             .then(response => response.json())
             .then(data => this.setState({activeFriends: data, isLoading: false}))
             .catch(error => console.log(error));
@@ -66,7 +66,10 @@ class ProfilePage extends Component {
                     </div>
                 </div>
                 <div className="row">
-                    {/*<Friends friends={activeFriends}/>*/}
+                    <div className="col s12">
+                        <h6 className="center">Active Friends</h6>
+                        <Friends friends={activeFriends}/>
+                    </div>
                 </div>
             </div>
 
