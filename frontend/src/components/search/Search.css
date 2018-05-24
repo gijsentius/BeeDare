@@ -1,49 +1,27 @@
-/* label color */
-.input-field label {
-  color: #000;
-}
-/* label focus color */
-.input-field input[type=search]:focus + label {
-  color: #000;
-}
-/* label underline focus color */
-.input-field input[type=search]:focus {
-  border-bottom: 1px solid #000;
-  box-shadow: 0 1px 0 0 #000;
-}
-/* valid color */
-.input-field input[type=search].valid {
-  border-bottom: 1px solid #000;
-  box-shadow: 0 1px 0 0 #000;
-}
-/* invalid color */
-.input-field input[type=search].invalid {
-  border-bottom: 1px solid #000;
-  box-shadow: 0 1px 0 0 #000;
-}
-  /* icon prefix focus color */
-.input-field .prefix.active {
-  color: #000;
-}
-
 input#search {
-  color: #777;
-  display: block;
-  font-size: 16px;
-  font-weight: 300;
-  width: 100%;
-  height: 62px;
-  margin: 0;
-  -webkit-box-sizing: border-box;
+  background: transparent;
+  border: none;
+  bottom: 0;
   box-sizing: border-box;
-  padding: 0 45px 0 30px;
-  border: 0;
+  left: 0;
+  margin: 0;
+  outline: none;
+  width: 100%;
+  padding: 40px;
+  font-size: 20px;
 }
 
-.search-wrapper {
-  color: #777;
-  margin-top: -1px;
-  border-top: 1px solid rgba(0,0,0,0.14);
-  -webkit-transition: margin .25s ease;
-  transition: margin .25s ease;
+.icon {
+  height: 50%;
+  margin-top: 25px;
+  margin-bottom: auto;
+  font-size: 20px; 
+}
+
+search-field {
+  width: 500px;
+}
+
+search-field:focus {
+  width: 1000px;
 }

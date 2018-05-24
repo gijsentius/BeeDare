@@ -9,23 +9,23 @@ export default class Register extends React.Component{
                 <div className="row">
                     <div className="input-field col s6">
                         <input id="first_name_register" type="text" className="validate"/>
-                            <label htmlFor="first_name">First Name</label>
+                            <label htmlFor="first_name_register">First Name</label>
                     </div>
                     <div className="input-field col s6">
                         <input id="last_name_register" type="text" className="validate"/>
-                            <label htmlFor="last_name">Last Name</label>
+                            <label htmlFor="last_name_register">Last Name</label>
                     </div>
                 </div>
                 <div className="row">
                     <div className="input-field col s12">
                         <input id="password_register" type="password" className="validate"/>
-                            <label htmlFor="password">Password</label>
+                            <label htmlFor="password_register">Password</label>
                     </div>
                 </div>
                 <div className="row">
                     <div className="input-field col s12">
                         <input id="email_register" type="email" className="validate"/>
-                            <label htmlFor="email">Email</label>
+                            <label htmlFor="email_register">Email</label>
                     </div>
                 </div>
                 <div className="row">

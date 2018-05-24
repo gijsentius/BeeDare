@@ -17,7 +17,7 @@ class App extends Component {
                         <div className="nav-wrapper amber darken-1">
                             <Link to="/"><a className="brand-logo">BeeDare</a></Link>
                             <ul id="nav-mobile" className="right hide-on-med-and-down">
-                                <li><Link to="/search"><i class="material-icons">search</i></Link></li>
+                                <li><Link to="/search"><i className="material-icons">search</i></Link></li>
                                 <li><Link to="/challenges">Dares</Link></li>
                                 <li><Link to="/newsfeed">Newsfeed</Link></li>
                                 <li><Link to="/account">Account</Link></li>
