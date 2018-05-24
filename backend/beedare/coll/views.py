@@ -1,11 +1,11 @@
 from . import *
 
 
-@coll.route('/friends')
+@coll_blueprint.route('/friends')
 def friends():
     return 'Friends'
 
 
-@coll.route('/challenges')
+@coll_blueprint.route('/challenges')
 def challenges():
     return 'Challenges'

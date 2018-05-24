@@ -1,11 +1,11 @@
 from . import *
 
 
-@auth.route('/login')
+@auth_blueprint.route('/login')
 def login():
     return "Login"
 
 
-@auth.route('/register')
+@auth_blueprint.route('/register')
 def register():
     return "Register"

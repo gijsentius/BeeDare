@@ -1,16 +1,16 @@
 from . import *
 
 
-@profile.route('/user')
+@profile_blueprint.route('/user')
 def user():
     return "User"
 
 
-@profile.route('/hive')
+@profile_blueprint.route('/hive')
 def hive():
     return "Hive"
 
 
-@profile.route('/newsFeed')
+@profile_blueprint.route('/newsFeed')
 def news():
     return "News feed"
