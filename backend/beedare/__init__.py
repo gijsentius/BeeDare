@@ -1,6 +1,6 @@
 from flask import Flask
-from backend.beedare.main.controllers import main
-from backend.beedare.admin.controllers import admin
+from backend.beedare.main.views import main
+from backend.beedare.admin.views import admin
 
 app = Flask(__name__)
 
