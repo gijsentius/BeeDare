@@ -1,5 +1,5 @@
 from flask import Blueprint
 
-admin = Blueprint('admin', __name__)
+search = Blueprint('search', __name__)
 
 from . import views
