@@ -9,6 +9,8 @@ from backend.beedare.search import search
 from backend.beedare.user import profile_blueprint
 
 app = Flask(__name__)
+"""Used to config flask"""
+# app.config['TESTING']
 
 app.register_blueprint(main, url_prefix='/')
 app.register_blueprint(admin, url_prefix='/admin')
