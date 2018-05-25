@@ -35,7 +35,7 @@ class User(db.model):
         self.email = email
 
     def __repr__(self):
-        return '<User %r>' % (self.name)
+        return '<User %r>' % (self.first_name)
 
 
 # source: https://github.com/miguelgrinberg/flasky/blob/master/app/models.py
