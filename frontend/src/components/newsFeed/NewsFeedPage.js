@@ -1,9 +1,9 @@
 import React from 'react';
 import Hives from "../hives/Hives";
 import Hive from "../hives/Hive";
-import Newsfeed from "./Newsfeed";
 import Profile from "../user_interaction/Profile";
 import './NewsFeed.css';
+import Newsfeed from "./Newsfeed";
 
 class NewsFeedPage extends React.Component {
     constructor(props) {
@@ -24,12 +24,12 @@ class NewsFeedPage extends React.Component {
         const profileInfo = this.state.profileInfo;
 
         return (
-            <div>
+            <div className="customContainer">
                 <div className="row">
                     <div className="col s12 m3 sticky">
                         <Profile profileInfo={profileInfo}/>
                     </div>
-                    <div className="col s12 m6">
+                    <div className="col s12 m6 droppedShadowBoxNoScroll">
                         <Newsfeed/>
                     </div>
                     <div className="col s12 m3 sticky">

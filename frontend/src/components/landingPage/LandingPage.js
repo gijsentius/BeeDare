@@ -1,7 +1,4 @@
 import React from 'react';
-import Friends from "../friends/Friends";
-import NewsFeedPage from "../NewsFeed/NewsFeedPage";
-import Newsfeed from "../NewsFeed/Newsfeed";
 
 class LandingPage extends React.Component{
     render(){
