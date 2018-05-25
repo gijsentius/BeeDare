@@ -10,26 +10,25 @@ class Friends extends React.Component {
         }
     }
 
-    componentDidMount() {
+    /*componentDidMount() {
         if (this.state.friends === undefined) {
             this.setState({friends: ['no friends']});
         }
-    }
+    }*/
 
     render() {
         let list = [];
-        if (this.state.friends !== undefined) {
-            for (let i = 0; i < this.state.friends.length; i++) {
-                let info = this.getInfo(this.state.friends[i]);
-                list.push(<Icon key={i} action={() => alert(info.name)} online={info.online} image={info.image}/>);
-            }
-        }
+
+        this.props.friends.forEach((friend) => {
+            list.push(
+                <Icon image={friend.url} action={() => alert(friend.name)}/>
+            )
+        });
         return (
-            <div className='friendsList'>
-                <h3 className='text'>Active Friends</h3>
-                <div className='friends'>{list}</div>
+            <div className="droppedShadowBox col s12">
+                <div className="friends">{<div className="col s6 m4 l1">{list}</div>}</div>
             </div>
-        )
+        );
     }
 
     getInfo(friend) {

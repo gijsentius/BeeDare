@@ -1,4 +1,6 @@
 .content {
     max-width: 90%;
-    margin: auto;
+    margin-top: 2vh;
+    margin-left: auto;
+    margin-right: auto;
 }
