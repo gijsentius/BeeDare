@@ -40,13 +40,13 @@
     /*top nu voor development, later verwijderen*/
 }
 
-#imgCH{
+/* #imgCH{
     border-radius: 50%;
     display: block;
     margin: auto;
     width: 50%;
     height: 50%;
-}
+} */
 
 .rightnext{
     position: relative;

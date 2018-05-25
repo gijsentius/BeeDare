@@ -9,7 +9,7 @@ class SearchBar extends Component {
                 <div className="search-field">
                     <div className="input-field">
                         <input id="search" type="search" onChange={(input) => this.props.search(input.target.value)} required/>
-                        <i className="material-icons icon">search</i>
+                        <i className="material-icons search-icon">search</i>
                     </div>
                 </div>
             </div>

@@ -8,7 +8,7 @@ class SearchPage extends Component {
         this.state = {
             searchResults: []
         }
-        this.search.bind(this);
+        this.search = this.search.bind(this);
     }
 
     search(input) {

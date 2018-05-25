@@ -24,6 +24,12 @@ export default class Register extends React.Component{
                 </div>
                 <div className="row">
                     <div className="input-field col s12">
+                        <input id="confirm_password_register" type="password" className="validate"/>
+                            <label htmlFor="confirm_password_register">Confirm Password</label>
+                    </div>
+                </div>
+                <div className="row">
+                    <div className="input-field col s12">
                         <input id="email_register" type="email" className="validate"/>
                             <label htmlFor="email_register">Email</label>
                     </div>
