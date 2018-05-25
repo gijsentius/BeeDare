@@ -1,6 +1,6 @@
 from . import *
 
 
-@search.route('/search')
+@search.route('/')
 def search():
     return 'Search'

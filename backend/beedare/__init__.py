@@ -16,12 +16,10 @@ app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False  # Removes warning
 
 db = SQLAlchemy(app)  # Database instance used for SQLAlchemy
 
-
 app.register_blueprint(main, url_prefix='/')
 app.register_blueprint(admin, url_prefix='/admin')
-app.register_blueprint(landing, url_prefix='/')
-app.register_blueprint(auth_blueprint, url_prefix='/profile')
+app.register_blueprint(landing, url_prefix='/landing')
+app.register_blueprint(auth_blueprint, url_prefix='/auth')
 app.register_blueprint(coll_blueprint, url_prefix='/coll')
-app.register_blueprint(search, url_prefix='/')
+app.register_blueprint(search, url_prefix='/search')
 app.register_blueprint(profile_blueprint, url_prefix='/profile')
-
