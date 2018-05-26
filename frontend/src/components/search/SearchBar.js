@@ -8,7 +8,7 @@ class SearchBar extends Component {
             <div className="card">
                 <div className="search-field">
                     <div className="input-field">
-                        <input id="search" type="search" onChange={(input) => this.props.search(input.target.value)} required/>
+                        <input id="search" type="search" onChange={(input) => this.props.search(input.target.value)} placeholder="Search" required/>
                         <i className="material-icons search-icon">search</i>
                     </div>
                 </div>
