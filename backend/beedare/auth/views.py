@@ -1,5 +1,6 @@
-from flask import request
+from flask import request, redirect, url_for, session
 
+from backend.beedare.models import User
 from . import *
 
 
@@ -8,7 +9,6 @@ def login():
     if request.method == 'POST':
         username = request.form['username']
         password = request.form['password']
-        db = get_db()
         error = None
 
         if not username:
@@ -16,10 +16,14 @@ def login():
         elif not password:
             error = "No password given."
         if error is None:
-            result = db.session.query(db.User).filter_by(email=username).first()
+            # TODO fix query
+            # TODO return JSON
+            result = session.query(User).filter_by(email=username).first()
             if result is not None:
                 if result.password == password:
-                    return "Succes!"
+                    session.clear()
+                    session['id'] = result.id
+                    return redirect(url_for('/profile/user'))
                 else:
                     error = "Password incorrect"
         return error
@@ -33,7 +37,6 @@ def register():
         lastname = request.form['lastname']
         email = request.form['email']
         password = request.form['password']
-        db = get_db()
         error = None
 
         if not firstname:
@@ -45,10 +48,14 @@ def register():
         elif not email:
             error = "No email given."
         if error is None:
-            result = db.session.query(db.User).filter_by(email=email).first()
+            # TODO fix query
+            # TODO return JSON
+            result = session.query(User).filter_by(email=email).first()
             if result is not None:
                 error = "Email already registered."
             else:
+                # TODO register
                 return "Register successful but not registered"
+        return error
 
     return "Register"
