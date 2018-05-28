@@ -3,6 +3,7 @@ from flask_script import Manager
 from flask_sqlalchemy import SQLAlchemy
 from backend.beedare import app
 from backend.beedare import db
+from backend.beedare.models import User, Message, Comment, Dare
 
 """"
 $ flask db init -> creates a migration repo
@@ -19,6 +20,7 @@ migrate = Migrate(app, db)  # Migrate instance used for migrating the database
 manager = Manager(app)  # Manager instance
 manager.add_command('db', MigrateCommand)
 
+newUser = User(first_name="Thierry", last_name="Baudet", age_cat="10-15", location="plaggenhut")
 
 @manager.command
 def test():
@@ -27,3 +29,5 @@ def test():
 
 if __name__ == "__main__":
     manager.run()
+
+

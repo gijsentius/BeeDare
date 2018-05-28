@@ -1,6 +1,4 @@
 import datetime
-
-from sqlalchemy import Column, Integer, String
 from backend.beedare.database import db
 
 
@@ -15,20 +13,20 @@ class Follow(db.Model):
 
 class User(db.model):
     __tablename__ = 'users'
-    id = db.column(db.String(50), primary_key=True, unique=True)  #ID is de primary_key
-    first_name = db.column(db.String(30), unique=True)  # 30 character genoeg?
-    last_name = db.column(db.String(40), unique=True)
-    age_cat = db.column(db.String(50))  # ageCat staat voor ageCategory. Bijvoorbeeld 5-10 15-20 etc...
-    location = db.column(db.String(120))
-    image = db.column(db.String(500))  # 500??
-    score = db.column(db.Integer)
-    status = db.column(db.String(50))
-    username = db.column(db.String(120), unique=True)
-    password = db.column(db.String(500))
+    id = db.Column(db.String(50), primary_key=True, unique=True, autoincrement=True)  #ID is de primary_key
+    first_name = db.Column(db.String(30), unique=True)  # 30 character genoeg?
+    last_name = db.Column(db.String(40), unique=True)
+    age_cat = db.Column(db.String(50))  # ageCat staat voor ageCategory. Bijvoorbeeld 5-10 15-20 etc...
+    location = db.Column(db.String(120))
+    image = db.Column(db.String(500))  # 500??
+    score = db.Column(db.Integer)
+    status = db.Column(db.String(50))
+    username = db.Column(db.String(120), unique=True)
+    password = db.Column(db.String(500))
     # PASSWORD MOET NOG AANGEPAST WORDEN ZODAT HET BEVEILIGD IS
-    email = db.column(db.String(120), unique=True)
-    title = db.column(db.String(500))
-    rank = db.column(db.String(500))
+    email = db.Column(db.String(120), unique=True)
+    title = db.Column(db.String(500))
+    rank = db.Column(db.String(500))
 
     def __init__(self, name=None, email=None):
         self.name = name
@@ -63,7 +61,7 @@ class Comment(db.Model):
 class Dare(db.model):
     __tablename__ = 'dares'
     id = db.Column(db.Integer, primary_key=True)
-    image = db.column(db.String(500))
+    image = db.Column(db.String(500))
     body = db.Column(db.Text)
     body_html = db.Column(db.Text)
     id = db.Column(db.Integer)
