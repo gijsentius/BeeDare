@@ -1,6 +1,6 @@
 import React from "react";
 import './Friends.css';
-import Icon from "../icon/Icon1";
+import Icon from "../icon/Icon";
 
 class Friendslist extends React.Component {
     constructor(props) {
