@@ -1,7 +1,6 @@
 from flask_migrate import Migrate, MigrateCommand
 from flask_script import Manager
-from flask_sqlalchemy import SQLAlchemy
-from backend.beedare import app
+from backend.beedare import create_app
 from backend.beedare import db
 
 """"
@@ -13,7 +12,7 @@ Each time the database model changes, repeat the migrate and upgrade commands
 
 $ flask --help to see all commands 
 """
-
+app = create_app()
 migrate = Migrate(app, db)  # Migrate instance used for migrating the database
 
 manager = Manager(app)  # Manager instance

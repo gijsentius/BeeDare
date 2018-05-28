@@ -2,5 +2,5 @@ from . import *
 
 
 @landing.route('/')
-def sign():
+def landing():
     return "Landing"

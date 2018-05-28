@@ -1,0 +1,10 @@
+.dare-col {
+    width: 300px;
+    margin-right: 10px; 
+}
+
+.dare-cols {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+}

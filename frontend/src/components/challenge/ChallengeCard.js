@@ -25,14 +25,14 @@ class ChallengeCard extends Component {
 					<p className="text center-align">{this.props.description}</p>
 					<p className="text center-align"><b>Reward</b></p>
 					<p className="text center-align">{this.props.reward}</p>
-					<a class="waves-effect waves-light btn amber darken-1 center-component">Dare</a>
+					<a className="waves-effect waves-light btn amber darken-1 center-component">Dare</a>
 				</div>
 			</div>
 		) : (
 			<div className="card challenge-box hoverable" onClick={this.handleExpandInfo}>
 				<div className="card-content">
 					<h6 className="text center-align">{this.props.title}</h6>
-					<img src={this.props.image} alt="" class="circle responsive-img center-component"/>
+					<img src={this.props.image} alt="" className="circle responsive-img center-component"/>
 				</div>
 			</div>
 		);
