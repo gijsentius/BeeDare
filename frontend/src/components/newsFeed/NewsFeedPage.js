@@ -26,17 +26,15 @@ class NewsFeedPage extends React.Component {
         return (
             <div className="customContainer">
                 <div className="row">
-                        <div className="col s12 m3 sticky">
-                            <Profile profileInfo={profileInfo}/>
-                        </div>
-
+                    <div className="col s12 m3 sticky">
+                        <Profile profileInfo={profileInfo}/>
+                    </div>
                     <div className="col s12 m6 droppedShadowBoxNoScroll">
                         <Newsfeed/>
                     </div>
-                        <div className="col s12 m3 sticky">
-                            <Hives className="col s4" hives={[<Hive/>, <Hive/>, <Hive/>]}/>
-                        </div>
-
+                    <div className="col s12 m3 sticky">
+                        <Hives className="col s4" hives={[<Hive/>, <Hive/>, <Hive/>]}/>
+                    </div>
                 </div>
             </div>
         )

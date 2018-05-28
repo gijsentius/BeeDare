@@ -1,5 +1,8 @@
 # See https://help.github.com/ignore-files/ for more about ignoring files.
 
+# database
+backend/*.db
+
 # dependencies
 frontend/node_modules
 
@@ -10,6 +13,8 @@ frontend/coverage
 
 # production
 frontend/build
+
+backend/*.db
 
 # misc
 .DS_Store

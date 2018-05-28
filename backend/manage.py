@@ -1,8 +1,7 @@
 from flask_migrate import Migrate, MigrateCommand
 from flask_script import Manager
-from backend.beedare import app
+from backend.beedare import create_app
 from backend.beedare import db
-from backend.beedare.models import User, Message, Comment, Dare
 
 """"
 $ flask db init -> creates a migration repo
@@ -13,7 +12,7 @@ Each time the database model changes, repeat the migrate and upgrade commands
 
 $ flask --help to see all commands 
 """
-
+app = create_app()
 migrate = Migrate(app, db)  # Migrate instance used for migrating the database
 
 manager = Manager(app)  # Manager instance
@@ -27,5 +26,3 @@ def test():
 
 if __name__ == "__main__":
     manager.run()
-
-

@@ -1,4 +1,5 @@
 import datetime
+
 from backend.beedare import db
 
 
@@ -60,8 +61,8 @@ class Comment(db.Model):
 
 class Dare(db.Model):
     __tablename__ = 'dares'
-    id = db.Column(db.Integer, primary_key=True, autoincrement=True)
-    image = db.Column(db.String(200))
+    id = db.Column(db.Integer, primary_key=True)
+    image = db.column(db.String(500))
     body = db.Column(db.Text)
     body_html = db.Column(db.Text)
 
