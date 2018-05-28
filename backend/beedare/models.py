@@ -1,5 +1,5 @@
 import datetime
-from backend.beedare.database import db
+from backend.beedare import db
 
 
 class Follow(db.Model):
@@ -11,9 +11,9 @@ class Follow(db.Model):
     timestamp = db.Column(db.DateTime, default=datetime.datetime.now())
 
 
-class User(db.model):
+class User(db.Model):
     __tablename__ = 'users'
-    id = db.Column(db.String(50), primary_key=True, unique=True, autoincrement=True)  #ID is de primary_key
+    id = db.Column(db.String(50), primary_key=True, unique=True)  #ID is de primary_key
     first_name = db.Column(db.String(30), unique=True)  # 30 character genoeg?
     last_name = db.Column(db.String(40), unique=True)
     age_cat = db.Column(db.String(50))  # ageCat staat voor ageCategory. Bijvoorbeeld 5-10 15-20 etc...
@@ -37,7 +37,7 @@ class User(db.model):
 
 
 # source: https://github.com/miguelgrinberg/flasky/blob/master/app/models.py
-class Message(db.model):
+class Message(db.Model):
     __tablename__ = 'posts'
     id = db.Column(db.Integer, primary_key=True)
     body = db.Column(db.Text)
@@ -58,12 +58,11 @@ class Comment(db.Model):
     post_id = db.Column(db.Integer, db.ForeignKey('posts.id'))
 
 
-class Dare(db.model):
+class Dare(db.Model):
     __tablename__ = 'dares'
-    id = db.Column(db.Integer, primary_key=True)
-    image = db.Column(db.String(500))
+    id = db.Column(db.Integer, primary_key=True, autoincrement=True)
+    image = db.Column(db.String(200))
     body = db.Column(db.Text)
     body_html = db.Column(db.Text)
-    id = db.Column(db.Integer)
 
 
