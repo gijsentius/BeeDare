@@ -1,5 +1,6 @@
-from flask import request, redirect, url_for, session
+from flask import request, redirect, url_for
 
+from backend.beedare import db
 from backend.beedare.models import User
 from . import *
 
@@ -7,6 +8,7 @@ from . import *
 @auth_blueprint.route('/login', methods=['GET', 'POST'])
 def login():
     if request.method == 'POST':
+        # TODO is this good?
         username = request.form['username']
         password = request.form['password']
         error = None
@@ -16,13 +18,13 @@ def login():
         elif not password:
             error = "No password given."
         if error is None:
-            # TODO fix query
-            # TODO return JSON
-            result = session.query(User).filter_by(email=username).first()
+            result = db.session.query(User).filter_by(email=username).first()
             if result is not None:
                 if result.password == password:
-                    session.clear()
-                    session['id'] = result.id
+                    # TODO is this right?
+                    db.session.clear()
+                    db.session['id'] = result.id
+                    # TODO return JSON
                     return redirect(url_for('/profile/user'))
                 else:
                     error = "Password incorrect"
@@ -33,6 +35,7 @@ def login():
 @auth_blueprint.route('/register', methods=['GET', 'POST'])
 def register():
     if request.method == 'POST':
+        # TODO is this good?
         firstname = request.form['firstname']
         lastname = request.form['lastname']
         email = request.form['email']
@@ -48,13 +51,12 @@ def register():
         elif not email:
             error = "No email given."
         if error is None:
-            # TODO fix query
-            # TODO return JSON
-            result = session.query(User).filter_by(email=email).first()
+            result = db.session.query(User).filter_by(email=email).first()
             if result is not None:
                 error = "Email already registered."
             else:
                 # TODO register
+                # TODO return JSON
                 return "Register successful but not registered"
         return error
 
