@@ -9,24 +9,20 @@ from . import *
 @coll_blueprint.route('/friends/<user_id>', methods=["POST"])
 @login_required
 def friends(user_id):
-    if request.method == 'POST':
-        result = db.session.query(Friends).filter_by(followed_id=user_id)
-        if result is not None:
-            return jsonify({
-                "result": result
-            })
-        return "No friends found"
-    return 'Friends'
+    result = db.session.query(Friends).filter_by(followed_id=user_id)
+    if result is not None:
+        return jsonify({
+            "result": result
+        }), 200
+    return jsonify({}), 401
 
 
 @coll_blueprint.route('/challenges/<user_id>', methods=["POST"])
 @login_required
 def challenges(user_id):
-    if request.method == 'POST':
-        #result = db.session.query(User_Dares).filter_by(dare_id=user_id)
-        #if result is not None:
-        #    return jsonify({
-        #        "result": result
-        #   })
-        return "No challenges found"
-    return 'Challenges'
+    # result = db.session.query(User_Dares).filter_by(dare_id=user_id)
+    # if result is not None:
+    #    return jsonify({
+    #        "result": result
+    #   }), 200
+    return jsonify({}), 401

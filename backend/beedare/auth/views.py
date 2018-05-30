@@ -1,8 +1,13 @@
-from flask import request, redirect, url_for
+from flask import request, redirect, url_for, jsonify
 
 from backend.beedare import db
 from backend.beedare.models import User
 from . import *
+
+
+@auth_blueprint.route('/login', methods=["GET"])
+def login_new():
+    return jsonify({}), 200
 
 
 @auth_blueprint.route('/login/<username>/<password>', methods=['GET', 'POST'])
@@ -21,15 +26,20 @@ def login(username, password):
                     # TODO is this right?
                     db.session.clear()
                     db.session['id'] = result.id
-                    # TODO return JSON
+                    # TODO return JSON?
                     return redirect(url_for('/profile/user'))
                 else:
                     error = "Password incorrect"
-        return error
-    return "Login"
+        return jsonify({"error": error}), 401
+    return jsonify({}), 401
 
 
-@auth_blueprint.route('/register/<firstname>/<lastname>/<email>/<password>/<username>', methods=['GET', 'POST'])
+@auth_blueprint.route('/register', methods=["GET"])
+def register_new():
+    return jsonify({}), 200
+
+
+@auth_blueprint.route('/register/<firstname>/<lastname>/<email>/<password>/<username>', methods=['POST'])
 def register(firstname, lastname, email, password, username):
     if request.method == 'POST':
         error = None
@@ -58,13 +68,19 @@ def register(firstname, lastname, email, password, username):
                 db.session.add(user)
                 db.session.commit()
                 # TODO return JSON
-                return "Register successful"
-        return error
+                return jsonify({
+                    "first_name": firstname,
+                    "last_name": lastname,
+                    "password": password,
+                    "email": email,
+                    "username": username
+                }), 200
+        return jsonify({"error": error}), 401
 
-    return "Register"
+    return jsonify({}), 401
 
 
-@auth_blueprint.route('/logout', method='GET')
+@auth_blueprint.route('/logout', methods=["GET"])
 def logout():
     db.session.clear()
     redirect(url_for('/login'))
