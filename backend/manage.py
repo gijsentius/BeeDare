@@ -2,6 +2,7 @@ from flask_migrate import Migrate, MigrateCommand
 from flask_script import Manager
 from backend.beedare import create_app
 from backend.beedare import db
+from backend.beedare.models import User
 
 """"
 $ flask db init -> creates a migration repo
@@ -21,7 +22,9 @@ manager.add_command('db', MigrateCommand)
 
 @manager.command
 def test():
-    print("Hello World")
+    testUser = User('Thierry', 'Baudet',)
+    db.session.add(testUser)
+    db.session.commit()
 
 
 if __name__ == "__main__":
