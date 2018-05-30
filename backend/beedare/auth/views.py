@@ -64,7 +64,7 @@ def register(firstname, lastname, email, password, username):
     return "Register"
 
 
-@auth_blueprint.route('/logout')
+@auth_blueprint.route('/logout', method='GET')
 def logout():
     db.session.clear()
     redirect(url_for('/login'))
