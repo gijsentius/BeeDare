@@ -1,4 +1,4 @@
-from flask import jsonify
+from flask import request, jsonify
 
 from backend.beedare import db
 from backend.beedare.models import User, Dare, Hive
