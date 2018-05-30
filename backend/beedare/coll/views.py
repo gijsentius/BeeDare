@@ -17,9 +17,9 @@ def friends(user_id):
     return jsonify({}), 401
 
 
-@coll_blueprint.route('/challenges/<user_id>', methods=["POST"])
+@coll_blueprint.route('/dares/<user_id>', methods=["POST"])
 @login_required
-def challenges(user_id):
+def dares(user_id):
     # result = db.session.query(User_Dares).filter_by(dare_id=user_id)
     # if result is not None:
     #    return jsonify({

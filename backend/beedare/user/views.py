@@ -1,4 +1,5 @@
-from flask import request, jsonify
+from flask import jsonify
+from flask_login import login_required
 
 from backend.beedare import db
 from backend.beedare.models import User, Hive, ColonyMembers, Dare, Message
@@ -6,6 +7,7 @@ from . import *
 
 
 @profile_blueprint.route('/user/<user_id>', methods=['POST'])
+@login_required
 def user(user_id):
     # is this necessary?
     if db.session.query(User).filter_by(id=user_id) is not None:
@@ -23,6 +25,7 @@ def user(user_id):
 
 
 @profile_blueprint.route('/hive/<hive_id>', methods=['POST'])
+@login_required
 def hive(hive_id):
     # is this necessary?
     if db.session.query(User).filter_by(id=hive_id).first() is not None:
@@ -39,6 +42,7 @@ def hive(hive_id):
 
 
 @profile_blueprint.route('/newsFeed/<user_id>', methods=['POST'])
+@login_required
 def news(user_id):
     # is this necessary?
     if db.session.query(User).filter_by(id=user_id).first() is not None:
