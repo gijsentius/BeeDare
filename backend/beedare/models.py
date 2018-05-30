@@ -29,6 +29,19 @@ class User(db.Model):
     title = db.Column(db.String(500))
     rank = db.Column(db.String(500))
 
+    def to_json(self):
+        json_user = {
+            'url': url_for('api.get_user', id=self.id),  # ????
+            'username': self.username,
+            'member_since': self.member_since,
+            'last_seen': self.last_seen,
+            'posts_url': url_for('api.get_user_posts', id=self.id),  # ?????
+            'followed_posts_url': url_for('api.get_user_followed_posts',  # ????
+                                          id=self.id),
+            'post_count': self.posts.count()
+        }
+        return json_user
+
     def __init__(self, name=None, email=None):
         self.name = name
         self.email = email
@@ -66,6 +79,13 @@ class Dare(db.Model):
     image = db.column(db.String(500))
     body = db.Column(db.Text)
     body_html = db.Column(db.Text)
+
+
+class UserDares(db.Model):
+    __tablename__ = 'userdares'
+    id = db.Column(db.ForeignKey('dares.id'), primary_key=True)
+    owner_id = db.Column(db.Integer, db.ForeignKey('users.id'))
+    achieved = db.Column(db.Boolean)
 
 
 class Hive(db.Model):
