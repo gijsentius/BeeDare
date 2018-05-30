@@ -5,12 +5,9 @@ from backend.beedare.models import User
 from . import *
 
 
-@auth_blueprint.route('/login', methods=['GET', 'POST'])
-def login():
+@auth_blueprint.route('/login/<username>/<password>', methods=['GET', 'POST'])
+def login(username, password):
     if request.method == 'POST':
-        # TODO is this good?
-        username = request.form['username']
-        password = request.form['password']
         error = None
 
         if not username:
