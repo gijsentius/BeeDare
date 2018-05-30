@@ -1,4 +1,5 @@
 import React from 'react';
+import '../user_interaction/login-register.css'
 
 export default class Register extends React.Component{
 
@@ -7,6 +8,9 @@ export default class Register extends React.Component{
         <div className="row">
             <form className="col s12">
                 <div className="row">
+                    <div className="title">
+                        <h5 className="title">Register</h5>
+                    </div>
                     <div className="input-field col s6">
                         <input id="first_name_register" type="text" className="validate"/>
                             <label htmlFor="first_name_register">First Name</label>
@@ -38,19 +42,19 @@ export default class Register extends React.Component{
                     <div className="center" style={{boxAlign: "center"}}>
                         <a className="waves-effect waves-light btn amber darken-1"
                         >
-                            Registreer
+                            Register
                         </a>
                     </div>
                 </div>
                 <div className="row">
-                    <p className="center">Of registreer via Google</p>
+                    <p className="center">Or register with Google</p>
                 </div>
                 <div className="row">
                     <div className="center">
                 <a className="waves-effect waves-light btn social google light red"
 
                 >
-                    Registreer via Google
+                    Register with Google
                 </a>
                     </div>
                 </div>
