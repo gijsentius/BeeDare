@@ -35,8 +35,8 @@ def search_hives(query):
     return 'Hives'
 
 
-@search_blueprint.route('/challenges/<query>', methods=['POST'])
-def search_challenges(query):
+@search_blueprint.route('/dares/<query>', methods=['POST'])
+def search_dares(query):
     if request.method == 'POST':
         result = db.session.query(Dare).filter_by(name=query)
         if result is not None:
@@ -44,4 +44,4 @@ def search_challenges(query):
                 "result": result
             })
         return "No results found"
-    return 'Challenges'
+    return 'Dares'
