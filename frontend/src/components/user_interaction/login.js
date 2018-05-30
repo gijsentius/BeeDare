@@ -9,7 +9,7 @@ export default class Login extends React.Component{
                     <div className="row">
                         <div className="input-field col s12">
                             <input id="email_login" type="email" className="validate"/>
-                            <label htmlFor="email">Email</label>
+                            <label htmlFor="email_login">Email</label>
                         </div>
                     </div>
                     <div className="row">

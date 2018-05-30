@@ -1,5 +1,6 @@
 import React, {Component} from 'react';
 import ChallengeCard from './ChallengeCard';
+import './ChallengeList.css'
 
 class ChallengeList extends Component {
 	constructor(props) {
@@ -17,9 +18,8 @@ class ChallengeList extends Component {
 	}
 
 	render() {
-		let challengePairs = [];
 		let challenges = this.state.challenges.map((challenge) => 
-			<div className="col s6 m3">
+			<div className="dare-col">
 				<ChallengeCard
 					description={challenge.thumbnailUrl}
 					reward="60 gallons of honey"
@@ -28,22 +28,9 @@ class ChallengeList extends Component {
 				/>
 			</div>
 		);
-		let tempItems = []
-		for(let i=0;i<challenges.length;i++) {
-			if(i%4 === 0 && i>0) {
-				challengePairs.push(tempItems);
-				tempItems = [];
-			}
-			tempItems.push(challenges[i]);
-		}
-		let challengesFixed = challengePairs.map((challenges) => 
-			<div className="row">
-				{challenges}
-			</div>
-		);
 		return (
-			<div>
-				{challengesFixed}
+			<div className="dare-cols">
+				{challenges}
 			</div>
 		);
 	}

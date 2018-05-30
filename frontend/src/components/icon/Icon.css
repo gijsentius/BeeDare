@@ -1,17 +1,9 @@
 .icon {
     max-width: 99%;
-    /*height: auto;*/
     border-radius: 50%;
     transition: 0.24s ease-in-out;
 }
 
 .icon:hover {
     opacity: 0.7;
-}
-
-.icon1 {
-    max-width: 35%;
-    height: auto;
-    border-radius: 50%;
-    transition: 0.24s ease-in-out;
 }
