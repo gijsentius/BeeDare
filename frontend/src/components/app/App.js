@@ -6,6 +6,7 @@ import NewsFeedPage from '../newsFeed/NewsFeedPage';
 import ProfilePage from '../profile/ProfilePage';
 import LandingPage from '../landingPage/LandingPage';
 import SearchPage from '../search/SearchPage';
+import NavLogo from './navbar_icon.png';
 import './App.css';
 
 class App extends Component {
@@ -15,7 +16,14 @@ class App extends Component {
                 <div>
                     <nav>
                         <div className="nav-wrapper amber darken-1">
-                            <Link to="/"><a className="brand-logo">BeeDare</a></Link>
+                            <Link to="/">
+                                <a class="logo">
+                                    <img className="main-logo" src={NavLogo}/>
+                                </a>
+                                <a>
+                                    <span className="navbar-text">BeeDare</span>
+                                </a>
+                            </Link> 
                             <ul id="nav-mobile" className="right hide-on-med-and-down">
                                 <li><Link to="/search"><i className="material-icons">search</i></Link></li>
                                 <li><Link to="/challenges">Dares</Link></li>

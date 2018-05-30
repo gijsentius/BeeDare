@@ -1,0 +1,10 @@
+.search-result-box {
+    width: 300px;
+    margin-right: 10px; 
+}
+
+.search-results {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+}
