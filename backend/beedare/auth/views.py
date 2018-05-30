@@ -59,3 +59,9 @@ def register():
         return error
 
     return "Register"
+
+
+@auth_blueprint.route('/logout')
+def logout():
+    session.clear()
+    redirect(url_for('index'))  # TODO Change logout redirect to the correct page
