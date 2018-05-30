@@ -18,7 +18,7 @@ def login():
         elif not password:
             error = "No password given."
         if error is None:
-            result = db.session.query(User).filter_by(email=username).first()
+            result = db.session.query(User).filter_by(username=username).first()
             if result is not None:
                 if result.password == password:
                     # TODO is this right?
@@ -32,14 +32,9 @@ def login():
     return "Login"
 
 
-@auth_blueprint.route('/register', methods=['GET', 'POST'])
-def register():
+@auth_blueprint.route('/register/<firstname>/<lastname>/<email>/<password>/<username>', methods=['GET', 'POST'])
+def register(firstname, lastname, email, password, username):
     if request.method == 'POST':
-        # TODO is this good?
-        firstname = request.form['firstname']
-        lastname = request.form['lastname']
-        email = request.form['email']
-        password = request.form['password']
         error = None
 
         if not firstname:
@@ -50,14 +45,23 @@ def register():
             error = "No password given."
         elif not email:
             error = "No email given."
+        elif not username:
+            error = "No uername given."
         if error is None:
             result = db.session.query(User).filter_by(email=email).first()
             if result is not None:
                 error = "Email already registered."
             else:
-                # TODO register
+                user = User()
+                user.first_name = firstname
+                user.last_name = lastname
+                user.password = password
+                user.email = email
+                user.username = username
+                db.session.add(user)
+                db.session.commit()
                 # TODO return JSON
-                return "Register successful but not registered"
+                return "Register successful"
         return error
 
     return "Register"
@@ -66,4 +70,4 @@ def register():
 @auth_blueprint.route('/logout')
 def logout():
     db.session.clear()
-    redirect(url_for('/login'))  # TODO Change logout redirect to the correct page
+    redirect(url_for('/login'))

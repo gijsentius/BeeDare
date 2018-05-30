@@ -23,7 +23,7 @@ def friends(user_id):
 @login_required
 def challenges(user_id):
     if request.method == 'POST':
-        #result = db.session.query(Completed_Dares).filter_by(dare_id=user_id)
+        #result = db.session.query(User_Dares).filter_by(dare_id=user_id)
         #if result is not None:
         #    return jsonify({
         #        "result": result
