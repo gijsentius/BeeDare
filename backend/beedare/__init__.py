@@ -1,17 +1,16 @@
 from flask import Flask
 from flask_login import LoginManager
 from flask_sqlalchemy import SQLAlchemy
+from backend.config import config, MailConfig
 
 db = SQLAlchemy()  # Database instance used for SQLAlchemy
 login_manager = LoginManager()
 
 
-def create_app():
+def create_app(config_type):
     app = Flask(__name__)
-    """Leave app init + app.config together like this to prevent warnings"""
-    app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///app.db'  # Removes warning
-    app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False  # Removes warning
-
+    app.config.from_object(config[config_type])
+    app.config.from_object(MailConfig)
     db.init_app(app)
     login_manager.init_app(app)
 
