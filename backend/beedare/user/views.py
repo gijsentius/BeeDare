@@ -1,3 +1,4 @@
+from django.contrib.auth.decorators import login_required
 from flask import request, jsonify
 
 from backend.beedare import db
@@ -6,6 +7,7 @@ from . import *
 
 
 @profile_blueprint.route('/user/<user_id>', methods=['GET', 'POST'])
+@login_required
 def user(user_id):
     if request.method == "POST":
         # is this necessary?
@@ -24,6 +26,7 @@ def user(user_id):
 
 
 @profile_blueprint.route('/hive/<hive_id>', methods=['GET', 'POST'])
+@login_required()
 def hive(hive_id):
     if request.method == "POST":
         # is this necessary?
@@ -40,6 +43,7 @@ def hive(hive_id):
 
 
 @profile_blueprint.route('/newsFeed/<user_id>', methods=['GET', 'POST'])
+@login_required()
 def news(user_id):
     if request.method == "POST":
         # is this necessary?
