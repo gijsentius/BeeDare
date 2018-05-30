@@ -29,10 +29,6 @@ class User(db.Model):
     title = db.Column(db.String(500))
     rank = db.Column(db.String(500))
 
-    def __init__(self, name=None, email=None):
-        self.name = name
-        self.email = email
-
     def __repr__(self):
         return '<User %r>' % (self.first_name)
 
