@@ -27,7 +27,6 @@ class Hive extends React.Component {
                     </div>
                     <div className="col s4">
                         <Icon image={this.state.image} action={undefined}/>
-                        <a className="waves-effect #4dd0e1 btn-small amber darken-1 s12 col">Join!</a>
                     </div>
             </div>
         )
