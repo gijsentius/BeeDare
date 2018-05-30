@@ -42,7 +42,7 @@ def hive(hive_id):
     return "Hive"
 
 
-@profile_blueprint.route('/newsFeed/<user_id>', methods=['GET', 'POST'])
+@profile_blueprint.route('/newsfeed/<user_id>', methods=['GET', 'POST'])
 @login_required()
 def news(user_id):
     if request.method == "POST":
