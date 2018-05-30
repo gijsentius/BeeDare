@@ -1,6 +1,8 @@
+from flask import jsonify
+
 from . import *
 
 
 @admin.route('/')
 def index():
-    return "Admin"
+    return jsonify({}), 200
