@@ -6,12 +6,11 @@ class LandingPage extends React.Component{
     render(){
         return(
             <div>
-                <div className="row"/>
                 <div className="row">
-                    <div className="col s6 offset-s1" id="landinginfo">
+                    <div className="col m4 offset-m1" id="landinginfo">
                         <Landinginfo/>
                     </div>
-                    <div className="col m3 offset-m8" id="register">
+                    <div className="col m3 offset-m4" id="register">
                         <Register />
                     </div>
                 </div>

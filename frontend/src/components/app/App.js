@@ -22,16 +22,16 @@ class App extends Component {
                                     <img className="main-logo" src={NavLogo}/>
                                 </a>
                                 <a>
-                                    <span className="navbar-text">BeeDare</span>
+                                    <span className="navbar-text text-color">BeeDare</span>
                                 </a>
                             </Link>
                             <ul id="nav-mobile" className="right hide-on-med-and-down">
-                                <li><Link to="/search"><i className="material-icons">search</i></Link></li>
-                                <li><Link to="/challenges">Dares</Link></li>
-                                <li><Link to="/newsfeed">Newsfeed</Link></li>
-                                <li><Link to="/signin">Sign in</Link></li>
-                                <li><Link to="/signup">Get started</Link></li>
-                                <li><Link to="/profile">Profile</Link></li>
+                                <li><Link to="/search"><i className="material-icons text-color">search</i></Link></li>
+                                <li><Link to="/challenges"><span className="text-color">Dares</span></Link></li>
+                                <li><Link to="/newsfeed"><span className="text-color">Newsfeed</span></Link></li>
+                                <li><Link to="/signin"><span className="text-color">Sign In</span></Link></li>
+                                <li><Link to="/signup"><span className="text-color">Get Started</span></Link></li>
+                                <li><Link to="/profile"><span className="text-color">Profile</span></Link></li>
                             </ul>
                         </div>
                     </nav>

@@ -5,3 +5,7 @@ span {
 p {
     text-align: center;
 }
+
+body {
+    background-image: url("../../images/Background.jpg");
+}
