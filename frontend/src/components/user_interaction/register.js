@@ -4,6 +4,8 @@ export default class Register extends React.Component{
 
     render(){
         return(
+        <div className="card">
+        <div className="card-content">
         <div className="row">
             <form className="col s12">
                 <div className="row">
@@ -58,6 +60,8 @@ export default class Register extends React.Component{
                     </div>
                 </div>
             </form>
+        </div>
+        </div>
         </div>
             )
     }

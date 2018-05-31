@@ -24,7 +24,8 @@ class Profile extends Component {
         }
 
         return (
-            <div className="droppedShadowBox">
+            <div className="card">
+            <div className="card-content">
                 <div className="section" key={profile.id}>
                     <div className="center" id='imgCH'>
                         <Icon image={profile.url}/>
@@ -46,6 +47,7 @@ class Profile extends Component {
                 <div className="section center">
                     <h6>Rank: Ultimate Master Vegan</h6>
                 </div>
+            </div>
             </div>
         );
 

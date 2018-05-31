@@ -62,11 +62,15 @@ class NewsFeedPage extends React.Component {
                         <Profile profileInfo={profileInfo}/>
                         {scrolled}
                     </div>
-                    <div className="col s12 m6 droppedShadowBoxNoScroll">
+                    <div className="col s12 m6 card">
+                    <div className="card-content">
                         <Newsfeed/>
                     </div>
-                    <div className="col s12 m3 sticky">
+                    </div>
+                    <div className="col s12 m3 card sticky">
+                    <div className="card-content">
                         <Hives className="col s4" hives={[<Hive/>, <Hive/>, <Hive/>]}/>
+                    </div>
                     </div>
                 </div>
             </div>

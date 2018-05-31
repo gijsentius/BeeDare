@@ -18,10 +18,7 @@ class Hives extends React.Component {
             }
         }
         return (
-            <div className="droppedShadowBox">
-                <Block title="Hives" content={list}/>
-            </div>
-
+            <Block title="Hives" content={list}/>
         )
     }
 }
