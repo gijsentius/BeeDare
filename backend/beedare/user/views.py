@@ -2,7 +2,7 @@ from flask import jsonify
 from flask_login import login_required
 
 from backend.beedare import db
-from backend.beedare.models import User, Hive, ColonyMembers, Dare, Message
+from backend.beedare.models import User, Hive, ColonyMembers, Dare, Message, Friends
 from . import *
 
 
@@ -12,14 +12,13 @@ def user(user_id):
     # is this necessary?
     if db.session.query(User).filter_by(id=user_id) is not None:
         user_data = db.session.query(User).filter_by(id=user_id)
-        # TODO query active friends
-        friends = None
+        friends = db.session.query(Friends).filter_by(follower_id=user_id)
         # TODO query challenges
-        challenges = None
+        dares = None
         return jsonify({
             'user data': user_data,
             'friends': friends,
-            'challenges': challenges,
+            'dares': dares,
         }), 200
     return jsonify({}), 401
 

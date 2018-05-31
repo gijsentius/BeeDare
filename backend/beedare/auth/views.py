@@ -16,12 +16,14 @@ def login(username, password):
     if request.method == 'POST':
         result = db.session.query(User).filter_by(username=username).first()
         if result is not None:
-            if result.password == password:
+            # TODO fix hash for password
+            if result.username == username:
                 # TODO is this right?
-                db.session.clear()
-                db.session['id'] = result.id
-                # TODO return JSON?
-                return redirect(url_for('/profile/user'))
+                #db.session.clear()
+                #db.session['id'] = result.id
+                # TODO return redirect
+                #return redirect(url_for("profile.user"), code=200)
+                return jsonify({"state": "succes"})
             else:
                 error = "Password incorrect"
         return jsonify({"error": error}), 401
@@ -33,8 +35,8 @@ def register_new():
     return jsonify({}), 200
 
 
-@auth_blueprint.route('/register/<firstname>/<lastname>/<email>/<password>/<username>', methods=['POST'])
-def register(firstname, lastname, email, password, username):
+@auth_blueprint.route('/register/<firstname>/<lastname>/<email>/<username>', methods=['POST'])
+def register(firstname, lastname, email,  username):
     result = db.session.query(User).filter_by(email=email).first()
     if result is not None:
         error = "Email already registered."
@@ -46,7 +48,6 @@ def register(firstname, lastname, email, password, username):
         return jsonify({
             "first_name": firstname,
             "last_name": lastname,
-            "password": password,
             "email": email,
             "username": username
         }), 200
@@ -55,4 +56,4 @@ def register(firstname, lastname, email, password, username):
 @auth_blueprint.route('/logout', methods=["GET"])
 def logout():
     db.session.clear()
-    redirect(url_for('/login'))
+    redirect(url_for('login'))
