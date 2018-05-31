@@ -24,8 +24,8 @@ def login(username, password):
                 # TODO return redirect
                 #return redirect(url_for("profile.user"), code=200)
                 return jsonify({"state": "succes"})
-            else:
-                error = "Password incorrect"
+        else:
+            error = "Password incorrect"
         return jsonify({"error": error}), 401
     return jsonify({}), 401
 
