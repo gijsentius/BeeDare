@@ -1,6 +1,18 @@
 import datetime
+from flask import current_app, request, url_for
+from itsdangerous import TimedSerializer
 
+from werkzeug.security import generate_password_hash, check_password_hash
 from backend.beedare import db
+
+
+# # Een klasse die aangeeft wat voor permissies iemand kan hebben
+# class Permission:
+#     FOLLOW = 1
+#     COMMENT = 2
+#     WRITE = 4
+#     MODERATE = 8
+#     ADMIN = 16
 
 
 class Friends(db.Model):
@@ -15,19 +27,40 @@ class Friends(db.Model):
 class User(db.Model):
     __tablename__ = 'users'
     id = db.Column(db.Integer, primary_key=True, unique=True, autoincrement=True)  #ID is de primary_key
-    first_name = db.Column(db.String(30), unique=True)  # 30 character genoeg?
-    last_name = db.Column(db.String(40), unique=True)
+    first_name = db.Column(db.String(30))  # 30 character genoeg?
+    last_name = db.Column(db.String(40))
     age_cat = db.Column(db.String(50))  # ageCat staat voor ageCategory. Bijvoorbeeld 5-10 15-20 etc...
     location = db.Column(db.String(120))
     image = db.Column(db.String(500))  # 500??
     score = db.Column(db.Integer)
-    status = db.Column(db.String(50))
+    last_seen = db.Column(db.String(50))
     username = db.Column(db.String(120), unique=True)
-    password = db.Column(db.String(500))
+    password_hash = db.Column(db.String(500))
     # PASSWORD MOET NOG AANGEPAST WORDEN ZODAT HET BEVEILIGD IS
     email = db.Column(db.String(120), unique=True)
     title = db.Column(db.String(500))
     rank = db.Column(db.String(500))
+
+    def set_password(self, password):
+        self.password_hash = generate_password_hash(password)
+
+    def check_password(self, password):
+        return check_password_hash(self.password_hash, password)
+
+    def generate_confirmation_token(self):
+        s = TimedSerializer(current_app.config['SECRET_KEY'], 'confirmation')
+        return s.dumps(self.id)
+
+    def check_confirmation(self, token, expiration=3600):
+        s = TimedSerializer(current_app.config['SECRET_KEY'], 'confirmation')
+        return s.loads(token, max_age=expiration) == self.id
+
+    def confirm(self):
+        self.confirmed = True
+
+    def ping(self):
+        self.last_seen = datetime.datetime.now()
+        db.session.add(self)
 
     def __repr__(self):
         return '<User %r>' % (self.first_name)
@@ -62,6 +95,13 @@ class Dare(db.Model):
     image = db.column(db.String(500))
     body = db.Column(db.Text)
     body_html = db.Column(db.Text)
+
+
+class UserDares(db.Model):
+    __tablename__ = 'userdares'
+    id = db.Column(db.ForeignKey('dares.id'), primary_key=True)
+    owner_id = db.Column(db.Integer, db.ForeignKey('users.id'))
+    achieved = db.Column(db.Boolean)
 
 
 class Hive(db.Model):
