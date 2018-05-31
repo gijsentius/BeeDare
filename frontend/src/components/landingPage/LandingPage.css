@@ -7,7 +7,7 @@ p {
 }
 
 .landingpage_background {
-    background-image: url("../../images/Background.jpg");
     /*Source = https://fwallpapers.com/view/yellow-flower-white-background*/
+    background: url("../../images/Background.jpg") no-repeat;
     background-size: cover;
 }
