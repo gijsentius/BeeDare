@@ -9,7 +9,7 @@ from flask_migrate import Migrate, MigrateCommand
 from flask_script import Manager
 from backend.beedare import create_app
 from backend.beedare import db
-from backend.beedare.models import User
+# from backend.beedare.models import User
 
 app = create_app(os.getenv('FLASK_CONFIG') or 'default')
 migrate = Migrate(app, db)  # Migrate instance used for migrating the database
@@ -19,7 +19,7 @@ manager.add_command('db', MigrateCommand)
 
 @manager.command
 def test():
-    test = User(first_name="asfasdfasdfasdf",last_name="asdfasdfasdfasdfasdf")
+    test = User(first_name="JeWeet", last_name="Zelf")
     db.session.add(test)
     db.session.commit()
 
