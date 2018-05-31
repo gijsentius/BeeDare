@@ -1,0 +1,13 @@
+span {
+    text-align: center;
+}
+
+p {
+    text-align: center;
+}
+
+.landingpage_background {
+    /*Source = https://fwallpapers.com/view/yellow-flower-white-background*/
+    background: url("../../images/Background.jpg") no-repeat;
+    background-size: cover;
+}

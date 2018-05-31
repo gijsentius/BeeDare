@@ -48,10 +48,12 @@ export default class CompletedChallenges extends React.Component{
 
         return(
             <div>
-                <div className="droppedShadowBox">
+                <div className="card">
+                <div className="card-content">
                     <div className="section">
                     {createRows(this.props)}
                     </div>
+                </div>
                 </div>
             </div>
         )

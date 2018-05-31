@@ -3,6 +3,7 @@
     margin-top: 2vh;
     margin-left: auto;
     margin-right: auto;
+    color: #343434;
 }
 
 .logo {
@@ -16,4 +17,5 @@ span.navbar-text {
     font-size: 36px;
     max-height: 64px;
     vertical-align: middle;
+    color: #343434;
 }
