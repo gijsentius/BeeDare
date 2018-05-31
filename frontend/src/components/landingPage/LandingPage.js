@@ -10,18 +10,24 @@ class LandingPage extends React.Component{
         return(
             // Het is belangrijk om alle "grote" divs ID's mee te geven voor de buttons
             <div className="main">
-                <div className="pageSection" id="first" style={{backgroundColor: "#fff8e1"}}>
+                <div className="pageSection" ref={(section) => { this.YellowBG = section; }} style={{backgroundColor: "#fff8e1"}}>
                     <div className="center-align">
                         <button
-                                onClick={() => scrollToComponent(this.Blue, { offset: 0, align: 'top', duration: 1500})}
+                                onClick={() => scrollToComponent(this.White, { offset: 0, align: 'top', duration: 1500})}
                                 className="center-bottom btn-floating btn-medium waves-effect amber accent-4"><i
                             className="material-icons">keyboard_arrow_down</i></button>
                     </div>
                 </div>
-                <div className="pageSection" ref={(section) => { this.Blue = section; }}>
-
+                <div className="pageSection" ref={(section) => { this.White = section; }}>
+                    <div className="center-align">
+                        <button
+                            onClick={() => scrollToComponent(this.PictureBG, { offset: 0, align: 'top', duration: 1500})}
+                            className="center-bottom btn-floating btn-medium waves-effect amber accent-4"><i
+                            className="material-icons">keyboard_arrow_down</i></button>
+                    </div>
                 </div>
-                <div className="pageSection" id="third" style={{backgroundImage: `url(${backgroundImage})`}}>
+                <div className="pageSection" ref={(section) => { this.PictureBG = section; }}
+                     style={{backgroundImage: `url(${backgroundImage})`}}>
                     <div className="row centerContent">
 
                         <div className="col s4">
@@ -62,11 +68,22 @@ class LandingPage extends React.Component{
                         </div>
                     </div>
 
-                </div>
-                <div className="pageSection" id="fourth" style={{backgroundColor: "#255957"}}>
+                    <div className="center-align">
+                        <button
+                            onClick={() => scrollToComponent(this.Blue, { offset: 0, align: 'top', duration: 1500})}
+                            className="center-bottom btn-floating btn-medium waves-effect amber accent-4"><i
+                            className="material-icons">keyboard_arrow_down</i></button>
+                    </div>
 
                 </div>
-                <div className="col m1 floatingRegister" id="register">
+                <div className="pageSection" ref={(section) => { this.Blue = section; }} style={{backgroundColor: "#255957"}}>
+                    <div className="center-align">
+                        <button
+                            onClick={() => scrollToComponent(this.Register, { offset: 0, align: 'top', duration: 1500})}
+                            className="center-bottom waves-effect amber accent-4 btn">Register</button>
+                    </div>
+                </div>
+                <div className="col m1 floatingRegister" ref={(section) => { this.Register = section; }}>
                     <Register />
                 </div>
 
