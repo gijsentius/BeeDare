@@ -1,5 +1,6 @@
 from flask import request, redirect, url_for, session
 
+from backend.beedare import db
 from backend.beedare.models import User
 from . import *
 
@@ -54,7 +55,9 @@ def register():
             if result is not None:
                 error = "Email already registered."
             else:
-                # TODO register
+                user = User(first_name=firstname, last_name=lastname, email=email)
+                db.session.add(user)
+                db.session.commit()
                 return "Register successful but not registered"
         return error
 
