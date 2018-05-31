@@ -6,7 +6,7 @@ p {
     text-align: center;
 }
 
-body {
+.landingpage_background {
     background-image: url("../../images/Background.jpg");
     /*Source = https://fwallpapers.com/view/yellow-flower-white-background*/
     background-size: contain;

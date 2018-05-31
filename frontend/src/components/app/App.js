@@ -16,7 +16,7 @@ class App extends Component {
             <Router>
                 <div>
                     <nav>
-                        <div className="nav-wrapper amber darken-1">
+                        <div className="nav-wrapper #ffd54f amber lighten-1">
                             <Link to="/">
                                 <a class="logo">
                                     <img className="main-logo" src={NavLogo}/>

@@ -34,7 +34,7 @@ export default class Login extends React.Component{
                     </div>
                     <div className="row">
                         <div className="center">
-                            <a className="waves-effect waves-light btn amber darken-1"
+                            <a className="waves-effect waves-light btn #ffd54f amber lighten-1"
                             >
                                 Login
                             </a>
