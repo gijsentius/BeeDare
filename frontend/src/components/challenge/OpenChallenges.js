@@ -42,7 +42,7 @@ export default class OpenChallenges extends React.Component{
         return(
             <div>
                     <div className="card">
-                    <div className="card-content">
+                    <div className="card-content overflow-scroll-box">
                         {listItems}
                     </div>
                     </div>
