@@ -41,7 +41,7 @@ export default class Register extends React.Component{
                     <div className="center" style={{boxAlign: "center"}}>
                         <a className="waves-effect waves-light btn amber darken-1"
                         >
-                            Registreer
+                            <span className="text-color">Register</span>
                         </a>
                     </div>
                 </div>
