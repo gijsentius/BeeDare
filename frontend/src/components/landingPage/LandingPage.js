@@ -6,7 +6,7 @@ class LandingPage extends React.Component{
     render(){
         return(
             <div>
-                <div className="row">
+                <div className="row landingpage_background">
                     <div className="col m4 offset-m1" id="landinginfo">
                         <Landinginfo/>
                     </div>
