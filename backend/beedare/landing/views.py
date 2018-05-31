@@ -1,6 +1,8 @@
+from flask import jsonify
+
 from . import *
 
 
 @landing.route('/')
 def landing():
-    return "Landing"
+    return jsonify({}), 200
