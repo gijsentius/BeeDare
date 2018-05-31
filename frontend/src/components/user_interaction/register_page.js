@@ -10,7 +10,7 @@ export default class LoginRegisterPage extends React.Component{
             <div className="container">
                 <div className="center">
                     <div className="row">
-                        <div className="col m5 s12 offset-m1" id="register">
+                        <div className="col m6 s12 offset-m3" id="register">
                             <Register />
                         </div>
                     </div>
