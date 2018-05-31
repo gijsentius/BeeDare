@@ -3,18 +3,25 @@ import Register from "../user_interaction/register";
 import Landinginfo from "./Landinginfo";
 import backgroundImage from "../../images/Background.jpg"
 import placeHolder from "../../images/placeholder.jpg"
+import scrollToComponent from 'react-scroll-to-component';
 
 class LandingPage extends React.Component{
     render(){
         return(
-            <div className="marginRemover">
-                <div className="pageSection" style={{backgroundColor: "#fff8e1"}}>
+            // Het is belangrijk om alle "grote" divs ID's mee te geven voor de buttons
+            <div className="main">
+                <div className="pageSection" id="first" style={{backgroundColor: "#fff8e1"}}>
+                    <div className="center-align">
+                        <button
+                                onClick={() => scrollToComponent(this.Blue, { offset: 0, align: 'top', duration: 1500})}
+                                className="center-bottom btn-floating btn-medium waves-effect amber accent-4"><i
+                            className="material-icons">keyboard_arrow_down</i></button>
+                    </div>
                 </div>
-                <div className="pageSection" >
+                <div className="pageSection" ref={(section) => { this.Blue = section; }}>
 
                 </div>
-                <div className="pageSection" style={{backgroundImage: `url(${backgroundImage})`}} >
-                    {/*style={{backgroundColor: "#e3f2fd"}}*/}
+                <div className="pageSection" id="third" style={{backgroundImage: `url(${backgroundImage})`}}>
                     <div className="row centerContent">
 
                         <div className="col s4">
@@ -56,16 +63,31 @@ class LandingPage extends React.Component{
                     </div>
 
                 </div>
-                <div className="pageSection" style={{backgroundColor: "#40F7FF"}}>
+                <div className="pageSection" id="fourth" style={{backgroundColor: "#255957"}}>
 
                 </div>
-                <div className="col m1 floatingRegister">
+                <div className="col m1 floatingRegister" id="register">
                     <Register />
                 </div>
 
             </div>
+
+
+
+
+
+
+
+
         );
     }
 }
 
 export default LandingPage
+
+// <div className='main'>
+//     <button onClick={() => scrollToComponent(this.Indigo, { offset: 0, align: 'bottom', duration: 500, ease:'inExpo'})}>Go To Indigo</button>
+//
+// <section className='blue' ref={(section) => { this.Blue = section; }}>Blue</section>
+// <section className='indigo' ref={(section) => { this.Indigo = section; }}>Indigo</section>
+// </div>

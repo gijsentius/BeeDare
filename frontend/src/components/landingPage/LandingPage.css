@@ -24,6 +24,12 @@ p {
     position: relative;
 }
 
+.center-bottom{
+    position: absolute;
+    bottom: 1vh;
+}
+
+
 img {
     object-fit: cover;
 }
@@ -33,6 +39,7 @@ img {
     top: 20vh;
     right: 5vw;
 }
+
 
 .marginRemover{
     margin-top: 0px !important;
