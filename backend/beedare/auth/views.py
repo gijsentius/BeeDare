@@ -40,12 +40,7 @@ def register(firstname, lastname, email, password, username):
         error = "Email already registered."
         return jsonify({"error": error}), 401
     else:
-        user = User()
-        user.first_name = firstname
-        user.last_name = lastname
-        user.password = password
-        user.email = email
-        user.username = username
+        user = User(first_name=firstname, last_name=lastname, email=email, username=username)
         db.session.add(user)
         db.session.commit()
         return jsonify({
