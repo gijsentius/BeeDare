@@ -57,20 +57,15 @@ class NewsFeedPage extends React.Component {
         return (
             <div className="customContainer">
                 <div className="row">
-                    <ScrollEvent handleScrollCallback={this.handleScrollCallback} />
                     <div className="col s12 m3 sticky">
                         <Profile profileInfo={profileInfo}/>
                         {scrolled}
                     </div>
-                    <div className="col s12 m6 card">
-                    <div className="card-content">
+                    <div className="col s12 m6">
                         <Newsfeed/>
                     </div>
-                    </div>
-                    <div className="col s12 m3 card sticky">
-                    <div className="card-content">
+                    <div className="col s12 m3 sticky">
                         <Hives className="col s4" hives={[<Hive/>, <Hive/>, <Hive/>]}/>
-                    </div>
                     </div>
                 </div>
             </div>
