@@ -7,5 +7,7 @@ p {
 }
 
 body {
-    background-image: url("../../images/Background.svg");
+    background-image: url("../../images/Background.jpg");
+    /*Source = https://fwallpapers.com/view/yellow-flower-white-background*/
+    background-size: contain;
 }
