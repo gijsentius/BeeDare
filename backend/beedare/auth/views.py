@@ -1,4 +1,5 @@
-from flask import request, redirect, url_for, jsonify
+from flask import request, redirect, url_for, jsonify, flash
+from flask_login import *
 
 from backend.beedare import db
 from backend.beedare.models import User
@@ -18,10 +19,10 @@ def login(username, password):
         # TODO fix hash for password
         if result.username == username:
             # TODO is this right?
-            #db.session.clear()
-            #db.session['id'] = result.id
+            # db.session.clear()
+            # db.session['id'] = result.id
             # TODO return redirect
-            #return redirect(url_for("profile.user"), code=200)
+            # return redirect(url_for("profile.user"), code=200)
             return jsonify({"state": "succes"})
     else:
         error = "Password incorrect"
@@ -34,8 +35,8 @@ def register_new():
 
 
 @auth_blueprint.route('/register/<firstname>/<lastname>/<email>/<username>', methods=['POST'])
-def register(firstname, lastname, email,  username):
-    result = db.session.query(User).filter_by(email=email).first()
+def register(firstname, lastname, email, username):
+    result = db.session.query(User).filter_by(email=email)
     if result is not None:
         error = "Email already registered."
         return jsonify({"error": error}), 401
@@ -51,7 +52,34 @@ def register(firstname, lastname, email,  username):
         }), 200
 
 
-@auth_blueprint.route('/logout', methods=["GET"])
+@auth_blueprint.route('/logout')
+@login_required
 def logout():
-    db.session.clear()
-    redirect(url_for('login'))
+    logout_user()
+    return jsonify({
+        "logout": True
+    }), 200
+
+
+@auth_blueprint.route('/unconfirmed', methods=["GET"])
+def unconfirmed():
+    result = db.session.query(User)
+    if result.is_anonymous or result.confirmed:
+        return redirect(url_for('login'))
+    return jsonify({
+        "error": "Account not confirmed. Please confirm your account by mail."
+    }), 401
+
+
+@auth_blueprint.route('/confirm/<token>')
+@login_required
+def confirm(token):
+    if current_user.confirmed:
+        return redirect(url_for('core.index'))
+    if current_user.check_confirmation(token):
+        current_user.confirm()
+        db.session.commit()
+        flash('You have confirmed your account. Thanks!')
+    else:
+        flash('The confirmation link is invalid or has expired.')
+    return redirect(url_for('core.index'))
