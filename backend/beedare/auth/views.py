@@ -10,24 +10,22 @@ def login_new():
     return jsonify({}), 200
 
 
-@auth_blueprint.route('/login/<username>/<password>', methods=['GET', 'POST'])
+@auth_blueprint.route('/login/<username>/<password>', methods=['POST'])
 def login(username, password):
     error = None
-    if request.method == 'POST':
-        result = db.session.query(User).filter_by(username=username).first()
-        if result is not None:
-            # TODO fix hash for password
-            if result.username == username:
-                # TODO is this right?
-                #db.session.clear()
-                #db.session['id'] = result.id
-                # TODO return redirect
-                #return redirect(url_for("profile.user"), code=200)
-                return jsonify({"state": "succes"})
-        else:
-            error = "Password incorrect"
-        return jsonify({"error": error}), 401
-    return jsonify({}), 401
+    result = db.session.query(User).filter_by(username=username).first()
+    if result is not None:
+        # TODO fix hash for password
+        if result.username == username:
+            # TODO is this right?
+            #db.session.clear()
+            #db.session['id'] = result.id
+            # TODO return redirect
+            #return redirect(url_for("profile.user"), code=200)
+            return jsonify({"state": "succes"})
+    else:
+        error = "Password incorrect"
+    return jsonify({"error": error}), 401
 
 
 @auth_blueprint.route('/register', methods=["GET"])

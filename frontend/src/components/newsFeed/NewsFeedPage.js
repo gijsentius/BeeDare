@@ -57,12 +57,11 @@ class NewsFeedPage extends React.Component {
         return (
             <div className="customContainer">
                 <div className="row">
-                    <ScrollEvent handleScrollCallback={this.handleScrollCallback} />
                     <div className="col s12 m3 sticky">
                         <Profile profileInfo={profileInfo}/>
                         {scrolled}
                     </div>
-                    <div className="col s12 m6 droppedShadowBoxNoScroll">
+                    <div className="col s12 m6">
                         <Newsfeed/>
                     </div>
                     <div className="col s12 m3 sticky">

@@ -1,16 +1,17 @@
 import React from 'react';
-import '../user_interaction/login-register.css'
 
 export default class Register extends React.Component{
 
     render(){
         return(
+        <div className="card">
+        <div className="card-content">
         <div className="row">
             <form className="col s12">
                 <div className="row">
-                    <div className="title">
-                        <h5 className="title">Register</h5>
-                    </div>
+                  <div className = "title">
+                    <h5 className="title">Register</h5>
+                  </div>
                     <div className="input-field col s6">
                         <input id="first_name_register" type="text" className="validate"/>
                             <label htmlFor="first_name_register">First Name</label>
@@ -40,9 +41,9 @@ export default class Register extends React.Component{
                 </div>
                 <div className="row">
                     <div className="center" style={{boxAlign: "center"}}>
-                        <a className="waves-effect waves-light btn amber darken-1"
+                        <a className="waves-effect waves-light btn #ffd54f amber lighten-1"
                         >
-                            Register
+                            <span className="text-color">Register</span>
                         </a>
                     </div>
                 </div>
@@ -59,6 +60,8 @@ export default class Register extends React.Component{
                     </div>
                 </div>
             </form>
+        </div>
+        </div>
         </div>
             )
     }

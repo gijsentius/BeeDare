@@ -25,8 +25,10 @@ class Friends extends React.Component {
             )
         });
         return (
-            <div className="droppedShadowBox col s12">
+            <div className="card col s12">
+            <div className="card-content">
                 <div className="friends">{<div className="col s6 m4 l1">{list}</div>}</div>
+            </div>
             </div>
         );
     }

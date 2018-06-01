@@ -22,7 +22,7 @@ class Message extends Component {
         return (
             <div className="section center">
                 <div className="messageCard">
-                    <div className="card yellow darken-2">
+                    <div className="card amber lighten-1">
                         <span className="username">{this.props.name}</span>
                         <div className="body">
                             {this.props.body}
