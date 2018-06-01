@@ -5,7 +5,7 @@ from backend.beedare.models import User, Dare, Hive
 from . import *
 
 
-@score_blueprint("/add/<user_id>/<add_score>", methods=["POST"])
+@score_blueprint.route("/add/<user_id>/<add_score>", methods=["POST"])
 def add(user_id, add_score):
     result = db.session.query(User).filter_by(user_id=user_id)
     if result is not None:
@@ -21,7 +21,7 @@ def add(user_id, add_score):
     return jsonify({"error": "user_not_found"}), 401
 
 
-@score_blueprint("add_hive/<hive_id>/<add_score>", methods=["POST"])
+@score_blueprint.route("add_hive/<hive_id>/<add_score>", methods=["POST"])
 def add_hive(hive_id, add_score):
     result = db.session.query(Hive).filter_by(id=hive_id)
     if result is not None:
