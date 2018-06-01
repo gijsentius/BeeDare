@@ -11,6 +11,7 @@ login_manager = LoginManager()
 
 def create_admin(app, database):
     from backend.beedare.models import User, Message, Comment, Dare, UserDares, Hive, ColonyMembers, Friends
+
     admin = Admin(app, name='beedare', template_mode='bootstrap3')
     admin.add_view(ModelView(User, database.session))
     admin.add_view(ModelView(Message, database.session))
@@ -20,6 +21,7 @@ def create_admin(app, database):
     admin.add_view(ModelView(Hive, database.session, endpoint='hive_date'))
     admin.add_view(ModelView(ColonyMembers, database.session))
     admin.add_view(ModelView(Friends, database.session))
+    
     return admin
 
 
