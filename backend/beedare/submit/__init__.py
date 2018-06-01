@@ -1,5 +1,5 @@
 from flask import Blueprint
 
-admin = Blueprint('admin', __name__)
+submit_blueprint = Blueprint('submit', __name__)
 
 from . import views
