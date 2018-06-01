@@ -30,7 +30,7 @@ def leave(user_id, hive_id):
         member = db.query(ColonyMembers).filter_by(follower_id=user_id, hive_id=hive_id)
         db.session.remove(member)
         db.session.commit()
-        return jsonify({"succes": True}), 200
+        return jsonify({"success": True}), 200
     return jsonify({"error": "user_not_found"}), 401
 
 

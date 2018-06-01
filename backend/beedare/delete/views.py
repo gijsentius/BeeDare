@@ -12,7 +12,7 @@ def delete_hive(hive_id):
         hive = db.session.query(Hive).filter_by(hive_id)
         db.session.delete(hive)
         return jsonify({
-            "succes": True
+            "success": True
         }), 200
     return jsonify({"error": "user_not_found"}), 401
 
@@ -24,7 +24,7 @@ def delete_message(message_id):
         message = db.session.query(Message).filter_by(message_id)
         db.session.delete(message)
         return jsonify({
-            "succes": True
+            "success": True
         }), 200
     return jsonify({"error": "user_not_found"}), 401
 
@@ -36,7 +36,7 @@ def delete_comment(comment_id):
         comment = db.session.query(Comment).filter_by(comment_id)
         db.session.delete(comment)
         return jsonify({
-            "succes": True
+            "success": True
         }), 200
     return jsonify({"error": "user_not_found"}), 401
 
@@ -48,7 +48,7 @@ def delete_dare(dare_id):
         dare = db.session.query(Dare).filter_by(dare_id)
         db.session.delete(dare)
         return jsonify({
-            "succes": True
+            "success": True
         }), 200
     return jsonify({"error": "user_not_found"}), 401
 
@@ -60,7 +60,7 @@ def delete_accepted_dare(dare_id):
         user_dare = db.session.query(UserDares).filter_by(dare_id)
         db.session.delete(user_dare)
         return jsonify({
-            "succes": True
+            "success": True
         }), 200
     return jsonify({"error": "user_not_found"}), 401
 
@@ -72,6 +72,6 @@ def profile(user_id):
         user = db.session.query(User).filter_by(user_id)
         db.session.delete(user)
         return jsonify({
-            "succes": True
+            "success": True
         }), 200
     return jsonify({"error": "user_not_found"}), 401
