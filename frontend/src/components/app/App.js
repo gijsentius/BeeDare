@@ -36,13 +36,15 @@ class App extends Component {
                         </div>
                     </nav>
                     <div className="content">
-                        <Route exact path="/" component={LandingPage}/>
                         <Route path="/signin" component={LoginPage}/>
                         <Route path="/signup" component={RegisterPage}/>
 						            <Route path="/challenges" component={ChallengeList}/>
                         <Route path="/newsfeed" component={NewsFeedPage}/>
                         <Route path="/profile" component={ProfilePage}/>
                         <Route path="/search" component={SearchPage}/>
+                    </div>
+                    <div>
+                        <Route exact path="/" component={LandingPage}/>
                     </div>
                 </div>
             </Router>
