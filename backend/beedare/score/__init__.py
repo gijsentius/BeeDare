@@ -1,5 +1,5 @@
 from flask import Blueprint
 
-search_blueprint = Blueprint('search', __name__)
+score_blueprint = Blueprint('score', __name__)
 
 from . import views

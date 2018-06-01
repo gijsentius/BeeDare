@@ -1,5 +1,5 @@
 from flask import Blueprint
 
-search_blueprint = Blueprint('search', __name__)
+hive_blueprint = Blueprint('hive', __name__)
 
 from . import views
