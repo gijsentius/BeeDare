@@ -46,10 +46,16 @@ img {
     left: 1vw;
 }
 
-.textPositionLP{
+#textPositionLP{
     position: absolute;
-    top: 10vh;
-    left: 6.5vw;
+    top: 12vh;
+    left: 12vw;
+}
+
+#textPositionQuote{
+    position: absolute;
+    top: 40vh;
+    left: 15vw;
 }
 
 .resizeImage{
