@@ -1,8 +1,7 @@
 import React from 'react';
 import Register from "../user_interaction/register";
-import Landinginfo from "./Landinginfo";
 import backgroundImage from "../../images/Background.jpg"
-import placeHolder from "../../images/placeholder.jpg"
+import beedareLaptop from "../../images/beedare_on_laptop.png"
 import scrollToComponent from 'react-scroll-to-component';
 import CardRow from "./CardRow";
 
@@ -12,7 +11,11 @@ class LandingPage extends React.Component{
             <div className="main">
 
                 <div className="pageSection" ref={(section) => { this.YellowBG = section; }} style={{backgroundColor: "#fff8e1"}}>
+                    <h3 className="textPositionLP"> Dare yourself to Bee <br/> more green! </h3>
                     <div className="center-align">
+                        <img className="floatingLaptop" src={beedareLaptop}
+                        style={{maxWidth: "50vw", maxHeight: "auto"}}/>
+                        {/*Blijkbaar is het dus nodig om zo een afbeelding te resizen, in de css werkt niet lekker*/}
                         <button
                                 onClick={() => scrollToComponent(this.White, { offset: 0, align: 'top', duration: 1500})}
                                 className="center-bottom btn-floating btn-medium waves-effect amber accent-4"><i
