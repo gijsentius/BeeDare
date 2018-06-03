@@ -48,6 +48,7 @@ class LandingPage extends React.Component{
 
                 <div className="pageSection z-depth-1" ref={(section) => { this.Blue = section; }} style={{backgroundColor: "#255957"}}>
                     <div className="center-align">
+                        <h4 id="textPositionLP" style={{color: "#ffffff", fontWeight:"bold"}}>+++ Meet the team +++ </h4>
                         <button
                             onClick={() => scrollToComponent(this.Register, { offset: 0, align: 'top', duration: 1500})}
                             className="center-bottom waves-effect amber accent-4 btn">Register</button>
