@@ -26,7 +26,7 @@ render() {
             name={message.name}
           />
         </div>
-      ) //end map
+      );//end map
       return(
         <div className="card">
         <div className="card-content">
