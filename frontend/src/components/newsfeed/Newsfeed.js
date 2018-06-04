@@ -28,10 +28,8 @@ render() {
         </div>
       ) //end map
       return(
-        <div className="card">
-        <div className="card-content">
+        <div id="messages">
           {messages}
-        </div>
         </div>
       ); //end return
 }//end render
