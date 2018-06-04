@@ -55,8 +55,33 @@ def register():
         }), 200
 
 
-@auth_blueprint.route('/logout', methods=["GET"])
+@auth_blueprint.route('/logout')
 def logout():
-    # TODO Steve plz fix
-    db.session.clear()
-    redirect(url_for('login'))
+    logout_user()
+    return jsonify({
+        "logout": True
+    }), 200
+
+
+@auth_blueprint.route('/unconfirmed', methods=["GET"])
+def unconfirmed():
+    result = db.session.query(User)
+    if result.is_anonymous or result.confirmed:
+        return redirect(url_for('login'))
+    return jsonify({
+        "error": "Account not confirmed. Please confirm your account by mail."
+    }), 401
+
+
+@auth_blueprint.route('/confirm/<token>')
+@login_required
+def confirm(token):
+    if current_user.confirmed:
+        return redirect(url_for('core.index'))
+    if current_user.check_confirmation(token):
+        current_user.confirm()
+        db.session.commit()
+        flash('You have confirmed your account. Thanks!')
+    else:
+        flash('The confirmation link is invalid or has expired.')
+    return redirect(url_for('core.index'))
