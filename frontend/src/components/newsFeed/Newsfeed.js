@@ -26,10 +26,12 @@ render() {
             name={message.name}
           />
         </div>
-      ) //end map
+      );//end map
       return(
-        <div id="messages">
+        <div className="card">
+        <div className="card-content">
           {messages}
+        </div>
         </div>
       ); //end return
 }//end render

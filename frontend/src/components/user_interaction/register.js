@@ -1,9 +1,12 @@
 import React from 'react';
+import "./login-register.css";
 
 export default class Register extends React.Component{
 
     render(){
         return(
+        <div className="card">
+        <div className="card-content">
         <div className="row">
             <form className="col s12">
                 <div className="row">
@@ -46,9 +49,6 @@ export default class Register extends React.Component{
                     </div>
                 </div>
                 <div className="row">
-                    <p className="center">Or register with Google</p>
-                </div>
-                <div className="row">
                     <div className="center">
                 <a className="waves-effect waves-light btn social google light red"
 
@@ -58,6 +58,8 @@ export default class Register extends React.Component{
                     </div>
                 </div>
             </form>
+        </div>
+        </div>
         </div>
             )
     }

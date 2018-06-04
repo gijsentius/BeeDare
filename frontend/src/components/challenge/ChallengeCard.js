@@ -19,7 +19,7 @@ class ChallengeCard extends Component {
 	
 	render() {
 		return this.state.isExpanded ? (
-			<div className="card challenge-box hoverable" onClick={this.handleCollapseInfo}>
+			<div className="card hoverable" onClick={this.handleCollapseInfo}>
 				<div className="card-content">
 					<p className="text center-align"><b>Description</b></p>
 					<p className="text center-align">{this.props.description}</p>
@@ -29,7 +29,7 @@ class ChallengeCard extends Component {
 				</div>
 			</div>
 		) : (
-			<div className="card challenge-box hoverable" onClick={this.handleExpandInfo}>
+			<div className="card hoverable" onClick={this.handleExpandInfo}>
 				<div className="card-content">
 					<h6 className="text center-align">{this.props.title}</h6>
 					<img src={this.props.image} alt="" className="circle responsive-img center-component"/>

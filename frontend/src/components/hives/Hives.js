@@ -14,14 +14,17 @@ class Hives extends React.Component {
         let list = [];
         if(this.state.hives !== undefined){
             for(let i = 0; i < this.state.hives.length; i++){
-                list.push(<div className="section"> <li key={i} className="item">{this.state.hives[i]}</li></div>);
+                list.push(<div className="section"> <div key={i} className="item">{this.state.hives[i]}</div></div>);
             }
         }
         return (
-            <div className="droppedShadowBox">
-                <Block title="Hives" content={list}/>
+            // <Block title="Hives" content={list}/>
+            <div className="card">
+            <div className="card-content">
+                <h6 className="center-align">Hives</h6>
+                {list}
             </div>
-
+            </div>
         )
     }
 }

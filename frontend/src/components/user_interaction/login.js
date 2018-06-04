@@ -1,4 +1,5 @@
 import React from 'react';
+import '../user_interaction/login-register.css'
 
 export default class Login extends React.Component{
 
@@ -15,6 +16,8 @@ export default class Login extends React.Component{
 
     render(){
         return this.state.forgotPW ? (
+            <div className="card">
+            <div className="card-content">
             <div className="row">
                 <form className="col s12">
                     <div className="row">
@@ -58,12 +61,16 @@ export default class Login extends React.Component{
                         <div className="input-field col s12">
                             <input id="email_forgot_pw" type="email" className="validate"/>
                             <label htmlFor="email_forgot_pw">Enter your email here</label>
-                            <a className="waves-effect waves-light btn-small orange" >Send password</a>
+                            <a className="waves-effect waves-light btn-small amber lighten-1" >Send password</a>
                         </div>
                     </div>
                 </form>
             </div>
+            </div>
+            </div>
         ) : (
+            <div className="card">
+            <div className="card-content">
             <div className="row">
                 <form className="col s12">
                     <div className="row">
@@ -101,9 +108,11 @@ export default class Login extends React.Component{
                         </div>
                     </div>
                     <div className="row">
-                    <a className="waves-effect waves-light btn-small orange" onClick={this.handleForgottenPW}>Forgot password?</a>
+                    <a className="waves-effect waves-light btn-small amber lighten-1" onClick={this.handleForgottenPW}>Forgot password?</a>
                     </div>
                 </form>
+            </div>
+            </div>
             </div>
         );
     }

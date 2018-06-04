@@ -1,21 +1,25 @@
 #link-pointer {
     background:none!important;
-    border:none; 
+    border:none;
     padding:0!important;
 
     /*optional*/
     font-family:arial,sans-serif; /*input has OS specific font-family*/
     cursor:pointer;
-    margin-right: 20px;
-    margin-left: 20px
+    /* margin-right: 20px;
+    margin-left: 20px */
 }
 
 .text-hover {
-    color: #343434; 
+    color: #343434;
 }
-  
+
 .text-hover:hover {
     color: #676767;
+}
+
+.username {
+  font-weight: bold;
 }
 
 #center-content {

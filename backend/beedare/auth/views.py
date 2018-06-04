@@ -1,61 +1,57 @@
-from flask import request, redirect, url_for, session
+from flask import request, redirect, url_for, jsonify
 
+from backend.beedare import db
 from backend.beedare.models import User
 from . import *
 
 
-@auth_blueprint.route('/login', methods=['GET', 'POST'])
-def login():
-    if request.method == 'POST':
-        username = request.form['username']
-        password = request.form['password']
-        error = None
-
-        if not username:
-            error = "No username given."
-        elif not password:
-            error = "No password given."
-        if error is None:
-            # TODO fix query
-            # TODO return JSON
-            result = session.query(User).filter_by(email=username).first()
-            if result is not None:
-                if result.password == password:
-                    session.clear()
-                    session['id'] = result.id
-                    return redirect(url_for('/profile/user'))
-                else:
-                    error = "Password incorrect"
-        return error
-    return "Login"
+@auth_blueprint.route('/login', methods=["GET"])
+def login_new():
+    return jsonify({}), 200
 
 
-@auth_blueprint.route('/register', methods=['GET', 'POST'])
-def register():
-    if request.method == 'POST':
-        firstname = request.form['firstname']
-        lastname = request.form['lastname']
-        email = request.form['email']
-        password = request.form['password']
-        error = None
+@auth_blueprint.route('/login/<username>/<password>', methods=['POST'])
+def login(username, password):
+    error = None
+    result = db.session.query(User).filter_by(username=username).first()
+    if result is not None:
+        # TODO fix hash for password
+        if result.username == username:
+            # TODO is this right?
+            #db.session.clear()
+            #db.session['id'] = result.id
+            # TODO return redirect
+            #return redirect(url_for("profile.user"), code=200)
+            return jsonify({"state": "succes"})
+    else:
+        error = "Password incorrect"
+    return jsonify({"error": error}), 401
 
-        if not firstname:
-            error = "No first name given."
-        elif not lastname:
-            error = "No last name given."
-        elif not password:
-            error = "No password given."
-        elif not email:
-            error = "No email given."
-        if error is None:
-            # TODO fix query
-            # TODO return JSON
-            result = session.query(User).filter_by(email=email).first()
-            if result is not None:
-                error = "Email already registered."
-            else:
-                # TODO register
-                return "Register successful but not registered"
-        return error
 
-    return "Register"
+@auth_blueprint.route('/register', methods=["GET"])
+def register_new():
+    return jsonify({}), 200
+
+
+@auth_blueprint.route('/register/<firstname>/<lastname>/<email>/<username>', methods=['POST'])
+def register(firstname, lastname, email,  username):
+    result = db.session.query(User).filter_by(email=email).first()
+    if result is not None:
+        error = "Email already registered."
+        return jsonify({"error": error}), 401
+    else:
+        user = User(first_name=firstname, last_name=lastname, email=email, username=username)
+        db.session.add(user)
+        db.session.commit()
+        return jsonify({
+            "first_name": firstname,
+            "last_name": lastname,
+            "email": email,
+            "username": username
+        }), 200
+
+
+@auth_blueprint.route('/logout', methods=["GET"])
+def logout():
+    db.session.clear()
+    redirect(url_for('login'))

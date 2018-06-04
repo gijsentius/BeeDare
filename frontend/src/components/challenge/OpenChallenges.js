@@ -41,8 +41,10 @@ export default class OpenChallenges extends React.Component{
 
         return(
             <div>
-                    <div className="droppedShadowBox">
+                    <div className="card">
+                    <div className="card-content overflow-scroll-box">
                         {listItems}
+                    </div>
                     </div>
 
                 {/*<a className='dropdown-button' href='#' data-activates='dropdown1'>Drop Me!</a>*/}
