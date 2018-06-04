@@ -1,4 +1,5 @@
 import React from 'react';
+import "./login-register.css";
 
 export default class Register extends React.Component{
 
@@ -46,9 +47,6 @@ export default class Register extends React.Component{
                             <span className="text-color">Register</span>
                         </a>
                     </div>
-                </div>
-                <div className="row">
-                    <p className="center">Or register with Google</p>
                 </div>
                 <div className="row">
                     <div className="center">

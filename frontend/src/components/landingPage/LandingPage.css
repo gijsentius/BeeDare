@@ -40,6 +40,29 @@ img {
     right: 5vw;
 }
 
+.floatingLaptop{
+    position: absolute;
+    top: 40vh;
+    left: 1vw;
+}
+
+#textPositionLP{
+    position: absolute;
+    top: 12vh;
+    left: 12vw;
+}
+
+#textPositionQuote{
+    position: absolute;
+    top: 40vh;
+    left: 15vw;
+}
+
+.resizeImage{
+    max-width:50%;
+    max-height:50%;
+}
+
 
 .marginRemover{
     margin-top: 0px !important;
