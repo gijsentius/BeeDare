@@ -1,3 +1,4 @@
+import sqlalchemy
 from flask import jsonify, request
 
 from backend.beedare import db
@@ -14,7 +15,10 @@ def delete_hive():
         return jsonify({"error": str(e) + " not given or invalid"}), 401
     if result is not None:
         db.session.delete(result)
-        db.session.commit()
+        try:
+            db.session.commit()
+        except sqlalchemy.exc.IntegrityError:
+            return jsonify({"error": "commit failed"}), 401
         return jsonify({
             "success": True
         }), 200
@@ -30,7 +34,10 @@ def delete_message():
         return jsonify({"error": str(e) + " not given or invalid"}), 401
     if result is not None:
         db.session.delete(result)
-        db.session.commit()
+        try:
+            db.session.commit()
+        except sqlalchemy.exc.IntegrityError:
+            return jsonify({"error": "commit failed"}), 401
         return jsonify({
             "success": True
         }), 200
@@ -46,7 +53,10 @@ def delete_comment():
         return jsonify({"error": str(e) + " not given or invalid"}), 401
     if result is not None:
         db.session.delete(result)
-        db.session.commit()
+        try:
+            db.session.commit()
+        except sqlalchemy.exc.IntegrityError:
+            return jsonify({"error": "commit failed"}), 401
         return jsonify({
             "success": True
         }), 200
@@ -62,7 +72,10 @@ def delete_dare():
         return jsonify({"error": str(e) + " not given or invalid"}), 401
     if result is not None:
         db.session.delete(result)
-        db.session.commit()
+        try:
+            db.session.commit()
+        except sqlalchemy.exc.IntegrityError:
+            return jsonify({"error": "commit failed"}), 401
         return jsonify({
             "success": True
         }), 200
@@ -78,7 +91,10 @@ def delete_accepted_dare():
         return jsonify({"error": str(e) + " not given or invalid"}), 401
     if result is not None:
         db.session.delete(result)
-        db.session.commit()
+        try:
+            db.session.commit()
+        except sqlalchemy.exc.IntegrityError:
+            return jsonify({"error": "commit failed"}), 401
         return jsonify({
             "success": True
         }), 200
@@ -94,7 +110,10 @@ def profile():
         return jsonify({"error": str(e) + " not given or invalid"}), 401
     if result is not None:
         db.session.delete(result)
-        db.session.commit()
+        try:
+            db.session.commit()
+        except sqlalchemy.exc.IntegrityError:
+            return jsonify({"error": "commit failed"}), 401
         return jsonify({
             "success": True
         }), 200

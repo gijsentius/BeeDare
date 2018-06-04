@@ -1,3 +1,6 @@
+import datetime
+
+import sqlalchemy
 from flask import request, redirect, url_for, jsonify, flash
 from flask_login import logout_user, current_user
 
@@ -43,16 +46,26 @@ def register():
         return jsonify({"error": error}), 401
     else:
         try:
-            user = User(first_name=content['firstname'], last_name=content['lastname'], email=content['email'], username=content['username'], score=0)
+            # TODO password
+            time = datetime.datetime.utcnow()
+            user = User(first_name=content['firstname'], last_name=content['lastname'], email=content['email'],
+                        username=content['username'], score=0, age_cat=content['age_cat'], location=content['location'],
+                        image=['image'], last_seen=time, rank='New Bee')
         except KeyError as e:
             return jsonify({"error": str(e) + " not given or invalid"}), 401
         db.session.add(user)
-        db.session.commit()
+        try:
+            db.session.commit()
+        except sqlalchemy.exc.IntegrityError:
+            return jsonify({"error": "commit failed"}), 401
         return jsonify({
             "first_name": content['firstname'],
             "last_name": content['lastname'],
             "email": content['email'],
-            "username": content['username']
+            "username": content['username'],
+            "image": content['image'],
+            "location": content['location'],
+            "last_seen": time
         }), 200
 
 
@@ -80,7 +93,10 @@ def confirm(token):
         return redirect(url_for('core.index'))
     if current_user.check_confirmation(token):
         current_user.confirm()
-        db.session.commit()
+        try:
+            db.session.commit()
+        except sqlalchemy.exc.IntegrityError:
+            return jsonify({"error": "commit failed"}), 401
         flash('You have confirmed your account. Thanks!')
     else:
         flash('The confirmation link is invalid or has expired.')

@@ -1,3 +1,4 @@
+import sqlalchemy
 from flask import jsonify, request
 
 from backend.beedare import db
@@ -21,7 +22,10 @@ def add():
             user.score += int(content['score'])
         except KeyError as e:
             return jsonify({"error": str(e) + " not given or invalid"}), 401
-        db.session.commit()
+        try:
+            db.session.commit()
+        except sqlalchemy.exc.IntegrityError:
+            return jsonify({"error": "commit failed"}), 401
         return jsonify({
             "user_id": content['id'],
             "score": user.score
@@ -45,7 +49,10 @@ def add_hive():
             hive.score += int(content['score'])
         except KeyError as e:
             return jsonify({"error": str(e) + " not given or invalid"}), 401
-        db.session.commit()
+        try:
+            db.session.commit()
+        except sqlalchemy.exc.IntegrityError:
+            return jsonify({"error": "commit failed"}), 401
         return jsonify({
             "hive_id": content['hive_id'],
             "score": hive.score

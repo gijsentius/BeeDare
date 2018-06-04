@@ -1,9 +1,10 @@
 import datetime
 
+import sqlalchemy
 from flask import jsonify, request
 
 from backend.beedare import db
-from backend.beedare.models import User, Dare, Hive, Message, Comment, UserDares
+from backend.beedare.models import User, Dare, Hive, Message, Comment, UserDares, Friends
 from . import *
 
 
@@ -22,7 +23,10 @@ def add_message():
         except KeyError as e:
             return jsonify({"error": str(e) + " not given or invalid"}), 401
         db.session.add(message)
-        db.session.commit()
+        try:
+            db.session.commit()
+        except sqlalchemy.exc.IntegrityError:
+            return jsonify({"error": "commit failed"}), 401
         return jsonify({
             "body": content['title'],
             "body_html": content['message'],
@@ -48,7 +52,10 @@ def add_comment():
         except KeyError as e:
             return jsonify({"error": str(e) + " not given or invalid"}), 401
         db.session.add(comment)
-        db.session.commit()
+        try:
+            db.session.commit()
+        except sqlalchemy.exc.IntegrityError:
+            return jsonify({"error": "commit failed"}), 401
         return jsonify({
             "body": content['title'],
             "body_html": content['message'],
@@ -73,7 +80,10 @@ def dare_accept():
         except KeyError as e:
             return jsonify({"error": str(e) + " not given or invalid"}), 401
         db.session.add(dare)
-        db.session.commit()
+        try:
+            db.session.commit()
+        except sqlalchemy.exc.IntegrityError:
+            return jsonify({"error": "commit failed"}), 401
         return jsonify({
             "id": content['dare_id'],
             "owner_id": content['user_id'],
@@ -94,7 +104,10 @@ def dare_done():
         # TODO test
         user_dare.achieved = True
         db.session.add(user_dare)
-        db.session.commit()
+        try:
+            db.session.commit()
+        except sqlalchemy.exc.IntegrityError:
+            return jsonify({"error": "commit failed"}), 401
         return jsonify({
             "id": content['dare_id'],
             "owner_id": content['user_id'],
@@ -117,7 +130,10 @@ def dare_create():
         except KeyError as e:
             return jsonify({"error": str(e) + " not given or invalid"}), 401
         db.session.add(create_dare)
-        db.session.commit()
+        try:
+            db.session.commit()
+        except sqlalchemy.exc.IntegrityError:
+            return jsonify({"error": "commit failed"}), 401
         return jsonify({
             "name": content['dare'],
             "body": content['body'],
@@ -125,3 +141,32 @@ def dare_create():
             "image": content['image']
         }), 200
     return jsonify({"error": "user_not_found"}), 401
+
+
+@submit_blueprint.route('/friend', methods=["POST"])
+def add_friend():
+    content = request.get_json()
+    try:
+        result = db.session.query(User).filter_by(id=content['user_id']).first()
+        if result is not None:
+            result = db.session.query(User).filter_by(id=content['friend_id']).first()
+        else:
+            return jsonify({"error": "user_not_found"}), 401
+    except KeyError as e:
+        return jsonify({"error": str(e) + " not given or invalid"}), 401
+    if result is not None:
+        time = datetime.datetime.utcnow()
+        try:
+            friend = Friends(follower_id=content['user_id'], followed_id=content['friend_id'], timestamp=time)
+        except KeyError as e:
+            return jsonify({"error": str(e) + " not given or invalid"}), 401
+        db.session.add(friend)
+        try:
+            db.session.commit()
+        except sqlalchemy.exc.IntegrityError:
+            return jsonify({"error": "commit failed"}), 401
+        return jsonify({
+            "friend": content['friend_id'],
+            "time": time
+        }), 200
+    return jsonify({"error": "friend_not_found"}), 401
