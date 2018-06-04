@@ -8,3 +8,4 @@ from . import *
 @user_info_blueprint.route('/change', methods=["POST"])
 def change():
     return None
+
