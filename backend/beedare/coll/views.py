@@ -14,7 +14,7 @@ def friends():
     except KeyError as e:
         return jsonify({"error": str(e) + " not given or invalid"}), 401
     return jsonify({
-        "result": result
+        "result": [[item.id] for item in result]
     }), 200
 
 
@@ -26,5 +26,5 @@ def dares():
     except KeyError as e:
         return jsonify({"error": str(e) + " not given or invalid"}), 401
     return jsonify({
-        "result": result
+        "result": [[item.id] for item in result]
     }), 200

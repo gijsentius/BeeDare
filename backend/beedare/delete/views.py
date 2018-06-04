@@ -1,6 +1,7 @@
 from flask import jsonify, request
 
 from backend.beedare import db
+from backend.beedare.functions import commit
 from backend.beedare.models import User, Dare, Hive, UserDares, Comment, Message
 from . import *
 
@@ -14,7 +15,7 @@ def delete_hive():
         return jsonify({"error": str(e) + " not given or invalid"}), 401
     if result is not None:
         db.session.delete(result)
-        db.session.commit()
+        commit(db.session)
         return jsonify({
             "success": True
         }), 200
@@ -30,7 +31,7 @@ def delete_message():
         return jsonify({"error": str(e) + " not given or invalid"}), 401
     if result is not None:
         db.session.delete(result)
-        db.session.commit()
+        commit(db.session)
         return jsonify({
             "success": True
         }), 200
@@ -46,7 +47,7 @@ def delete_comment():
         return jsonify({"error": str(e) + " not given or invalid"}), 401
     if result is not None:
         db.session.delete(result)
-        db.session.commit()
+        commit(db.session)
         return jsonify({
             "success": True
         }), 200
@@ -62,7 +63,7 @@ def delete_dare():
         return jsonify({"error": str(e) + " not given or invalid"}), 401
     if result is not None:
         db.session.delete(result)
-        db.session.commit()
+        commit(db.session)
         return jsonify({
             "success": True
         }), 200
@@ -78,7 +79,7 @@ def delete_accepted_dare():
         return jsonify({"error": str(e) + " not given or invalid"}), 401
     if result is not None:
         db.session.delete(result)
-        db.session.commit()
+        commit(db.session)
         return jsonify({
             "success": True
         }), 200
@@ -94,7 +95,7 @@ def profile():
         return jsonify({"error": str(e) + " not given or invalid"}), 401
     if result is not None:
         db.session.delete(result)
-        db.session.commit()
+        commit(db.session)
         return jsonify({
             "success": True
         }), 200

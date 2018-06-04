@@ -1,6 +1,7 @@
 from flask import jsonify, request
 
 from backend.beedare import db
+from backend.beedare.functions import commit
 from backend.beedare.models import User, Dare, Hive
 from . import *
 
@@ -21,7 +22,7 @@ def add():
             user.score += int(content['score'])
         except KeyError as e:
             return jsonify({"error": str(e) + " not given or invalid"}), 401
-        db.session.commit()
+        commit(db.session)
         return jsonify({
             "user_id": content['id'],
             "score": user.score
@@ -45,7 +46,7 @@ def add_hive():
             hive.score += int(content['score'])
         except KeyError as e:
             return jsonify({"error": str(e) + " not given or invalid"}), 401
-        db.session.commit()
+        commit(db.session)
         return jsonify({
             "hive_id": content['hive_id'],
             "score": hive.score

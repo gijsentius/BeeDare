@@ -3,6 +3,7 @@ import datetime
 from flask import jsonify, request
 
 from backend.beedare import db
+from backend.beedare.functions import commit
 from backend.beedare.models import User, Dare, Hive, ColonyMembers
 from . import *
 
@@ -25,7 +26,7 @@ def join():
         except KeyError as e:
             return jsonify({"error": str(e) + " not given or invalid"}), 401
         db.session.add(member)
-        db.session.commit()
+        commit(db.session)
         return jsonify({
             "follower_id": content['user_id'],
             "hive_id": content['hive_id'],
@@ -48,7 +49,7 @@ def leave():
     if result is not None:
         member = db.query(ColonyMembers).filter_by(follower_id=content['user_id'], hive_id=['hive_id'])
         db.session.delete(member)
-        db.session.commit()
+        commit(db.session)
         return jsonify({"success": True}), 200
     return jsonify({"error": "'hive' not given or invalid"}), 401
 
@@ -66,7 +67,7 @@ def create():
         except KeyError as e:
             return jsonify({"error": str(e) + " not given or invalid"}), 401
         db.session.add(hive)
-        db.session.commit()
+        commit(db.session)
         return jsonify({
             "hive_name": content['hive_name'],
             "beekeeper": content['user_id'],
