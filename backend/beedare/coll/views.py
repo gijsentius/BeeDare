@@ -1,8 +1,8 @@
 from flask import request, jsonify
 from flask_login import login_required
 
-from backend.beedare import db
-from backend.beedare.models import Friends
+from beedare import db
+from beedare.models import Friends
 from . import *
 
 

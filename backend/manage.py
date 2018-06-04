@@ -1,14 +1,16 @@
-import os
+import os, sys
 from dotenv import load_dotenv
 
+home_dir = basedir = os.path.abspath(os.path.dirname(__file__))
 dotenv_path = os.path.join(os.path.dirname(__file__), '.env')
 if os.path.exists(dotenv_path):
     load_dotenv(dotenv_path)
+sys.path.append(home_dir)
 
 from flask_migrate import Migrate, MigrateCommand
 from flask_script import Manager
-from backend.beedare import create_app, create_admin
-from backend.beedare import db
+from beedare import create_app, create_admin
+from beedare import db
 
 app = create_app(os.getenv('FLASK_CONFIG') or 'default')
 admin = create_admin(app, db)
