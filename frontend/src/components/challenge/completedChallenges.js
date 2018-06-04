@@ -49,7 +49,7 @@ export default class CompletedChallenges extends React.Component{
         return(
             <div>
                 <div className="card">
-                <div className="card-content">
+                <div className="card-content overflow-scroll-box">
                     <div className="section">
                     {createRows(this.props)}
                     </div>

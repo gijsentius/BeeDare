@@ -6,16 +6,14 @@ import Profile from "../user_interaction/Profile";
 import ScrollEvent from 'react-onscroll';
 import Newsfeed from "./Newsfeed";
 import './NewsFeed.css';
+import scrollToComponent from "react-scroll-to-component";
 
 class NewsFeedPage extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
             profileInfo: {},
-            scrolled: false,
         };
-        this.handleScrollCallback = this.handleScrollCallback.bind(this);
-        this.clickedBackToTopButton = this.clickedBackToTopButton.bind(this);
     }
 
     componentDidMount(){
@@ -25,43 +23,20 @@ class NewsFeedPage extends React.Component {
             .catch(error => console.log(error));
     }
 
-    handleScrollCallback() {
-        this.setState({
-            scrolled: true,
-        });
-    }
-
-    clickedBackToTopButton() {
-        ReactDOM.findDOMNode(this).scrollTop = 0;
-        this.setState({
-            scrolled: false,
-        });
-    }
-
     render() {
 
         const profileInfo = this.state.profileInfo;
-        let scrolled = '';
-        if(this.state.scrolled) {
-            scrolled = (
-                <a 
-                    className="waves-effect waves-light btn amber darken-1 center-component top-button" 
-                    onClick={this.clickedBackToTopButton}>Top</a>
-            );
-        } else {
-            scrolled = (
-                <div>
-                </div>
-            );
-        }
         return (
             <div className="customContainer">
                 <div className="row">
                     <div className="col s12 m3 sticky">
                         <Profile profileInfo={profileInfo}/>
-                        {scrolled}
+                        <a
+                            className="waves-effect waves-light btn amber darken-1 center-component top-button"
+                            onClick={() => scrollToComponent(this.Blue, { offset: 0, align: 'top', duration: 1500})}>
+                            Top</a>
                     </div>
-                    <div className="col s12 m6">
+                    <div className="col s12 m6" ref={(section) => { this.Blue = section; }}>
                         <Newsfeed/>
                     </div>
                     <div className="col s12 m3 sticky">
