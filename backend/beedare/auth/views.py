@@ -1,4 +1,5 @@
-from flask import request, redirect, url_for, jsonify
+from flask import request, redirect, url_for, jsonify, flash
+from flask_login import logout_user, current_user
 
 from backend.beedare import db
 from backend.beedare.models import User
@@ -74,7 +75,6 @@ def unconfirmed():
 
 
 @auth_blueprint.route('/confirm/<token>')
-@login_required
 def confirm(token):
     if current_user.confirmed:
         return redirect(url_for('core.index'))
