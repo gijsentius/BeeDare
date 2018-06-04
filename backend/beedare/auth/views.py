@@ -17,6 +17,7 @@ def login_new():
 @auth_blueprint.route('/login', methods=['POST'])
 def login():
     content = request.get_json()
+    time = datetime.datetime.utcnow()
     try:
         result = db.session.query(User).filter_by(username=content['username']).first()
     except KeyError as e:
@@ -24,6 +25,8 @@ def login():
     if result is not None:
         if result.username == content['username']:
             # TODO password
+            result.last_seen = time
+            db.session.commit()
             return jsonify({"state": "succes"})
     else:
         return jsonify({"error": "Password incorrect"}), 401

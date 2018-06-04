@@ -42,6 +42,7 @@ def create_app(config_type):
     from backend.beedare.hive import hive_blueprint
     from backend.beedare.score import score_blueprint
     from backend.beedare.submit import submit_blueprint
+    from backend.beedare.user_information import user_info_blueprint
 
     app.register_blueprint(main, url_prefix='/')
     app.register_blueprint(landing, url_prefix='/landing')
@@ -52,6 +53,7 @@ def create_app(config_type):
     app.register_blueprint(delete_blueprint, url_prefix='/delete')
     app.register_blueprint(hive_blueprint, url_prefix='/hive')
     app.register_blueprint(score_blueprint, url_prefix='/score')
+    app.register_blueprint(user_info_blueprint, url_prefix='/info')
     app.register_blueprint(submit_blueprint, url_prefix='/submit')
 
     return app
