@@ -29,7 +29,7 @@ def add():
     return jsonify({"error": "user_not_found"}), 401
 
 
-@score_blueprint.route("add_hive", methods=["POST"])
+@score_blueprint.route("/add_hive", methods=["POST"])
 def add_hive():
     content = request.get_json()
     try:
