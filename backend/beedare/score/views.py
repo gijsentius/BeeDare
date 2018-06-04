@@ -1,7 +1,7 @@
 from flask import jsonify
 
-from backend.beedare import db
-from backend.beedare.models import User, Dare, Hive
+from beedare import db
+from beedare.models import User, Dare, Hive
 from . import *
 
 
