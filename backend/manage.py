@@ -19,9 +19,9 @@ manager.add_command('db', MigrateCommand)
 
 @manager.command
 def test():
-    from backend.beedare import User
-    test = User(first_name="Dit is", last_name="Een Test")
-    db.session.add(test)
+    from backend.beedare.models import User
+    user = User(first_name="Dit is", last_name="Een Test")
+    db.session.add(user)
     db.session.commit()
 
 
