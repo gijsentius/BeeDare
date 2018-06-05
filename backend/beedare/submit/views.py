@@ -3,8 +3,8 @@ import datetime
 import sqlalchemy
 from flask import jsonify, request
 
-from backend.beedare import db
-from backend.beedare.models import User, Dare, Hive, Message, Comment, UserDares, Friends
+from beedare import db
+from beedare.models import User, Dare, Hive, Message, Comment, UserDares
 from . import *
 
 

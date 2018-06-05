@@ -4,8 +4,8 @@ import sqlalchemy
 from flask import request, redirect, url_for, jsonify, flash
 from flask_login import logout_user, current_user
 
-from backend.beedare import db
-from backend.beedare.models import User
+from beedare import db
+from beedare.models import User
 from . import *
 
 
