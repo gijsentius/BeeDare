@@ -1,5 +1,8 @@
+import datetime
+
+import sqlalchemy
 from flask import request, redirect, url_for, jsonify, flash
-from flask_login import logout_user, login_required, current_user
+from flask_login import logout_user, current_user
 
 from beedare import db
 from beedare.models import User
@@ -11,22 +14,22 @@ def login_new():
     return jsonify({}), 200
 
 
-@auth_blueprint.route('/login/<username>/<password>', methods=['POST'])
-def login(username, password):
-    error = None
-    result = db.session.query(User).filter_by(username=username).first()
+@auth_blueprint.route('/login', methods=['POST'])
+def login():
+    content = request.get_json()
+    time = datetime.datetime.utcnow()
+    try:
+        result = db.session.query(User).filter_by(username=content['username']).first()
+    except KeyError as e:
+        return jsonify({"error": str(e) + " not given or invalid"}), 401
     if result is not None:
-        # TODO fix hash for password
-        if result.username == username:
-            # TODO is this right?
-            # db.session.clear()
-            # db.session['id'] = result.id
-            # TODO return redirect
-            # return redirect(url_for("profile.user"), code=200)
+        if result.username == content['username']:
+            # TODO password
+            result.last_seen = time
+            db.session.commit()
             return jsonify({"state": "succes"})
     else:
-        error = "Password incorrect"
-    return jsonify({"error": error}), 401
+        return jsonify({"error": "Password incorrect"}), 401
 
 
 @auth_blueprint.route('/register', methods=["GET"])
@@ -34,26 +37,42 @@ def register_new():
     return jsonify({}), 200
 
 
-@auth_blueprint.route('/register/<firstname>/<lastname>/<email>/<username>', methods=['POST'])
-def register(firstname, lastname, email, username):
-    result = db.session.query(User).filter_by(email=email)
+@auth_blueprint.route('/register', methods=['POST'])
+def register():
+    content = request.get_json()
+    try:
+        result = db.session.query(User).filter_by(email=content['email']).first()
+    except KeyError as e:
+        return jsonify({"error": str(e) + " not given or invalid"}), 401
     if result is not None:
         error = "Email already registered."
         return jsonify({"error": error}), 401
     else:
-        user = User(first_name=firstname, last_name=lastname, email=email, username=username)
+        try:
+            # TODO password
+            time = datetime.datetime.utcnow()
+            user = User(first_name=content['firstname'], last_name=content['lastname'], email=content['email'],
+                        username=content['username'], score=0, age_cat=content['age_cat'], location=content['location'],
+                        image=['image'], last_seen=time, rank='New Bee')
+        except KeyError as e:
+            return jsonify({"error": str(e) + " not given or invalid"}), 401
         db.session.add(user)
-        db.session.commit()
+        try:
+            db.session.commit()
+        except sqlalchemy.exc.IntegrityError:
+            return jsonify({"error": "commit failed"}), 401
         return jsonify({
-            "first_name": firstname,
-            "last_name": lastname,
-            "email": email,
-            "username": username
+            "first_name": content['firstname'],
+            "last_name": content['lastname'],
+            "email": content['email'],
+            "username": content['username'],
+            "image": content['image'],
+            "location": content['location'],
+            "last_seen": time
         }), 200
 
 
 @auth_blueprint.route('/logout')
-@login_required
 def logout():
     logout_user()
     return jsonify({
@@ -72,13 +91,15 @@ def unconfirmed():
 
 
 @auth_blueprint.route('/confirm/<token>')
-@login_required
 def confirm(token):
     if current_user.confirmed:
         return redirect(url_for('core.index'))
     if current_user.check_confirmation(token):
         current_user.confirm()
-        db.session.commit()
+        try:
+            db.session.commit()
+        except sqlalchemy.exc.IntegrityError:
+            return jsonify({"error": "commit failed"}), 401
         flash('You have confirmed your account. Thanks!')
     else:
         flash('The confirmation link is invalid or has expired.')
