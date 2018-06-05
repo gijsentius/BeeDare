@@ -52,6 +52,7 @@ def create_app(config_type):
     app.register_blueprint(delete_blueprint, url_prefix='/delete')
     app.register_blueprint(hive_blueprint, url_prefix='/hive')
     app.register_blueprint(score_blueprint, url_prefix='/score')
+    app.register_blueprint(user_info_blueprint, url_prefix='/info')
     app.register_blueprint(submit_blueprint, url_prefix='/submit')
 
     return app
