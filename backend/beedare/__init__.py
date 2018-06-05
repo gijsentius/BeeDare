@@ -5,6 +5,7 @@ from flask_sqlalchemy import SQLAlchemy
 from config import config, MailConfig
 from flask_admin.contrib.sqla import ModelView
 
+
 db = SQLAlchemy()  # Database instance used for SQLAlchemy
 login_manager = LoginManager()
 
@@ -42,6 +43,7 @@ def create_app(config_type):
     from beedare.hive import hive_blueprint
     from beedare.score import score_blueprint
     from beedare.submit import submit_blueprint
+    from beedare.user_information import user_info_blueprint
 
     app.register_blueprint(main, url_prefix='/')
     app.register_blueprint(landing, url_prefix='/landing')
