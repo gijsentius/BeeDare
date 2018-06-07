@@ -1,15 +1,3 @@
-/* #register{
-    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
-    border-radius: 10px;
-    background: #FFFFFF;
-}
-
-#login{
-    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
-    border-radius: 10px;
-    background: #FFFFFF;
-} */
-
 .full-height-box {
     height: 85vh;
 }
@@ -18,6 +6,72 @@
     text-align: center;
 }
 
-.center-box {
-    justify-content: center;
+/* De textkleur van de inputfield */
+#password_register:focus + label {
+    color: #ffca28;
+}
+/* de underline van de inputfield*/
+#password_register:focus {
+    border-bottom: 1px solid #ffca28;
+    box-shadow: 0 1px 0 0 #ffca28;
+}
+
+/* De textkleur van de inputfield */
+#first_name_register:focus + label {
+    color: #ffca28;
+}
+/* de underline van de inputfield*/
+#first_name_register:focus {
+    border-bottom: 1px solid #ffca28;
+    box-shadow: 0 1px 0 0 #ffca28;
+}
+
+/* De textkleur van de inputfield */
+#last_name_register:focus + label {
+    color: #ffca28;
+}
+/* de underline van de inputfield*/
+#last_name_register:focus {
+    border-bottom: 1px solid #ffca28;
+    box-shadow: 0 1px 0 0 #ffca28;
+}
+
+/* De textkleur van de inputfield */
+#confirm_password_register:focus + label {
+    color: #ffca28;
+}
+/* de underline van de inputfield*/
+#confirm_password_register:focus {
+    border-bottom: 1px solid #ffca28;
+    box-shadow: 0 1px 0 0 #ffca28;
+}
+
+/* De textkleur van de inputfield */
+#email_register:focus + label {
+    color: #ffca28;
+}
+/* de underline van de inputfield*/
+#email_register:focus {
+    border-bottom: 1px solid #ffca28;
+    box-shadow: 0 1px 0 0 #ffca28;
+}
+
+/* De textkleur van de inputfield */
+#password:focus + label {
+    color: #ffca28;
+}
+/* de underline van de inputfield*/
+#password:focus {
+    border-bottom: 1px solid #ffca28;
+    box-shadow: 0 1px 0 0 #ffca28;
+}
+
+/* De textkleur van de inputfield */
+#email_login:focus + label {
+    color: #ffca28;
+}
+/* de underline van de inputfield*/
+#email_login:focus {
+    border-bottom: 1px solid #ffca28;
+    box-shadow: 0 1px 0 0 #ffca28;
 }

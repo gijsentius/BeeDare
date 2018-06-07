@@ -3,7 +3,7 @@ from flask import current_app, request, url_for
 from itsdangerous import TimedSerializer
 
 from werkzeug.security import generate_password_hash, check_password_hash
-from backend.beedare import db
+from beedare import db
 
 
 # # Een klasse die aangeeft wat voor permissies iemand kan hebben
@@ -40,6 +40,7 @@ class User(db.Model):
     email = db.Column(db.String(120), unique=True)
     title = db.Column(db.String(500))
     rank = db.Column(db.String(500))
+    confirmed = db.Column(db.Boolean(False))
 
     def set_password(self, password):
         self.password_hash = generate_password_hash(password)
@@ -93,8 +94,9 @@ class Dare(db.Model):
     id = db.Column(db.Integer, primary_key=True, autoincrement=True)
     name = db.Column(db.String(30), unique=True)  # een Dare moet uniek zijn
     image = db.column(db.String(500))
-    body = db.Column(db.Text)
-    body_html = db.Column(db.Text)
+    body = db.Column(db.Text)  # title
+    body_html = db.Column(db.Text)  # description
+    value = db.column(db.Integer)  # Dares are worth "gallons of honey"
 
 
 class UserDares(db.Model):
