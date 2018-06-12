@@ -16,6 +16,8 @@ app = create_app(os.getenv('FLASK_CONFIG') or 'default')
 admin = create_admin(app, db)
 migrate = Migrate(app, db)  # Migrate instance used for migrating the database
 manager = Manager(app)  # Manager instance
+server = Server(host="0.0.0.0", port=80)
+manager.add_command("runserver", Server())
 manager.add_command('db', MigrateCommand)
 
 
@@ -28,4 +30,4 @@ def test():
 
 
 if __name__ == "__main__":
-    manager.run(host='0.0.0.0', port='80')
+    manager.run()
