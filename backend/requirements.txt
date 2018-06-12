@@ -7,6 +7,7 @@ dj-database-url==0.4.2
 Django==2.0.1
 django-crispy-forms==1.6.1
 ExifRead==2.1.2
+Faker==0.8.15
 Flask==1.0.2
 Flask-Admin==1.5.1
 Flask-Login==0.4.1
@@ -46,6 +47,7 @@ serial==0.0.0
 six==1.11.0
 SQLAlchemy==1.2.7
 status==0.2.5
+text-unidecode==1.2
 tweepy==3.6.0
 urllib3==1.22
 virtualenv==15.1.0
