@@ -10,6 +10,7 @@ import MeetTeamBox from "./MeetTeamBox";
 import ArrowedButton from "./ArrowedButton";
 
 class LandingPage extends React.Component{
+
     render(){
         return(
             <div className="main z-depth-1">

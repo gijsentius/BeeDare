@@ -10,15 +10,15 @@ class TeamPhotoRow extends React.Component{
     render(){
         return(
             <div className="employee-row">
-                <img src={EmployeeStephan} alt="" className="circle responsive-img"
+                <img src={EmployeeStephan} alt="" className="circle responsive-img z-depth-1"
                      />
-                <img src={EmployeeJelmer} alt="" className="circle responsive-img"
+                <img src={EmployeeJelmer} alt="" className="circle responsive-img z-depth-1"
                      />
-                <img src={EmployeeGijs} alt="" className="circle responsive-img"
+                <img src={EmployeeGijs} alt="" className="circle responsive-img z-depth-1"
                      />
-                <img src={EmployeeDagmar} alt="" className="circle responsive-img"
+                <img src={EmployeeDagmar} alt="" className="circle responsive-img z-depth-1"
                      />
-                <img src={EmployeeRoy} alt="" className="circle responsive-img"
+                <img src={EmployeeRoy} alt="" className="circle responsive-img z-depth-1"
                 />
             </div>
 
