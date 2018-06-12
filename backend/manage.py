@@ -8,7 +8,7 @@ if os.path.exists(dotenv_path):
 sys.path.append(home_dir)
 
 from flask_migrate import Migrate, MigrateCommand
-from flask_script import Manager
+from flask_script import Manager, Server
 from beedare import create_app, create_admin
 from beedare import db
 
@@ -17,7 +17,7 @@ admin = create_admin(app, db)
 migrate = Migrate(app, db)  # Migrate instance used for migrating the database
 manager = Manager(app)  # Manager instance
 server = Server(host="0.0.0.0", port=80)
-manager.add_command("runserver", Server())
+manager.add_command("runserver", server)
 manager.add_command('db', MigrateCommand)
 
 
