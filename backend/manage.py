@@ -28,9 +28,5 @@ def test():
     addDataToDB()
 
 
-def addDataTest():
-    addDataToDB()
-
-
 if __name__ == "__main__":
     manager.run()
