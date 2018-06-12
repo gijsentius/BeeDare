@@ -1,7 +1,7 @@
 from flask import request, redirect, url_for, jsonify
 
-from backend.beedare import db
-from backend.beedare.models import User
+from beedare import db
+from beedare.models import User
 from . import *
 
 
