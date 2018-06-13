@@ -6,12 +6,6 @@ p {
     text-align: center;
 }
 
-.landingpage_background {
-    /*Source = https://fwallpapers.com/view/yellow-flower-white-background*/
-    background: url("../../images/Background.jpg") no-repeat;
-    background-size: cover;
-}
-
 .pageSection{
     width: auto;
     height: 80vh;
@@ -27,6 +21,21 @@ p {
 .center-bottom{
     position: absolute;
     bottom: 1vh;
+}
+
+
+.employee-row{
+    display: flex;
+    justify-content: center;
+    object-fit: cover;
+    position: relative;
+    top: 30vh;
+}
+
+.employee-row img{
+    width: auto;
+    height: 30vh;
+    margin: 1vw;
 }
 
 

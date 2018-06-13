@@ -38,7 +38,6 @@ class User(db.Model):
     password_hash = db.Column(db.String(500))
     # PASSWORD MOET NOG AANGEPAST WORDEN ZODAT HET BEVEILIGD IS
     email = db.Column(db.String(120), unique=True)
-    title = db.Column(db.String(500))
     rank = db.Column(db.String(500))
     confirmed = db.Column(db.Boolean(False))
 
@@ -64,7 +63,8 @@ class User(db.Model):
         db.session.add(self)
 
     def __repr__(self):
-        return '<User %r>' % (self.first_name)
+        return '<User %r>' % (self.username) + '<Email %r>' % (self.email) + '<Rank %r>' % (self.rank) + '<Last_Seen %r>' % self.last_seen
+
 
 
 # source: https://github.com/miguelgrinberg/flasky/blob/master/app/models.py
@@ -76,6 +76,9 @@ class Message(db.Model):
     timestamp = db.Column(db.DateTime, index=True, default=datetime.datetime.now())
     author_id = db.Column(db.Integer, db.ForeignKey('users.id'))
     comments = db.relationship('Comment', backref='post', lazy='dynamic') # lazy??? backref???
+
+    def __repr__(self):
+        return '<Message %r>' % (self.body)
 
 
 class Comment(db.Model):

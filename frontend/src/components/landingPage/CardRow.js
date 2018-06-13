@@ -18,7 +18,7 @@ class CardRow extends React.Component{
             "                                  Start your own hive and become the queen of the hive.";
 
         let textHoney = "Complete as many Dares as you can and earn gallons of honey!\n" +
-            "                                Maybe even earn Royal Jelly ad some point.\n" +
+            "                                Maybe even earn Royal Jelly at some point.\n" +
             "                                By completing Dares you earn honey points.\n" +
             "                                The more points you have, the higher up the bee rank you go!";
 
