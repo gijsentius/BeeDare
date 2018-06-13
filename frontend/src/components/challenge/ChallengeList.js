@@ -11,7 +11,7 @@ class ChallengeList extends Component {
 	}
 
 	componentDidMount() {
-		fetch('https://jsonplaceholder.typicode.com/photos?albumId=1')
+		fetch('https://92.212.18.127:5000/dares')
             .then(response => response.json())
             .then(data => this.setState({challenges: data}))
             .catch(error => console.log(error)); // optioneel
