@@ -10,7 +10,15 @@ import SearchPage from '../search/SearchPage';
 import NavLogo from './navbar_icon.png';
 import './App.css';
 
+
+
 class App extends Component {
+
+    constructor(props){
+        super(props);
+        this.state = {loginState: false};
+    }
+
     render() {
         return (
             <Router>
@@ -28,10 +36,7 @@ class App extends Component {
                             <ul id="nav-mobile" className="right hide-on-med-and-down">
                                 <li><Link to="/search"><i className="material-icons text-color">search</i></Link></li>
                                 <li><Link to="/challenges"><span className="text-color">Dares</span></Link></li>
-                                <li><Link to="/newsfeed"><span className="text-color">Newsfeed</span></Link></li>
-                                <li><Link to="/signin"><span className="text-color">Sign In</span></Link></li>
-                                <li><Link to="/signup"><span className="text-color">Get Started</span></Link></li>
-                                <li><Link to="/profile"><span className="text-color">Profile</span></Link></li>
+                                {this.returnCorrectPath()}
                             </ul>
                         </div>
                     </nav>
@@ -50,6 +55,29 @@ class App extends Component {
             </Router>
         );
     }
+
+    // a small function to update de state of the user us in
+    updateState() {
+        this.setState({loginState: !this.state.loginState});
+    }
+
+    // a small component to return the correct pages
+    returnCorrectPath(){
+        if (this.state.loginState){
+            // thanks to React.Fragment you can return multiple elements without using a div
+            return <React.Fragment>
+                <li><Link to="/newsfeed"><span className="text-color">Newsfeed</span></Link></li>
+                <li><Link to="/profile"><span className="text-color">Profile</span></Link></li>
+                </React.Fragment>
+
+        } else{
+            return<React.Fragment>
+                <li><Link to="/signin"><span className="text-color">Sign In</span></Link></li>
+                <li><Link to="/signup"><span className="text-color">Get Started</span></Link></li>
+            </React.Fragment>
+        }
+    }
+
 }
 
 export default App;

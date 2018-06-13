@@ -11,7 +11,7 @@ class ChallengeList extends Component {
 	}
 
 	componentDidMount() {
-		fetch('https://jsonplaceholder.typicode.com/photos?albumId=1')
+		fetch('https://92.212.18.127:5000/dares')
             .then(response => response.json())
             .then(data => this.setState({challenges: data}))
             .catch(error => console.log(error)); // optioneel
@@ -21,10 +21,10 @@ class ChallengeList extends Component {
 		let challenges = this.state.challenges.map((challenge) => 
 			<div className="dare-col">
 				<ChallengeCard
-					description={challenge.thumbnailUrl}
-					reward="60 gallons of honey"
-					title={challenge.title}
-					image={challenge.url}
+					description={challenge.body_html}
+					reward={challenge.value}
+					title={challenge.body}
+					image={challenge.image}
 				/>
 			</div>
 		);

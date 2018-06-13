@@ -11,6 +11,7 @@ class ChallengeIconBox extends Component {
         };
     } 
 
+    // https://jsonplaceholder.typicode.com/photos?albumId=1
     componentDidMount() {
         fetch('https://jsonplaceholder.typicode.com/photos?albumId=1')
             .then(response => response.json())
