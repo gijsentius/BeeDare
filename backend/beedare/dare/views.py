@@ -12,6 +12,7 @@ def show_dares():
         return jsonify({"error": str(e) + " not given or invalid"}), 401
     if result is not None:
         return jsonify({
-            "result": [[item.name, item.image, item.body, item.body_html, item.value] for item in result]
+            "body": [[item.body] for item in result],
+            "value": [[item.value] for item in result],
+            "images": [[item.image] for item in result]
         }), 200
-    return jsonify({}), 401
