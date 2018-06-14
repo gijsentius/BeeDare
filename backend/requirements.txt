@@ -10,6 +10,7 @@ ExifRead==2.1.2
 Faker==0.8.15
 Flask==1.0.2
 Flask-Admin==1.5.1
+Flask-Cors==3.0.6
 Flask-Login==0.4.1
 Flask-Migrate==2.1.1
 Flask-MySQLdb==0.2.0
@@ -31,6 +32,7 @@ numpy==1.13.3
 oauthlib==2.0.7
 olefile==0.44
 Pillow==5.1.0
+pkg-resources==0.0.0
 psycopg2==2.7.1
 PyMySQL==0.8.1
 pyparsing==2.2.0

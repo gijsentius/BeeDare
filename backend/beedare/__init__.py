@@ -2,13 +2,14 @@ from flask import Flask
 from flask_admin import Admin
 from flask_login import LoginManager
 from flask_sqlalchemy import SQLAlchemy
-
+from flask_cors import CORS
 from config import config, MailConfig
 from flask_admin.contrib.sqla import ModelView
 
 
 db = SQLAlchemy()  # Database instance used for SQLAlchemy
 login_manager = LoginManager()
+cors = CORS()
 
 
 def create_admin(app, database):
@@ -31,6 +32,7 @@ def create_app(config_type):
     app = Flask(__name__)
     app.config.from_object(config[config_type])
     app.config.from_object(MailConfig)
+    
     db.init_app(app)
     login_manager.init_app(app)
 
@@ -62,5 +64,5 @@ def create_app(config_type):
     app.register_blueprint(dares_blueprint, url_prefix='/dares')
     app.register_blueprint(image_blueprint, url_prefix='/image')
 
-    
+    cors.init_app(app)
     return app
