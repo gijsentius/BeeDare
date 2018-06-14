@@ -1,3 +1,6 @@
+from beedare.dare import dares_blueprint
+
+
 @dares_blueprint.route('/', methods=["GET"])
 def show_dares():
     try:
