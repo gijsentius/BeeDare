@@ -22,7 +22,7 @@ def addDataToDB():
         comment = Comment(body=fakeDataFactory.sentence(nb_words=6, variable_nb_words=True, ext_word_list=None))
         addToSession.append(comment)
 
-        dare = Dare(image='nonexistent', body=fakeDataFactory.text(max_nb_chars=200, ext_word_list=None),
+        dare = Dare(image='nonexisent', body=fakeDataFactory.text(max_nb_chars=200, ext_word_list=None),
                     value=fakeDataFactory.random_number())
         addToSession.append(dare)
 
