@@ -62,4 +62,5 @@ def create_app(config_type):
     app.register_blueprint(dares_blueprint, url_prefix='/dares')
     app.register_blueprint(image_blueprint, url_prefix='/image')
 
+    
     return app
