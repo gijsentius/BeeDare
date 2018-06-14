@@ -1,6 +1,6 @@
 from faker import Factory
-from backend.beedare import db
-from backend.beedare.models import User, Message, Comment, Dare, Hive
+from beedare import db
+from beedare.models import User, Message, Comment, Dare, Hive
 
 
 def addDataToDB():
