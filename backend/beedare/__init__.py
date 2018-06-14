@@ -44,6 +44,7 @@ def create_app(config_type):
     from beedare.score import score_blueprint
     from beedare.submit import submit_blueprint
     from beedare.user_information import user_info_blueprint
+    from beedare.dare import dares_blueprint
 
     app.register_blueprint(main, url_prefix='/')
     app.register_blueprint(landing, url_prefix='/landing')
@@ -56,5 +57,6 @@ def create_app(config_type):
     app.register_blueprint(score_blueprint, url_prefix='/score')
     app.register_blueprint(user_info_blueprint, url_prefix='/info')
     app.register_blueprint(submit_blueprint, url_prefix='/submit')
+    app.register_blueprint(dares_blueprint, url_prefix='/dares')
 
     return app
