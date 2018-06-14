@@ -2,6 +2,7 @@ from flask import Flask
 from flask_admin import Admin
 from flask_login import LoginManager
 from flask_sqlalchemy import SQLAlchemy
+
 from config import config, MailConfig
 from flask_admin.contrib.sqla import ModelView
 
@@ -43,6 +44,7 @@ def create_app(config_type):
     from beedare.hive import hive_blueprint
     from beedare.score import score_blueprint
     from beedare.submit import submit_blueprint
+    from beedare.image import image_blueprint
     from beedare.user_information import user_info_blueprint
     from beedare.dare import dares_blueprint
 
@@ -58,5 +60,7 @@ def create_app(config_type):
     app.register_blueprint(user_info_blueprint, url_prefix='/info')
     app.register_blueprint(submit_blueprint, url_prefix='/submit')
     app.register_blueprint(dares_blueprint, url_prefix='/dares')
+    app.register_blueprint(image_blueprint, url_prefix='/image')
 
+    
     return app

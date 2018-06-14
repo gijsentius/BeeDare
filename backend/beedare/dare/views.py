@@ -1,3 +1,5 @@
+from beedare.dare import dares_blueprint
+
 from flask import jsonify
 from . import *
 from beedare.models import Dare
