@@ -1,9 +1,11 @@
+from flask import jsonify
 from . import *
+from beedare.models import Dare
 
 @dares_blueprint.route('/', methods=["GET"])
 def show_dares():
     try:
-        result = db.session.query(User).all()
+        result = db.session.query(Dare).all()
     except KeyError as e:
         return jsonify({"error": str(e) + " not given or invalid"}), 401
     if result is not None:
