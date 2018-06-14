@@ -3,6 +3,8 @@ from flask_login import login_required
 
 from beedare import db
 from beedare.models import User, Hive, ColonyMembers, Dare, Message, Friends
+
+from beedare.models import UserDares
 from . import *
 
 
@@ -15,8 +17,8 @@ def user():
         return jsonify({"error": str(e) + " not given or invalid"}), 401
     if user_data is not None:
         try:
-            friends = db.session.query(Friends).filter_by(follower_id=content['id']).all()
-            dares = db.session.query(UserDares).filter_by(owner_id=content['id']).all()
+            friends = db.session.query(Friends).filter(Friends.follower_id.like("%" + content['id'] + "%")).all()
+            dares = db.session.query(UserDares).filter(UserDares.owner_id.like("%" + content['id'] + "%")).all()
         except KeyError as e:
             return jsonify({"error": str(e) + " not given or invalid"}), 401
         return jsonify({
@@ -38,8 +40,8 @@ def hive():
     if result is not None:
         try:
             hive = db.session.query(Hive).filter_by(id=content['hive_id']).first()
-            members = db.session.query(ColonyMembers).filter_by(follower_id=content['hive_id']).all()
-            dares = db.session.query(UserDares).filter_by(id=content['hive_id']).all()
+            members = db.session.query(ColonyMembers).filter(ColonyMembers.follower_id.like("%" + content['hive_id'] + "%")).all()
+            dares = db.session.query(UserDares).filter(UserDares.id.like("%" + content['hive_id'] + "%")).all()
         except KeyError as e:
             return jsonify({"error": str(e) + " not given or invalid"}), 401
         response = jsonify({
@@ -60,8 +62,8 @@ def news():
         return jsonify({"error": str(e) + " not given or invalid"}), 401
     if user_data is not None:
         try:
-            messages = db.session.query(Message).filter_by(author_id=content['id']).all()
-            hives = db.session.query(ColonyMembers).filter_by(follower_id=content['id']).all()
+            messages = db.session.query(Message).filter(Message.author_id.like("%" + content['id'] + "%")).all()
+            hives = db.session.query(ColonyMembers).filter_by(ColonyMembers.follower_id.like("%" + content['id'] + "%")).all()
         except KeyError as e:
             return jsonify({"error": str(e) + " not given or invalid"}), 401
 

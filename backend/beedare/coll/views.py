@@ -3,6 +3,8 @@ from flask_login import login_required
 
 from beedare import db
 from beedare.models import Friends
+
+from backend.beedare.models import UserDares
 from . import *
 
 
@@ -10,7 +12,7 @@ from . import *
 def friends():
     content = request.get_json()
     try:
-        result = db.session.query(Friends).filter_by(followed_id=content['id']).all()
+        result = db.session.query(Friends).filter(Friends.follower_id.like("%" + content['id'] + "%")).all()
     except KeyError as e:
         return jsonify({"error": str(e) + " not given or invalid"}), 401
     return jsonify({
@@ -22,7 +24,7 @@ def friends():
 def dares():
     content = request.get_json()
     try:
-        result = db.session.query(UserDares).filter_by(dare_id=content['id']).all()
+        result = db.session.query(UserDares).filter(UserDares.owner_id.like("%" + content['id'] + "%")).all()
     except KeyError as e:
         return jsonify({"error": str(e) + " not given or invalid"}), 401
     return jsonify({
