@@ -75,7 +75,7 @@ class Message(db.Model):
     body_html = db.Column(db.Text)
     timestamp = db.Column(db.DateTime, index=True, default=datetime.datetime.now())
     author_id = db.Column(db.Integer, db.ForeignKey('users.id'))
-    comments = db.relationship('Comment', backref='post', lazy='dynamic') # lazy??? backref???
+    comments = db.relationship('Comment', backref='post', lazy='dynamic')  # lazy??? backref???
 
     def __repr__(self):
         return '<Message %r>' % (self.body)
@@ -96,10 +96,10 @@ class Dare(db.Model):
     __tablename__ = 'dares'
     id = db.Column(db.Integer, primary_key=True, autoincrement=True)
     name = db.Column(db.String(30), unique=True)  # een Dare moet uniek zijn
-    image = db.column(db.String(500))
+    image = db.Column(db.String(500))
     body = db.Column(db.Text)  # title
     body_html = db.Column(db.Text)  # description
-    value = db.column(db.Integer)  # Dares are worth "gallons of honey"
+    value = db.Column(db.Integer)  # Dares are worth "gallons of honey"
 
 
 class UserDares(db.Model):
