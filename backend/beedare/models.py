@@ -75,7 +75,7 @@ class Message(db.Model):
     body_html = db.Column(db.Text)
     timestamp = db.Column(db.DateTime, index=True, default=datetime.datetime.now())
     author_id = db.Column(db.Integer, db.ForeignKey('users.id'))
-    comments = db.Relationship('Comment', backref='post', lazy='dynamic')  # lazy??? backref???
+    comments = db.relationship('Comment', backref='post', lazy='dynamic')  # lazy??? backref???
 
     def __repr__(self):
         return '<Message %r>' % (self.body)
