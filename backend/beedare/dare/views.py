@@ -1,6 +1,7 @@
 from flask import jsonify
 from . import *
 from beedare.models import Dare
+from beedare import db
 
 @dares_blueprint.route('/', methods=["GET"])
 def show_dares():
