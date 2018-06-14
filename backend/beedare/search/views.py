@@ -14,7 +14,7 @@ def search():
 def search_users():
     content = request.get_json()
     try:
-        result = db.session.query(User).filter_by(username=content['query']).all()
+        result = db.session.query(User).filter(User.username.like("%" + content['query'] + "%")).all()
     except KeyError as e:
         return jsonify({"error": str(e) + " not given or invalid"}), 401
     if result is not None:
@@ -28,7 +28,7 @@ def search_users():
 def search_hives():
     content = request.get_json()
     try:
-        result = db.session.query(Hive).filter_by(hive_name=content['query']).all()
+        result = db.session.query(Hive).filter(Hive.hive_name.like("%" + content['query'] + "%")).all()
     except KeyError as e:
         return jsonify({"error": str(e) + " not given or invalid"}), 401
     if result is not None:
@@ -42,7 +42,7 @@ def search_hives():
 def search_challenges():
     content = request.get_json()
     try:
-        result = db.session.query(Dare).filter_by(name=content['query']).all()
+        result = db.session.query(Dare).filter(Dare.body.like("%" + content['query'] + "%")).all()
     except KeyError as e:
         return jsonify({"error": str(e) + " not given or invalid"}), 401
     if result is not None:
