@@ -1,3 +1,5 @@
+from . import *
+
 @dares_blueprint.route('/', methods=["GET"])
 def show_dares():
     try:
