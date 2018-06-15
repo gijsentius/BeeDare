@@ -11,18 +11,18 @@ class ChallengeList extends Component {
 	}
 
 	componentDidMount() {
-		fetch('https://92.212.18.127:5000/dares')
+		fetch('http://94.212.18.127:5000/dares/')
             .then(response => response.json())
             .then(data => this.setState({challenges: data}))
             .catch(error => console.log(error)); // optioneel
 	}
 
 	render() {
-		let challenges = this.state.challenges.map((challenge) => 
+		let challenges = this.state.challenges.map((challenge) =>
 			<div className="dare-col">
 				<ChallengeCard
-					description={challenge.body_html}
-					reward={challenge.value}
+					description={challenge.body}
+					reward={challenge.body}
 					title={challenge.body}
 					image={challenge.image}
 				/>
@@ -31,6 +31,7 @@ class ChallengeList extends Component {
 		return (
 			<div className="dare-cols">
 				{challenges}
+				{/*{console.log(this.state.challenges)}*/}
 			</div>
 		);
 	}
