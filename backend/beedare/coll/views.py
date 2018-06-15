@@ -4,7 +4,7 @@ from flask_login import login_required
 from beedare import db
 from beedare.models import Friends
 
-from backend.beedare.models import UserDares
+from beedare.models import UserDares
 from . import *
 
 
