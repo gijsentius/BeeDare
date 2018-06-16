@@ -3,6 +3,7 @@
 # database
 backend/*.db
 backend/b-env
+.vscode/
 
 # dependencies
 frontend/node_modules

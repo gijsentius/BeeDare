@@ -12,13 +12,13 @@ from . import *
 def user():
     content = request.get_json()
     try:
-        user_data = db.session.query(User).filter_by(id=content['id']).first()
+        user_data = db.session.query(User).filter_by(username=content['username']).first()
     except KeyError as e:
         return jsonify({"error": str(e) + " not given or invalid"}), 401
     if user_data is not None:
         try:
-            friends = db.session.query(Friends).filter(Friends.follower_id.like("%" + content['id'] + "%")).all()
-            dares = db.session.query(UserDares).filter(UserDares.owner_id.like("%" + content['id'] + "%")).all()
+            friends = db.session.query(Friends).filter(Friends.follower_id.like("%" + str(user_data.id) + "%")).all()
+            dares = db.session.query(UserDares).filter(UserDares.owner_id.like("%" + str(user_data.id) + "%")).all()
         except KeyError as e:
             return jsonify({"error": str(e) + " not given or invalid"}), 401
         return jsonify({

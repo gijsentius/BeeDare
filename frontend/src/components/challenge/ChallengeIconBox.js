@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import ChallengeIcon from './ChallengeIcon'
 
+//This class is currently not used
 class ChallengeIconBox extends Component {
     // normally this class is given a list with challenge id's through the props
     // has a title
