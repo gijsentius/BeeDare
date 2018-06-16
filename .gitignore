@@ -2,6 +2,7 @@
 
 # database
 backend/*.db
+backend/b-env
 
 # dependencies
 frontend/node_modules
@@ -38,6 +39,7 @@ __pycache__/
 # Distribution / packaging
 .Python
 env/
+b-env/
 build/
 develop-eggs/
 dist/
