@@ -22,7 +22,7 @@ export default class OpenChallenges extends React.Component{
     showMenu(event) {
         event.preventDefault();
 
-        this.setState({ showMenu: true }, () => {
+        this.setState({ showMenu: true}, () => {
             document.addEventListener('click', this.closeMenu);
         });
     }
@@ -38,6 +38,12 @@ export default class OpenChallenges extends React.Component{
         }
     }
 
+    deleteDare(id, event) {
+        event.preventDefault();
+        alert('deleting dare = ' + id)
+        }
+
+
     render(){
         let openChallenges;
         let listItems;
@@ -49,7 +55,7 @@ export default class OpenChallenges extends React.Component{
             listItems = openChallenges.map((item) =>
                 <div className="section" key={item.id}>
                     <div className="center" id='imgCH'>
-                        <ChallengeIcon image={item.image}/>
+                        <ChallengeIcon/>
 
                         <div className="rightnext">
                             <a onClick={this.showMenu} className="btn-floating btn-small amber darken-1">
@@ -61,7 +67,9 @@ export default class OpenChallenges extends React.Component{
                                              ref={(element) => {
                                             this.dropdownMenu = element;
                                         }}>
-                                            <button onClick={()=>alert("HOI!!")}> Delete Dare </button>
+                                            <button className="btn-small waves-effect red buttonMargin"
+                                                    id={item.id} onClick={(e)=>this.deleteDare(item.id, e)}>
+                                                <i className="material-icons">delete</i></button>
                                         </div>
                                     )
                                     : (
