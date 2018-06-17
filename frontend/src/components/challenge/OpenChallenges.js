@@ -13,16 +13,17 @@ export default class OpenChallenges extends React.Component{
         super(props);
         this.state = {
             showMenu: false,
+            currentId: "",
         };
 
         this.showMenu = this.showMenu.bind(this);
         this.closeMenu = this.closeMenu.bind(this);
     }
 
-    showMenu(event) {
+    showMenu(event, id) {
         event.preventDefault();
 
-        this.setState({ showMenu: true}, () => {
+        this.setState({ showMenu: true, currentId: id}, () => {
             document.addEventListener('click', this.closeMenu);
         });
     }
@@ -31,7 +32,7 @@ export default class OpenChallenges extends React.Component{
 
         if (!this.dropdownMenu.contains(event.target)) {
 
-            this.setState({ showMenu: false }, () => {
+            this.setState({ showMenu: false}, () => {
                 document.removeEventListener('click', this.closeMenu);
             });
 
@@ -41,7 +42,7 @@ export default class OpenChallenges extends React.Component{
     deleteDare(id, event) {
         event.preventDefault();
         alert('deleting dare = ' + id)
-        }
+    }
 
 
     render(){
@@ -56,12 +57,12 @@ export default class OpenChallenges extends React.Component{
                 <div className="section" key={item.id}>
                     <div className="center" id='imgCH'>
                         <ChallengeIcon/>
-
+                        {/*Hierboven moet image nog toegevoegd worden als deze klaar is!!!!!*/}
                         <div className="rightnext">
-                            <a onClick={this.showMenu} className="btn-floating btn-small amber darken-1">
+                            <a id={item.id} onClick={(e)=>this.showMenu(e, item.id)} className="btn-floating btn-small amber darken-1">
                                 <i className="material-icons">edit</i></a>
                             {
-                                this.state.showMenu
+                                this.state.showMenu && this.state.currentId === item.id
                                     ? (
                                         <div id={item.id}
                                              ref={(element) => {
