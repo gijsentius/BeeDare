@@ -65,3 +65,7 @@
     overflow-y: auto;
     max-height: 83vh;
 }
+
+.buttonMargin {
+    margin: 1vh;
+}
