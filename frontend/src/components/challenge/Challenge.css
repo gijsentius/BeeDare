@@ -63,5 +63,9 @@
 .overflow-scroll-box {
     overflow-x: hidden;
     overflow-y: auto;
-    max-height: 83vh;
+    max-height: 72.5vh;
+}
+
+.buttonMargin {
+    margin: 1vh;
 }

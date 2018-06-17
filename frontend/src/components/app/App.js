@@ -9,6 +9,9 @@ import LandingPage from '../landingPage/LandingPage';
 import SearchPage from '../search/SearchPage';
 import NavLogo from './navbar_icon.png';
 import './App.css';
+import ChangeEmailPassword from "../editInformation/ChangeEmailPassword";
+import EditProfilePage from "../editInformation/EditProfilePage";
+import FriendPage from "../friends/FriendPage";
 
 
 
@@ -47,6 +50,9 @@ class App extends Component {
                         <Route path="/newsfeed" component={NewsFeedPage}/>
                         <Route path="/profile" component={ProfilePage}/>
                         <Route path="/search" component={SearchPage}/>
+                        <Route path="/change-email" component={ChangeEmailPassword}/>
+                        <Route path="/edit-profile" component={EditProfilePage}/>
+                        <Route path="/friends" component={FriendPage}/>
                     </div>
                     <div>
                         <Route exact path="/" component={LandingPage}/>
