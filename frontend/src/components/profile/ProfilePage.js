@@ -69,12 +69,13 @@ class ProfilePage extends Component {
                         <Profile profileInfo={profileInfo}/>
                     </div>
                 </div>
-                <div className="row">
-                    <div className="col s12">
-                        <h6 className="center">Active Friends</h6>
-                        <Friends friends={activeFriends}/>
-                    </div>
-                </div>
+                {/*<div className="row">*/}
+                    {/*<div className="col s12">*/}
+                        {/*<h6 className="center">Active Friends</h6>*/}
+                        {/*<Friends friends={activeFriends}/>*/}
+                    {/*</div>*/}
+                {/*</div>*/}
+                {/*bovenstaande in comments gezet omdat het wellicht niks toevoegd*/}
             </div>
 
         );

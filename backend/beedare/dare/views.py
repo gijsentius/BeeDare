@@ -18,6 +18,7 @@ def show_dares():
             list.append(
             {
                 "name": item.name,
+                "id": item.id,
                 "image": item.image,
                 "body": item.body,
                 "body_html": item.body_html,
@@ -26,5 +27,19 @@ def show_dares():
             })
         return jsonify(
             list
+        ), 200
+    return jsonify({}), 401
+
+@dares_blueprint.route('/delete/<dareid>')
+def delete_dare(dareid):
+    try:
+        dare = Dare.query.filter_by(id=dareid).first()
+    except KeyError as e:
+        return jsonify({"error": str(e) + " not given or invalid"}), 401
+    if dare is not None:
+        db.session.delete(dare)
+        db.session.commit()
+        return jsonify(
+            {"result": "It worked! Dare is deleted"}
         ), 200
     return jsonify({}), 401

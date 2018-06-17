@@ -3,7 +3,6 @@ import './Challenge.css';
 import ChallengeIcon from "./ChallengeIcon";
 
 
-// Make sure to bind modal to your appElement (http://reactcommunity.org/react-modal/accessibility/)
 // source code = https://github.com/reactjs/react-modal
 // source code = https://blog.campvanilla.com/reactjs-dropdown-menus-b6e06ae3a8fe
 
@@ -14,6 +13,7 @@ export default class OpenChallenges extends React.Component{
         this.state = {
             showMenu: false,
             currentId: "",
+            returnAfterDelete: true,
         };
 
         this.showMenu = this.showMenu.bind(this);
@@ -32,7 +32,7 @@ export default class OpenChallenges extends React.Component{
 
         if (!this.dropdownMenu.contains(event.target)) {
 
-            this.setState({ showMenu: false}, () => {
+            this.setState({ showMenu: false, currentId: ""}, () => {
                 document.removeEventListener('click', this.closeMenu);
             });
 
@@ -41,7 +41,13 @@ export default class OpenChallenges extends React.Component{
 
     deleteDare(id, event) {
         event.preventDefault();
-        alert('deleting dare = ' + id)
+        fetch('http://localhost:5000/dares/delete/' + id)
+        this.setState({ showMenu: false, currentId: ""}, () => {
+            document.removeEventListener('click', this.closeMenu);
+        });
+        window.location.reload()
+    //    window reload is nodig omdat anders de data niet update en je steeds
+    //    probeert dezelfde challenge te verwijderen.
     }
 
 
@@ -51,7 +57,7 @@ export default class OpenChallenges extends React.Component{
         if (this.props.openChallenges !== undefined){
             openChallenges = this.props.openChallenges;
             // .map is eigenlijk al een forloop. Het zorgt ervoor dat listItems een nieuwe
-            // array wordt, maar hij loop dus over movieHits en stopt er vervolgens listItems in.
+            // array wordt, maar hij loop dus over openChallenges en stopt er vervolgens listItems in.
             // div met de className center wordt gebruikt om de image in het midden te zetten
             listItems = openChallenges.map((item) =>
                 <div className="section" key={item.id}>
@@ -59,9 +65,12 @@ export default class OpenChallenges extends React.Component{
                         <ChallengeIcon/>
                         {/*Hierboven moet image nog toegevoegd worden als deze klaar is!!!!!*/}
                         <div className="rightnext">
+                            {/*Gebruik van arrow functie om event en item.id mee te kunnen geven*/}
                             <a id={item.id} onClick={(e)=>this.showMenu(e, item.id)} className="btn-floating btn-small amber darken-1">
                                 <i className="material-icons">edit</i></a>
                             {
+                                // onderstaande vergelijking is van essentieel belang, zodat er niet meerdere menu's
+                                // aangemaakt worden.
                                 this.state.showMenu && this.state.currentId === item.id
                                     ? (
                                         <div id={item.id}
