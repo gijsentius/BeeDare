@@ -1,8 +1,8 @@
 """empty message
 
-Revision ID: 5a113957bedb
+Revision ID: 0bc7af533c37
 Revises: 
-Create Date: 2018-06-18 14:14:15.376184
+Create Date: 2018-06-18 17:36:11.851079
 
 """
 from alembic import op
@@ -10,7 +10,7 @@ import sqlalchemy as sa
 
 
 # revision identifiers, used by Alembic.
-revision = '5a113957bedb'
+revision = '0bc7af533c37'
 down_revision = None
 branch_labels = None
 depends_on = None
@@ -21,7 +21,7 @@ def upgrade():
     op.create_table('dares',
     sa.Column('id', sa.Integer(), nullable=False),
     sa.Column('name', sa.String(length=255), nullable=True),
-    sa.Column('image', sa.String(length=500), nullable=True),
+    sa.Column('image', sa.String(length=255), nullable=True),
     sa.Column('body', sa.Text(), nullable=True),
     sa.Column('body_html', sa.Text(), nullable=True),
     sa.Column('value', sa.Integer(), nullable=True),
@@ -34,13 +34,13 @@ def upgrade():
     sa.Column('last_name', sa.String(length=255), nullable=True),
     sa.Column('age_cat', sa.String(length=50), nullable=True),
     sa.Column('location', sa.String(length=120), nullable=True),
-    sa.Column('image', sa.String(length=500), nullable=True),
+    sa.Column('image', sa.String(length=255), nullable=True),
     sa.Column('score', sa.Integer(), nullable=True),
     sa.Column('last_seen', sa.String(length=50), nullable=True),
     sa.Column('username', sa.String(length=120), nullable=True),
-    sa.Column('password_hash', sa.String(length=500), nullable=True),
+    sa.Column('password_hash', sa.String(length=255), nullable=True),
     sa.Column('email', sa.String(length=120), nullable=True),
-    sa.Column('rank', sa.String(length=500), nullable=True),
+    sa.Column('rank', sa.String(length=255), nullable=True),
     sa.Column('confirmed', sa.Boolean(create_constraint=False), nullable=True),
     sa.PrimaryKeyConstraint('id'),
     sa.UniqueConstraint('email'),
@@ -58,7 +58,7 @@ def upgrade():
     op.create_table('hives',
     sa.Column('id', sa.Integer(), nullable=False),
     sa.Column('hive_name', sa.String(length=255), nullable=True),
-    sa.Column('image', sa.String(length=500), nullable=True),
+    sa.Column('image', sa.String(length=255), nullable=True),
     sa.Column('total_score_members', sa.Integer(), nullable=True),
     sa.Column('beekeeper', sa.Integer(), nullable=True),
     sa.ForeignKeyConstraint(['beekeeper'], ['users.id'], ),
