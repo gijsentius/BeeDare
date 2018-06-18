@@ -30,13 +30,13 @@ class EditProfilePage extends React.Component {
         const form = event.target;
         const data = new FormData(form);
 
-        fetch('http://localhost:5000/profile/user/edit/' +username, {
+        fetch('http://localhost:5000/profile/user/edit/' + username, {
             method: 'POST',
             body: data,
         });
         window.location.reload()
     }
-    
+
     render() {
         if (!this.state.profileInfo[0]) {
             return <div/>
