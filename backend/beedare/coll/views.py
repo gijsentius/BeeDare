@@ -2,7 +2,7 @@ from flask import request, jsonify
 from flask_login import login_required
 
 from beedare import db
-from beedare.models import Friends
+from beedare.models import Friend
 
 from beedare.models import UserDares
 from . import *

@@ -6,7 +6,7 @@ from werkzeug.security import generate_password_hash, check_password_hash
 from beedare import db
 
 
-class Friends(db.Model):
+class Friend(db.Model):
     __tablename__ = 'friends'
     follower_id = db.Column(db.Integer, db.ForeignKey('users.id'),
                             primary_key=True)
