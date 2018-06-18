@@ -1,40 +1,58 @@
-import React, { Component } from 'react';
+import React, {Component} from 'react';
 import Message from './Message'
+import scrollToComponent from "react-scroll-to-component";
 
 
 class Newsfeed extends Component {
-  constructor(props){
-    super(props);
-    this.state={
-      messages: []
+    constructor(props) {
+        super(props);
+        this.state = {
+            messages: [],
+            number: 10,
+            messageList: [],
 
+        }
     }
-  }
 
-componentDidMount() {
-  fetch('https://jsonplaceholder.typicode.com/comments')
-  .then(response => response.json())
-  .then(data => this.setState({messages: data}))
-}
+    componentDidMount() {
+        fetch('https://jsonplaceholder.typicode.com/comments')
+            .then(response => response.json())
+            .then(data => this.setState({messages: data}))
+    }
 
 
-render() {
-  let messages = this.state.messages.map((message) =>
-        <div className = "message">
-          <Message
-            body={message.body}
-            name={message.name}
-          />
-        </div>
-      );//end map
-      return(
-        <div className="card">
-        <div className="card-content">
-          {messages}
-        </div>
-        </div>
-      ); //end return
-}//end render
+    render() {
+        this.state.messageList = this.state.messages.map((message) =>
+            <div className="message">
+                <Message
+                    body={message.body}
+                    name={message.name}
+                />
+            </div>
+        );//end map
+        return (
+            <div>
+                {this.getList(this.state.number)}
+                <a className="waves-effect waves-light btn amber darken-1 center-component top-button"
+                    onClick={() => this.setState({number: this.state.number + 10})}>Load more</a>
+            </div>
+
+        ); //end return
+    }//end render
+
+    getList() {
+        let messageSet = [];
+        for (let i = 0; i < this.state.number; i++) {
+            messageSet.push(this.state.messageList[i])
+        }
+        return (
+            <div className="card">
+                <div className="card-content">
+                    {messageSet}
+                </div>
+            </div>
+        )
+    }
 }
 
 export default Newsfeed;
