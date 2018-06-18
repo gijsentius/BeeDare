@@ -2,6 +2,7 @@ import React from 'react';
 import Icon from "../icon/Icon";
 import EmployeeDagmar from "../../images/EmployeeDagmar.jpg";
 import {Link} from "react-router-dom";
+import {UserContext} from "../UserProvider";
 
 class EditProfilePage extends React.Component {
     constructor(props) {
@@ -9,9 +10,11 @@ class EditProfilePage extends React.Component {
         this.state = {
             profileInfo: [],
         };
+
+        this.editInformation = this.editInformation.bind(this);
     }
 
-    componentWillMount() {
+    componentDidMount() {
         // hier nog graag een API request die alleen op ID haalt, anders beetje zonde van data etc.
         fetch('http://localhost:5000/profile/user')
             .then(response => response.json())
@@ -19,6 +22,20 @@ class EditProfilePage extends React.Component {
             .catch(error => console.log(error));
     }
 
+    // source: https://medium.com/@everdimension/how-to-handle-forms-with-just-react-ac066c48bd4f
+
+    editInformation(event, username){
+        event.preventDefault();
+
+        const form = event.target;
+        const data = new FormData(form);
+
+        fetch('http://localhost:5000/profile/user/edit/' + username, {
+            method: 'POST',
+            body: data,
+        });
+        window.location.reload()
+    }
 
     render() {
         if (!this.state.profileInfo[0]) {
@@ -29,7 +46,7 @@ class EditProfilePage extends React.Component {
 
         return(
             <div className="container">
-                <form className="col s12">
+                <form onSubmit={(e) => this.editInformation(e, profileInfo.username)} className="col s12">
                     <div className="row">
                         <div className="col 6">
                             <img src={EmployeeDagmar} alt="" className="circle responsive-img z-depth-1"
@@ -38,41 +55,53 @@ class EditProfilePage extends React.Component {
                         {/*Br is misschien wel heel lelijk, maar is voor nu een snelle oplossing*/}
                         <br/>
                         <br/>
-                        <form action="#" className="col s2">
+
+                        <form className="col s2">
                             <div className="file-field input-field">
                                 <div className="btn btn-small amber darken-1">
                                     <i className="material-icons">edit</i>
-                                    <input type="file"/>
+                                    <input name="edit" type="file"/>
                                 </div>
                                 <div className="file-path-wrapper">
                                     <input className="file-path"/>
                                 </div>
                             </div>
                         </form>
+
                     </div>
                     <div className="row">
                         <div className="input-field col s6">
-                            <input placeholder={profileInfo.first_name} id="first_name" type="text" className="validate"/>
+                            <input name="firstName" placeholder={profileInfo.first_name}
+                                   id="first_name" type="text" className="validate"/>
                                 <label className="active" htmlFor="first_name">First Name</label>
                         </div>
                         <div className="input-field col s6">
-                            <input placeholder={profileInfo.last_name} id="last_name" type="text" className="validate"/>
+                            <input name="lastName" placeholder={profileInfo.last_name}
+                                   id="last_name" type="text" className="validate"/>
                                 <label className="active" htmlFor="last_name">Last Name</label>
                         </div>
                     </div>
                     <div className="row">
                         <div className="input-field col s6">
-                            <input placeholder={profileInfo.username} id="last_name" type="text" className="validate"/>
+                            <input name="userName" placeholder={profileInfo.username}
+                                   id="last_name" type="text" className="validate"/>
                             <label className="active" htmlFor="last_name">Username</label>
                         </div>
                     </div>
                     <div className="row">
-                        <li className="btn amber darken-1">Save changes</li>
-                    </div>
-                    <div className="row">
-                        <Link className="btn amber darken-1" to="/change-email">Edit Email and password</Link>
+                        <button className="btn amber darken-1">Save changes</button>
                     </div>
                 </form>
+                <div className="row">
+                    {/*TODO: ervoor zorgen dat deze rechts op de pagina komt te staan*/}
+                    <Link className="btn amber darken-1" to="/change-email">Edit Email and password</Link>
+                </div>
+                <p>
+                    een test :
+                    <UserContext>
+                        {(context) => context.loggedInUsername}
+                    </UserContext>
+                </p>
             </div>
         )
 
