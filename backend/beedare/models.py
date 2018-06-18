@@ -86,7 +86,7 @@ class Comment(db.Model):
 class Dare(db.Model):
     __tablename__ = 'dares'
     id = db.Column(db.Integer, primary_key=True, autoincrement=True)
-    name = db.Column(db.String(255), unique=True)  # een Dare moet uniek zijn
+    name = db.Column(db.String(128), unique=True)  # een Dare moet uniek zijn
     image = db.Column(db.String(255))
     body = db.Column(db.Text)  # title
     body_html = db.Column(db.Text)  # description
@@ -103,7 +103,7 @@ class UserDares(db.Model):
 class Hive(db.Model):
     __tablename__ = 'hives'
     id = db.Column(db.Integer, primary_key=True, unique=True, autoincrement=True)
-    hive_name = db.Column(db.String(255), unique=True)
+    hive_name = db.Column(db.String(128), unique=True)
     image = db.Column(db.String(255))
     total_score_members = db.Column(db.Integer)
     beekeeper = db.Column(db.ForeignKey('users.id'))  # beekeeper is de hive eigenaar
