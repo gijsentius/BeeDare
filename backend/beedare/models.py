@@ -22,14 +22,14 @@ class User(db.Model):
     last_name = db.Column(db.String(255))
     age_cat = db.Column(db.String(50))  # ageCat staat voor ageCategory. Bijvoorbeeld 5-10 15-20 etc...
     location = db.Column(db.String(120))
-    image = db.Column(db.String(500))  # 500??
+    image = db.Column(db.String(255))  # 500??
     score = db.Column(db.Integer)
     last_seen = db.Column(db.String(50))
     username = db.Column(db.String(120), unique=True)
-    password_hash = db.Column(db.String(500))
+    password_hash = db.Column(db.String(255))
     # PASSWORD MOET NOG AANGEPAST WORDEN ZODAT HET BEVEILIGD IS
     email = db.Column(db.String(120), unique=True)
-    rank = db.Column(db.String(500))
+    rank = db.Column(db.String(255))
     confirmed = db.Column(db.Boolean(False))
 
     def set_password(self, password):
@@ -87,7 +87,7 @@ class Dare(db.Model):
     __tablename__ = 'dares'
     id = db.Column(db.Integer, primary_key=True, autoincrement=True)
     name = db.Column(db.String(255), unique=True)  # een Dare moet uniek zijn
-    image = db.Column(db.String(500))
+    image = db.Column(db.String(255))
     body = db.Column(db.Text)  # title
     body_html = db.Column(db.Text)  # description
     value = db.Column(db.Integer)  # Dares are worth "gallons of honey"
@@ -104,7 +104,7 @@ class Hive(db.Model):
     __tablename__ = 'hives'
     id = db.Column(db.Integer, primary_key=True, unique=True, autoincrement=True)
     hive_name = db.Column(db.String(255), unique=True)
-    image = db.Column(db.String(500))
+    image = db.Column(db.String(255))
     total_score_members = db.Column(db.Integer)
     beekeeper = db.Column(db.ForeignKey('users.id'))  # beekeeper is de hive eigenaar
 
