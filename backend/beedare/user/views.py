@@ -73,11 +73,10 @@ def hive():
     return jsonify({}), 401
 
 
-@profile_blueprint.route('/newsfeed', methods=['POST'])
-def news():
-    content = request.get_json()
+@profile_blueprint.route('/newsfeed/<user>', methods=['GET'])
+def news(user):
     try:
-        user_data = User.query.filter_by(username=content['username']).first()
+        user_data = User.query.filter_by(username=user).first()
     except KeyError as e:
         return jsonify({"error": str(e) + " not given or invalid"}), 401
     if user_data is not None:
