@@ -2,6 +2,7 @@ import React from 'react';
 import Icon from "../icon/Icon";
 import EmployeeDagmar from "../../images/EmployeeDagmar.jpg";
 import {Link} from "react-router-dom";
+import {UserContext} from "../UserProvider";
 
 class EditProfilePage extends React.Component {
     constructor(props) {
@@ -11,7 +12,6 @@ class EditProfilePage extends React.Component {
         };
 
         this.editInformation = this.editInformation.bind(this);
-        // this.handleChange = this.handleChange.bind(this);
     }
 
     componentDidMount() {
@@ -72,19 +72,19 @@ class EditProfilePage extends React.Component {
                     <div className="row">
                         <div className="input-field col s6">
                             <input name="firstName" placeholder={profileInfo.first_name}
-                                   id="first_name" type="text" className="validate" onChange={this.handleChange}/>
+                                   id="first_name" type="text" className="validate"/>
                                 <label className="active" htmlFor="first_name">First Name</label>
                         </div>
                         <div className="input-field col s6">
                             <input name="lastName" placeholder={profileInfo.last_name}
-                                   id="last_name" type="text" className="validate" onChange={this.handleChange}/>
+                                   id="last_name" type="text" className="validate"/>
                                 <label className="active" htmlFor="last_name">Last Name</label>
                         </div>
                     </div>
                     <div className="row">
                         <div className="input-field col s6">
                             <input name="userName" placeholder={profileInfo.username}
-                                   id="last_name" type="text" className="validate" onChange={this.handleChange}/>
+                                   id="last_name" type="text" className="validate"/>
                             <label className="active" htmlFor="last_name">Username</label>
                         </div>
                     </div>
@@ -96,6 +96,12 @@ class EditProfilePage extends React.Component {
                     {/*TODO: ervoor zorgen dat deze rechts op de pagina komt te staan*/}
                     <Link className="btn amber darken-1" to="/change-email">Edit Email and password</Link>
                 </div>
+                <p>
+                    een test :
+                    <UserContext>
+                        {(context) => context.loggedInUsername}
+                    </UserContext>
+                </p>
             </div>
         )
 
