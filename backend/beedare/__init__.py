@@ -13,7 +13,7 @@ cors = CORS()
 
 
 def create_admin(app, database):
-    from beedare.models import User, Message, Comment, Dare, UserDares, Hive, ColonyMembers, Friends
+    from beedare.models import User, Message, Comment, Dare, UserDares, Hive, ColonyMembers, Friend
 
     admin = Admin(app, name='beedare', template_mode='bootstrap3')
     admin.add_view(ModelView(User, database.session))
@@ -23,7 +23,7 @@ def create_admin(app, database):
     admin.add_view(ModelView(UserDares, database.session))
     admin.add_view(ModelView(Hive, database.session, endpoint='hive_date'))
     admin.add_view(ModelView(ColonyMembers, database.session))
-    admin.add_view(ModelView(Friends, database.session))
+    admin.add_view(ModelView(Friend, database.session))
     
     return admin
 

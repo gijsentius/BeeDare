@@ -2,9 +2,7 @@ from flask import jsonify, request
 from flask_login import login_required
 
 from beedare import db
-from beedare.models import User, Hive, ColonyMembers, Dare, Message, Friends
-
-from beedare.models import UserDares
+from beedare.models import User, Hive, ColonyMembers, Dare, Message, Friend, UserDares
 from . import *
 
 
@@ -39,14 +37,14 @@ def user():
         return jsonify({"error": str(e) + " not given or invalid"}), 401
     if user_data is not None:
         try:
-            friends = db.session.query(Friends).filter(Friends.follower_id.like("%" + str(user_data.id) + "%")).all()
+            friends = db.session.query(Friend).filter(Friend.follower_id.like("%" + str(user_data.id) + "%")).all()
             dares = db.session.query(UserDares).filter(UserDares.owner_id.like("%" + str(user_data.id) + "%")).all()
         except KeyError as e:
             return jsonify({"error": str(e) + " not given or invalid"}), 401
         return jsonify({
             # TODO fix this
             'user data': [user_data.id, user_data.username, user_data.score, user_data.image, user_data.rank, user_data.email],
-            'friends': [[item.id] for item in friends],
+            'friends': [[item.id] for item in friend],
             'dares': [[item.id] for item in dares],
         }), 200
     return jsonify({}), 401
@@ -79,20 +77,29 @@ def hive():
 def news():
     content = request.get_json()
     try:
-        user_data = db.session.query(User).filter_by(username=content['username']).first()
+        user_data = User.query.filter_by(username=content['username']).first()
     except KeyError as e:
         return jsonify({"error": str(e) + " not given or invalid"}), 401
     if user_data is not None:
+        message_list = []
         try:
-            messages = db.session.query(Message).filter(Message.author_id.like("%" + str(user_data.id) + "%")).all()
-            hives = db.session.query(ColonyMembers).filter_by(ColonyMembers.follower_id.like("%" + str(user_data.id) + "%")).all()
+            friends = Friend.query.filter_by(follower_id=(user_data.id)).all()
+            for friend in friends:
+                friend_data = User.query.filter_by(id=friend.followed_id).first()
+                messages = Message.query.filter_by(author_id=friend.followed_id).all()
+                for message in messages:
+                    message_list.append(
+                        {
+                            'author': friend_data.username,
+                            'body': message.body,
+                            'timestamp': message.timestamp
+                        }
+                    )
+            # message_list.sort(key=lambda m: m.timestamp)
         except KeyError as e:
             return jsonify({"error": str(e) + " not given or invalid"}), 401
-
         response = jsonify({
-            'user data': [user_data.id, user_data.username, user_data.score, user_data.image, user_data.rank, user_data.email],
-            'messages': [[item.id] for item in messages],
-            'hives': [[item.id] for item in hives],
+            'messages': message_list,
         })
         return response, 200
     return jsonify({}), 401
