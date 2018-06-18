@@ -41,7 +41,7 @@ export default class OpenChallenges extends React.Component{
 
     deleteDare(id, event) {
         event.preventDefault();
-        fetch('http://localhost:5000/dares/delete/' + id)
+        fetch('http://localhost:5000/dares/delete/' + id);
         this.setState({ showMenu: false, currentId: ""}, () => {
             document.removeEventListener('click', this.closeMenu);
         });
