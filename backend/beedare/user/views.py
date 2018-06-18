@@ -79,13 +79,13 @@ def hive():
 def news():
     content = request.get_json()
     try:
-        user_data = db.session.query(User).filter_by(id=content['id']).first()
+        user_data = db.session.query(User).filter_by(username=content['username']).first()
     except KeyError as e:
         return jsonify({"error": str(e) + " not given or invalid"}), 401
     if user_data is not None:
         try:
-            messages = db.session.query(Message).filter(Message.author_id.like("%" + content['id'] + "%")).all()
-            hives = db.session.query(ColonyMembers).filter_by(ColonyMembers.follower_id.like("%" + content['id'] + "%")).all()
+            messages = db.session.query(Message).filter(Message.author_id.like("%" + str(user_data.id) + "%")).all()
+            hives = db.session.query(ColonyMembers).filter_by(ColonyMembers.follower_id.like("%" + str(user_data.id) + "%")).all()
         except KeyError as e:
             return jsonify({"error": str(e) + " not given or invalid"}), 401
 
