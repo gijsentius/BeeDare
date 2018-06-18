@@ -18,8 +18,8 @@ class Friends(db.Model):
 class User(db.Model):
     __tablename__ = 'users'
     id = db.Column(db.Integer, primary_key=True, unique=True, autoincrement=True)  #ID is de primary_key
-    first_name = db.Column(db.String(30))  # 30 character genoeg?
-    last_name = db.Column(db.String(40))
+    first_name = db.Column(db.String(255))  # 30 character genoeg? Nee
+    last_name = db.Column(db.String(255))
     age_cat = db.Column(db.String(50))  # ageCat staat voor ageCategory. Bijvoorbeeld 5-10 15-20 etc...
     location = db.Column(db.String(120))
     image = db.Column(db.String(500))  # 500??
@@ -86,7 +86,7 @@ class Comment(db.Model):
 class Dare(db.Model):
     __tablename__ = 'dares'
     id = db.Column(db.Integer, primary_key=True, autoincrement=True)
-    name = db.Column(db.String(30), unique=True)  # een Dare moet uniek zijn
+    name = db.Column(db.String(255), unique=True)  # een Dare moet uniek zijn
     image = db.Column(db.String(500))
     body = db.Column(db.Text)  # title
     body_html = db.Column(db.Text)  # description
@@ -103,7 +103,7 @@ class UserDares(db.Model):
 class Hive(db.Model):
     __tablename__ = 'hives'
     id = db.Column(db.Integer, primary_key=True, unique=True, autoincrement=True)
-    hive_name = db.Column(db.String(30), unique=True)
+    hive_name = db.Column(db.String(255), unique=True)
     image = db.Column(db.String(500))
     total_score_members = db.Column(db.Integer)
     beekeeper = db.Column(db.ForeignKey('users.id'))  # beekeeper is de hive eigenaar

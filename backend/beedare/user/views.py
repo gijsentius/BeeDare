@@ -85,12 +85,10 @@ def news():
     if user_data is not None:
         try:
             messages = db.session.query(Message).filter(Message.author_id.like("%" + str(user_data.id) + "%")).all()
-            hives = db.session.query(ColonyMembers).filter_by(ColonyMembers.follower_id.like("%" + str(user_data.id) + "%")).all()
+            hives = db.session.query(ColonyMembers).filter(ColonyMembers.follower_id.like("%" + str(user_data.id) + "%")).all()
         except KeyError as e:
             return jsonify({"error": str(e) + " not given or invalid"}), 401
-
         response = jsonify({
-            'user data': [user_data.id, user_data.username, user_data.score, user_data.image, user_data.rank, user_data.email],
             'messages': [[item.id] for item in messages],
             'hives': [[item.id] for item in hives],
         })
