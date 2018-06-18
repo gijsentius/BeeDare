@@ -22,17 +22,17 @@ class ProfilePage extends Component {
 
     componentDidMount()
     {
-        fetch('https://jsonplaceholder.typicode.com/photos?albumId=1')
+        fetch('http://localhost:5000/dares/')
             .then(response => response.json())
             .then(data => this.setState({openChallenges: data, isLoading: false}))
             .catch(error => console.log(error));
 
-        fetch('https://jsonplaceholder.typicode.com/users/1')
+        fetch('http://localhost:5000/profile/user')
             .then(response => response.json())
             .then(data => this.setState({profileInfo: data, isLoading: false}))
             .catch(error => console.log(error));
 
-        fetch('https://jsonplaceholder.typicode.com/photos?albumId=15')
+        fetch('http://localhost:5000/dares/')
             .then(response => response.json())
             .then(data => this.setState({completedChallenges: data, isLoading: false}))
             .catch(error => console.log(error));
@@ -45,13 +45,17 @@ class ProfilePage extends Component {
 
     render() {
 
-        const {openChallenges, isLoading, profileInfo, completedChallenges, activeFriends} = this.state;
+        if (!this.state.profileInfo){
+            return <div/>
+        //    dit stukje code zorgt ervoor dat je geen undefined krijgt
+        }
+        const {openChallenges, isLoading, completedChallenges, activeFriends} = this.state;
+        const profileInfo = this.state.profileInfo[0];
 
         return (
             <div>
 
                 <div className="row">
-                    <p>{console.log(isLoading)}</p>
                     <div className="col s2 m3">
                         <h6 className="center">Open Dares</h6>
                         <OpenChallenges openChallenges={openChallenges}/>
@@ -65,12 +69,13 @@ class ProfilePage extends Component {
                         <Profile profileInfo={profileInfo}/>
                     </div>
                 </div>
-                <div className="row">
-                    <div className="col s12">
-                        <h6 className="center">Active Friends</h6>
-                        <Friends friends={activeFriends}/>
-                    </div>
-                </div>
+                {/*<div className="row">*/}
+                    {/*<div className="col s12">*/}
+                        {/*<h6 className="center">Active Friends</h6>*/}
+                        {/*<Friends friends={activeFriends}/>*/}
+                    {/*</div>*/}
+                {/*</div>*/}
+                {/*bovenstaande in comments gezet omdat het wellicht niks toevoegd*/}
             </div>
 
         );

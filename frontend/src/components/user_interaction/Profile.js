@@ -1,6 +1,7 @@
 import React, {Component} from 'react';
 import Icon from "../icon/Icon";
 import '../challenge/Challenge.css';
+import {Link} from "react-router-dom";
 
 class Profile extends Component {
 
@@ -17,35 +18,36 @@ class Profile extends Component {
 
     render() {
 
-        let profile;
-        if (this.props.profileInfo !== undefined) {
-            profile = this.props.profileInfo;
-            console.log(profile);
+        if (!this.props.profileInfo) {
+            return <div/>
         }
+
+        const profile = this.props.profileInfo;
 
         return (
             <div className="card">
             <div className="card-content">
                 <div className="section" key={profile.id}>
                     <div className="center" id='imgCH'>
-                        <Icon image={profile.url}/>
+                        <Icon />
+                        {/*Hierboven nog toevoegen: image={profile.image}*/}
                         <div className="rightnext">
-                            <a onClick={this.sayHello} className="btn-floating btn-small amber darken-1">
-                                <i className="material-icons">edit</i></a>
+                            <li className="btn-floating btn-small amber darken-1">
+                                <Link to="/edit-profile"><i className="material-icons">edit</i></Link></li>
                         </div>
                     </div>
                 </div>
                 <div className="divider"/>
                 <div className="section center">
-                    <h6>{profile.name}</h6>
+                    <h6>{profile.username}</h6>
                 </div>
                 <div className="divider"/>
                 <div className="section center">
-                    <a href="#"><h6>{'Friends: ' + profile.phone}</h6></a>
+                    <a><Link to="/friends"><h6>{'Friends: ' + profile.id}</h6></Link></a>
                 </div>
                 <div className="divider"/>
                 <div className="section center">
-                    <h6>Rank: Ultimate Master Vegan</h6>
+                    <h6>Rank: {profile.rank}</h6>
                 </div>
             </div>
             </div>

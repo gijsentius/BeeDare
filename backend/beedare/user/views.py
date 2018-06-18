@@ -8,9 +8,31 @@ from beedare.models import UserDares
 from . import *
 
 
-@profile_blueprint.route('/user', methods=['POST'])
+@profile_blueprint.route('/user', methods=['POST', 'GET'])
 def user():
     content = request.get_json()
+    try:
+        user_data = db.session.query(User).all()
+        # .filter_by(id=content['id']).first()
+    except KeyError as e:
+        return jsonify({"error": str(e) + " not given or invalid"}), 401
+    if request.method == "GET":
+        if user_data is not None:
+            list = []
+            for item in user_data:
+                list.append(
+                    {
+                        "first_name": item.first_name,
+                        "username": item.username,
+                        "last_name": item.last_name,
+                        "email": item.email,
+                        "image": item.image,
+                        "id": item.id,
+                        "rank": item.rank,
+                    })
+            return jsonify(
+                list
+            ), 200
     try:
         user_data = db.session.query(User).filter_by(username=content['username']).first()
     except KeyError as e:
