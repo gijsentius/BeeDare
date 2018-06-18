@@ -7,6 +7,7 @@ import ScrollEvent from 'react-onscroll';
 import Newsfeed from "./Newsfeed";
 import './NewsFeed.css';
 import scrollToComponent from "react-scroll-to-component";
+import Upload from "../upload/Upload";
 
 class NewsFeedPage extends React.Component {
     constructor(props) {
