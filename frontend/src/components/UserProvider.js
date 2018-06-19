@@ -7,8 +7,8 @@ export const UserContext = React.createContext();
 
 class UserProvider extends React.Component {
     state = {
-        loggedInUsername: 'melkjhgfdghj',
-        loginState: true,
+        loggedInUsername: 'hoi',
+        loginState: false,
     };
 
 
