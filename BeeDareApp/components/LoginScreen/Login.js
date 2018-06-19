@@ -8,6 +8,8 @@ class Login extends Component {
             <View style={styles.container}>
                 <View style={styles.loginContainer}>
                     <Image resizeMode="contain" style={styles.logo} source={require('../../images/logo.png')}/>
+                    <Text style={styles.beedareText}>BeeDare</Text>
+                    {/*<Text style={styles.beedareText}>Dare yourself to Bee green!</Text>*/}
                 </View>
 
                     <View style={styles.container}>
@@ -24,7 +26,7 @@ const styles = StyleSheet.create({
         flex: 1,
         justifyContent: 'center',
         alignItems: 'center',
-        backgroundColor: '#fffde7',
+        backgroundColor: '#ffe082',
     },
     loginContainer: {
         alignItems: 'center',
@@ -32,9 +34,19 @@ const styles = StyleSheet.create({
         justifyContent: 'center'
     },
     logo: {
-        position: 'absolute',
+        flexDirection:'column',
+        justifyContent: 'center',
+        alignItems: 'center',
         width: 300,
         height: 100
+    },
+    beedareText: {
+        fontSize: 25,
+        fontStyle: 'normal',
+        color: '#000',
+        flexDirection: 'column',
+        justifyContent: 'center',
+        alignItems: 'center'
     }
 });
 

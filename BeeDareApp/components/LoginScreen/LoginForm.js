@@ -1,9 +1,12 @@
 import React, { Component } from 'react';
 import {View, Text, TextInput, TouchableOpacity, StyleSheet} from 'react-native';
+import { KeyboardAvoidingView } from 'react-native';
+import Linking from "react-native";
 
 class LoginForm extends Component {
     render() {
         return (
+            <KeyboardAvoidingView style={styles.container} behavior="padding" enabled>
             <View style={styles.container}>
                 <TextInput style = {styles.input}
                            autoCapitalize="none"
@@ -26,31 +29,47 @@ class LoginForm extends Component {
                                   {/*onPress={onButtonPress}>*/}
                 <Text  style={styles.buttonText}>LOGIN</Text>
                 </TouchableOpacity>
+                {/*The hyperlink should work but for some odd reason openURL is not a function for me*/}
+                <Text style={styles.bottomLink}
+                      onPress={() => Linking.openURL('https://google.com')}>Sign Up for BeeDare
+                </Text>
             </View>
+            </KeyboardAvoidingView>
         );
     }
 }
 
-// Dit is de CSS
+// CSS
+// pls dun change as it finally works perfectly with keyboard avoidance
 const styles = StyleSheet.create({
     container: {
-        padding: 20
+        width: 250,
+        marginBottom: 40,
+        marginTop: 40,
+        // backgroundColor: '#000'
     },
     input: {
-        height: 50,
         backgroundColor: '#fff',
-        borderColor: '#000',
+        paddingVertical: 15,
         marginBottom: 10,
-        flex: 1,
+        color: '#000',
     },
     buttonContainer: {
         backgroundColor: '#ffca28',
-        paddingVertical: 15
+        paddingVertical: 15,
+        marginBottom: 10
     },
     buttonText: {
         color: '#000',
         textAlign: 'center',
         fontWeight: '700'
+    },
+    bottomLink: {
+        textAlign:'center',
+        color: '#000',
+        marginBottom: 5,
+        marginTop: 5,
+        textDecorationLine: 'underline'
     }
 });
 
