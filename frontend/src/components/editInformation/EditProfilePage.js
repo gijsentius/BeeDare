@@ -3,6 +3,8 @@ import Icon from "../icon/Icon";
 import EmployeeDagmar from "../../images/EmployeeDagmar.jpg";
 import {Link} from "react-router-dom";
 import {UserContext} from "../UserProvider";
+import NotLogIn from "../ErrorMessages/NotLogIn";
+import Login from "../user_interaction/login";
 
 class EditProfilePage extends React.Component {
     constructor(props) {
@@ -46,6 +48,8 @@ class EditProfilePage extends React.Component {
 
 
         return(
+                // De usercontext consumer checkt of degene ingelogt is. Zo niet: dan wordt de content
+                // ook niet geladen en komt daar een message over te staan.
                 <UserContext.Consumer>
                     {(context) => context.loginState  ?
                         <div className="container">
@@ -100,8 +104,11 @@ class EditProfilePage extends React.Component {
                         <Link className="btn amber darken-1" to="/change-email">Edit Email and password</Link>
                         </div>
                         </div>
-
-                        : null}
+                        // de : betekent false: de gebruiker is niet ingelogt. Gebruiker krijgt error message.
+                        : <div className="container">
+                            <NotLogIn/>
+                          <Login/>
+                    </div>}
 
                 </UserContext.Consumer>
         )
