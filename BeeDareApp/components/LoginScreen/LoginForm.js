@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import {View, Text, TextInput, TouchableOpacity, StyleSheet} from 'react-native';
 import { KeyboardAvoidingView } from 'react-native';
+import Linking from "react-native";
 
 class LoginForm extends Component {
     render() {
@@ -28,6 +29,10 @@ class LoginForm extends Component {
                                   {/*onPress={onButtonPress}>*/}
                 <Text  style={styles.buttonText}>LOGIN</Text>
                 </TouchableOpacity>
+                {/*The hyperlink should work but for some odd reason openURL is not a function for me*/}
+                <Text style={styles.bottomLink}
+                      onPress={() => Linking.openURL('https://google.com')}>Sign Up for BeeDare
+                </Text>
             </View>
             </KeyboardAvoidingView>
         );
@@ -58,6 +63,13 @@ const styles = StyleSheet.create({
         color: '#000',
         textAlign: 'center',
         fontWeight: '700'
+    },
+    bottomLink: {
+        textAlign:'center',
+        color: '#000',
+        marginBottom: 5,
+        marginTop: 5,
+        textDecorationLine: 'underline'
     }
 });
 
