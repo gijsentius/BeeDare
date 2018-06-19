@@ -3,11 +3,6 @@ import {View, Text, TextInput, TouchableOpacity, StyleSheet} from 'react-native'
 import { KeyboardAvoidingView } from 'react-native';
 
 class LoginForm extends Component {
-    constructor(props) {
-        super(props);
-        this.state = { text: ''};
-    }
-
     render() {
         return (
             <KeyboardAvoidingView style={styles.container} behavior="padding" enabled>
