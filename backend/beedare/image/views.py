@@ -6,16 +6,10 @@ from flask import jsonify, request
 
 from beedare import db
 from beedare.models import User, Dare, Hive, ColonyMembers
-
-from manage import app
 from . import *
 
 
-UPLOAD_FOLDER = '../backend/images'
 ALLOWED_EXTENSIONS = set(['txt', 'pdf', 'png', 'jpg', 'jpeg', 'gif'])
-
-app.config['UPLOAD_FOLDER'] = UPLOAD_FOLDER
-
 
 def allowed_image_format(image):
     return '.' in image and \

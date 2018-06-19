@@ -157,7 +157,7 @@ def add_friend():
     if result is not None:
         time = datetime.datetime.utcnow()
         try:
-            friend = Friends(follower_id=content['user_id'], followed_id=content['friend_id'], timestamp=time)
+            friend = Friend(follower_id=content['user_id'], followed_id=content['friend_id'], timestamp=time)
         except KeyError as e:
             return jsonify({"error": str(e) + " not given or invalid"}), 401
         db.session.add(friend)
