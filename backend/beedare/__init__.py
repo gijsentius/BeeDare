@@ -2,15 +2,18 @@ from flask import Flask
 from flask_admin import Admin
 from flask_login import LoginManager
 from flask_sqlalchemy import SQLAlchemy
+from flask_cors import CORS
 from config import config, MailConfig
 from flask_admin.contrib.sqla import ModelView
 
+
 db = SQLAlchemy()  # Database instance used for SQLAlchemy
 login_manager = LoginManager()
+cors = CORS()
 
 
 def create_admin(app, database):
-    from beedare.models import User, Message, Comment, Dare, UserDares, Hive, ColonyMembers, Friends
+    from beedare.models import User, Message, Comment, Dare, UserDares, Hive, ColonyMembers, Friend
 
     admin = Admin(app, name='beedare', template_mode='bootstrap3')
     admin.add_view(ModelView(User, database.session))
@@ -20,7 +23,7 @@ def create_admin(app, database):
     admin.add_view(ModelView(UserDares, database.session))
     admin.add_view(ModelView(Hive, database.session, endpoint='hive_date'))
     admin.add_view(ModelView(ColonyMembers, database.session))
-    admin.add_view(ModelView(Friends, database.session))
+    admin.add_view(ModelView(Friend, database.session))
     
     return admin
 
@@ -29,6 +32,10 @@ def create_app(config_type):
     app = Flask(__name__)
     app.config.from_object(config[config_type])
     app.config.from_object(MailConfig)
+
+    UPLOAD_FOLDER = '../backend/images'
+    app.config['UPLOAD_FOLDER'] = UPLOAD_FOLDER
+    
     db.init_app(app)
     login_manager.init_app(app)
 
@@ -42,6 +49,9 @@ def create_app(config_type):
     from beedare.hive import hive_blueprint
     from beedare.score import score_blueprint
     from beedare.submit import submit_blueprint
+    from beedare.image import image_blueprint
+    from beedare.user_information import user_info_blueprint
+    from beedare.dare import dares_blueprint
 
     app.register_blueprint(main, url_prefix='/')
     app.register_blueprint(landing, url_prefix='/landing')
@@ -52,6 +62,10 @@ def create_app(config_type):
     app.register_blueprint(delete_blueprint, url_prefix='/delete')
     app.register_blueprint(hive_blueprint, url_prefix='/hive')
     app.register_blueprint(score_blueprint, url_prefix='/score')
+    app.register_blueprint(user_info_blueprint, url_prefix='/info')
     app.register_blueprint(submit_blueprint, url_prefix='/submit')
+    app.register_blueprint(dares_blueprint, url_prefix='/dares')
+    app.register_blueprint(image_blueprint, url_prefix='/image')
 
+    cors.init_app(app)
     return app

@@ -1,11 +1,9 @@
-import os, sys
+import os
 from dotenv import load_dotenv
 
-home_dir = basedir = os.path.abspath(os.path.dirname(__file__))
 dotenv_path = os.path.join(os.path.dirname(__file__), '.env')
 if os.path.exists(dotenv_path):
     load_dotenv(dotenv_path)
-sys.path.append(home_dir)
 
 from flask_migrate import Migrate, MigrateCommand
 from flask_script import Manager
@@ -21,10 +19,12 @@ manager.add_command('db', MigrateCommand)
 
 @manager.command
 def test():
-    from backend.beedare import User
-    test = User(first_name="JeWeet", last_name="Zelf")
-    db.session.add(test)
-    db.session.commit()
+    from beedare.fill_database import addDataToDB
+    # from beedare.models import User
+    # user = User(first_name="Dit is", last_name="Een Test")
+    # db.session.add(user)
+    # db.session.commit()
+    addDataToDB()
 
 
 if __name__ == "__main__":

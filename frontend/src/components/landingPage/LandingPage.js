@@ -8,8 +8,10 @@ import FirstYellowBox from "./FirstYellowBox";
 import SecondWhiteBox from "./SecondWhiteBox";
 import MeetTeamBox from "./MeetTeamBox";
 import ArrowedButton from "./ArrowedButton";
+import Fade from 'react-reveal/Fade';
 
 class LandingPage extends React.Component{
+
     render(){
         return(
             <div className="main z-depth-1">
@@ -41,7 +43,9 @@ class LandingPage extends React.Component{
                 </div>
 
                 <div className="col m1 floatingRegister" ref={(section) => { this.Register = section; }}>
-                    <Register />
+                    <Fade bottom>
+                        <Register />
+                    </Fade>
                 </div>
 
             </div>

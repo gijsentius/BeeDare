@@ -6,16 +6,7 @@ from werkzeug.security import generate_password_hash, check_password_hash
 from beedare import db
 
 
-# # Een klasse die aangeeft wat voor permissies iemand kan hebben
-# class Permission:
-#     FOLLOW = 1
-#     COMMENT = 2
-#     WRITE = 4
-#     MODERATE = 8
-#     ADMIN = 16
-
-
-class Friends(db.Model):
+class Friend(db.Model):
     __tablename__ = 'friends'
     follower_id = db.Column(db.Integer, db.ForeignKey('users.id'),
                             primary_key=True)
@@ -27,19 +18,19 @@ class Friends(db.Model):
 class User(db.Model):
     __tablename__ = 'users'
     id = db.Column(db.Integer, primary_key=True, unique=True, autoincrement=True)  #ID is de primary_key
-    first_name = db.Column(db.String(30))  # 30 character genoeg?
-    last_name = db.Column(db.String(40))
+    first_name = db.Column(db.String(255))  # 30 character genoeg? Nee
+    last_name = db.Column(db.String(255))
     age_cat = db.Column(db.String(50))  # ageCat staat voor ageCategory. Bijvoorbeeld 5-10 15-20 etc...
     location = db.Column(db.String(120))
-    image = db.Column(db.String(500))  # 500??
+    image = db.Column(db.String(255))  # 500??
     score = db.Column(db.Integer)
     last_seen = db.Column(db.String(50))
     username = db.Column(db.String(120), unique=True)
-    password_hash = db.Column(db.String(500))
+    password_hash = db.Column(db.String(255))
     # PASSWORD MOET NOG AANGEPAST WORDEN ZODAT HET BEVEILIGD IS
     email = db.Column(db.String(120), unique=True)
-    title = db.Column(db.String(500))
-    rank = db.Column(db.String(500))
+    rank = db.Column(db.String(255))
+    confirmed = db.Column(db.Boolean(False))
 
     def set_password(self, password):
         self.password_hash = generate_password_hash(password)
@@ -63,7 +54,8 @@ class User(db.Model):
         db.session.add(self)
 
     def __repr__(self):
-        return '<User %r>' % (self.first_name)
+        return '<User %r>' % (self.username) + '<Email %r>' % (self.email) + '<Rank %r>' % (self.rank) + '<Last_Seen %r>' % self.last_seen
+
 
 
 # source: https://github.com/miguelgrinberg/flasky/blob/master/app/models.py
@@ -74,7 +66,10 @@ class Message(db.Model):
     body_html = db.Column(db.Text)
     timestamp = db.Column(db.DateTime, index=True, default=datetime.datetime.now())
     author_id = db.Column(db.Integer, db.ForeignKey('users.id'))
-    comments = db.relationship('Comment', backref='post', lazy='dynamic') # lazy??? backref???
+    comments = db.relationship('Comment', backref='post', lazy='dynamic')  # lazy??? backref???
+
+    def __repr__(self):
+        return '<Message %r>' % (self.body)
 
 
 class Comment(db.Model):
@@ -91,10 +86,11 @@ class Comment(db.Model):
 class Dare(db.Model):
     __tablename__ = 'dares'
     id = db.Column(db.Integer, primary_key=True, autoincrement=True)
-    name = db.Column(db.String(30), unique=True)  # een Dare moet uniek zijn
-    image = db.column(db.String(500))
-    body = db.Column(db.Text)
-    body_html = db.Column(db.Text)
+    name = db.Column(db.String(128), unique=True)  # een Dare moet uniek zijn
+    image = db.Column(db.String(255))
+    body = db.Column(db.Text)  # title
+    body_html = db.Column(db.Text)  # description
+    value = db.Column(db.Integer)  # Dares are worth "gallons of honey"
 
 
 class UserDares(db.Model):
@@ -107,8 +103,8 @@ class UserDares(db.Model):
 class Hive(db.Model):
     __tablename__ = 'hives'
     id = db.Column(db.Integer, primary_key=True, unique=True, autoincrement=True)
-    hive_name = db.Column(db.String(30), unique=True)
-    image = db.Column(db.String(500))
+    hive_name = db.Column(db.String(128), unique=True)
+    image = db.Column(db.String(255))
     total_score_members = db.Column(db.Integer)
     beekeeper = db.Column(db.ForeignKey('users.id'))  # beekeeper is de hive eigenaar
 

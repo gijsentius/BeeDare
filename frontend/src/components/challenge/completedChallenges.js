@@ -25,15 +25,15 @@ export default class CompletedChallenges extends React.Component{
                     listItems.push(
                         <div className="row" >
                             <div className="col m3">
-                                <ChallengeIcon image={challenge.url}/>
-                                <p className="center-align">{challenge.id + ' points'}</p>
+                                <ChallengeIcon image={challenge.image}/>
+                                <p className="center-align">{challenge.value + ' points'}</p>
                             </div>
                         </div>
                     )
                 }else{
                     listItems.push(<div className="col m3">
-                        <ChallengeIcon image={challenge.url}/>
-                        <p className="center-align">{challenge.id + ' points'}</p>
+                        <ChallengeIcon image={challenge.image}/>
+                        <p className="center-align">{challenge.value + ' points'}</p>
                     </div>);
                 }
             });

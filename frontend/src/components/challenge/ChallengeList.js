@@ -11,26 +11,27 @@ class ChallengeList extends Component {
 	}
 
 	componentDidMount() {
-		fetch('https://jsonplaceholder.typicode.com/photos?albumId=1')
+		fetch('http://localhost:5000/dares/')
             .then(response => response.json())
             .then(data => this.setState({challenges: data}))
             .catch(error => console.log(error)); // optioneel
 	}
 
 	render() {
-		let challenges = this.state.challenges.map((challenge) => 
+		let challenges = this.state.challenges.map((challenge) =>
 			<div className="dare-col">
 				<ChallengeCard
-					description={challenge.thumbnailUrl}
-					reward="60 gallons of honey"
-					title={challenge.title}
-					image={challenge.url}
+					description={challenge.body}
+					reward={challenge.body}
+					title={challenge.body}
+					image={challenge.image}
 				/>
 			</div>
 		);
 		return (
 			<div className="dare-cols">
 				{challenges}
+				{/*{console.log(this.state.challenges)}*/}
 			</div>
 		);
 	}

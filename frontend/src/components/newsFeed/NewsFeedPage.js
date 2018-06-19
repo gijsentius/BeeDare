@@ -7,6 +7,7 @@ import ScrollEvent from 'react-onscroll';
 import Newsfeed from "./Newsfeed";
 import './NewsFeed.css';
 import scrollToComponent from "react-scroll-to-component";
+import Upload from "../upload/Upload";
 
 class NewsFeedPage extends React.Component {
     constructor(props) {
@@ -17,7 +18,7 @@ class NewsFeedPage extends React.Component {
     }
 
     componentDidMount(){
-        fetch('https://jsonplaceholder.typicode.com/users/1')
+        fetch('http://localhost:5000/profile/user')
             .then(response => response.json())
             .then(data => this.setState({profileInfo: data}))
             .catch(error => console.log(error));
@@ -25,7 +26,7 @@ class NewsFeedPage extends React.Component {
 
     render() {
 
-        const profileInfo = this.state.profileInfo;
+        const profileInfo = this.state.profileInfo[0];
         return (
             <div className="customContainer">
                 <div className="row">
