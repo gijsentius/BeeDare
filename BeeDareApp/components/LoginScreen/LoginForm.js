@@ -1,9 +1,16 @@
 import React, { Component } from 'react';
 import {View, Text, TextInput, TouchableOpacity, StyleSheet} from 'react-native';
+import { KeyboardAvoidingView } from 'react-native';
 
 class LoginForm extends Component {
+    constructor(props) {
+        super(props);
+        this.state = { text: ''};
+    }
+
     render() {
         return (
+            <KeyboardAvoidingView style={styles.container} behavior="padding" enabled>
             <View style={styles.container}>
                 <TextInput style = {styles.input}
                            autoCapitalize="none"
@@ -27,25 +34,30 @@ class LoginForm extends Component {
                 <Text  style={styles.buttonText}>LOGIN</Text>
                 </TouchableOpacity>
             </View>
+            </KeyboardAvoidingView>
         );
     }
 }
 
-// Dit is de CSS
+// CSS
+// pls dun change as it finally works perfectly with keyboard avoidance
 const styles = StyleSheet.create({
     container: {
-        padding: 20
+        width: 250,
+        marginBottom: 40,
+        marginTop: 40,
+        // backgroundColor: '#000'
     },
     input: {
-        height: 50,
         backgroundColor: '#fff',
-        borderColor: '#000',
+        paddingVertical: 15,
         marginBottom: 10,
-        flex: 1,
+        color: '#000',
     },
     buttonContainer: {
         backgroundColor: '#ffca28',
-        paddingVertical: 15
+        paddingVertical: 15,
+        marginBottom: 10
     },
     buttonText: {
         color: '#000',
