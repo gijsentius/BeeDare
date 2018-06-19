@@ -22,9 +22,9 @@ class App extends Component {
 
     render() {
         return (
+            <UserProvider>
             <Router>
                     <div>
-                        <UserProvider>
                         <nav>
                             <div className="nav-wrapper #ffd54f amber lighten-1">
                                 <Link to="/">
@@ -56,9 +56,9 @@ class App extends Component {
                         <div>
                             <Route exact path="/" component={LandingPage}/>
                         </div>
-                        </UserProvider>
                     </div>
             </Router>
+            </UserProvider>
         );
     }
 

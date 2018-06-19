@@ -98,9 +98,9 @@ class EditProfilePage extends React.Component {
                 </div>
                 <p>
                     een test :
-                    <UserContext>
+                    <UserContext.Consumer>
                         {(context) => context.loggedInUsername}
-                    </UserContext>
+                    </UserContext.Consumer>
                 </p>
             </div>
         )
