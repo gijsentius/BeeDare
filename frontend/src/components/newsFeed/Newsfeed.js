@@ -13,11 +13,12 @@ class Newsfeed extends Component {
         }
     }
 
-    componentDidMount() {
-        fetch('http://localhost:5000/profile/newsfeed/' + username)
-            .then(response => response.json())
-            .then(data => this.setState({messages: data}));
-    }
+    // componentDidMount() {
+    //     let username = 'Vyxor';
+    //     fetch('http://localhost:5000/profile/newsfeed/' + username)
+    //         .then(response => response.json())
+    //         .then(data => this.setState({messages: data}));
+    // }
 
 
     render() {

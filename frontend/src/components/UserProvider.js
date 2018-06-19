@@ -1,13 +1,12 @@
 // source: https://hackernoon.com/how-to-use-the-new-react-context-api-fce011e7d87
 import React from 'react';
-import EditProfilePage from "./editInformation/EditProfilePage";
 
 
 export const UserContext = React.createContext();
 
 class UserProvider extends React.Component {
     state = {
-        loggedInUsername: 'hallo ik ben een aap',
+        loggedInUsername: 'VyxorAnnelies',
         loginState: true,
     };
 

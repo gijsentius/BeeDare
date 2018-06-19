@@ -13,6 +13,7 @@ import ChangeEmailPassword from "../editInformation/ChangeEmailPassword";
 import EditProfilePage from "../editInformation/EditProfilePage";
 import FriendPage from "../friends/FriendPage";
 import UserProvider from "../UserProvider"
+import {UserContext} from "../UserProvider";
 
 class App extends Component {
 
@@ -22,9 +23,9 @@ class App extends Component {
 
     render() {
         return (
+            <UserProvider>
             <Router>
                     <div>
-                        <UserProvider>
                         <nav>
                             <div className="nav-wrapper #ffd54f amber lighten-1">
                                 <Link to="/">
@@ -38,7 +39,7 @@ class App extends Component {
                                 <ul id="nav-mobile" className="right hide-on-med-and-down">
                                     <li><Link to="/search"><i className="material-icons text-color">search</i></Link></li>
                                     <li><Link to="/challenges"><span className="text-color">Dares</span></Link></li>
-                                    {this.returnCorrectPath()}
+                                    {App.returnCorrectPath()}
                                 </ul>
                             </div>
                         </nav>
@@ -56,34 +57,29 @@ class App extends Component {
                         <div>
                             <Route exact path="/" component={LandingPage}/>
                         </div>
-                        </UserProvider>
                     </div>
             </Router>
+            </UserProvider>
         );
     }
 
-    // a small function to update de state of the user us in
-    updateState() {
-        this.setState({loginState: !this.props.loginState});
-    }
-
     // a small component to return the correct pages
-    returnCorrectPath(){
-        if (1===1){
-            // thanks to React.Fragment you can return multiple elements without using a div
-            return <React.Fragment>
-                <li><Link to="/newsfeed"><span className="text-color">Newsfeed</span></Link></li>
-                <li><Link to="/profile"><span className="text-color">Profile</span></Link></li>
-                </React.Fragment>
-
-        } else{
-            return<React.Fragment>
-                <li><Link to="/signin"><span className="text-color">Sign In</span></Link></li>
-                <li><Link to="/signup"><span className="text-color">Get Started</span></Link></li>
-            </React.Fragment>
-        }
+    static returnCorrectPath(){
+        return (
+        <UserContext.Consumer>
+            {(context => context.loginState ?
+                    <React.Fragment>
+                        <li><Link to="/newsfeed"><span className="text-color">Newsfeed</span></Link></li>
+                        <li><Link to="/profile"><span className="text-color">Profile</span></Link></li>
+                    </React.Fragment>
+            : <React.Fragment>
+                    <li><Link to="/signin"><span className="text-color">Sign In</span></Link></li>
+                    <li><Link to="/signup"><span className="text-color">Get Started</span></Link></li>
+                </React.Fragment> )
+            }
+        </UserContext.Consumer>
+        )
     }
-
 }
 
 export default App;
