@@ -6,15 +6,6 @@ from werkzeug.security import generate_password_hash, check_password_hash
 from beedare import db
 
 
-# # Een klasse die aangeeft wat voor permissies iemand kan hebben
-# class Permission:
-#     FOLLOW = 1
-#     COMMENT = 2
-#     WRITE = 4
-#     MODERATE = 8
-#     ADMIN = 16
-
-
 class Friends(db.Model):
     __tablename__ = 'friends'
     follower_id = db.Column(db.Integer, db.ForeignKey('users.id'),

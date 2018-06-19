@@ -3,6 +3,7 @@ import friendBees from "../../images/friendBees.jpg"
 import honey from "../../images/honey.jpg"
 import beehives from "../../images/beehives.jpg"
 import Card from "./Card";
+import Jump from 'react-reveal/Jump';
 
 class CardRow extends React.Component{
 
@@ -24,11 +25,15 @@ class CardRow extends React.Component{
 
 
         return(
+            <Jump>
               <div className="row valign-wrapper">
-                  <Card image={friendBees} title={"Follow your friends"} text={textFriends}/>
-                  <Card image={beehives} title={"Become a hive member"} text={textHives}/>
-                  <Card image={honey} title={"Complete Dares and earn honey"} text={textHoney}/>
+                      <Card image={friendBees} title={"Follow your friends"} text={textFriends}/>
+
+                      <Card image={beehives} title={"Become a hive member"} text={textHives}/>
+
+                      <Card image={honey} title={"Complete Dares and earn honey"} text={textHoney}/>
               </div>
+            </Jump>
         );
     }
 }
