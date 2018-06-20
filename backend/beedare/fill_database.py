@@ -1,9 +1,11 @@
 from faker import Factory
 from beedare import db
-from beedare.models import User, Message, Comment, Dare, Hive
+from beedare.models import User, Message, Comment, Dare, Hive, Friend
 
 
 def addDataToDB():
+    from random import randint
+    import datetime
 
     fakeDataFactory = Factory.create('nl_NL')
 
@@ -16,7 +18,7 @@ def addDataToDB():
                     , username=fakeDataFactory.user_name(), email=fakeDataFactory.email(), rank=fakeDataFactory.word())
         addToSession.append(user)
 
-        message = Message(body=fakeDataFactory.text(max_nb_chars=200, ext_word_list=None))
+        message = Message(body=fakeDataFactory.text(max_nb_chars=200, ext_word_list=None), author_id=randint(1, 50), timestamp=(datetime.datetime.now()+datetime.timedelta(seconds=randint(1, 50))))
         addToSession.append(message)
 
         comment = Comment(body=fakeDataFactory.sentence(nb_words=6, variable_nb_words=True, ext_word_list=None))
@@ -32,6 +34,10 @@ def addDataToDB():
 
         for j in addToSession:
             db.session.add(j)
+
+    for i in range(2, 5):
+        friend = Friend(follower_id=1, followed_id=i)
+        db.session.add(friend)
 
     db.session.commit()
 
