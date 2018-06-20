@@ -14,6 +14,7 @@ import EditProfilePage from "../editInformation/EditProfilePage";
 import FriendPage from "../friends/FriendPage";
 import UserProvider from "../UserProvider"
 import {UserContext} from "../UserProvider";
+import HivesPage from "../hives/HivesPage";
 
 class App extends Component {
 
@@ -37,9 +38,10 @@ class App extends Component {
                                     </a>
                                 </Link>
                                 <ul id="nav-mobile" className="right hide-on-med-and-down">
-                                    <li><Link to="/search"><i className="material-icons text-color">search</i></Link></li>
-                                    <li><Link to="/challenges"><span className="text-color">Dares</span></Link></li>
                                     {App.returnCorrectPath()}
+                                    <li><Link to="/challenges"><span className="text-color">Dares</span></Link></li>
+                                    <li><Link to="/hives"><span className="text-color">Hives</span></Link></li>
+                                    <li><Link to="/search"><i className="material-icons text-color">search</i></Link></li>
                                 </ul>
                             </div>
                         </nav>
@@ -53,6 +55,7 @@ class App extends Component {
                             <Route path="/change-email" component={ChangeEmailPassword}/>
                             <Route path="/edit-profile" component={EditProfilePage}/>
                             <Route path="/friends" component={FriendPage}/>
+                            <Route path="/hives" component={HivesPage}/>
                         </div>
                         <div>
                             <Route exact path="/" component={LandingPage}/>
