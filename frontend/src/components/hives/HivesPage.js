@@ -22,17 +22,16 @@ class HivesPage extends React.Component {
         let listItems;
 
         listItems = hives.map((item) =>
-            <div className="item">
+            <div className="item dare-col">
                 <Hive name={item.hiveName} content={item.totalScore} image="https://placeimg.com/400/400/nature"/>
             </div>
         );
 
 
         return (
-            <div>
-                {listItems}
-            </div>
-
+                <div className="dare-cols">
+                    {listItems}
+                </div>
         )
     }
 }
