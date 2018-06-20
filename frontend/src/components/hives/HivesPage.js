@@ -2,7 +2,7 @@ import React from 'react';
 import Hive from "./Hive";
 
 class HivesPage extends React.Component {
-    constructor(props){
+    constructor(props) {
         super(props);
         this.state = {
             hives: [],
@@ -25,7 +25,6 @@ class HivesPage extends React.Component {
             <div className="item">
                 <Hive name={item.hiveName} content={item.totalScore} image="https://placeimg.com/400/400/nature"/>
             </div>
-
         );
 
 
