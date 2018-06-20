@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 import './index.css';
 import FlipMove from 'react-flip-move';
 import UploadIcon from './UploadIcon.svg';
+import Icon from "../icon/Icon";
 
 const styles = {
     display: "flex",
@@ -156,8 +157,9 @@ class ReactImageUploadComponent extends React.Component {
         return this.state.pictures.map((picture, index) => {
             return (
                 <div key={index} className="uploadPictureContainer">
-                    <div className="deleteImage" onClick={() => this.removeImage(picture)}>X</div>
-                    <img src={picture} className="uploadPicture" alt="preview"/>
+                    {/*<div className="deleteImage" onClick={() => this.removeImage(picture)}>X</div>*/}
+                    {/*<img src={picture} className="uploadPicture" alt="preview"/>*/}
+                    <Icon image={picture} action={() => this.removeImage(picture)}/>
                 </div>
             );
         });
