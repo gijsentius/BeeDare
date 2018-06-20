@@ -2,15 +2,25 @@ import React, { Component } from 'react';
 import {View, Text, TextInput, TouchableOpacity, StyleSheet} from 'react-native';
 import { KeyboardAvoidingView } from 'react-native';
 import Linking from "react-native";
+import { onSignIn} from "../../auth";
 
 class LoginForm extends Component {
+    constructor(props) {
+        super(props);
+        this.state = {loggedIn: false, email: '', password: ''}
+    }
+
+    onLogin() {
+        alert('Credentials ' + this.state.email + ' ' + this.state.password);
+    }
+
     render() {
         return (
             <KeyboardAvoidingView style={styles.container} behavior="padding" enabled>
             <View style={styles.container}>
                 <TextInput style = {styles.input}
+                           onChangeText={(email) => this.setState({ email })}
                            autoCapitalize="none"
-                           onSubmitEditing={() => this.passwordInput.focus()}
                            autoCorrect={false}
                            keyboardType='email-address'
                            returnKeyType="next"
@@ -18,15 +28,15 @@ class LoginForm extends Component {
                            placeholderTextColor='#000'/>
 
                 <TextInput style = {styles.input}
+                           onChangeText={(password) => this.setState({ password })}
                            returnKeyType="go"
-                           ref={(input)=> this.passwordInput = input}
                            placeholder='Password'
                            placeholderTextColor='#000'
                            secureTextEntry/>
 
 
-                <TouchableOpacity style={styles.buttonContainer}>
-                                  {/*onPress={onButtonPress}>*/}
+                <TouchableOpacity style={styles.buttonContainer}
+                                  onPress={onSignIn()}>
                 <Text  style={styles.buttonText}>LOGIN</Text>
                 </TouchableOpacity>
                 {/*The hyperlink should work but for some odd reason openURL is not a function for me*/}
