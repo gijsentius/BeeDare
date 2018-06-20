@@ -49,6 +49,12 @@ img {
     right: 5vw;
 }
 
+.floatingWelcome{
+    position: absolute;
+    top: 30vh;
+    right: 20vw;
+}
+
 .floatingLaptop{
     position: absolute;
     top: 40vh;

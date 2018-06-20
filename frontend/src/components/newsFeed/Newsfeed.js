@@ -13,11 +13,12 @@ class Newsfeed extends Component {
         }
     }
 
-    componentDidMount() {
-        fetch('https://jsonplaceholder.typicode.com/comments')
-            .then(response => response.json())
-            .then(data => this.setState({messages: data}))
-    }
+    // componentDidMount() {
+    //     let username = 'Vyxor';
+    //     fetch('http://localhost:5000/profile/newsfeed/' + username)
+    //         .then(response => response.json())
+    //         .then(data => this.setState({messages: data}));
+    // }
 
 
     render() {
@@ -25,7 +26,7 @@ class Newsfeed extends Component {
             <div className="message">
                 <Message
                     body={message.body}
-                    name={message.name}
+                    name={message.author}
                 />
             </div>
         );//end map
