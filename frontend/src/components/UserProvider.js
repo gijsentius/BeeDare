@@ -5,10 +5,23 @@ import React from 'react';
 export const UserContext = React.createContext();
 
 class UserProvider extends React.Component {
-    state = {
-        loggedInUsername: 'VyxorAnnelies',
-        loginState: true,
-    };
+
+    constructor(props) {
+        super(props);
+
+        this.state = {
+            loggedInUsername: 'VyxorAnnelies',
+            isAuthenticated: false,
+            authenticate: (cb) => {
+                this.setState({isAuthenticated: true});
+                setTimeout(cb, 100);
+                },
+            signout: (cb) => {
+                this.setState({isAuthenticated: false});
+                setTimeout(cb, 100)
+            },
+        };
+    }
 
 
     render() {

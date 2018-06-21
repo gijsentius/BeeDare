@@ -61,7 +61,7 @@ class LandingPage extends React.Component{
                 </div>
 
                 <UserContext.Consumer>
-                    {(context) => context.loginState ?
+                    {(context) => context.isAuthenticated ?
                         <div className="col m1 floatingWelcome">
                             <Fade bottom>
                             <div className="card">

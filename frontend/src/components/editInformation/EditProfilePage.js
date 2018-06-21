@@ -50,8 +50,7 @@ class EditProfilePage extends React.Component {
         return(
             // De usercontext consumer checkt of degene ingelogt is. Zo niet: dan wordt de content
             // ook niet geladen en komt daar een message over te staan.
-            <UserContext.Consumer>
-                {(context) => context.loginState  ?
+
                     <div className="container">
                     <form onSubmit={(e) => this.editInformation(e, profileInfo.username)} className="col s12">
                         <div className="row">
@@ -105,11 +104,7 @@ class EditProfilePage extends React.Component {
                     </div>
                     </div>
                     // de : betekent false: de gebruiker is niet ingelogt. Gebruiker krijgt error message.
-                    : <div className="container">
-                        <NotLogIn/>
-                      <Login/>
-                </div>}
-            </UserContext.Consumer>
+
         )
     }
 }
