@@ -39,7 +39,7 @@ def store():
 def retrieve(imageName):
     from manage import app
 
-    try
+    try:
         return send_from_directory(os.path.join(app.config['UPLOAD_ROOT'], 'images') , imageName), 200
     except Exception as e:
         return jsonify({"error": "Image could not be found"}), 410
