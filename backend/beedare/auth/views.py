@@ -2,34 +2,45 @@ import datetime
 
 import sqlalchemy
 from flask import request, redirect, url_for, jsonify, flash
-from flask_login import logout_user, current_user
+from flask_login import logout_user, login_user, login_required, current_user
 
 from beedare import db
 from beedare.models import User
+
+from beedare import login_manager
 from . import *
-
-
-@auth_blueprint.route('/login', methods=["GET"])
-def login_new():
-    return jsonify({}), 200
 
 
 @auth_blueprint.route('/login', methods=['POST'])
 def login():
-    content = request.get_json()
-    time = datetime.datetime.utcnow()
+    content = request.form
     try:
-        result = db.session.query(User).filter_by(username=content['username']).first()
+        email = content['email']
+        password = content['password']
+        user = db.session.query(User).filter_by(email=email).first()
     except KeyError as e:
+        print("hier ging het mis")
         return jsonify({"error": str(e) + " not given or invalid"}), 401
-    if result is not None:
-        if result.username == content['username']:
-            # TODO password
-            result.last_seen = time
-            db.session.commit()
-            return jsonify({"state": "succes"})
+    if user is not None and user.check_password(password):
+            login_user(user)
+            user.ping()
+            next = request.args.get('next')
+            return jsonify({"login": True,
+                         "username": user.username, "Succes?": "Oui"})
     else:
-        return jsonify({"error": "Password incorrect"}), 401
+        return jsonify({"login": False,
+                        "username": "NotLoggedIn", "Succes?": "Non"}), 401
+
+
+@auth_blueprint.route('/logout')
+@login_required
+def logout():
+    logout_user()
+    return jsonify({
+        "username": "NotLoggedIn",
+        "login": False,
+        "Succes?": "Non",
+    }), 200
 
 
 @auth_blueprint.route('/register', methods=["GET"])
@@ -39,7 +50,7 @@ def register_new():
 
 @auth_blueprint.route('/register', methods=['POST'])
 def register():
-    content = request.get_json()
+    content = request.form
     try:
         result = db.session.query(User).filter_by(email=content['email']).first()
     except KeyError as e:
@@ -70,14 +81,6 @@ def register():
             "location": content['location'],
             "last_seen": time
         }), 200
-
-
-@auth_blueprint.route('/logout')
-def logout():
-    logout_user()
-    return jsonify({
-        "logout": True
-    }), 200
 
 
 @auth_blueprint.route('/unconfirmed', methods=["GET"])
