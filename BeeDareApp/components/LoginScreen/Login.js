@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import {View, Text, StyleSheet, Image} from 'react-native';
 import LoginForm from '../../components/LoginScreen/LoginForm'
+import "../../router";
 
 class Login extends Component {
     render() {
