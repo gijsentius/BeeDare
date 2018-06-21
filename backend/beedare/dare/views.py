@@ -19,7 +19,7 @@ def show_dares():
             {
                 "name": item.name,
                 "id": item.id,
-                "image": item.image,
+                "images": item.image,
                 "body": item.body,
                 "body_html": item.body_html,
                 "value": item.value

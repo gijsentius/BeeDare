@@ -53,7 +53,7 @@ def register():
             time = datetime.datetime.utcnow()
             user = User(first_name=content['firstname'], last_name=content['lastname'], email=content['email'],
                         username=content['username'], score=0, age_cat=content['age_cat'], location=content['location'],
-                        image=['image'], last_seen=time, rank='New Bee')
+                        image=['images'], last_seen=time, rank='New Bee')
         except KeyError as e:
             return jsonify({"error": str(e) + " not given or invalid"}), 401
         db.session.add(user)
@@ -66,7 +66,7 @@ def register():
             "last_name": content['lastname'],
             "email": content['email'],
             "username": content['username'],
-            "image": content['image'],
+            "images": content['images'],
             "location": content['location'],
             "last_seen": time
         }), 200

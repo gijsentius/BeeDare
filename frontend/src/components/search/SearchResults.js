@@ -7,7 +7,7 @@ class SearchResults extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            searchItems:this.props.SearchResults,
+            searchItems:this.props.searchResults,
         }
     }
 
@@ -36,7 +36,7 @@ class SearchResults extends Component {
                 if(type === 'dare') {
                     dareResults.push(
                         <div className="search-result-box">
-                            <ChallengeCard 
+                            <ChallengeCard
                                 description={searchItems[i].description}
                                 reward="60 gallons of honey"
                                 title={searchItems[i].title}

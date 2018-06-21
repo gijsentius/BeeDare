@@ -83,3 +83,25 @@ def create():
             "total_score_members": 0
         }), 200
     return jsonify({"error": "user_not_found"}), 401
+
+
+@hive_blueprint.route('/hives', methods=["GET"])
+def getHives():
+    try:
+        hives = db.session.query(Hive).all()
+    except KeyError as e:
+        return jsonify({"error": str(e) + " not given or invalid"}), 401
+    if hives is not None:
+        list = []
+        for item in hives:
+            list.append(
+                {
+                    "hiveName": item.hive_name,
+                    "images": item.image,
+                    "totalScore": item.total_score_members,
+                    "beekeeper": item.beekeeper,
+                })
+        return jsonify(
+            list
+        ), 200
+    return jsonify({"error": "user_not_found"}), 401
