@@ -3,6 +3,8 @@ import {View, Text, TextInput, TouchableOpacity, StyleSheet} from 'react-native'
 import { KeyboardAvoidingView } from 'react-native';
 import Linking from "react-native";
 import { onSignIn} from "../../auth";
+import LandingScreen from "../../components/LandingScreen/LandingScreen"
+
 
 class LoginForm extends Component {
     constructor(props) {
@@ -15,6 +17,7 @@ class LoginForm extends Component {
     }
 
     render() {
+        const { navigate } = this.props.navigation;
         return (
             <KeyboardAvoidingView style={styles.container} behavior="padding" enabled>
             <View style={styles.container}>
@@ -36,7 +39,7 @@ class LoginForm extends Component {
 
 
                 <TouchableOpacity style={styles.buttonContainer}
-                                  onPress={onSignIn()}>
+                                  onPress={() => navigate('LandingScreen')}>
                 <Text  style={styles.buttonText}>LOGIN</Text>
                 </TouchableOpacity>
                 {/*The hyperlink should work but for some odd reason openURL is not a function for me*/}
