@@ -70,7 +70,7 @@ def editData(username):
             "succes": "succes",
         })
         return response, 200
-    return jsonify({content}), 401
+    return jsonify({}), 401
 
 
 @profile_blueprint.route('/user/pwandeedit/<username>', methods=['POST'])
