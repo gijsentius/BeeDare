@@ -32,9 +32,6 @@ def create_app(config_type):
     app = Flask(__name__)
     app.config.from_object(config[config_type])
     app.config.from_object(MailConfig)
-
-    UPLOAD_FOLDER = '../backend/images'
-    app.config['UPLOAD_FOLDER'] = UPLOAD_FOLDER
     
     db.init_app(app)
     login_manager.init_app(app)
