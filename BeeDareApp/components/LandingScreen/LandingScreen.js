@@ -1,11 +1,10 @@
-import React from 'react-native';
-import Login from "../LoginScreen/Login";
-import "../../router";
+import React, { Component } from 'react';
+import {Text} from "react-native";
 
 class LandingScreen extends Component {
     render() {
         return (
-            <Login/>
+            <Text> Hoi dit is een testpagina</Text>
         )
     }
 }
