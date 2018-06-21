@@ -15,7 +15,7 @@ def allowed_image_format(image):
            image.rsplit('.', 1)[1].lower() in ALLOWED_EXTENSIONS
 
 
-@image_blueprint.route('/', methods=["POST"])
+@image_blueprint.route('', methods=["POST"])
 def store():
     from manage import app
     
