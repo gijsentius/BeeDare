@@ -17,7 +17,7 @@ def allowed_image_format(image):
 
 @image_blueprint.route('/store', methods=["POST"])
 def store():
-    from beedare import app
+    from manage import app
     
     content = request.form.get('user_id')
     image = flask.request.files.get('image', '')
