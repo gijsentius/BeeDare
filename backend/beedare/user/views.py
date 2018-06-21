@@ -25,7 +25,7 @@ def user():
                         "username": item.username,
                         "last_name": item.last_name,
                         "email": item.email,
-                        "image": item.image,
+                        "images": item.image,
                         "id": item.id,
                         "rank": item.rank,
                     })
