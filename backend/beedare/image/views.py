@@ -42,4 +42,6 @@ def store():
 
 @image_blueprint.route('/<imageName>', methods=["GET"])
 def retrieve(imageName):
+    from manage import app
+    
     send_from_directory(os.path.join(app.config['UPLOAD_ROOT'], 'images') , imageName)
