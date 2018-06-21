@@ -21,7 +21,7 @@ def store():
     image = flask.request.files.get('image', '')
     name = request.form.get('name')
     try:
-        result = User.query().filter_by(id=content).first()
+        result = User.query.filter_by(id=content).first()
     except KeyError as e:
         return jsonify({"error": str(e) + " not given or invalid"}), 401
     if result is not None and name is not None and type(image) is not str:
