@@ -1,20 +1,40 @@
 import React, { Component } from 'react';
-import {View, Text, StyleSheet, Image} from 'react-native';
-import LoginForm from '../../components/LoginScreen/LoginForm';
+import {View, Text, StyleSheet, Image, TouchableOpacity, TextInput, KeyboardAvoidingView} from 'react-native';
 
 class Login extends Component {
     render() {
         return (
-            <View style={styles.container}>
+            <View style={styles.container1}>
                 <View style={styles.loginContainer}>
                     <Image resizeMode="contain" style={styles.logo} source={require('../../images/logo.png')}/>
                     <Text style={styles.beedareText}>BeeDare</Text>
                     {/*<Text style={styles.beedareText}>Dare yourself to Bee green!</Text>*/}
                 </View>
+                <KeyboardAvoidingView style={styles.container2} behavior="padding" enabled>
+                    <View style={styles.container2}>
+                        <TextInput style = {styles.input}
+                                   onChangeText={(email) => this.setState({ email })}
+                                   autoCapitalize="none"
+                                   autoCorrect={false}
+                                   keyboardType='email-address'
+                                   returnKeyType="next"
+                                   placeholder='Email'
+                                   placeholderTextColor='#000'/>
 
-                    <View style={styles.container}>
-                        <LoginForm/>
+                        <TextInput style = {styles.input}
+                                   onChangeText={(password) => this.setState({ password })}
+                                   returnKeyType="go"
+                                   placeholder='Password'
+                                   placeholderTextColor='#000'
+                                   secureTextEntry/>
+
+                        <TouchableOpacity style={styles.buttonContainer}
+                                          onPress={() => this.navigate('LandingScreen')}>
+                            <Text  style={styles.buttonText}>LOGIN</Text>
+                        </TouchableOpacity>
+                        <Text style={styles.bottomLink}>Sign Up for BeeDare</Text>
                     </View>
+                </KeyboardAvoidingView>
             </View>
         );
     }
@@ -22,7 +42,7 @@ class Login extends Component {
 
 // Dit is de CSS
 const styles = StyleSheet.create({
-    container: {
+    container1: {
         flex: 1,
         justifyContent: 'center',
         alignItems: 'center',
@@ -47,6 +67,35 @@ const styles = StyleSheet.create({
         flexDirection: 'column',
         justifyContent: 'center',
         alignItems: 'center'
+    },
+    container2: {
+        width: 250,
+        marginBottom: 40,
+        marginTop: 40,
+        // backgroundColor: '#000'
+    },
+    input: {
+        backgroundColor: '#fff',
+        paddingVertical: 15,
+        marginBottom: 10,
+        color: '#000',
+    },
+    buttonContainer: {
+        backgroundColor: '#ffca28',
+        paddingVertical: 15,
+        marginBottom: 10
+    },
+    buttonText: {
+        color: '#000',
+        textAlign: 'center',
+        fontWeight: '700'
+    },
+    bottomLink: {
+        textAlign:'center',
+        color: '#000',
+        marginBottom: 5,
+        marginTop: 5,
+        textDecorationLine: 'underline'
     }
 });
 
