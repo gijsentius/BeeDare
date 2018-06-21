@@ -27,7 +27,7 @@ def store():
     if result is not None and name is not None and type(image) is not str:
         try:
             if image.filename != '' and allowed_image_format(image.filename):
-                image.save(os.path.join(app.config["UPLOAD_ROOT"], name + '.' + image.filename.rsplit('.', 1)[1].lower()))
+                image.save(os.path.join(app.config["UPLOAD_ROOT"], 'images', name + '.' + image.filename.rsplit('.', 1)[1].lower()))
                 return jsonify({
                     "image_name": image.filename,
                     "success": True
