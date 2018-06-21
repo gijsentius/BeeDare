@@ -10,11 +10,10 @@ def search():
     return jsonify({}), 200
 
 
-@search_blueprint.route('/users', methods=['POST'])
-def search_users():
-    content = request.get_json()
+@search_blueprint.route('/users/<query>', methods=['GET'])
+def search_users(query):
     try:
-        result = db.session.query(User).filter(User.username.like("%" + content['query'] + "%")).all()
+        result = db.session.query(User).filter(User.username.like("%" + query + "%")).all()
     except KeyError as e:
         return jsonify({"error": str(e) + " not given or invalid"}), 401
     if result is not None:
@@ -24,11 +23,10 @@ def search_users():
     return jsonify({}), 401
 
 
-@search_blueprint.route('/hives', methods=['POST'])
-def search_hives():
-    content = request.get_json()
+@search_blueprint.route('/hives/<query>', methods=['GET'])
+def search_hives(query):
     try:
-        result = db.session.query(Hive).filter(Hive.hive_name.like("%" + content['query'] + "%")).all()
+        result = db.session.query(Hive).filter(Hive.hive_name.like("%" + query + "%")).all()
     except KeyError as e:
         return jsonify({"error": str(e) + " not given or invalid"}), 401
     if result is not None:
@@ -38,11 +36,10 @@ def search_hives():
     return jsonify({}), 401
 
 
-@search_blueprint.route('/challenges', methods=['POST'])
-def search_challenges():
-    content = request.get_json()
+@search_blueprint.route('/dares/<query>', methods=['GET'])
+def search_challenges(query):
     try:
-        result = db.session.query(Dare).filter(Dare.body.like("%" + content['query'] + "%")).all()
+        result = db.session.query(Dare).filter(Dare.body.like("%" + query + "%")).all()
     except KeyError as e:
         return jsonify({"error": str(e) + " not given or invalid"}), 401
     if result is not None:

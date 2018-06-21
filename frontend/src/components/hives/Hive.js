@@ -1,5 +1,4 @@
 import React from 'react';
-import './Hives.css';
 import Icon from "../icon/Icon";
 
 class Hive extends React.Component {

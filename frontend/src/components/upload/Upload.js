@@ -18,7 +18,7 @@ class Upload extends Component {
         return (
             <div>
                 <ReactImageUploadComponent
-                    withIcon={true}
+                    withIcon={false}
                     buttonText='Choose image'
                     onChange={this.onDrop}
                     imgExtension={['.jpg', '.gif', '.png', '.gif']}

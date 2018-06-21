@@ -1,5 +1,5 @@
 import React, {Component} from 'react';
-import {BrowserRouter as Router, Route, Link} from "react-router-dom";
+import {BrowserRouter as Router, Route, Link, Redirect} from "react-router-dom";
 import LoginPage from '../user_interaction/login_page';
 import RegisterPage from '../user_interaction/register_page';
 import ChallengeList from '../challenge/ChallengeList';
@@ -15,6 +15,26 @@ import FriendPage from "../friends/FriendPage";
 import UserProvider from "../UserProvider"
 import {UserContext} from "../UserProvider";
 import HivesPage from "../hives/HivesPage";
+
+// Idea/ source for PrivateRouter from https://tylermcginnis.com/react-router-protected-routes-authentication/
+
+
+const PrivateRoute = ({ component: Component, ...rest }) => (
+    <Route {...rest} render={(props) => (
+        <UserContext.Consumer>
+            {(context => context.isAuthenticated ?
+                <Component {...props} />
+                : <Redirect to={{
+                    pathname: '/signin',
+                    state: { from: props.location }
+                }} />)
+            }
+                </UserContext.Consumer>
+    )} />
+);
+
+
+
 
 class App extends Component {
 
@@ -49,11 +69,11 @@ class App extends Component {
                             <Route path="/signin" component={LoginPage}/>
                             <Route path="/signup" component={RegisterPage}/>
                                         <Route path="/challenges" component={ChallengeList}/>
-                            <Route path="/newsfeed" component={NewsFeedPage}/>
-                            <Route path="/profile" component={ProfilePage}/>
+                            <PrivateRoute path="/newsfeed" component={NewsFeedPage}/>
+                            <PrivateRoute path="/profile" component={ProfilePage}/>
                             <Route path="/search" component={SearchPage}/>
-                            <Route path="/change-email" component={ChangeEmailPassword}/>
-                            <Route path="/edit-profile" component={EditProfilePage}/>
+                            <PrivateRoute path="/change-email" component={ChangeEmailPassword}/>
+                            <PrivateRoute path="/edit-profile" component={EditProfilePage}/>
                             <Route path="/friends" component={FriendPage}/>
                             <Route path="/hives" component={HivesPage}/>
                         </div>
@@ -70,7 +90,7 @@ class App extends Component {
     static returnCorrectPath(){
         return (
         <UserContext.Consumer>
-            {(context => context.loginState ?
+            {(context => context.isAuthenticated ?
                     <React.Fragment>
                         <li><Link to="/newsfeed"><span className="text-color">Newsfeed</span></Link></li>
                         <li><Link to="/profile"><span className="text-color">Profile</span></Link></li>
