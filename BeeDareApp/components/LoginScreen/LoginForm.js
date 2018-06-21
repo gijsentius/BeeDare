@@ -2,8 +2,7 @@ import React, { Component } from 'react';
 import {View, Text, TextInput, TouchableOpacity, StyleSheet} from 'react-native';
 import { KeyboardAvoidingView } from 'react-native';
 import Linking from "react-native";
-import { onSignIn} from "../../auth";
-import LandingScreen from "../../components/LandingScreen/LandingScreen"
+import LandingScreen from "../../components/LandingScreen/LandingScreen";
 
 
 class LoginForm extends Component {
@@ -52,6 +51,8 @@ class LoginForm extends Component {
     }
 }
 
+export default LoginForm;
+
 // CSS
 // pls dun change as it finally works perfectly with keyboard avoidance
 const styles = StyleSheet.create({
@@ -86,4 +87,3 @@ const styles = StyleSheet.create({
     }
 });
 
-export default LoginForm
