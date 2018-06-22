@@ -10,15 +10,28 @@ class UserProvider extends React.Component {
         super(props);
 
         this.state = {
-            loggedInUsername: 'VyxorAnnelies',
+            loggedInUsername: '',
             isAuthenticated: false,
-            authenticate: (cb) => {
-                this.setState({isAuthenticated: true});
-                setTimeout(cb, 100);
-                },
-            signout: (cb) => {
-                this.setState({isAuthenticated: false});
-                setTimeout(cb, 100)
+
+            authenticate: (data) => {
+                console.log(data);
+                fetch('http://localhost:5000/auth/login', {
+                    method: 'POST',
+                    body: data,
+                })
+                    .then(response => response.json())
+                    .then(data => this.setState({isAuthenticated: data['login'],
+                        loggedInUsername: data['username']}))
+                    .catch(error => console.log(error));
+            },
+
+            signout: () => {
+
+                fetch('http://localhost:5000/auth/logout')
+                    .then(response => response.json())
+                    .then(data => this.setState({isAuthenticated: data['login'],
+                        loggedInUsername: data['username']}))
+                    .catch(error => console.log(error));
             },
         };
     }
