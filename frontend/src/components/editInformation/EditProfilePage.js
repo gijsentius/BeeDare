@@ -5,12 +5,14 @@ import {Link} from "react-router-dom";
 import {UserContext} from "../UserProvider";
 import NotLogIn from "../ErrorMessages/NotLogIn";
 import Login from "../user_interaction/login";
+import Upload from "../upload/Upload";
 
 class EditProfilePage extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
             profileInfo: [],
+            image: ''
         };
 
         this.editInformation = this.editInformation.bind(this);
@@ -47,6 +49,7 @@ class EditProfilePage extends React.Component {
         // Het is dus van essentieel belang om hier const te gebruiken, anders krijg je undefined errors.
         const profileInfo = this.state.profileInfo[0];
 
+        // alert(this.getImage(profileInfo));
 
         return (
 
@@ -54,13 +57,14 @@ class EditProfilePage extends React.Component {
                 <form onSubmit={(e) => this.editInformation(e, profileInfo.username)} className="col s12">
                     <div className="row">
                         <div className="col 6">
-                            <img src={EmployeeDagmar} alt="" className="circle responsive-img z-depth-1"
-                                 style={{maxWidth: "10vw", maxHeight: "auto"}}/>
+                            <div style={{maxWidth: "10vw", maxHeight: "auto"}}>
+                                <Icon image={'http://localhost:5000/image/' + profileInfo.image + '/users'}
+                                      action={() => alert(profileInfo.image)}/>
+                            </div>
                         </div>
                         {/*Br is misschien wel heel lelijk, maar is voor nu een snelle oplossing*/}
                         <br/>
                         <br/>
-
                         <form className="col s2">
                             <div className="file-field input-field">
                                 <div className="btn btn-small amber darken-1">
@@ -101,8 +105,8 @@ class EditProfilePage extends React.Component {
                     {/*TODO: ervoor zorgen dat deze rechts op de pagina komt te staan*/}
                     <Link className="btn amber darken-1" to="/change-email">Edit Email and password</Link>
                 </div>
+                <Upload folder='users'/>
             </div>
-
         )
     }
 }
