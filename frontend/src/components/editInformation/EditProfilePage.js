@@ -25,6 +25,7 @@ class EditProfilePage extends React.Component {
     }
 
     // source: https://medium.com/@everdimension/how-to-handle-forms-with-just-react-ac066c48bd4f
+    // comment voor merge
 
     editInformation(event, username) {
         event.preventDefault();
