@@ -97,7 +97,7 @@ def getHives():
             list.append(
                 {
                     "hiveName": item.hive_name,
-                    "image": item.image,
+                    "images": item.image,
                     "totalScore": item.total_score_members,
                     "beekeeper": item.beekeeper,
                 })

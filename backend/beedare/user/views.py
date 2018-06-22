@@ -53,7 +53,6 @@ def user():
 
 
 @profile_blueprint.route('/user/edit/<username>', methods=['POST'])
-@login_required
 def editData(username):
     content = request.form
     try:
@@ -72,11 +71,10 @@ def editData(username):
             "succes": "succes",
         })
         return response, 200
-    return jsonify({content}), 401
+    return jsonify({}), 401
 
 
 @profile_blueprint.route('/user/pwandeedit/<username>', methods=['POST'])
-@login_required
 def editconfidential(username):
     content = request.form
     try:
@@ -123,7 +121,6 @@ def hive():
 
 
 @profile_blueprint.route('/newsfeed/<user>', methods=['GET'])
-@login_required
 def news(user):
     try:
         user_data = User.query.filter_by(username=user).first()
