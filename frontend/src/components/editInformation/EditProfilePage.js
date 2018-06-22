@@ -65,17 +65,17 @@ class EditProfilePage extends React.Component {
                         {/*Br is misschien wel heel lelijk, maar is voor nu een snelle oplossing*/}
                         <br/>
                         <br/>
-                        <form className="col s2">
-                            <div className="file-field input-field">
-                                <div className="btn btn-small amber darken-1">
-                                    <i className="material-icons">edit</i>
-                                    <input name="edit" type="file"/>
-                                </div>
-                                <div className="file-path-wrapper">
-                                    <input className="file-path"/>
-                                </div>
-                            </div>
-                        </form>
+                        {/*<form className="col s2">*/}
+                            {/*<div className="file-field input-field">*/}
+                                {/*<div className="btn btn-small amber darken-1">*/}
+                                    {/*<i className="material-icons">edit</i>*/}
+                                    {/*<input name="edit" type="file"/>*/}
+                                {/*</div>*/}
+                                {/*<div className="file-path-wrapper">*/}
+                                    {/*<input className="file-path"/>*/}
+                                {/*</div>*/}
+                            {/*</div>*/}
+                        {/*</form>*/}
 
                     </div>
                     <div className="row">
