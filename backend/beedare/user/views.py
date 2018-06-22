@@ -8,6 +8,7 @@ from . import *
 
 
 @profile_blueprint.route('/user', methods=['POST', 'GET'])
+# @login_required
 def user():
     content = request.get_json()
     try:
@@ -25,8 +26,8 @@ def user():
                         "username": item.username,
                         "last_name": item.last_name,
                         "email": item.email,
-                        "images": item.image,
-                        "id": item.id,
+                        "image": item.image,
+                        "id": item.user_id,
                         "rank": item.rank,
                     })
             return jsonify(

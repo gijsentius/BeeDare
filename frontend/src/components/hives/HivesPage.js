@@ -1,5 +1,6 @@
 import React from 'react';
 import Hive from "./Hive";
+import "../block/Block.css";
 
 class HivesPage extends React.Component {
     constructor(props) {
@@ -7,6 +8,9 @@ class HivesPage extends React.Component {
         this.state = {
             hives: [],
         };
+
+        this.goToHive = this.goToHive.bind(this);
+        this.onHover = this.onHover.bind(this);
     }
 
 
@@ -17,22 +21,32 @@ class HivesPage extends React.Component {
             .catch(error => console.log(error));
     }
 
+    goToHive(event, hiveId){
+        event.preventDefault();
+        alert("going to hivepage " + hiveId);
+    }
+
+    onHover(event){
+
+    }
+
     render() {
         let hives = this.state.hives;
         let listItems;
 
         listItems = hives.map((item) =>
-            <div className="item">
-                <Hive name={item.hiveName} content={item.totalScore} image="https://placeimg.com/400/400/nature"/>
+            <div onClick={(e) => this.goToHive(e, item.id)} style={{cursor:'pointer'}}>
+                <div className="item dare-col">
+                    <Hive name={item.hiveName} content={item.totalScore} image="https://placeimg.com/400/400/nature"/>
+                </div>
             </div>
         );
 
 
         return (
-            <div>
-                {listItems}
-            </div>
-
+                <div className="dare-cols">
+                    {listItems}
+                </div>
         )
     }
 }
