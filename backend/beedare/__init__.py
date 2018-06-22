@@ -32,9 +32,6 @@ def create_app(config_type):
     app = Flask(__name__)
     app.config.from_object(config[config_type])
     app.config.from_object(MailConfig)
-
-    UPLOAD_FOLDER = '../backend/images'
-    app.config['UPLOAD_FOLDER'] = UPLOAD_FOLDER
     
     db.init_app(app)
     login_manager.init_app(app)
@@ -49,7 +46,7 @@ def create_app(config_type):
     from beedare.hive import hive_blueprint
     from beedare.score import score_blueprint
     from beedare.submit import submit_blueprint
-    from beedare.image import image_blueprint
+    from beedare.images import image_blueprint
     from beedare.user_information import user_info_blueprint
     from beedare.dare import dares_blueprint
 

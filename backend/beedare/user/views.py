@@ -8,6 +8,7 @@ from . import *
 
 
 @profile_blueprint.route('/user', methods=['POST', 'GET'])
+# @login_required
 def user():
     content = request.get_json()
     try:
@@ -26,7 +27,7 @@ def user():
                         "last_name": item.last_name,
                         "email": item.email,
                         "image": item.image,
-                        "id": item.id,
+                        "id": item.user_id,
                         "rank": item.rank,
                     })
             return jsonify(
@@ -70,7 +71,7 @@ def editData(username):
             "succes": "succes",
         })
         return response, 200
-    return jsonify({content}), 401
+    return jsonify({}), 401
 
 
 @profile_blueprint.route('/user/pwandeedit/<username>', methods=['POST'])

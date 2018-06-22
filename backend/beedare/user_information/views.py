@@ -19,7 +19,7 @@ def change():
         result.last_name = content['last_name']
         result.age_cat = content['age_cat']
         result.location = content['location']
-        result.image = content['image']
+        result.image = content['images']
         result.username = content['username']
         result.email = content['email']
         return jsonify({
@@ -27,7 +27,7 @@ def change():
             "last_name": content['last_name'],
             "age_cat": content['age_cat'],
             "location": content['location'],
-            "image": content['image'],
+            "images": content['images'],
             "username": content['username'],
             "email": content['email']
         }), 200
