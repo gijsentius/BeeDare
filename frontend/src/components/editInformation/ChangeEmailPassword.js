@@ -19,7 +19,7 @@ class ChangeEmailPassword extends React.Component {
             .catch(error => console.log(error));
     }
 
-    editInformation(event, username){
+    editInformation(event, username) {
         event.preventDefault();
 
         const form = event.target;
@@ -32,22 +32,23 @@ class ChangeEmailPassword extends React.Component {
         window.location.reload()
     }
 
-
+    // comment voor merge
     render() {
 
-        if (!this.state.profileInfo[0]){
+        if (!this.state.profileInfo[0]) {
             return <div/>
         }
 
         const profileInfo = this.state.profileInfo[0];
 
-        return(
+        return (
 
             <div className="container">
                 <form onSubmit={(e) => this.editInformation(e, profileInfo.username)} className="col s12">
                     <div className="row">
                         <div className="input-field col s12">
-                            <input name="email" placeholder={profileInfo.email} id="email_register" type="email" className="validate"/>
+                            <input name="email" placeholder={profileInfo.email} id="email_register" type="email"
+                                   className="validate"/>
                             <label className="active" htmlFor="email_register">Email</label>
                         </div>
                     </div>
@@ -65,7 +66,8 @@ class ChangeEmailPassword extends React.Component {
                     </div>
                     <div className="row">
                         <div className="input-field col s12">
-                            <input name="confirmnewpassword" id="confirm_password_new" type="password" className="validate"/>
+                            <input name="confirmnewpassword" id="confirm_password_new" type="password"
+                                   className="validate"/>
                             <label htmlFor="confirm_password_new">Confirm New Password</label>
                         </div>
                     </div>
@@ -73,7 +75,7 @@ class ChangeEmailPassword extends React.Component {
                         <div className="center" style={{boxAlign: "center"}}>
                             <button className="waves-effect waves-light btn #ffd54f amber lighten-1"
                             >
-                               Confirm
+                                Confirm
                             </button>
                         </div>
                     </div>
