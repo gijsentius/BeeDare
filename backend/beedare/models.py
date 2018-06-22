@@ -41,18 +41,18 @@ class User(db.Model):
 
     def generate_loginrequired_token(self):
         s = TimedSerializer(current_app.config['SECRET_KEY'], 'loginrequired')
-        return s.dumps(self.username)
+        return s.dumps({'loginrequired': self.username})
 
     def check_loginrequired(self, token):
         s = TimedSerializer(current_app.config['SECRET_KEY'], 'loginrequired')
         try:
-            data = s.loads(token.encode('utf-8'))
+            data = s.loads(token)
+            print(data)
+            print(data.get('loginrequired'))
         except:
             return False
         if data.get('loginrequired') != self.username:
             return False
-        self.is_active = True
-        db.session.add(self)
         return True
 
     def confirm(self):

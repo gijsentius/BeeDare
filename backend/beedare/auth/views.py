@@ -23,18 +23,22 @@ def login():
     if user is not None and user.check_password(password):
             login_user(user)
             user.ping()
-            user.generate_loginrequired_token()
+            token = user.generate_loginrequired_token()
             next = request.args.get('next')
             return jsonify({"login": True,
-                         "username": user.username, "Succes?": "Oui"})
+                         "username": user.username, "Succes?": "Oui", "token": token})
     else:
         return jsonify({"login": False,
                         "username": "NotLoggedIn", "Succes?": "Non"}), 401
 
 
-@auth_blueprint.route('/logout')
-def logout():
-    if current_user.check_loginrequired(current_user.username):
+@auth_blueprint.route('/logout/<username>/<token>', methods=['GET'])
+def logout(username, token):
+    try:
+        user = db.session.query(User).filter_by(username=username).first()
+    except KeyError as e:
+        return jsonify({"error": str(e) + " not given or invalid"}), 401
+    if user.check_loginrequired(token):
         logout_user()
         return jsonify({
             "username": "NotLoggedIn",
@@ -94,7 +98,7 @@ def unconfirmed():
         "error": "Account not confirmed. Please confirm your account by mail."
     }), 401
 
-
+# LET OP!!!!!!!!!! current_user kunnen wij niet gebruiken want REST is stateless
 @auth_blueprint.route('/confirm/<token>')
 def confirm(token):
     if current_user.confirmed:
