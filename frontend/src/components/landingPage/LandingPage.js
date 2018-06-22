@@ -46,7 +46,7 @@ class LandingPage extends React.Component{
                         <MeetTeamBox/>
                         <UserContext.Consumer>
                         {
-                            (context) => context.loginState ?
+                            (context) => context.isAuthenticated ?
                                 null
                                  : <button
                                     onClick={() => scrollToComponent(this.Register, {

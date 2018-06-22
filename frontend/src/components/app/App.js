@@ -19,33 +19,31 @@ import HivesPage from "../hives/HivesPage";
 // Idea/ source for PrivateRouter from https://tylermcginnis.com/react-router-protected-routes-authentication/
 
 
-const PrivateRoute = ({ component: Component, ...rest }) => (
+const PrivateRoute = ({component: Component, ...rest}) => (
     <Route {...rest} render={(props) => (
         <UserContext.Consumer>
             {(context => context.isAuthenticated ?
                 <Component {...props} />
                 : <Redirect to={{
                     pathname: '/signin',
-                    state: { from: props.location }
-                }} />)
+                    state: {from: props.location}
+                }}/>)
             }
-                </UserContext.Consumer>
-    )} />
+        </UserContext.Consumer>
+    )}/>
 );
-
-
 
 
 class App extends Component {
 
-    constructor(props){
+    constructor(props) {
         super(props);
     }
 
     render() {
         return (
             <UserProvider>
-            <Router>
+                <Router>
                     <div>
                         <nav>
                             <div className="nav-wrapper #ffd54f amber lighten-1">
@@ -58,17 +56,18 @@ class App extends Component {
                                     </a>
                                 </Link>
                                 <ul id="nav-mobile" className="right hide-on-med-and-down">
-                                    {App.returnCorrectPath()}
                                     <li><Link to="/challenges"><span className="text-color">Dares</span></Link></li>
                                     <li><Link to="/hives"><span className="text-color">Hives</span></Link></li>
-                                    <li><Link to="/search"><i className="material-icons text-color">search</i></Link></li>
+                                    {App.returnCorrectPath()}
+                                    <li><Link to="/search"><i className="material-icons text-color">search</i></Link>
+                                    </li>
                                 </ul>
                             </div>
                         </nav>
                         <div className="content">
                             <Route path="/signin" component={LoginPage}/>
                             <Route path="/signup" component={RegisterPage}/>
-                                        <Route path="/challenges" component={ChallengeList}/>
+                            <Route path="/challenges" component={ChallengeList}/>
                             <PrivateRoute path="/newsfeed" component={NewsFeedPage}/>
                             <PrivateRoute path="/profile" component={ProfilePage}/>
                             <Route path="/search" component={SearchPage}/>
@@ -81,26 +80,28 @@ class App extends Component {
                             <Route exact path="/" component={LandingPage}/>
                         </div>
                     </div>
-            </Router>
+                </Router>
             </UserProvider>
         );
     }
 
     // a small component to return the correct pages
-    static returnCorrectPath(){
+    static returnCorrectPath() {
         return (
-        <UserContext.Consumer>
-            {(context => context.isAuthenticated ?
+            <UserContext.Consumer>
+                {(context => context.isAuthenticated ?
                     <React.Fragment>
                         <li><Link to="/newsfeed"><span className="text-color">Newsfeed</span></Link></li>
                         <li><Link to="/profile"><span className="text-color">Profile</span></Link></li>
+                        <li onClick={context.signout}><Link to="/signin"><span className="text-color">
+                            Sign out</span></Link></li>
                     </React.Fragment>
-            : <React.Fragment>
-                    <li><Link to="/signin"><span className="text-color">Sign In</span></Link></li>
-                    <li><Link to="/signup"><span className="text-color">Get Started</span></Link></li>
-                </React.Fragment> )
-            }
-        </UserContext.Consumer>
+                    : <React.Fragment>
+                        <li><Link to="/signin"><span className="text-color">Sign In</span></Link></li>
+                        <li><Link to="/signup"><span className="text-color">Get Started</span></Link></li>
+                    </React.Fragment>)
+                }
+            </UserContext.Consumer>
         )
     }
 }
