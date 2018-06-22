@@ -39,13 +39,21 @@ class User(db.Model):
     def check_password(self, password):
         return check_password_hash(self.password_hash, password)
 
-    def generate_confirmation_token(self):
-        s = TimedSerializer(current_app.config['SECRET_KEY'], 'confirmation')
-        return s.dumps(self.id)
+    def generate_loginrequired_token(self):
+        s = TimedSerializer(current_app.config['SECRET_KEY'], 'loginrequired')
+        return s.dumps(self.username)
 
-    def check_confirmation(self, token, expiration=3600):
-        s = TimedSerializer(current_app.config['SECRET_KEY'], 'confirmation')
-        return s.loads(token, max_age=expiration) == self.id
+    def check_loginrequired(self, token):
+        s = TimedSerializer(current_app.config['SECRET_KEY'], 'loginrequired')
+        try:
+            data = s.loads(token.encode('utf-8'))
+        except:
+            return False
+        if data.get('loginrequired') != self.username:
+            return False
+        self.is_active = True
+        db.session.add(self)
+        return True
 
     def confirm(self):
         self.confirmed = True
@@ -53,12 +61,6 @@ class User(db.Model):
     def ping(self):
         self.last_seen = datetime.datetime.now()
         db.session.add(self)
-
-    def is_active(self):
-        return self.is_active
-
-    def is_authenticated(self):
-        return self.is_authenticated
 
     def get_id(self):
         return self.user_id

@@ -19,11 +19,11 @@ def login():
         password = content['password']
         user = db.session.query(User).filter_by(email=email).first()
     except KeyError as e:
-        print("hier ging het mis")
         return jsonify({"error": str(e) + " not given or invalid"}), 401
     if user is not None and user.check_password(password):
             login_user(user)
             user.ping()
+            user.generate_loginrequired_token()
             next = request.args.get('next')
             return jsonify({"login": True,
                          "username": user.username, "Succes?": "Oui"})
@@ -33,14 +33,16 @@ def login():
 
 
 @auth_blueprint.route('/logout')
-# @login_required
 def logout():
-    logout_user()
-    return jsonify({
-        "username": "NotLoggedIn",
-        "login": False,
-        "Succes?": "Non",
-    }), 200
+    if current_user.check_loginrequired(current_user.username):
+        logout_user()
+        return jsonify({
+            "username": "NotLoggedIn",
+            "login": False,
+            "Succes?": "Oui",
+        }), 200
+    else:
+        return jsonify({"error": "not correct user detected"}), 401
 
 
 @auth_blueprint.route('/register', methods=["GET"])
