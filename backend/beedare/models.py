@@ -3,22 +3,22 @@ from flask import current_app, request, url_for
 from itsdangerous import TimedSerializer
 
 from werkzeug.security import generate_password_hash, check_password_hash
-from beedare import db
+from beedare import db, login_manager
 
 
 class Friend(db.Model):
     __tablename__ = 'friends'
-    follower_id = db.Column(db.Integer, db.ForeignKey('users.id'),
+    follower_id = db.Column(db.Integer, db.ForeignKey('users.user_id'),
                             primary_key=True)
-    followed_id = db.Column(db.Integer, db.ForeignKey('users.id'),
+    followed_id = db.Column(db.Integer, db.ForeignKey('users.user_id'),
                             primary_key=True)
     timestamp = db.Column(db.DateTime, default=datetime.datetime.now())
 
 
 class User(db.Model):
     __tablename__ = 'users'
-    id = db.Column(db.Integer, primary_key=True, unique=True, autoincrement=True)  #ID is de primary_key
-    first_name = db.Column(db.String(255))  # 30 character genoeg? Nee
+    user_id = db.Column(db.Integer, primary_key=True, unique=True, autoincrement=True)  # ID is de primary_key
+    first_name = db.Column(db.String(255))  # 30 character genoeg? Nee. REEEEE
     last_name = db.Column(db.String(255))
     age_cat = db.Column(db.String(50))  # ageCat staat voor ageCategory. Bijvoorbeeld 5-10 15-20 etc...
     location = db.Column(db.String(120))
@@ -27,7 +27,8 @@ class User(db.Model):
     last_seen = db.Column(db.String(50))
     username = db.Column(db.String(120), unique=True)
     password_hash = db.Column(db.String(255))
-    # PASSWORD MOET NOG AANGEPAST WORDEN ZODAT HET BEVEILIGD IS
+    is_active = db.Column(db.Boolean)  # is_active is er om te checken of het account geactiveerd is.
+    is_authenticated = db.Column(db.Boolean)
     email = db.Column(db.String(120), unique=True)
     rank = db.Column(db.String(255))
     confirmed = db.Column(db.Boolean(False))
@@ -53,9 +54,23 @@ class User(db.Model):
         self.last_seen = datetime.datetime.now()
         db.session.add(self)
 
-    def __repr__(self):
-        return '<User %r>' % (self.username) + '<Email %r>' % (self.email) + '<Rank %r>' % (self.rank) + '<Last_Seen %r>' % self.last_seen
+    def is_active(self):
+        return self.is_active
 
+    def is_authenticated(self):
+        return self.is_authenticated
+
+    def get_id(self):
+        return self.user_id
+
+    def __repr__(self):
+        return '<User %r>' % (self.username) + '<Email %r>' % (self.email) + '<Rank %r>' % (
+            self.rank) + '<Last_Seen %r>' % self.last_seen
+
+
+@login_manager.user_loader
+def load_user(user_id):
+    return User.get(int(user_id))
 
 
 # source: https://github.com/miguelgrinberg/flasky/blob/master/app/models.py
@@ -65,7 +80,7 @@ class Message(db.Model):
     body = db.Column(db.Text)
     body_html = db.Column(db.Text)
     timestamp = db.Column(db.DateTime, index=True, default=datetime.datetime.now())
-    author_id = db.Column(db.Integer, db.ForeignKey('users.id'))
+    author_id = db.Column(db.Integer, db.ForeignKey('users.user_id'))
     comments = db.relationship('Comment', backref='post', lazy='dynamic')  # lazy??? backref???
 
     def __repr__(self):
@@ -79,7 +94,7 @@ class Comment(db.Model):
     body_html = db.Column(db.Text)
     timestamp = db.Column(db.DateTime, index=True, default=datetime.datetime.now())
     disabled = db.Column(db.Boolean)
-    author_id = db.Column(db.Integer, db.ForeignKey('users.id'))
+    author_id = db.Column(db.Integer, db.ForeignKey('users.user_id'))
     post_id = db.Column(db.Integer, db.ForeignKey('posts.id'))
 
 
@@ -96,7 +111,7 @@ class Dare(db.Model):
 class UserDares(db.Model):
     __tablename__ = 'userdares'
     id = db.Column(db.ForeignKey('dares.id'), primary_key=True)
-    owner_id = db.Column(db.Integer, db.ForeignKey('users.id'))
+    owner_id = db.Column(db.Integer, db.ForeignKey('users.user_id'))
     achieved = db.Column(db.Boolean)
 
 
@@ -106,15 +121,13 @@ class Hive(db.Model):
     hive_name = db.Column(db.String(128), unique=True)
     image = db.Column(db.String(255))
     total_score_members = db.Column(db.Integer)
-    beekeeper = db.Column(db.ForeignKey('users.id'))  # beekeeper is de hive eigenaar
+    beekeeper = db.Column(db.ForeignKey('users.user_id'))  # beekeeper is de hive eigenaar
 
 
 class ColonyMembers(db.Model):
     __tablename__ = 'colonymembers'
-    follower_id = db.Column(db.Integer, db.ForeignKey('users.id'),
+    follower_id = db.Column(db.Integer, db.ForeignKey('users.user_id'),
                             primary_key=True)
     hive_id = db.Column(db.Integer, db.ForeignKey('hives.id'),
-                            primary_key=True)
+                        primary_key=True)
     timestamp = db.Column(db.DateTime, default=datetime.datetime.now())
-
-

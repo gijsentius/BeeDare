@@ -29,8 +29,6 @@ class NewsFeedPage extends React.Component {
 
         const profileInfo = this.state.profileInfo[0];
         return (
-            <UserContext.Consumer>
-                {(context) => context.loginState ?
             <div className="customContainer">
                 <div className="row">
                     <div className="col s12 m3 sticky">
@@ -47,11 +45,7 @@ class NewsFeedPage extends React.Component {
                         <Hives className="col s4" hives={[<Hive/>, <Hive/>, <Hive/>]}/>
                     </div>
                 </div>
-            </div> : <div className="container">
-                        <NotLogIn/>
-                        <Login/>
-                    </div>}
-            </UserContext.Consumer>
+            </div>
         )
     }
 }
