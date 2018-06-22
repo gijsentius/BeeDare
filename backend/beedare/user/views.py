@@ -1,5 +1,6 @@
 from flask import jsonify, request
 from flask_login import login_required
+from sqlalchemy import update
 
 from beedare import db
 from beedare.models import User, Hive, ColonyMembers, Dare, Message, Friend, UserDares
@@ -7,6 +8,7 @@ from . import *
 
 
 @profile_blueprint.route('/user', methods=['POST', 'GET'])
+# @login_required
 def user():
     content = request.get_json()
     try:
@@ -25,7 +27,7 @@ def user():
                         "last_name": item.last_name,
                         "email": item.email,
                         "image": item.image,
-                        "id": item.id,
+                        "id": item.user_id,
                         "rank": item.rank,
                     })
             return jsonify(
@@ -47,6 +49,53 @@ def user():
             'friends': [[item.id] for item in friend],
             'dares': [[item.id] for item in dares],
         }), 200
+    return jsonify({}), 401
+
+
+@profile_blueprint.route('/user/edit/<username>', methods=['POST'])
+@login_required
+def editData(username):
+    content = request.form
+    try:
+        user = db.session.query(User).filter_by(username=username).first()
+    except KeyError as e:
+        return jsonify({"error": str(e) + " not given or invalid"}), 401
+    if user is not None:
+        try:
+            user.first_name = content['firstName']
+            user.last_name = content['lastName']
+            user.username = content['userName']
+            db.session.commit()
+        except KeyError as e:
+            return jsonify({"error": str(e) + " not given or invalid"}), 401
+        response = jsonify({
+            "succes": "succes",
+        })
+        return response, 200
+    return jsonify({content}), 401
+
+
+@profile_blueprint.route('/user/pwandeedit/<username>', methods=['POST'])
+@login_required
+def editconfidential(username):
+    content = request.form
+    try:
+        user = db.session.query(User).filter_by(username=username).first()
+    except KeyError as e:
+        return jsonify({"error": str(e) + " not given or invalid"}), 401
+    if user is not None:
+        try:
+            print(content)
+            # user.email = content['email']
+            # user.password = content['lastName']
+            # user.username = content['userName']
+            # db.session.commit()
+        except KeyError as e:
+            return jsonify({"error": str(e) + " not given or invalid"}), 401
+        response = jsonify({
+            "Result": "succes",
+        })
+        return response, 200
     return jsonify({}), 401
 
 
@@ -74,6 +123,7 @@ def hive():
 
 
 @profile_blueprint.route('/newsfeed/<user>', methods=['GET'])
+@login_required
 def news(user):
     try:
         user_data = User.query.filter_by(username=user).first()

@@ -1,6 +1,4 @@
 import React from 'react';
-import './Hives.css';
-import Block from "../block/Block";
 
 class Hives extends React.Component {
     constructor(props) {

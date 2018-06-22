@@ -42,8 +42,7 @@ class ChangeEmailPassword extends React.Component {
         const profileInfo = this.state.profileInfo[0];
 
         return(
-            <UserContext.Consumer>
-                {(context) => context.loginState ?
+
             <div className="container">
                 <form onSubmit={(e) => this.editInformation(e, profileInfo.username)} className="col s12">
                     <div className="row">
@@ -79,11 +78,7 @@ class ChangeEmailPassword extends React.Component {
                         </div>
                     </div>
                 </form>
-            </div> : <div className="container">
-                        <NotLogIn/>
-                        <Login/>
-                    </div>}
-            </UserContext.Consumer>
+            </div>
         )
     }
 }

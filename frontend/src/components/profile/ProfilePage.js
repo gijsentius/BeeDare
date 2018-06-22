@@ -52,8 +52,7 @@ class ProfilePage extends Component {
         const profileInfo = this.state.profileInfo[0];
 
         return (
-            <UserContext.Consumer>
-                {(context) => context.loginState ?
+
                     <div>
                         <div className="row">
                             <div className="col s2 m3">
@@ -69,11 +68,7 @@ class ProfilePage extends Component {
                                 <Profile profileInfo={profileInfo}/>
                             </div>
                         </div>
-                    </div> : <div className="container">
-                        <NotLogIn/>
-                        <Login/>
-                    </div>}
-            </UserContext.Consumer>
+                    </div>
         );
     }
 }
