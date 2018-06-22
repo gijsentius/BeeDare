@@ -33,7 +33,7 @@ def login():
 
 
 @auth_blueprint.route('/logout')
-@login_required
+# @login_required
 def logout():
     logout_user()
     return jsonify({

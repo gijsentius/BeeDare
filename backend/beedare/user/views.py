@@ -8,6 +8,7 @@ from . import *
 
 
 @profile_blueprint.route('/user', methods=['POST', 'GET'])
+# @login_required
 def user():
     content = request.get_json()
     try:
@@ -26,7 +27,7 @@ def user():
                         "last_name": item.last_name,
                         "email": item.email,
                         "image": item.image,
-                        "id": item.id,
+                        "id": item.user_id,
                         "rank": item.rank,
                     })
             return jsonify(
@@ -52,6 +53,7 @@ def user():
 
 
 @profile_blueprint.route('/user/edit/<username>', methods=['POST'])
+@login_required
 def editData(username):
     content = request.form
     try:
@@ -74,6 +76,7 @@ def editData(username):
 
 
 @profile_blueprint.route('/user/pwandeedit/<username>', methods=['POST'])
+@login_required
 def editconfidential(username):
     content = request.form
     try:
@@ -120,6 +123,7 @@ def hive():
 
 
 @profile_blueprint.route('/newsfeed/<user>', methods=['GET'])
+@login_required
 def news(user):
     try:
         user_data = User.query.filter_by(username=user).first()
