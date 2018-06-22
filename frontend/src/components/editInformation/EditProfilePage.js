@@ -12,6 +12,7 @@ class EditProfilePage extends React.Component {
         super(props);
         this.state = {
             profileInfo: [],
+            image: ''
         };
 
         this.editInformation = this.editInformation.bind(this);
@@ -47,18 +48,22 @@ class EditProfilePage extends React.Component {
         // Het is dus van essentieel belang om hier const te gebruiken, anders krijg je undefined errors.
         const profileInfo = this.state.profileInfo[0];
 
+        // alert(this.getImage(profileInfo));
 
         return (
             // De usercontext consumer checkt of degene ingelogt is. Zo niet: dan wordt de content
             // ook niet geladen en komt daar een message over te staan.
             <UserContext.Consumer>
+
                 {(context) => context.loginState ?
                     <div className="container">
                         <form onSubmit={(e) => this.editInformation(e, profileInfo.username)} className="col s12">
                             <div className="row">
                                 <div className="col 6">
-                                    <img src={EmployeeDagmar} alt="" className="circle responsive-img z-depth-1"
-                                         style={{maxWidth: "10vw", maxHeight: "auto"}}/>
+                                    <div style={{maxWidth: "10vw", maxHeight: "auto"}}>
+                                        <Icon image={'http://localhost:5000/image/' + profileInfo.images + '/users'}
+                                              action={() => alert(profileInfo.images)}/>
+                                    </div>
                                 </div>
                                 {/*Br is misschien wel heel lelijk, maar is voor nu een snelle oplossing*/}
                                 <br/>
@@ -100,11 +105,11 @@ class EditProfilePage extends React.Component {
                                 <button className="btn amber darken-1">Save changes</button>
                             </div>
                         </form>
-                        <Upload/>
                         <div className="row">
                             {/*TODO: ervoor zorgen dat deze rechts op de pagina komt te staan*/}
                             <Link className="btn amber darken-1" to="/change-email">Edit Email and password</Link>
                         </div>
+                        <Upload folder='users'/>
                     </div>
                     // de : betekent false: de gebruiker is niet ingelogt. Gebruiker krijgt error message.
                     : <div className="container">
