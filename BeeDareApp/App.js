@@ -8,6 +8,7 @@ import React, { Component } from 'react';
 import Login from './components/LoginScreen/Login.js';
 import { Navigator} from "./router";
 import { Platform, StyleSheet, Text, View } from 'react-native';
+import NewsfeedMessage from './components/Newsfeed/NewsfeedMessage';
 
 export default class App extends Component {
   constructor(props) {
@@ -17,7 +18,7 @@ export default class App extends Component {
 
   render() {
     return (
-        <Login/>
+        <NewsfeedMessage/>
     );
   }
 }
