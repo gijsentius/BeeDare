@@ -12,6 +12,7 @@ class UserProvider extends React.Component {
         this.state = {
             loggedInUsername: '',
             isAuthenticated: false,
+            toke: null,
 
             authenticate: (data) => {
                 console.log(data);
@@ -21,13 +22,13 @@ class UserProvider extends React.Component {
                 })
                     .then(response => response.json())
                     .then(data => this.setState({isAuthenticated: data['login'],
-                        loggedInUsername: data['username']}))
+                        loggedInUsername: data['username'], token: data['token']}))
                     .catch(error => console.log(error));
             },
 
             signout: () => {
 
-                fetch('http://localhost:5000/auth/logout')
+                fetch('http://localhost:5000/auth/logout/' +this.state.loggedInUsername + "/" + this.state.token)
                     .then(response => response.json())
                     .then(data => this.setState({isAuthenticated: data['login'],
                         loggedInUsername: data['username']}))
