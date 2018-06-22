@@ -6,6 +6,7 @@
 
 import React, { Component } from 'react';
 import Login from './components/LoginScreen/Login.js';
+import { Navigator} from "./router";
 import { Platform, StyleSheet, Text, View } from 'react-native';
 
 export default class App extends Component {
