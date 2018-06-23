@@ -101,23 +101,13 @@ def editconfidential(username):
 def hive():
     content = request.get_json()
     try:
-        result = db.session.query(User).filter_by(id=content['id']).first()
+        hive = db.session.query(Hive).filter_by(id=content['hive_id']).first()
     except KeyError as e:
         return jsonify({"error": str(e) + " not given or invalid"}), 401
-    if result is not None:
-        try:
-            hive = db.session.query(Hive).filter_by(id=content['hive_id']).first()
-            members = db.session.query(ColonyMembers).filter(ColonyMembers.follower_id.like("%" + content['hive_id'] + "%")).all()
-            dares = db.session.query(UserDares).filter(UserDares.id.like("%" + content['hive_id'] + "%")).all()
-        except KeyError as e:
-            return jsonify({"error": str(e) + " not given or invalid"}), 401
-        response = jsonify({
-            'hive': [hive.id, hive.have_name, hive.image, hive.total_score_members, hive.beekeeper],
-            'members': [[item.id] for item in members],
-            'dares': [[item.id] for item in dares],
-        })
-        return response, 200
-    return jsonify({}), 401
+    response = jsonify({
+        'hive': [hive.id, hive.hive_name, hive.image, hive.total_score_members, hive.beekeeper],
+    })
+    return response, 200
 
 
 @profile_blueprint.route('/newsfeed/<user>', methods=['GET'])

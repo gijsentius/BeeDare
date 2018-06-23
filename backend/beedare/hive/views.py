@@ -105,3 +105,23 @@ def getHives():
             list
         ), 200
     return jsonify({"error": "user_not_found"}), 401
+
+
+@hive_blueprint.route('/members/<hive_id>', methods=["GET"])
+def getMembers(hive_id):
+    try:
+        hives = db.session.query(ColonyMembers).filter_by(hive_id=hive_id).all()
+    except KeyError as e:
+        return jsonify({"error": str(e) + " not given or invalid"}), 401
+    if hives is not None:
+        list = []
+        for item in hives:
+            list.append(
+                {
+                    "follower_id": item.follower_id,
+                    "hive_id": item.hive_id,
+                })
+        return jsonify(
+            list
+        ), 200
+    return jsonify({"error": "user_not_found"}), 401

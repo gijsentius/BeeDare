@@ -15,6 +15,7 @@ import FriendPage from "../friends/FriendPage";
 import UserProvider from "../UserProvider"
 import {UserContext} from "../UserProvider";
 import HivesPage from "../hives/HivesPage";
+import HivePage from "../profile/HivePage";
 
 // Idea/ source for PrivateRouter from https://tylermcginnis.com/react-router-protected-routes-authentication/
 
@@ -75,10 +76,12 @@ class App extends Component {
                             <PrivateRoute path="/edit-profile" component={EditProfilePage}/>
                             <Route path="/friends" component={FriendPage}/>
                             <Route path="/hives" component={HivesPage}/>
+                            <Route path="/hive/:name" component={HivePage}/>
                         </div>
                         <div>
                             <Route exact path="/" component={LandingPage}/>
                         </div>
+
                     </div>
                 </Router>
             </UserProvider>
