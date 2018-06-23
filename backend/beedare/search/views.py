@@ -13,7 +13,7 @@ def search():
 @search_blueprint.route('/users/<query>', methods=['GET'])
 def search_users(query):
     try:
-        result = db.session.query(User).filter(User.username.like("%" + query + "%")).all()
+        result = db.session.query(User).filter(User.username.contains(query.replace('+', ' '))).all()
     except KeyError as e:
         return jsonify({"error": str(e) + " not given or invalid"}), 401
     if result is not None:
@@ -26,7 +26,7 @@ def search_users(query):
 @search_blueprint.route('/hives/<query>', methods=['GET'])
 def search_hives(query):
     try:
-        result = db.session.query(Hive).filter(Hive.hive_name.like("%" + query + "%")).all()
+        result = db.session.query(Hive).filter(Hive.hive_name.contains(query.replace('+', ' '))).all()
     except KeyError as e:
         return jsonify({"error": str(e) + " not given or invalid"}), 401
     if result is not None:
@@ -39,7 +39,7 @@ def search_hives(query):
 @search_blueprint.route('/dares/<query>', methods=['GET'])
 def search_challenges(query):
     try:
-        result = db.session.query(Dare).filter(Dare.body.like("%" + query + "%")).all()
+        result = db.session.query(Dare).filter(Dare.body.contains(query.replace('+', ' '))).all()
     except KeyError as e:
         return jsonify({"error": str(e) + " not given or invalid"}), 401
     if result is not None:

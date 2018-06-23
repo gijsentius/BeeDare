@@ -35,7 +35,7 @@ class HivesPage extends React.Component {
         let listItems;
 
         listItems = hives.map((item) =>
-            <div onClick={(e) => this.goToHive(e, item.id)} style={{cursor:'pointer'}}>
+            <div style={{cursor:'pointer'}}>
                 <div className="item dare-col">
                     <Hive name={item.hiveName} content={item.totalScore} image="https://placeimg.com/400/400/nature"/>
                 </div>

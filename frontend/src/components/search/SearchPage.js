@@ -4,6 +4,7 @@ import SearchResults from './SearchResults';
 import Icon from "../icon/Icon";
 import Hive from "../hives/Hive";
 import ChallengeCard from "../challenge/ChallengeCard";
+import "../block/Block.css";
 
 class SearchPage extends Component {
     constructor() {
@@ -12,7 +13,8 @@ class SearchPage extends Component {
             searchResults: [],
             userResults: [],
             hiveResults: [],
-            dareResults: []
+            dareResults: [],
+            query: ''
         };
         this.search = this.search.bind(this);
     }
@@ -24,6 +26,7 @@ class SearchPage extends Component {
     }
 
     fetchResults(searchQuery) {
+        this.setState({query: searchQuery});
         fetch('http://localhost:5000/search/users/' + searchQuery)
             .then(response => response.json())
             .then(data => this.setState({userResults: data.result}))
@@ -44,10 +47,8 @@ class SearchPage extends Component {
         return (
             <div>
                 <SearchBar search={this.search}/>
-                <SearchResults results={this.state.searchResults}/>
-                {console.log(this.state.userResults)}
+                {/*<SearchResults results={this.state.searchResults}/>*/}
                 {console.log(this.state.hiveResults)}
-                {console.log(this.state.dareResults)}
                 {this.getItems()}
             </div>
         );
@@ -55,36 +56,72 @@ class SearchPage extends Component {
 
     getItems() {
         let userList = [];
+        let startUser = [];
         let hiveList = [];
+        let startHive = [];
         let dareList = [];
+        let startDare = [];
+
         for (let i = 0; i < this.state.userResults.length; i++) {
-            userList.push(<div className='search-result-box item' style={{maxWidth: '15vw'}}><Icon
-                action={() => alert(this.state.userResults[i][0])}/>
-                <p className='text'>{this.state.userResults[i][0]}</p></div>)
+            if (this.state.userResults[i][0].toLowerCase().startsWith(this.state.query.toLowerCase())) {
+                startUser.push(<div className='search-result-box item' style={{maxWidth: '15vw'}}><Icon
+                    action={() => alert(this.state.userResults[i][0])}/>
+                    <p className='text'>{this.state.userResults[i][0]}</p></div>)
+            }
+            else {
+                userList.push(<div className='search-result-box item' style={{maxWidth: '15vw'}}><Icon
+                    action={() => alert(this.state.userResults[i][0])}/>
+                    <p className='text'>{this.state.userResults[i][0]}</p></div>)
+            }
         }
         for (let i = 0; i < this.state.hiveResults.length; i++) {
-            hiveList.push(<div className='search-result-box item'><Hive name={this.state.hiveResults[i][0]}/></div>)
+            if (this.state.hiveResults[i][0].toLowerCase().startsWith(this.state.query.toLowerCase())) {
+                startHive.push(
+                    <div style={{cursor: 'pointer'}}>
+                        <div className="item dare-col">
+                            <Hive name={this.state.hiveResults[i][0]} content={this.state.hiveResults[i][2]}
+                                  image="https://placeimg.com/400/400/nature"/>
+                        </div>
+                    </div>)
+                //     <div className='search-result-box item'>
+                //         <Hive name={this.state.hiveResults[i][0]} content={this.state.hiveResults[i][2]} image="https://placeimg.com/400/400/nature"/>
+                // </div>)
+            }
+            else {
+                hiveList.push(<div className='search-result-box item'><Hive name={this.state.hiveResults[i][0]}/>
+                </div>)
+            }
         }
         for (let i = 0; i < this.state.dareResults.length; i++) {
-            dareList.push(<div className='search-result-box'><ChallengeCard description={this.state.dareResults[i][2]}
-                                                                            reward={this.state.dareResults[i][2]}
-                                                                            title={this.state.dareResults[i][2]}/>
-            </div>)
+            if (this.state.dareResults[i][2].toLowerCase().startsWith(this.state.query.toLowerCase())) {
+                startDare.push(<div className='search-result-box'><ChallengeCard
+                    description={this.state.dareResults[i][2]}
+                    reward={this.state.dareResults[i][2]}
+                    title={this.state.dareResults[i][2]}/>
+                </div>)
+            }
+            else {
+                dareList.push(<div className='search-result-box'><ChallengeCard
+                    description={this.state.dareResults[i][2]}
+                    reward={this.state.dareResults[i][2]}
+                    title={this.state.dareResults[i][2]}/>
+                </div>)
+            }
         }
         return <div>
             <div className='card'>
                 <h6 className="center">Users</h6>
-                <div className="search-results row">{userList}</div>
+                <div className="search-results row">{startUser}{userList}</div>
                 <br/>
             </div>
             <div className='card'>
                 <h6 className="center">Hives</h6>
-                <div className="search-results">{hiveList}</div>
+                <div className="search-results">{startHive}{hiveList}</div>
                 <br/>
             </div>
             <div className='card'>
                 <h6 className="center">Dares</h6>
-                <div className="search-results">{dareList}</div>
+                <div className="search-results">{startDare}{dareList}</div>
                 <br/>
             </div>
         </div>
