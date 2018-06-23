@@ -4,6 +4,7 @@ import SearchResults from './SearchResults';
 import Icon from "../icon/Icon";
 import Hive from "../hives/Hive";
 import ChallengeCard from "../challenge/ChallengeCard";
+import "../block/Block.css";
 
 class SearchPage extends Component {
     constructor() {
@@ -75,8 +76,16 @@ class SearchPage extends Component {
         }
         for (let i = 0; i < this.state.hiveResults.length; i++) {
             if (this.state.hiveResults[i][0].toLowerCase().startsWith(this.state.query.toLowerCase())) {
-                startHive.push(<div className='search-result-box item'><Hive name={this.state.hiveResults[i][0]}/>
-                </div>)
+                startHive.push(
+                    <div style={{cursor: 'pointer'}}>
+                        <div className="item dare-col">
+                            <Hive name={this.state.hiveResults[i][0]} content={this.state.hiveResults[i][2]}
+                                  image="https://placeimg.com/400/400/nature"/>
+                        </div>
+                    </div>)
+                //     <div className='search-result-box item'>
+                //         <Hive name={this.state.hiveResults[i][0]} content={this.state.hiveResults[i][2]} image="https://placeimg.com/400/400/nature"/>
+                // </div>)
             }
             else {
                 hiveList.push(<div className='search-result-box item'><Hive name={this.state.hiveResults[i][0]}/>
