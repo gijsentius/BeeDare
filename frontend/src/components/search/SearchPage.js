@@ -21,7 +21,6 @@ class SearchPage extends Component {
 
     search(input) {
         let searchQuery = input.split(' ').join('+'); // to split with multiple seperators use regex
-        console.log(searchQuery);
         this.fetchResults(searchQuery);
     }
 

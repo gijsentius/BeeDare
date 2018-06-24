@@ -97,15 +97,15 @@ def editconfidential(username):
     return jsonify({}), 401
 
 
-@profile_blueprint.route('/hive', methods=['POST'])
-def hive():
-    content = request.get_json()
+@profile_blueprint.route('/hive/<hive_name>', methods=['GET'])
+def hive(hive_name):
     try:
-        hive = db.session.query(Hive).filter_by(id=content['hive_id']).first()
+        hive = db.session.query(Hive).filter_by(hive_name=hive_name).first()
+        keeper = db.session.query(User).filter_by(user_id=hive.beekeeper).first()
     except KeyError as e:
         return jsonify({"error": str(e) + " not given or invalid"}), 401
     response = jsonify({
-        'hive': [hive.id, hive.hive_name, hive.image, hive.total_score_members, hive.beekeeper],
+        'hive': [hive.id, hive.hive_name, hive.image, hive.total_score_members, keeper.username],
     })
     return response, 200
 

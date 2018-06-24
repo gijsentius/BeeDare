@@ -94,12 +94,13 @@ def getHives():
     if hives is not None:
         list = []
         for item in hives:
+            keeper = db.session.query(User).filter_by(user_id=item.id).first()
             list.append(
                 {
                     "hiveName": item.hive_name,
                     "images": item.image,
                     "totalScore": item.total_score_members,
-                    "beekeeper": item.beekeeper,
+                    "beekeeper": keeper.username,
                 })
         return jsonify(
             list
@@ -116,11 +117,8 @@ def getMembers(hive_id):
     if hives is not None:
         list = []
         for item in hives:
-            list.append(
-                {
-                    "follower_id": item.follower_id,
-                    "hive_id": item.hive_id,
-                })
+            name = db.session.query(User).filter_by(user_id=item.follower_id).first()
+            list.append(name.username)
         return jsonify(
             list
         ), 200
