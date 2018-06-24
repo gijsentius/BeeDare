@@ -3,6 +3,7 @@ import OpenChallenges from "../challenge/OpenChallenges";
 import Profile from "../user_interaction/Profile";
 import CompletedChallenges from "../challenge/completedChallenges";
 import './Common.css'
+import HiveProfile from "../user_interaction/HiveProfile";
 
 class HivePage extends Component {
 
@@ -20,6 +21,16 @@ class HivePage extends Component {
 
     componentDidMount()
     {
+        fetch('http://localhost:5000/profile/hive/' + this.props.match.params.name)
+            .then(response => response.json())
+            .then(data => this.setState({profileInfo: data}))
+            .catch(error => console.log(error));
+
+        fetch('http://127.0.0.1:5000/hive/members/' + this.props.match.params.name)
+            .then(response => response.json())
+            .then(data => this.setState({members: data}))
+            .catch(error => console.log(error));
+
         // TODO Fix these fetches!
 
         // TODO make this open challenges for hives
@@ -28,21 +39,10 @@ class HivePage extends Component {
             .then(data => this.setState({openChallenges: data}))
             .catch(error => console.log(error));
 
-        // TODO fix fetch
-        fetch('http://localhost:5000/profile/hive')
-            .then(response => response.json())
-            .then(data => this.setState({profileInfo: data}))
-            .catch(error => console.log(error));
-
         // TODO get right challenges
         fetch('http://localhost:5000/dares/')
             .then(response => response.json())
             .then(data => this.setState({completedChallenges: data}))
-            .catch(error => console.log(error));
-
-        fetch('http://127.0.0.1:5000/hive/members/' + this.state.hive_id)
-            .then(response => response.json())
-            .then(data => this.setState({members: data}))
             .catch(error => console.log(error));
     }
 
@@ -52,23 +52,25 @@ class HivePage extends Component {
             //    dit stukje code zorgt ervoor dat je geen undefined krijgt
         }
         const {openChallenges, completedChallenges, members} = this.state;
-        const profileInfo = this.state.profileInfo[0];
+        const profileInfo = this.state.profileInfo.hive;
 
         return (
             <div>
                 <h1>{this.props.match.params.name}</h1>
                 <div className="row">
+                    {/*Change*/}
                     <div className="col s2 m3">
                         <h6 className="center">Open Dares</h6>
                         <OpenChallenges openChallenges={openChallenges}/>
                     </div>
                     <div className="col s4 m6">
-                        <h6 className="center">Achieved Dares</h6>
-                        <CompletedChallenges completedChallenges={completedChallenges}/>
+                        <h6 className="center">Members</h6>
+                        <h6>{members}</h6>
                     </div>
+                    {/*//*/}
                     <div className="col s2 m3">
-                        <h6 className="center">Profile</h6>
-                        <Profile profileInfo={profileInfo}/>
+                        <h6 className="center">Hive</h6>
+                        <HiveProfile profileInfo={profileInfo}/>
                     </div>
                 </div>
             </div>
