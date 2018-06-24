@@ -117,13 +117,8 @@ def getMembers(hive_id):
     if hives is not None:
         list = []
         for item in hives:
-            keeper = db.session.query(User).filter_by(user_id=item.beekeeper).first()
-            list.append(
-                {
-                    "follower_id": item.follower_id,
-                    "hive_id": item.hive_id,
-                    "beekeeper": keeper
-                })
+            name = db.session.query(User).filter_by(user_id=item.follower_id).first()
+            list.append(name.username)
         return jsonify(
             list
         ), 200
