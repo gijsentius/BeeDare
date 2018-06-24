@@ -1,13 +1,14 @@
-import React, { Component } from 'react';
+import React, {Component} from 'react';
 import OpenChallenges from "../challenge/OpenChallenges";
 import Profile from "../user_interaction/Profile";
 import CompletedChallenges from "../challenge/completedChallenges";
 import './Common.css'
 import HiveProfile from "../user_interaction/HiveProfile";
+import Icon from "../icon/Icon";
 
 class HivePage extends Component {
 
-    constructor(props){
+    constructor(props) {
         super(props);
         this.state = {
             openChallenges: [],
@@ -19,16 +20,10 @@ class HivePage extends Component {
         };
     }
 
-    componentDidMount()
-    {
+    componentDidMount() {
         fetch('http://localhost:5000/profile/hive/' + this.props.match.params.name)
             .then(response => response.json())
             .then(data => this.setState({profileInfo: data}))
-            .catch(error => console.log(error));
-
-        fetch('http://127.0.0.1:5000/hive/members/' + this.props.match.params.name)
-            .then(response => response.json())
-            .then(data => this.setState({members: data}))
             .catch(error => console.log(error));
 
         // TODO Fix these fetches!
@@ -47,12 +42,19 @@ class HivePage extends Component {
     }
 
     render() {
-        if (!this.props.match.params.name){
+        if (!this.props.match.params.name) {
             return <div/>
             //    dit stukje code zorgt ervoor dat je geen undefined krijgt
         }
-        const {openChallenges, completedChallenges, members} = this.state;
+        const {openChallenges, completedChallenges} = this.state;
         const profileInfo = this.state.profileInfo.hive;
+
+        if(this.state.profileInfo.hive) {
+            fetch('http://127.0.0.1:5000/hive/members/' + this.state.profileInfo.hive[0])
+                .then(response => response.json())
+                .then(data => this.setState({members: data}))
+                .catch(error => console.log(error));
+        }
 
         return (
             <div>
@@ -65,7 +67,7 @@ class HivePage extends Component {
                     </div>
                     <div className="col s4 m6">
                         <h6 className="center">Members</h6>
-                        <h6>{members}</h6>
+                        <h6>{this.state.members}</h6>
                     </div>
                     {/*//*/}
                     <div className="col s2 m3">
