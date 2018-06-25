@@ -27,7 +27,7 @@ class HiveProfile extends Component {
                             <Icon image={hive_profile[2]}/>
                             <div className="rightnext">
                                 <li className="btn-floating btn-small amber darken-1">
-                                    <Link to="/edit-profile"><i className="material-icons">edit</i></Link></li>
+                                    <Link to={"/edit-hive/" + hive_profile[1]}><i className="material-icons">edit</i></Link></li>
                             </div>
                         </div>
                     </div>
