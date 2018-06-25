@@ -16,6 +16,7 @@ def addDataToDB():
                     , location=fakeDataFactory.city(), image='noneexistent', score=fakeDataFactory.random_number()
                     , last_seen=fakeDataFactory.time(pattern="%H:%M:%S", end_datetime=None)
                     , username=fakeDataFactory.user_name(), email=fakeDataFactory.email(), rank=fakeDataFactory.word())
+        user.set_password("wachtwoord")
         addToSession.append(user)
 
         message = Message(body=fakeDataFactory.text(max_nb_chars=200, ext_word_list=None), author_id=randint(1, 50), timestamp=(datetime.datetime.now()+datetime.timedelta(seconds=randint(1, 50))))
