@@ -11,9 +11,9 @@ class FriendPage extends React.Component {
     }
 
     componentWillMount() {
-        fetch('http://localhost:5000/profile/user')
+        fetch('http://localhost:5000/profile/friends/' + this.props.match.params.user)
             .then(response => response.json())
-            .then(data => this.setState({friends: data}))
+            .then(data => this.setState({friends: data.friends}))
             .catch(error => console.log(error));
     }
 
@@ -23,10 +23,16 @@ class FriendPage extends React.Component {
             return <div/>
         }
 
-        let friends = this.state.friends;
+        let friends_list = [];
+
+        for(let friend in this.state.friends){
+            for(let item in friend){
+                friends_list.push(item)
+            }
+        }
 
         return(
-            <Friends friends={friends}/>
+            <Friends friends={friends_list}/>
         )
     }
 }

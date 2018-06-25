@@ -1,10 +1,8 @@
 import React, {Component} from 'react';
 import OpenChallenges from "../challenge/OpenChallenges";
-import Profile from "../user_interaction/Profile";
-import CompletedChallenges from "../challenge/completedChallenges";
 import './Common.css'
 import HiveProfile from "../user_interaction/HiveProfile";
-import Icon from "../icon/Icon";
+import Members from "./Members";
 
 class HivePage extends Component {
 
@@ -56,10 +54,6 @@ class HivePage extends Component {
                 .catch(error => console.log(error));
         }
 
-        for(let item in members){
-
-        }
-
         return (
             <div>
                 {/*<h1>{this.props.match.params.name}</h1>*/}
@@ -71,7 +65,7 @@ class HivePage extends Component {
                     </div>
                     <div className="col s4 m6">
                         <h6 className="center">Members</h6>
-                        {this.getMembers(members)}
+                        <Members members={members}/>
                     </div>
                     {/*//*/}
                     <div className="col s2 m3">
@@ -81,16 +75,6 @@ class HivePage extends Component {
                 </div>
             </div>
         );
-    }
-
-    getMembers(members) {
-        let list = [];
-        for(let i = 0; i < members.length; i++){
-            list.push(<div className='item col s4 m3 l2'><Icon/>{members[i]}</div>)
-        }
-        return <div className='card dare-cols'>
-            <h6>{list}</h6>
-        </div>
     }
 }
 
