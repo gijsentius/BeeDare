@@ -74,6 +74,27 @@ def editData(username):
     return jsonify({}), 401
 
 
+@profile_blueprint.route('/hive/edit/<hive_name>', methods=['POST'])
+def editDataHive(hive_name):
+    content = request.form
+    try:
+        hive = db.session.query(Hive).filter_by(hive_name=hive_name).first()
+    except KeyError as e:
+        return jsonify({"error": str(e) + " not given or invalid"}), 401
+    if hive is not None:
+        try:
+            hive.hive_name = content['hive_name']
+            hive.beekeeper = content['beekeeper']
+            db.session.commit()
+        except KeyError as e:
+            return jsonify({"error": str(e) + " not given or invalid"}), 401
+        response = jsonify({
+            "succes": "succes",
+        })
+        return response, 200
+    return jsonify({}), 401
+
+
 @profile_blueprint.route('/user/pwandeedit/<username>', methods=['POST'])
 def editconfidential(username):
     content = request.form
@@ -136,6 +157,30 @@ def news(user):
             return jsonify({"error": str(e) + " not given or invalid"}), 401
         response = jsonify({
             'messages': message_list,
+        })
+        return response, 200
+    return jsonify({}), 401
+
+
+@profile_blueprint.route('/friends/<user>', methods=['GET'])
+def getFriends(user):
+    friend_list = []
+    try:
+        friends = db.session.query(Friend).filter_by(followed_id=user).all()
+    except KeyError as e:
+        return jsonify({"error": str(e) + " not given or invalid"}), 401
+    if hive is not None:
+        try:
+            for friend in friends:
+                friend_list.append(
+                    {
+                        'friend': friend.follower_id,
+                    }
+                )
+        except KeyError as e:
+            return jsonify({"error": str(e) + " not given or invalid"}), 401
+        response = jsonify({
+            "friends": friend_list,
         })
         return response, 200
     return jsonify({}), 401

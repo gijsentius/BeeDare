@@ -1,6 +1,7 @@
 import React from "react";
 import './Friends.css';
 import Icon from "../icon/Icon";
+import Members from "../profile/Members";
 
 class Friends extends React.Component {
     constructor(props) {
@@ -17,18 +18,12 @@ class Friends extends React.Component {
     }*/
 
     render() {
-        let list = [];
-
-        this.props.friends.forEach((friend) => {
-            list.push(
-                <Icon image={friend.url} action={() => alert(friend.name)}/>
-            )
-        });
         return (
-            <div className="card col s12">
-            <div className="card-content">
-                <div className="friends">{<div className="col s6 m4 l1">{list}</div>}</div>
-            </div>
+            <div className='row'>
+                <div className="col s12 m12">
+                    <h6 className="center">Friends</h6>
+                    <Members members={this.props.friends}/>
+                </div>
             </div>
         );
     }
