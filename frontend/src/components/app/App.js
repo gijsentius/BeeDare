@@ -11,6 +11,7 @@ import NavLogo from './navbar_icon.png';
 import './App.css';
 import ChangeEmailPassword from "../editInformation/ChangeEmailPassword";
 import EditProfilePage from "../editInformation/EditProfilePage";
+import EditHivePage from "../editInformation/EditHivePage";
 import FriendPage from "../friends/FriendPage";
 import UserProvider from "../UserProvider"
 import {UserContext} from "../UserProvider";
@@ -74,6 +75,7 @@ class App extends Component {
                             <Route path="/search" component={SearchPage}/>
                             <PrivateRoute path="/change-email" component={ChangeEmailPassword}/>
                             <PrivateRoute path="/edit-profile" component={EditProfilePage}/>
+                            <PrivateRoute path="/edit-hive/:name" component={EditHivePage}/>
                             <Route path="/friends" component={FriendPage}/>
                             <Route path="/hives" component={HivesPage}/>
                             <Route path="/hive/:name" component={HivePage}/>

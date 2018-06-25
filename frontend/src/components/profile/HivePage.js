@@ -46,28 +46,32 @@ class HivePage extends Component {
             return <div/>
             //    dit stukje code zorgt ervoor dat je geen undefined krijgt
         }
-        const {openChallenges, completedChallenges} = this.state;
+        const {openChallenges, completedChallenges, members} = this.state;
         const profileInfo = this.state.profileInfo.hive;
 
-        if(this.state.profileInfo.hive) {
+        if (this.state.profileInfo.hive) {
             fetch('http://127.0.0.1:5000/hive/members/' + this.state.profileInfo.hive[0])
                 .then(response => response.json())
                 .then(data => this.setState({members: data}))
                 .catch(error => console.log(error));
         }
 
+        for(let item in members){
+
+        }
+
         return (
             <div>
-                <h1>{this.props.match.params.name}</h1>
+                {/*<h1>{this.props.match.params.name}</h1>*/}
                 <div className="row">
                     {/*Change*/}
                     <div className="col s2 m3">
-                        <h6 className="center">Open Dares</h6>
+                        <h6 className="center">Harvest Dares</h6>
                         <OpenChallenges openChallenges={openChallenges}/>
                     </div>
                     <div className="col s4 m6">
                         <h6 className="center">Members</h6>
-                        <h6>{this.state.members}</h6>
+                        {this.getMembers(members)}
                     </div>
                     {/*//*/}
                     <div className="col s2 m3">
@@ -77,6 +81,16 @@ class HivePage extends Component {
                 </div>
             </div>
         );
+    }
+
+    getMembers(members) {
+        let list = [];
+        for(let i = 0; i < members.length; i++){
+            list.push(<div className='item col s4 m3 l2'><Icon/>{members[i]}</div>)
+        }
+        return <div className='card dare-cols'>
+            <h6>{list}</h6>
+        </div>
     }
 }
 
