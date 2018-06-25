@@ -18,6 +18,7 @@ export default class OpenChallenges extends React.Component {
             username: null,
             token: null,
             renderOnce: true,
+            fakyfake: true,
         };
 
         this.showMenu = this.showMenu.bind(this);
@@ -49,9 +50,6 @@ export default class OpenChallenges extends React.Component {
         this.setState({showMenu: false, currentId: ""}, () => {
             document.removeEventListener('click', this.closeMenu);
         });
-        window.location.reload()
-        //    window reload is nodig omdat anders de data niet update en je steeds
-        //    probeert dezelfde challenge te verwijderen.
     }
 
     dareIsAchieved(event, id) {
