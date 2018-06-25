@@ -22,9 +22,9 @@ class ChallengeList extends Component {
 			<div className="dare-col">
 				<ChallengeCard
 					description={challenge.body}
-					reward={challenge.body}
-					title={challenge.body}
-					image={challenge.image}
+					reward={challenge.value}
+					title={challenge.value}
+					image="https://placeimg.com/400/400/nature"
 				/>
 			</div>
 		);

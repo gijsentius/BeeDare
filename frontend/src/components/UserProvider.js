@@ -12,7 +12,7 @@ class UserProvider extends React.Component {
         this.state = {
             loggedInUsername: '',
             isAuthenticated: false,
-            toke: null,
+            token: null,
 
             authenticate: (data) => {
                 console.log(data);
