@@ -32,7 +32,7 @@ class ProfilePage extends Component {
                 .then(data => this.setState({profileInfo: data}))
                 .catch(error => console.log(error));
 
-            fetch('http://localhost:5000/dares/')
+            fetch('http://localhost:5000/dares/completeddares/' + this.state.username + "/" + this.state.token)
                 .then(response => response.json())
                 .then(data => this.setState({completedChallenges: data}))
                 .catch(error => console.log(error));
