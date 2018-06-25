@@ -32,7 +32,7 @@ class UserProvider extends React.Component {
                     .then(response => response.json())
                     .then(data => this.setState({isAuthenticated: data['login'],
                         loggedInUsername: data['username']}))
-                    .catch(error => console.log(error));
+                    .catch(error => this.setState({isAuthenticated: false, loggedInUsername: "", token: null}));
             },
         };
     }
