@@ -1,6 +1,5 @@
 import React, {Component} from 'react';
 import Message from './Message'
-import scrollToComponent from "react-scroll-to-component";
 
 
 class Newsfeed extends Component {
@@ -14,11 +13,12 @@ class Newsfeed extends Component {
         }
     }
 
-    componentDidMount() {
-        fetch('http://localhost:5000/profile/newsfeed/' + username)
-            .then(response => response.json())
-            .then(data => this.setState({messages: data}));
-    }
+    // componentDidMount() {
+    //     let username = 'Vyxor';
+    //     fetch('http://localhost:5000/profile/newsfeed/' + username)
+    //         .then(response => response.json())
+    //         .then(data => this.setState({messages: data}));
+    // }
 
 
     render() {
@@ -33,8 +33,7 @@ class Newsfeed extends Component {
         return (
             <div>
                 {this.getList(this.state.number)}
-                <a className="waves-effect waves-light btn amber darken-1 center-component top-button"
-                    onClick={() => this.setState({number: this.state.number + 10})}>Load more</a>
+                {this.placeButton()}
             </div>
 
         ); //end return
@@ -52,6 +51,13 @@ class Newsfeed extends Component {
                 </div>
             </div>
         )
+    }
+
+    placeButton() {
+        if (this.state.number < this.state.messages.length) {
+            return <a className="waves-effect waves-light btn amber darken-1 center-component top-button"
+                      onClick={() => this.setState({number: this.state.number + 10})}>Load more</a>
+        }
     }
 }
 

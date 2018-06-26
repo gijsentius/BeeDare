@@ -1,49 +1,70 @@
 import React from 'react';
+import {UserContext} from "../UserProvider";
 
 class ChangeEmailPassword extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
             profileInfo: [],
+            username: null,
+            token: null,
+            renderOnce: true,
         };
         this.editInformation = this.editInformation.bind(this);
     }
 
-    componentWillMount() {
-        fetch('http://localhost:5000/profile/user')
-            .then(response => response.json())
-            .then(data => this.setState({profileInfo: data}))
-            .catch(error => console.log(error));
+    fetchImportant() {
+        if (this.state.username) {
+            fetch('http://localhost:5000/profile/user/' + this.state.username + "/" + this.state.token)
+                .then(response => response.json())
+                .then(data => this.setState({profileInfo: data}))
+                .catch(error => console.log(error));
+
+            this.setState({renderOnce: false});
+        }
     }
 
-    editInformation(event, username){
+    editInformation(event) {
         event.preventDefault();
 
         const form = event.target;
         const data = new FormData(form);
 
-        fetch('http://localhost:5000/profile/user/pwandeedit/' + username, {
+        fetch('http://localhost:5000/profile/user/pwandeedit/' + this.state.username + "/" + this.state.token, {
             method: 'POST',
             body: data,
         });
         window.location.reload()
     }
 
-
+    // comment voor merge
     render() {
 
-        if (!this.state.profileInfo[0]){
+        if(this.state.renderOnce){
+            return(
+                <UserContext.Consumer>{
+                    (context) => { this.setState({username: context.loggedInUsername,
+                        token: context.token}); this.fetchImportant() ;}
+                }
+                </UserContext.Consumer>
+            )
+        }
+
+
+        if (!this.state.profileInfo) {
             return <div/>
         }
 
-        const profileInfo = this.state.profileInfo[0];
+        const profileInfo = this.state.profileInfo;
 
-        return(
+        return (
+
             <div className="container">
-                <form onSubmit={(e) => this.editInformation(e, profileInfo.username)} className="col s12">
+                <form onSubmit={(e) => this.editInformation(e)} className="col s12">
                     <div className="row">
                         <div className="input-field col s12">
-                            <input name="email" placeholder={profileInfo.email} id="email_register" type="email" className="validate"/>
+                            <input name="email" placeholder={profileInfo.email} id="email_register" type="email"
+                                   className="validate"/>
                             <label className="active" htmlFor="email_register">Email</label>
                         </div>
                     </div>
@@ -61,7 +82,8 @@ class ChangeEmailPassword extends React.Component {
                     </div>
                     <div className="row">
                         <div className="input-field col s12">
-                            <input name="confirmnewpassword" id="confirm_password_new" type="password" className="validate"/>
+                            <input name="confirmnewpassword" id="confirm_password_new" type="password"
+                                   className="validate"/>
                             <label htmlFor="confirm_password_new">Confirm New Password</label>
                         </div>
                     </div>
@@ -69,7 +91,7 @@ class ChangeEmailPassword extends React.Component {
                         <div className="center" style={{boxAlign: "center"}}>
                             <button className="waves-effect waves-light btn #ffd54f amber lighten-1"
                             >
-                               Confirm
+                                Confirm
                             </button>
                         </div>
                     </div>

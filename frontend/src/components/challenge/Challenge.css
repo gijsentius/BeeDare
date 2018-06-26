@@ -69,3 +69,10 @@
 .buttonMargin {
     margin: 1vh;
 }
+
+.completedMH {
+    max-width: 15vh;
+    height: auto;
+    justify-content: flex-start !important;
+}
+

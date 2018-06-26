@@ -3,7 +3,7 @@ from flask import current_app, request, url_for
 from itsdangerous import TimedSerializer
 
 from werkzeug.security import generate_password_hash, check_password_hash
-from beedare import db
+from beedare import db, login_manager
 
 
 class Friend(db.Model):
@@ -17,8 +17,8 @@ class Friend(db.Model):
 
 class User(db.Model):
     __tablename__ = 'users'
-    id = db.Column(db.Integer, primary_key=True, unique=True, autoincrement=True)  #ID is de primary_key
-    first_name = db.Column(db.String(255))  # 30 character genoeg? Nee
+    id = db.Column(db.Integer, primary_key=True, unique=True, autoincrement=True)  # ID is de primary_key
+    first_name = db.Column(db.String(255))  # 30 character genoeg? Nee. REEEEE
     last_name = db.Column(db.String(255))
     age_cat = db.Column(db.String(50))  # ageCat staat voor ageCategory. Bijvoorbeeld 5-10 15-20 etc...
     location = db.Column(db.String(120))
@@ -27,7 +27,8 @@ class User(db.Model):
     last_seen = db.Column(db.String(50))
     username = db.Column(db.String(120), unique=True)
     password_hash = db.Column(db.String(255))
-    # PASSWORD MOET NOG AANGEPAST WORDEN ZODAT HET BEVEILIGD IS
+    is_active = db.Column(db.Boolean)  # is_active is er om te checken of het account geactiveerd is.
+    is_authenticated = db.Column(db.Boolean)
     email = db.Column(db.String(120), unique=True)
     rank = db.Column(db.String(255))
     confirmed = db.Column(db.Boolean(False))
@@ -38,13 +39,19 @@ class User(db.Model):
     def check_password(self, password):
         return check_password_hash(self.password_hash, password)
 
-    def generate_confirmation_token(self):
-        s = TimedSerializer(current_app.config['SECRET_KEY'], 'confirmation')
-        return s.dumps(self.id)
+    def generate_loginrequired_token(self):
+        s = TimedSerializer(current_app.config['SECRET_KEY'], 'loginrequired')
+        return s.dumps({'loginrequired': self.username})
 
-    def check_confirmation(self, token, expiration=3600):
-        s = TimedSerializer(current_app.config['SECRET_KEY'], 'confirmation')
-        return s.loads(token, max_age=expiration) == self.id
+    def check_loginrequired(self, token):
+        s = TimedSerializer(current_app.config['SECRET_KEY'], 'loginrequired')
+        try:
+            data = s.loads(token)
+        except:
+            return False
+        if data.get('loginrequired') != self.username:
+            return False
+        return True
 
     def confirm(self):
         self.confirmed = True
@@ -53,9 +60,17 @@ class User(db.Model):
         self.last_seen = datetime.datetime.now()
         db.session.add(self)
 
-    def __repr__(self):
-        return '<User %r>' % (self.username) + '<Email %r>' % (self.email) + '<Rank %r>' % (self.rank) + '<Last_Seen %r>' % self.last_seen
+    def get_id(self):
+        return self.user_id
 
+    def __repr__(self):
+        return '<User %r>' % (self.username) + '<Email %r>' % (self.email) + '<Rank %r>' % (
+            self.rank) + '<Last_Seen %r>' % self.last_seen
+
+
+@login_manager.user_loader
+def load_user(user_id):
+    return User.get(int(user_id))
 
 
 # source: https://github.com/miguelgrinberg/flasky/blob/master/app/models.py
@@ -114,7 +129,5 @@ class ColonyMembers(db.Model):
     follower_id = db.Column(db.Integer, db.ForeignKey('users.id'),
                             primary_key=True)
     hive_id = db.Column(db.Integer, db.ForeignKey('hives.id'),
-                            primary_key=True)
+                        primary_key=True)
     timestamp = db.Column(db.DateTime, default=datetime.datetime.now())
-
-

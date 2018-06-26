@@ -126,7 +126,7 @@ def dare_create():
     if result is not None:
         try:
             create_dare = Dare(name=content['dare'], body=content['body'], body_html=content['body_html'],
-                               image=content['image'])
+                               image=content['images'])
         except KeyError as e:
             return jsonify({"error": str(e) + " not given or invalid"}), 401
         db.session.add(create_dare)
@@ -138,7 +138,7 @@ def dare_create():
             "name": content['dare'],
             "body": content['body'],
             "body_html": content['body_html'],
-            "image": content['image']
+            "images": content['images']
         }), 200
     return jsonify({"error": "user_not_found"}), 401
 

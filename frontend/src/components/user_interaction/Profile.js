@@ -43,7 +43,7 @@ class Profile extends Component {
                 </div>
                 <div className="divider"/>
                 <div className="section center">
-                    <a><Link to="/friends"><h6>{'Friends: ' + profile.id}</h6></Link></a>
+                    <a><Link to={"/friends/" + profile.id}><h6>{'Friends: ' + profile.id}</h6></Link></a>
                 </div>
                 <div className="divider"/>
                 <div className="section center">

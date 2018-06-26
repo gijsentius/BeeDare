@@ -1,19 +1,23 @@
 import React from 'react';
 import './Challenge.css';
 import ChallengeIcon from "./ChallengeIcon";
+import {UserContext} from "../UserProvider";
 
 
 // source code = https://github.com/reactjs/react-modal
 // source code = https://blog.campvanilla.com/reactjs-dropdown-menus-b6e06ae3a8fe
 
 
-export default class OpenChallenges extends React.Component{
-    constructor(props){
+export default class OpenChallenges extends React.Component {
+    constructor(props) {
         super(props);
         this.state = {
             showMenu: false,
             currentId: "",
             returnAfterDelete: true,
+            username: null,
+            token: null,
+            renderOnce: true,
         };
 
         this.showMenu = this.showMenu.bind(this);
@@ -23,7 +27,7 @@ export default class OpenChallenges extends React.Component{
     showMenu(event, id) {
         event.preventDefault();
 
-        this.setState({ showMenu: true, currentId: id}, () => {
+        this.setState({showMenu: true, currentId: id}, () => {
             document.addEventListener('click', this.closeMenu);
         });
     }
@@ -32,7 +36,7 @@ export default class OpenChallenges extends React.Component{
 
         if (!this.dropdownMenu.contains(event.target)) {
 
-            this.setState({ showMenu: false, currentId: ""}, () => {
+            this.setState({showMenu: false, currentId: ""}, () => {
                 document.removeEventListener('click', this.closeMenu);
             });
 
@@ -41,20 +45,41 @@ export default class OpenChallenges extends React.Component{
 
     deleteDare(id, event) {
         event.preventDefault();
-        fetch('http://localhost:5000/dares/delete/' + id);
-        this.setState({ showMenu: false, currentId: ""}, () => {
+        fetch('http://localhost:5000/dares/delete/' + id + "/" + this.state.username + "/" + this.state.token);
+        this.setState({showMenu: false, currentId: ""}, () => {
             document.removeEventListener('click', this.closeMenu);
         });
-        window.location.reload()
-    //    window reload is nodig omdat anders de data niet update en je steeds
-    //    probeert dezelfde challenge te verwijderen.
+    }
+
+    dareIsAchieved(event, id) {
+        event.preventDefault();
+        fetch('http://localhost:5000/dares/achieved/' + id + "/" + this.state.username + "/" + this.state.token);
+        this.setState({showMenu: false, currentId: ""}, () => {
+            document.removeEventListener('click', this.closeMenu);
+        });
     }
 
 
-    render(){
+    render() {
+
+        if (this.state.renderOnce) {
+            return (
+                <UserContext.Consumer>{
+                    (context) => {
+                        this.setState({
+                            username: context.loggedInUsername,
+                            token: context.token
+                        });
+                        this.setState({renderOnce: false});
+                    }
+                }
+                </UserContext.Consumer>
+            )
+        }
+
         let openChallenges;
         let listItems;
-        if (this.props.openChallenges !== undefined){
+        if (this.props.openChallenges !== undefined) {
             openChallenges = this.props.openChallenges;
             // .map is eigenlijk al een forloop. Het zorgt ervoor dat listItems een nieuwe
             // array wordt, maar hij loop dus over openChallenges en stopt er vervolgens listItems in.
@@ -66,20 +91,31 @@ export default class OpenChallenges extends React.Component{
                         {/*Hierboven moet image nog toegevoegd worden als deze klaar is!!!!!*/}
                         <div className="rightnext">
                             {/*Gebruik van arrow functie om event en item.id mee te kunnen geven*/}
-                            <a id={item.id} onClick={(e)=>this.showMenu(e, item.id)} className="btn-floating btn-small amber darken-1">
+                            <a id={item.id} onClick={(e) => this.showMenu(e, item.id)}
+                               className="btn-floating btn-small amber darken-1">
                                 <i className="material-icons">edit</i></a>
                             {
                                 // onderstaande vergelijking is van essentieel belang, zodat er niet meerdere menu's
                                 // aangemaakt worden.
                                 this.state.showMenu && this.state.currentId === item.id
                                     ? (
-                                        <div id={item.id}
-                                             ref={(element) => {
-                                            this.dropdownMenu = element;
-                                        }}>
-                                            <button className="btn-small waves-effect red buttonMargin"
-                                                    id={item.id} onClick={(e)=>this.deleteDare(item.id, e)}>
-                                                <i className="material-icons">delete</i></button>
+                                        <div>
+                                            <div id={item.id}
+                                                 ref={(element) => {
+                                                     this.dropdownMenu = element;
+                                                 }}>
+                                                <button className="btn-small waves-effect red buttonMargin"
+                                                        id={item.id} onClick={(e) => this.deleteDare(item.id, e)}>
+                                                    <i className="material-icons">delete</i></button>
+                                            </div>
+                                            < div id={item.id}
+                                                  ref={(element) => {
+                                                      this.dropdownMenu = element;
+                                                  }}>
+                                                <button className="btn-small waves-effect green buttonMargin"
+                                                        id={item.id} onClick={(e) => this.dareIsAchieved(e, item.id)}>
+                                                    <i className="material-icons">check</i></button>
+                                            </div>
                                         </div>
                                     )
                                     : (
@@ -88,17 +124,17 @@ export default class OpenChallenges extends React.Component{
                             }
 
                         </div>
-                </div>
+                    </div>
                 </div>);
         }
 
-        return(
+        return (
             <div>
-                    <div className="card">
+                <div className="card">
                     <div className="card-content overflow-scroll-box">
                         {listItems}
                     </div>
-                    </div>
+                </div>
 
             </div>
         )

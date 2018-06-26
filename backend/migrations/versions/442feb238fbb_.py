@@ -1,8 +1,8 @@
 """empty message
 
-Revision ID: 05d79a51b4bd
+Revision ID: 442feb238fbb
 Revises: 
-Create Date: 2018-06-18 17:42:04.707943
+Create Date: 2018-06-22 12:14:37.957780
 
 """
 from alembic import op
@@ -10,7 +10,7 @@ import sqlalchemy as sa
 
 
 # revision identifiers, used by Alembic.
-revision = '05d79a51b4bd'
+revision = '442feb238fbb'
 down_revision = None
 branch_labels = None
 depends_on = None
@@ -29,7 +29,7 @@ def upgrade():
     sa.UniqueConstraint('name')
     )
     op.create_table('users',
-    sa.Column('id', sa.Integer(), nullable=False),
+    sa.Column('user_id', sa.Integer(), nullable=False),
     sa.Column('first_name', sa.String(length=255), nullable=True),
     sa.Column('last_name', sa.String(length=255), nullable=True),
     sa.Column('age_cat', sa.String(length=50), nullable=True),
@@ -42,17 +42,17 @@ def upgrade():
     sa.Column('email', sa.String(length=120), nullable=True),
     sa.Column('rank', sa.String(length=255), nullable=True),
     sa.Column('confirmed', sa.Boolean(create_constraint=False), nullable=True),
-    sa.PrimaryKeyConstraint('id'),
+    sa.PrimaryKeyConstraint('user_id'),
     sa.UniqueConstraint('email'),
-    sa.UniqueConstraint('id'),
+    sa.UniqueConstraint('user_id'),
     sa.UniqueConstraint('username')
     )
     op.create_table('friends',
     sa.Column('follower_id', sa.Integer(), nullable=False),
     sa.Column('followed_id', sa.Integer(), nullable=False),
     sa.Column('timestamp', sa.DateTime(), nullable=True),
-    sa.ForeignKeyConstraint(['followed_id'], ['users.id'], ),
-    sa.ForeignKeyConstraint(['follower_id'], ['users.id'], ),
+    sa.ForeignKeyConstraint(['followed_id'], ['users.user_id'], ),
+    sa.ForeignKeyConstraint(['follower_id'], ['users.user_id'], ),
     sa.PrimaryKeyConstraint('follower_id', 'followed_id')
     )
     op.create_table('hives',
@@ -61,7 +61,7 @@ def upgrade():
     sa.Column('image', sa.String(length=255), nullable=True),
     sa.Column('total_score_members', sa.Integer(), nullable=True),
     sa.Column('beekeeper', sa.Integer(), nullable=True),
-    sa.ForeignKeyConstraint(['beekeeper'], ['users.id'], ),
+    sa.ForeignKeyConstraint(['beekeeper'], ['users.user_id'], ),
     sa.PrimaryKeyConstraint('id'),
     sa.UniqueConstraint('hive_name'),
     sa.UniqueConstraint('id')
@@ -72,7 +72,7 @@ def upgrade():
     sa.Column('body_html', sa.Text(), nullable=True),
     sa.Column('timestamp', sa.DateTime(), nullable=True),
     sa.Column('author_id', sa.Integer(), nullable=True),
-    sa.ForeignKeyConstraint(['author_id'], ['users.id'], ),
+    sa.ForeignKeyConstraint(['author_id'], ['users.user_id'], ),
     sa.PrimaryKeyConstraint('id')
     )
     op.create_index(op.f('ix_posts_timestamp'), 'posts', ['timestamp'], unique=False)
@@ -81,14 +81,14 @@ def upgrade():
     sa.Column('owner_id', sa.Integer(), nullable=True),
     sa.Column('achieved', sa.Boolean(), nullable=True),
     sa.ForeignKeyConstraint(['id'], ['dares.id'], ),
-    sa.ForeignKeyConstraint(['owner_id'], ['users.id'], ),
+    sa.ForeignKeyConstraint(['owner_id'], ['users.user_id'], ),
     sa.PrimaryKeyConstraint('id')
     )
     op.create_table('colonymembers',
     sa.Column('follower_id', sa.Integer(), nullable=False),
     sa.Column('hive_id', sa.Integer(), nullable=False),
     sa.Column('timestamp', sa.DateTime(), nullable=True),
-    sa.ForeignKeyConstraint(['follower_id'], ['users.id'], ),
+    sa.ForeignKeyConstraint(['follower_id'], ['users.user_id'], ),
     sa.ForeignKeyConstraint(['hive_id'], ['hives.id'], ),
     sa.PrimaryKeyConstraint('follower_id', 'hive_id')
     )
@@ -100,7 +100,7 @@ def upgrade():
     sa.Column('disabled', sa.Boolean(), nullable=True),
     sa.Column('author_id', sa.Integer(), nullable=True),
     sa.Column('post_id', sa.Integer(), nullable=True),
-    sa.ForeignKeyConstraint(['author_id'], ['users.id'], ),
+    sa.ForeignKeyConstraint(['author_id'], ['users.user_id'], ),
     sa.ForeignKeyConstraint(['post_id'], ['posts.id'], ),
     sa.PrimaryKeyConstraint('id')
     )
