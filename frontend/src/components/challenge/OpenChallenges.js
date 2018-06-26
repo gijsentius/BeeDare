@@ -1,6 +1,7 @@
 import React from 'react';
 import './Challenge.css';
 import ChallengeIcon from "./ChallengeIcon";
+import {UserContext} from "../UserProvider";
 
 
 // source code = https://github.com/reactjs/react-modal
@@ -14,6 +15,9 @@ export default class OpenChallenges extends React.Component {
             showMenu: false,
             currentId: "",
             returnAfterDelete: true,
+            username: null,
+            token: null,
+            renderOnce: true,
         };
 
         this.showMenu = this.showMenu.bind(this);
@@ -41,7 +45,7 @@ export default class OpenChallenges extends React.Component {
 
     deleteDare(id, event) {
         event.preventDefault();
-        fetch('http://localhost:5000/dares/delete/' + id);
+        fetch('http://localhost:5000/dares/delete/' + id + "/" + this.state.username + "/" + this.state.token);
         this.setState({showMenu: false, currentId: ""}, () => {
             document.removeEventListener('click', this.closeMenu);
         });
@@ -50,8 +54,32 @@ export default class OpenChallenges extends React.Component {
         //    probeert dezelfde challenge te verwijderen.
     }
 
+    dareIsAchieved(event, id) {
+        event.preventDefault();
+        fetch('http://localhost:5000/dares/achieved/' + id + "/" + this.state.username + "/" + this.state.token);
+        this.setState({showMenu: false, currentId: ""}, () => {
+            document.removeEventListener('click', this.closeMenu);
+        });
+    }
+
 
     render() {
+
+        if (this.state.renderOnce) {
+            return (
+                <UserContext.Consumer>{
+                    (context) => {
+                        this.setState({
+                            username: context.loggedInUsername,
+                            token: context.token
+                        });
+                        this.setState({renderOnce: false});
+                    }
+                }
+                </UserContext.Consumer>
+            )
+        }
+
         let openChallenges;
         let listItems;
         if (this.props.openChallenges !== undefined) {
@@ -74,13 +102,23 @@ export default class OpenChallenges extends React.Component {
                                 // aangemaakt worden.
                                 this.state.showMenu && this.state.currentId === item.id
                                     ? (
-                                        <div id={item.id}
-                                             ref={(element) => {
-                                                 this.dropdownMenu = element;
-                                             }}>
-                                            <button className="btn-small waves-effect red buttonMargin"
-                                                    id={item.id} onClick={(e) => this.deleteDare(item.id, e)}>
-                                                <i className="material-icons">delete</i></button>
+                                        <div>
+                                            <div id={item.id}
+                                                 ref={(element) => {
+                                                     this.dropdownMenu = element;
+                                                 }}>
+                                                <button className="btn-small waves-effect red buttonMargin"
+                                                        id={item.id} onClick={(e) => this.deleteDare(item.id, e)}>
+                                                    <i className="material-icons">delete</i></button>
+                                            </div>
+                                            < div id={item.id}
+                                                  ref={(element) => {
+                                                      this.dropdownMenu = element;
+                                                  }}>
+                                                <button className="btn-small waves-effect green buttonMargin"
+                                                        id={item.id} onClick={(e) => this.dareIsAchieved(e, item.id)}>
+                                                    <i className="material-icons">check</i></button>
+                                            </div>
                                         </div>
                                     )
                                     : (

@@ -1,79 +1,57 @@
 from flask import jsonify, request
-from flask_login import login_required
-from sqlalchemy import update
 
 from beedare import db
 from beedare.models import User, Hive, ColonyMembers, Dare, Message, Friend, UserDares
 from . import *
 
 
-@profile_blueprint.route('/user', methods=['POST', 'GET'])
-# @login_required
-def user():
-    content = request.get_json()
+@profile_blueprint.route('/user/<username>/<token>', methods=['POST', 'GET'])
+def user(username, token):
     try:
-        user_data = db.session.query(User).all()
-        # .filter_by(id=content['id']).first()
+        user_data = db.session.query(User).filter_by(username=username).first()
     except KeyError as e:
         return jsonify({"error": str(e) + " not given or invalid"}), 401
-    if request.method == "GET":
+    if request.method == "GET" and user_data.check_loginrequired(token):
         if user_data is not None:
-            list = []
-            for item in user_data:
-                list.append(
-                    {
-                        "first_name": item.first_name,
-                        "username": item.username,
-                        "last_name": item.last_name,
-                        "email": item.email,
-                        "image": item.image,
-                        "id": item.user_id,
-                        "rank": item.rank,
-                    })
             return jsonify(
-                list
+                {
+                    "first_name": user_data.first_name,
+                    "username": user_data.username,
+                    "last_name": user_data.last_name,
+                    "email": user_data.email,
+                    "image": user_data.image,
+                    "id": user_data.id,
+                    "rank": user_data.rank,
+                }
             ), 200
-    try:
-        user_data = db.session.query(User).filter_by(username=content['username']).first()
-    except KeyError as e:
-        return jsonify({"error": str(e) + " not given or invalid"}), 401
-    if user_data is not None:
-        try:
-            friends = db.session.query(Friend).filter(Friend.follower_id.like("%" + str(user_data.id) + "%")).all()
-            dares = db.session.query(UserDares).filter(UserDares.owner_id.like("%" + str(user_data.id) + "%")).all()
-        except KeyError as e:
-            return jsonify({"error": str(e) + " not given or invalid"}), 401
-        return jsonify({
-            # TODO fix this
-            'user data': [user_data.id, user_data.username, user_data.score, user_data.image, user_data.rank, user_data.email],
-            'friends': [[item.id] for item in friend],
-            'dares': [[item.id] for item in dares],
-        }), 200
     return jsonify({}), 401
 
 
-@profile_blueprint.route('/user/edit/<username>', methods=['POST'])
-def editData(username):
+@profile_blueprint.route('/user/edit/<username>/<token>', methods=['POST'])
+def editData(username, token):
     content = request.form
     try:
         user = db.session.query(User).filter_by(username=username).first()
     except KeyError as e:
         return jsonify({"error": str(e) + " not given or invalid"}), 401
-    if user is not None:
-        try:
-            user.first_name = content['firstName']
-            user.last_name = content['lastName']
-            user.username = content['userName']
-            db.session.commit()
-        except KeyError as e:
-            return jsonify({"error": str(e) + " not given or invalid"}), 401
-        response = jsonify({
-            "succes": "succes",
-        })
-        return response, 200
+    if request.method == "POST" and user.check_loginrequired(token):
+        if user is not None:
+            try:
+                user.first_name = content['firstName']
+                user.last_name = content['lastName']
+                user.username = content['userName']
+                db.session.commit()
+            except KeyError as e:
+                return jsonify({"error": str(e) + " not given or invalid"}), 401
+            response = jsonify({
+                "succes": "Oui",
+            })
+            return response, 200
     return jsonify({}), 401
 
 
+@profile_blueprint.route('/user/pwandeedit/<username>/<token>', methods=['POST'])
+def editconfidential(username, token):
 @profile_blueprint.route('/hive/edit/<hive_name>', methods=['POST'])
 def editDataHive(hive_name):
     content = request.form
@@ -102,17 +80,16 @@ def editconfidential(username):
         user = db.session.query(User).filter_by(username=username).first()
     except KeyError as e:
         return jsonify({"error": str(e) + " not given or invalid"}), 401
-    if user is not None:
+    if request.method == "POST" and user.check_loginrequired(token):
         try:
-            print(content)
-            # user.email = content['email']
-            # user.password = content['lastName']
-            # user.username = content['userName']
-            # db.session.commit()
+            user.email = content['email']
+            user.password = content['lastName']
+            user.username = content['userName']
+            db.session.commit()
         except KeyError as e:
             return jsonify({"error": str(e) + " not given or invalid"}), 401
         response = jsonify({
-            "Result": "succes",
+            "Succes": "Oui",
         })
         return response, 200
     return jsonify({}), 401
@@ -131,13 +108,13 @@ def hive(hive_name):
     return response, 200
 
 
-@profile_blueprint.route('/newsfeed/<user>', methods=['GET'])
-def news(user):
+@profile_blueprint.route('/newsfeed/<username>/<token>', methods=['GET'])
+def news(username, token):
     try:
-        user_data = User.query.filter_by(username=user).first()
+        user_data = User.query.filter_by(username=username).first()
     except KeyError as e:
         return jsonify({"error": str(e) + " not given or invalid"}), 401
-    if user_data is not None:
+    if request.method == "GET" and user_data.check_loginrequired(token):
         message_list = []
         try:
             friends = Friend.query.filter_by(follower_id=(user_data.id)).all()

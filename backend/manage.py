@@ -21,14 +21,7 @@ manager.add_command('db', MigrateCommand)
 @manager.command
 def test():
     from beedare.fill_database import addDataToDB
-#     from beedare.makeOneUser import addUserWithPassToDB
-    # from beedare.models import User
-    # user = User(first_name="Dit is", last_name="Een Test")
-    # db.session.add(user)
-    # db.session.commit()
     addDataToDB()
-#     addUserWithPassToDB()
-
 
 if __name__ == "__main__":
     manager.run()
