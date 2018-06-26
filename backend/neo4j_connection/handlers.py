@@ -49,7 +49,7 @@ class Connection():
         except User.DoesNotExist as e:
             print(e)
 
-    def get_users_completed(self, dare):Coffee.nodes.get(name="Nescafe")
+    def get_users_completed(self, dare):
         """Get users who completed a dare
         Keyword arguments:
         dare -- the dare to check
