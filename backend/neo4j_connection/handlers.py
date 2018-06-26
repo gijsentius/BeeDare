@@ -16,12 +16,12 @@ class Connection():
         """
         new_user = User(username=username).save()
 
-    def create_dare(self, code):
+    def create_dare(self, code, score):
         """Create a dare in the database
         Keyword arguments:
         code -- the name or code of the dare to create
         """
-        new_dare = Dare(code=code).save()
+        new_dare = Dare(code=code, score=score).save()
 
     def completed_dare(self, username, dare):
         """Connect a dare with a user
@@ -38,21 +38,6 @@ class Connection():
         except Dare.DoesNotExist as e:
             print(e)
 
-    def started_dare(self, username, dare):
-        """Connect a dare with a user
-        Keyword arguments:
-        username -- the username of the user to connect
-        dare -- the dare to connect to
-        """
-        try:
-            user = User.nodes.get(username=username)
-            _dare = Dare.nodes.get(code=dare)
-            user.started_dare.connect(_dare)
-        except User.DoesNotExist as e:
-            print(e)
-        except Dare.DoesNotExist as e:
-            print(e)
-
     def get_completed_dares(self, username):
         """Get completed dares of a user
         Keyword arguments:
@@ -64,18 +49,7 @@ class Connection():
         except User.DoesNotExist as e:
             print(e)
 
-    def get_started_dares(self, username):
-        """Get started dares of a user
-        Keyword arguments:
-        username -- the username of the user
-        """
-        try:
-            user = User.nodes.get(username=username)
-            return user.started_dare.all()
-        except User.DoesNotExist as e:
-            print(e)
-
-    def get_users_completed(self, dare):
+    def get_users_completed(self, dare):Coffee.nodes.get(name="Nescafe")
         """Get users who completed a dare
         Keyword arguments:
         dare -- the dare to check
@@ -86,13 +60,14 @@ class Connection():
         except Dare.DoesNotExist as e:
             print(e)
 
-    def get_users_started(self, dare):
-        """Get users who started a dare
+    def get_user_score(self, username)
+        """Get the total score of a user
         Keyword arguments:
-        dare -- the dare to check
+        username -- the username of the user
         """
-        try:
-            _dare = Dare.nodes.get(code=dare)
-            return _dare.completed_dare.all()
-        except Dare.DoesNotExist as e:
-            print(e)
+        user = User.nodes.get(username=username)
+        completed_dares = user.completed_dare.all()
+        total = 0
+        for dare in completed_dares:
+            total += dare.score
+        return total
