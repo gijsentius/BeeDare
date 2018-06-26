@@ -24,12 +24,11 @@ def test():
 
 @manager.command
 def test_neo4j():
-    from neo4j_connection.handlers import Connection
-    conn = Connection()
+    from beedare import neoconn
     # conn.create_user(username='jelmer')
     # conn.create_dare(code='test')
-    conn.completed_dare(username='jelmer', dare='test')
-    for dare in conn.get_completed_dares('jelmer'):
+    neoconn.completed_dare(username='jelmer', dare='test')
+    for dare in neoconn.get_completed_dares('jelmer'):
         print(dare)
 
 

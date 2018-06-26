@@ -111,12 +111,14 @@ def delete_dare(dareid, username, token):
 
 @dares_blueprint.route('/achieved/<dareid>/<username>/<token>', methods=["GET"])
 def achieved_dare(dareid, username, token):
+    from beedare import neoconn
     try:
         user_data = db.session.query(User).filter_by(username=username).first()
     except KeyError as e:
         return jsonify({"error": str(e) + " not given or invalid"}), 401
     if request.method == "GET" and user_data.check_loginrequired(token):
         try:
+            neoconn.completed_dare(username, dareid)
             userdare = UserDares.query.filter_by(id=dareid).first()
         except KeyError as e:
             return jsonify({"error": str(e) + " not given or invalid"}), 401
