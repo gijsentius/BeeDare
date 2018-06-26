@@ -50,8 +50,6 @@ def editData(username, token):
     return jsonify({}), 401
 
 
-@profile_blueprint.route('/user/pwandeedit/<username>/<token>', methods=['POST'])
-def editconfidential(username, token):
 @profile_blueprint.route('/hive/edit/<hive_name>', methods=['POST'])
 def editDataHive(hive_name):
     content = request.form
@@ -73,8 +71,6 @@ def editDataHive(hive_name):
     return jsonify({}), 401
 
 
-@profile_blueprint.route('/user/pwandeedit/<username>', methods=['POST'])
-def editconfidential(username):
 @profile_blueprint.route('/user/pwandeedit/<username>/<token>', methods=['POST'])
 def editconfidential(username, token):
     content = request.form
