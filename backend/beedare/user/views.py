@@ -45,7 +45,8 @@ def user():
             return jsonify({"error": str(e) + " not given or invalid"}), 401
         return jsonify({
             # TODO fix this
-            'user data': [user_data.id, user_data.username, user_data.score, user_data.image, user_data.rank, user_data.email],
+            'user data': [user_data.id, user_data.username, user_data.score, user_data.image, user_data.rank,
+                          user_data.email],
             'friends': [[item.id] for item in friend],
             'dares': [[item.id] for item in dares],
         }), 200
@@ -172,10 +173,9 @@ def getFriends(user):
     if hive is not None:
         try:
             for friend in friends:
+                friend = db.session.query(User).filter_by(user_id=friend.follower_id).first()
                 friend_list.append(
-                    {
-                        'friend': friend.follower_id,
-                    }
+                    friend.username
                 )
         except KeyError as e:
             return jsonify({"error": str(e) + " not given or invalid"}), 401

@@ -73,7 +73,7 @@ class App extends Component {
                             <Route path="/challenges" component={ChallengeList}/>
                             <PrivateRoute path="/newsfeed" component={NewsFeedPage}/>
                             <PrivateRoute path="/profile" component={ProfilePage}/>
-                            <PrivateRoute path="/profile/:user" component={ViewedProfilePage}/>
+                            <PrivateRoute path="/user/:user" component={ViewedProfilePage}/>
                             <Route path="/search" component={SearchPage}/>
                             <PrivateRoute path="/change-email" component={ChangeEmailPassword}/>
                             <PrivateRoute path="/edit-profile" component={EditProfilePage}/>
