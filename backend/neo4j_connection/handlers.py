@@ -60,7 +60,7 @@ class Connection():
         except Dare.DoesNotExist as e:
             print(e)
 
-    def get_user_score(self, username)
+    def get_user_score(self, username):
         """Get the total score of a user
         Keyword arguments:
         username -- the username of the user
