@@ -18,7 +18,6 @@ export default class OpenChallenges extends React.Component {
             username: null,
             token: null,
             renderOnce: true,
-            fakyfake: true,
         };
 
         this.showMenu = this.showMenu.bind(this);
