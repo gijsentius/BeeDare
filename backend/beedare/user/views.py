@@ -97,13 +97,15 @@ def editconfidential(username, token):
 def hive(hive_name):
     try:
         hive = db.session.query(Hive).filter_by(hive_name=hive_name).first()
-        keeper = db.session.query(User).filter_by(user_id=hive.beekeeper).first()
+        keeper = db.session.query(User).filter_by(id=hive.beekeeper).first()
     except KeyError as e:
         return jsonify({"error": str(e) + " not given or invalid"}), 401
-    response = jsonify({
-        'hive': [hive.id, hive.hive_name, hive.image, hive.total_score_members, keeper.username],
-    })
-    return response, 200
+    if hive is not None and keeper is not None:
+        response = jsonify({
+            'hive': [hive.id, hive.hive_name, hive.image, hive.total_score_members, keeper.username],
+        })
+        return jsonify({response}), 200
+    return jsonify({"error": "error"}), 401
 
 
 @profile_blueprint.route('/newsfeed/<username>/<token>', methods=['GET'])
