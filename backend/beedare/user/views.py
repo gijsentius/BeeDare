@@ -75,6 +75,8 @@ def editDataHive(hive_name):
 
 @profile_blueprint.route('/user/pwandeedit/<username>', methods=['POST'])
 def editconfidential(username):
+@profile_blueprint.route('/user/pwandeedit/<username>/<token>', methods=['POST'])
+def editconfidential(username, token):
     content = request.form
     try:
         user = db.session.query(User).filter_by(username=username).first()
