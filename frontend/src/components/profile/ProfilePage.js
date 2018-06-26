@@ -22,6 +22,7 @@ class ProfilePage extends Component {
 
     fetchImportant() {
         if (this.state.username) {
+
             fetch('http://localhost:5000/dares/opendares/' + this.state.username + "/" + this.state.token)
                 .then(response => response.json())
                 .then(data => this.setState({openChallenges: data}))
@@ -36,8 +37,8 @@ class ProfilePage extends Component {
                 .then(response => response.json())
                 .then(data => this.setState({completedChallenges: data}))
                 .catch(error => console.log(error));
-
             this.setState({renderOnce: false});
+
         }
     }
 
@@ -51,7 +52,7 @@ class ProfilePage extends Component {
                     (context) => {
                         this.setState({
                             username: context.loggedInUsername,
-                            token: context.token
+                            token: context.token,
                         });
                         this.fetchImportant();
                     }

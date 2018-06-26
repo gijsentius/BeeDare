@@ -15,7 +15,6 @@ class UserProvider extends React.Component {
             token: null,
 
             authenticate: (data) => {
-                console.log(data);
                 fetch('http://localhost:5000/auth/login', {
                     method: 'POST',
                     body: data,
