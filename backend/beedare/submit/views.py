@@ -12,7 +12,7 @@ from . import *
 def add_message():
     content = request.form
     try:
-        result = db.session.query(User).filter_by(user_id=content['user_id']).first()
+        result = db.session.query(User).filter_by(id=content['user_id']).first()
     except KeyError as e:
         return jsonify({"error": str(e) + " not given or invalid"}), 401
     if result is not None:

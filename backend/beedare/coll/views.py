@@ -37,7 +37,7 @@ def messages(id):
     try:
         list = []
         result = db.session.query(Message).filter_by(author_id=id).all()
-        author = db.session.query(User).filter_by(user_id=id).first()
+        author = db.session.query(User).filter_by(id=id).first()
         for item in result:
             list.append(
                 {'body': item.body, 'html': item.body_html, 'author': author.username}

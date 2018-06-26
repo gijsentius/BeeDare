@@ -1,31 +1,36 @@
 import React from 'react';
 import {UserContext} from "../UserProvider";
-import Login from "../user_interaction/login";
-import NotLogIn from "../ErrorMessages/NotLogIn";
 
 class ChangeEmailPassword extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
             profileInfo: [],
+            username: null,
+            token: null,
+            renderOnce: true,
         };
         this.editInformation = this.editInformation.bind(this);
     }
 
-    componentWillMount() {
-        fetch('http://localhost:5000/profile/user')
-            .then(response => response.json())
-            .then(data => this.setState({profileInfo: data}))
-            .catch(error => console.log(error));
+    fetchImportant() {
+        if (this.state.username) {
+            fetch('http://localhost:5000/profile/user/' + this.state.username + "/" + this.state.token)
+                .then(response => response.json())
+                .then(data => this.setState({profileInfo: data}))
+                .catch(error => console.log(error));
+
+            this.setState({renderOnce: false});
+        }
     }
 
-    editInformation(event, username) {
+    editInformation(event) {
         event.preventDefault();
 
         const form = event.target;
         const data = new FormData(form);
 
-        fetch('http://localhost:5000/profile/user/pwandeedit/' + username, {
+        fetch('http://localhost:5000/profile/user/pwandeedit/' + this.state.username + "/" + this.state.token, {
             method: 'POST',
             body: data,
         });
@@ -35,16 +40,27 @@ class ChangeEmailPassword extends React.Component {
     // comment voor merge
     render() {
 
-        if (!this.state.profileInfo[0]) {
+        if(this.state.renderOnce){
+            return(
+                <UserContext.Consumer>{
+                    (context) => { this.setState({username: context.loggedInUsername,
+                        token: context.token}); this.fetchImportant() ;}
+                }
+                </UserContext.Consumer>
+            )
+        }
+
+
+        if (!this.state.profileInfo) {
             return <div/>
         }
 
-        const profileInfo = this.state.profileInfo[0];
+        const profileInfo = this.state.profileInfo;
 
         return (
 
             <div className="container">
-                <form onSubmit={(e) => this.editInformation(e, profileInfo.username)} className="col s12">
+                <form onSubmit={(e) => this.editInformation(e)} className="col s12">
                     <div className="row">
                         <div className="input-field col s12">
                             <input name="email" placeholder={profileInfo.email} id="email_register" type="email"

@@ -36,6 +36,7 @@ class NewsFeedPage extends React.Component {
             .then(data => this.setState({hives: data}))
             .catch(error => console.log(error));
 
+        // TODO get right ID
         fetch('http://localhost:5000/coll/messages/1')
             .then(response => response.json())
             .then(data => this.setState({messages: data.result}))

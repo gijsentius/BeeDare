@@ -2,6 +2,14 @@ import React, { Component } from 'react';
 import {View, Text, StyleSheet, Image, TouchableOpacity, TextInput, KeyboardAvoidingView} from 'react-native';
 
 class Login extends Component {
+    constructor(props) {
+        super(props);
+        this.state = { loggedIn: false };
+    }
+    handleSettingsPress = () => {
+        this.setState({loggedIn: true});
+        this.props.navigation.navigate('LandingScreen');
+    };
     render() {
         return (
             <View style={styles.container1}>
@@ -29,7 +37,7 @@ class Login extends Component {
                                    secureTextEntry/>
 
                         <TouchableOpacity style={styles.buttonContainer}
-                                          onPress={() => this.navigate('LandingScreen')}>
+                                          onPress={() => this.handleSettingsPress()}>
                             <Text  style={styles.buttonText}>LOGIN</Text>
                         </TouchableOpacity>
                         <Text style={styles.bottomLink}>Sign Up for BeeDare</Text>
@@ -39,6 +47,8 @@ class Login extends Component {
         );
     }
 }
+
+export default Login;
 
 // Dit is de CSS
 const styles = StyleSheet.create({
@@ -99,4 +109,4 @@ const styles = StyleSheet.create({
     }
 });
 
-export default Login
+
