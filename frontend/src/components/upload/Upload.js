@@ -6,7 +6,8 @@ class Upload extends Component {
         super(props);
         this.state = {
             pictures: [],
-            result: ''
+            result: '',
+            folder: this.props.folder
         };
         this.onDrop = this.onDrop.bind(this);
     }
@@ -19,7 +20,7 @@ class Upload extends Component {
 
     render() {
         return (
-            <div>
+            <div className='card'>
                 <ReactImageUploadComponent
                     withIcon={false}
                     buttonText='Change profile image'
@@ -28,7 +29,8 @@ class Upload extends Component {
                     maxFileSize={5242880}
                     withPreview={true}
                 />
-                <input type="button" value='submit' onClick={() => this.submit()}/>
+                <input className='waves-effect waves-light btn amber darken-1 center-component top-button' type="button"
+                       value='Submit change' onClick={() => this.submit()}/>
             </div>
         );
     }
@@ -36,7 +38,8 @@ class Upload extends Component {
     submit() {
         let formData = new FormData();
         formData.append('image', this.state.pictures[0]);
-        formData.append('name', 'image');
+        formData.append('name', 'PietHenk');
+        formData.append('folder', this.state.folder);
         fetch('http://127.0.0.1:5000/image', {
             method: 'POST',
             body: formData

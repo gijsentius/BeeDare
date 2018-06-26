@@ -13,7 +13,7 @@ class Icon extends React.Component {
     }
 
     componentDidMount() {
-        if (this.state.image === undefined) {
+        if (this.state.image === undefined || this.state.image === null || this.state.image === "noneexistent") {
             this.setState({image: personPlaceholder});
         }
         if (this.state.online === undefined) {
@@ -28,9 +28,10 @@ class Icon extends React.Component {
                      style={{'border': '3px solid black', 'marginLeft': '1%', 'marginRight': '1%'}}/>
             )
         }
-        else{
+        else {
             return (
-                <img className='icon' src={this.state.image} onClick={this.state.action} style={{'marginLeft': '1%', 'marginRight': '1%'}} alt=''/>
+                <img className='icon' src={this.state.image} onClick={this.state.action}
+                     style={{'marginLeft': '1%', 'marginRight': '1%'}} alt=''/>
             )
         }
     }

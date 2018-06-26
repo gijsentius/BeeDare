@@ -50,6 +50,27 @@ def editData(username, token):
     return jsonify({}), 401
 
 
+@profile_blueprint.route('/hive/edit/<hive_name>', methods=['POST'])
+def editDataHive(hive_name):
+    content = request.form
+    try:
+        hive = db.session.query(Hive).filter_by(hive_name=hive_name).first()
+    except KeyError as e:
+        return jsonify({"error": str(e) + " not given or invalid"}), 401
+    if hive is not None:
+        try:
+            hive.hive_name = content['hive_name']
+            hive.beekeeper = content['beekeeper']
+            db.session.commit()
+        except KeyError as e:
+            return jsonify({"error": str(e) + " not given or invalid"}), 401
+        response = jsonify({
+            "succes": "succes",
+        })
+        return response, 200
+    return jsonify({}), 401
+
+
 @profile_blueprint.route('/user/pwandeedit/<username>/<token>', methods=['POST'])
 def editconfidential(username, token):
     content = request.form
@@ -72,27 +93,17 @@ def editconfidential(username, token):
     return jsonify({}), 401
 
 
-@profile_blueprint.route('/hive', methods=['POST'])
-def hive():
-    content = request.get_json()
+@profile_blueprint.route('/hive/<hive_name>', methods=['GET'])
+def hive(hive_name):
     try:
-        result = db.session.query(User).filter_by(id=content['id']).first()
+        hive = db.session.query(Hive).filter_by(hive_name=hive_name).first()
+        keeper = db.session.query(User).filter_by(user_id=hive.beekeeper).first()
     except KeyError as e:
         return jsonify({"error": str(e) + " not given or invalid"}), 401
-    if result is not None:
-        try:
-            hive = db.session.query(Hive).filter_by(id=content['hive_id']).first()
-            members = db.session.query(ColonyMembers).filter(ColonyMembers.follower_id.like("%" + content['hive_id'] + "%")).all()
-            dares = db.session.query(UserDares).filter(UserDares.id.like("%" + content['hive_id'] + "%")).all()
-        except KeyError as e:
-            return jsonify({"error": str(e) + " not given or invalid"}), 401
-        response = jsonify({
-            'hive': [hive.id, hive.have_name, hive.image, hive.total_score_members, hive.beekeeper],
-            'members': [[item.id] for item in members],
-            'dares': [[item.id] for item in dares],
-        })
-        return response, 200
-    return jsonify({}), 401
+    response = jsonify({
+        'hive': [hive.id, hive.hive_name, hive.image, hive.total_score_members, keeper.username],
+    })
+    return response, 200
 
 
 @profile_blueprint.route('/newsfeed/<username>/<token>', methods=['GET'])
@@ -121,6 +132,30 @@ def news(username, token):
             return jsonify({"error": str(e) + " not given or invalid"}), 401
         response = jsonify({
             'messages': message_list,
+        })
+        return response, 200
+    return jsonify({}), 401
+
+
+@profile_blueprint.route('/friends/<user>', methods=['GET'])
+def getFriends(user):
+    friend_list = []
+    try:
+        friends = db.session.query(Friend).filter_by(followed_id=user).all()
+    except KeyError as e:
+        return jsonify({"error": str(e) + " not given or invalid"}), 401
+    if hive is not None:
+        try:
+            for friend in friends:
+                friend_list.append(
+                    {
+                        'friend': friend.follower_id,
+                    }
+                )
+        except KeyError as e:
+            return jsonify({"error": str(e) + " not given or invalid"}), 401
+        response = jsonify({
+            "friends": friend_list,
         })
         return response, 200
     return jsonify({}), 401
