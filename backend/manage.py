@@ -26,6 +26,16 @@ def test():
     # db.session.commit()
     addDataToDB()
 
+@manager.command
+def test_neo4j():
+    from neo4j_connection.handlers import Connection
+    conn = Connection()
+    # conn.create_user(username='jelmer')
+    # conn.create_dare(code='test')
+    conn.completed_dare(username='jelmer', dare='test')
+    for dare in conn.get_completed_dares('jelmer'):
+        print(dare)
+
 
 if __name__ == "__main__":
     manager.run()
