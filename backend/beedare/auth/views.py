@@ -66,11 +66,11 @@ def register():
         return jsonify({"error": error}), 401
     else:
         try:
-            # TODO password
             time = datetime.datetime.utcnow()
             user = User(first_name=content['firstname'], last_name=content['lastname'], email=content['email'],
-                        username=content['username'], score=0, age_cat=content['age_cat'], location=content['location'],
-                        image=['images'], last_seen=time, rank='New Bee')
+                        username=content['username'], score=0,
+                        last_seen=time, rank='New Bee')
+            user.set_password(content['password'])
         except KeyError as e:
             return jsonify({"error": str(e) + " not given or invalid"}), 401
         db.session.add(user)
@@ -83,8 +83,6 @@ def register():
             "last_name": content['lastname'],
             "email": content['email'],
             "username": content['username'],
-            "images": content['images'],
-            "location": content['location'],
             "last_seen": time
         }), 200
 
