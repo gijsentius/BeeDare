@@ -122,7 +122,6 @@ export default class OpenChallenges extends React.Component {
                                         null
                                     )
                             }
-
                         </div>
                     </div>
                 </div>);
@@ -135,7 +134,6 @@ export default class OpenChallenges extends React.Component {
                         {listItems}
                     </div>
                 </div>
-
             </div>
         )
     }
