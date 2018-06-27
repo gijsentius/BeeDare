@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { AppRegistry } from 'react-native';
+import {AppRegistry, StyleSheet} from 'react-native';
 import { Router, Scene } from 'react-native-router-flux';
 import { Provider } from 'react-redux';
 import { createStore, applyMiddleware } from 'redux';
@@ -12,13 +12,13 @@ import navStyles from './styles/navStyles';
 const store = createStore(reducer, applyMiddleware(thunk));
 
 
-class StarringApp extends Component {
+class starringApp extends Component {
     render() {
         return (
             <Provider store={store}>
                 <Router navigationBarStyle={navStyles.navBar} titleStyle={navStyles.navBarTitle} barButtonTextStyle={navStyles.barButtonTextStyle} barButtonIconStyle={navStyles.barButtonIconStyle}>
                     <Scene key="root">
-                        <Scene key="home" component={Home} initial title="Logo"/>
+                        <Scene key="home" component={Home} initial title="BeeDare"/>
                     </Scene>
                 </Router>
             </Provider>
@@ -26,4 +26,4 @@ class StarringApp extends Component {
     }
 }
 
-AppRegistry.registerComponent('starringApp', () => StarringApp);
+AppRegistry.registerComponent('starringApp', () => starringApp);

@@ -7,15 +7,15 @@ const {width, height} = Dimensions.get('window');
 
 export default StyleSheet.create({
     navBar: {
-        backgroundColor: '#fff'
+        backgroundColor: '#ffe082'
     },
     navBarTitle:{
-        color:'#989898'
+        color:'#000'
     },
     barButtonTextStyle:{
-        color:'#FFFFFF'
+        color:'#fff'
     },
     barButtonIconStyle:{
-        tintColor:'rgb(255,255,255)'
+        tintColor:'#000'
     }
 })

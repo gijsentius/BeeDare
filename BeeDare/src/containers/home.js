@@ -12,14 +12,7 @@ import Icon from 'react-native-vector-icons/FontAwesome';
 
 import data from '../data/users';
 class Home extends Component {
-    static renderRightButton(props){
-        return <Icon name="search" size={20}/>;
-    }
-
-    static renderLeftButton(props){
-        return <Icon name="envelope-o" size={20}/>;
-    }
-
+    
     render() {
         return (
             <View style={MainStyles.container}>
@@ -37,5 +30,3 @@ const mapStateToProps = state => ({
 const mapActionsToProps = dispatch => bindActionCreators(actionCreators, dispatch);
 
 export default connect(mapStateToProps, mapActionsToProps)(Home);
-
-//jmfhegugh

@@ -46,7 +46,6 @@ class Login extends Component {
 
 export default Login;
 
-// Dit is de CSS
 const styles = StyleSheet.create({
     container1: {
         flex: 1,
