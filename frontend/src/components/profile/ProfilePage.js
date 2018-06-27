@@ -17,6 +17,7 @@ class ProfilePage extends Component {
             username: null,
             token: null,
             renderOnce: true,
+            setRenderTrue: () => this.setState({renderOnce: true}),
         };
     }
 
@@ -38,7 +39,6 @@ class ProfilePage extends Component {
                 .then(data => this.setState({completedChallenges: data}))
                 .catch(error => console.log(error));
             this.setState({renderOnce: false});
-
         }
     }
 
@@ -77,7 +77,7 @@ class ProfilePage extends Component {
                 <div className="row">
                     <div className="col s2 m3">
                         <h6 className="center">Open Dares</h6>
-                        <OpenChallenges openChallenges={openChallenges}/>
+                        <OpenChallenges fetch={this.state.setRenderTrue} openChallenges={openChallenges}/>
                     </div>
                     <div className="col s4 m6">
                         <h6 className="center">Achieved Dares</h6>
