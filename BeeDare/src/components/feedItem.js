@@ -10,7 +10,8 @@ export default class FeedItem extends Component {
         super(props);
         const ds = new ListView.DataSource({rowHasChanged: () => false});
         this.state = {
-            dataSource: ds.cloneWithRows(this.props.pictures)
+            dataSource: ds.cloneWithRows(this.props.pictures),
+            messageList: 'oi nibba'
         };
     }
 
@@ -19,17 +20,14 @@ export default class FeedItem extends Component {
         return (
             <View style={[MainStyles.flex, MainStyles.flexCenter]}>
                 <View style={Styles.content}>
-                    <Image source={{uri: picture.url}} style={Styles.feedImage} resizeMode='contain'/>
+                    <Text style={Styles.feedMessage} resizeMode='contain'>{this.state.messageList}</Text>
                 </View>
                 <View style={Styles.bottom}>
-                    <View style={[MainStyles.flex, MainStyles.flexCenter, MainStyles.flexRow]}>
-                        {_.range(3).map(i => <Icon size={32} key={i} name={`star${picture.rating >= i + 1? '': '-o'}`}/>)}
-                    </View>
+                    <TouchableOpacity style={[MainStyles.flex, MainStyles.flexCenter]}>
+                        <Icon size={32} name="thumbs-up"/>
+                    </TouchableOpacity>
                     <TouchableOpacity style={[MainStyles.flex, MainStyles.flexCenter, Styles.messageButton]}>
                         <Icon size={32} name="comment"/>
-                    </TouchableOpacity>
-                    <TouchableOpacity style={[MainStyles.flex, MainStyles.flexCenter]}>
-                        <Icon size={32} name="share"/>
                     </TouchableOpacity>
                 </View>
             </View>
@@ -39,10 +37,10 @@ export default class FeedItem extends Component {
 
     render() {
         return (
-            <View style={{height: 500}}>
+            <View style={{height: 250}}>
                 <View style={Styles.header}>
                     <Image source={{uri: this.props.avatar}} style={Styles.avatar}/>
-                    <Text>{this.props.username}</Text>
+                    <Text style={Styles.feedUsername}>{this.props.username}</Text>
                     <TouchableOpacity>
                         <Icon size={24} name="ellipsis-h"/>
                     </TouchableOpacity>

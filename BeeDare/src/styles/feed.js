@@ -35,14 +35,21 @@ export default StyleSheet.create({
         borderWidth: 1,
         borderColor: '#000'
     },
-    feedImage: {
+    feedMessage: {
         flex: 1,
         flexDirection: 'row',
-        width
+        marginLeft: 150,
+        width,
+        color: '#000',
+        fontSize: 18
     },
     messageButton: {
         borderLeftWidth: 1,
         borderRightWidth: 1,
         borderColor: '#969696'
+    },
+    feedUsername: {
+        fontSize: 22,
+        color: '#000'
     }
 })
