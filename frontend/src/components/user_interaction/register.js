@@ -69,10 +69,16 @@ export default class Register extends React.Component {
 
     render() {
 
+        let errors;
+        if (this.state.message) {
+            errors = this.state.message.map((mes) => <div>{mes.message}</div>);
+        }
+
         return (
 
             <div className="card">
                 <div className="card-content">
+                    {errors ? <div>{errors}</div> : null}
                     <div className="row">
                         <form onSubmit={this.handleRegister}
                               className="col s12">
@@ -111,7 +117,7 @@ export default class Register extends React.Component {
                             <div className="row">
                                 <div className="input-field col s12">
                                     <input id="confirm_password_register" type="password" className="validate"
-                                           onChange={this.confirmPass}/>
+                                           onChange={this.handleConfirmPasswordChange}/>
                                     <label htmlFor="confirm_password_register">Confirm Password</label>
                                 </div>
                             </div>

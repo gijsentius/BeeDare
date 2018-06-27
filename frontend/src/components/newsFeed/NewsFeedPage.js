@@ -5,10 +5,8 @@ import Profile from "../user_interaction/Profile";
 import Newsfeed from "./Newsfeed";
 import './NewsFeed.css';
 import scrollToComponent from "react-scroll-to-component";
-import Upload from "../upload/Upload";
 import {UserContext} from "../UserProvider";
-import NotLogIn from "../ErrorMessages/NotLogIn";
-import Login from "../user_interaction/login";
+
 
 class NewsFeedPage extends React.Component {
     constructor(props) {
@@ -16,22 +14,45 @@ class NewsFeedPage extends React.Component {
         this.state = {
             profileInfo: {},
             hives: [],
+            username: null,
+            token: null,
+            renderOnce: true,
         };
     }
 
-    componentDidMount() {
-        fetch('http://localhost:5000/profile/user')
-            .then(response => response.json())
-            .then(data => this.setState({profileInfo: data}))
-            .catch(error => console.log(error));
+    fetchImportant() {
+        if (this.state.username) {
+            fetch('http://localhost:5000/profile/user/' + this.state.username + "/" + this.state.token)
+                .then(response => response.json())
+                .then(data => this.setState({profileInfo: data}))
+                .catch(error => console.log(error));
 
-        fetch('http://localhost:5000/hive/hives')
-            .then(response => response.json())
-            .then(data => this.setState({hives: data}))
-            .catch(error => console.log(error));
+            fetch('http://localhost:5000/hive/hives')
+                .then(response => response.json())
+                .then(data => this.setState({hives: data}))
+                .catch(error => console.log(error));
+            this.setState({renderOnce: false});
+
+        }
     }
 
     render() {
+
+        if (this.state.renderOnce) {
+            return (
+                <UserContext.Consumer>{
+                    (context) => {
+                        this.setState({
+                            username: context.loggedInUsername,
+                            token: context.token,
+                        });
+                        this.fetchImportant();
+                    }
+                }
+                </UserContext.Consumer>
+            )
+        }
+
 
         let listItems = this.state.hives.map((item) =>
             <div className='card-content'>
@@ -42,7 +63,7 @@ class NewsFeedPage extends React.Component {
         );
 
 
-        const profileInfo = this.state.profileInfo[0];
+        const profileInfo = this.state.profileInfo;
         return (
             <div className="customContainer">
                 <div className="row">
