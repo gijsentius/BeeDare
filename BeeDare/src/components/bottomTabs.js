@@ -19,12 +19,10 @@ class BottomTabs extends Component {
 
     render() {
         return (
-            <Tabs selected={this.props.page} style={{backgroundColor:'white'}}
+            <Tabs selected={this.props.page} style={{backgroundColor:'#ffe082'}}
                   selectedStyle={{color:'#333'}} onSelect={this.selectPage.bind(this)}>
-                <Icon size={24} name="star-o" />
-                <Icon size={24} name="camera" />
                 <Icon size={24} name="user" />
-                <Icon size={24} name="home" />
+                <Icon size={24} name="ellipsis-h" />
             </Tabs>
         )
     }

@@ -7,7 +7,7 @@ const {width, height} = Dimensions.get('window');
 
 export default StyleSheet.create({
     navBar: {
-        backgroundColor: '#ffe082'
+        backgroundColor: '#ffe082',
     },
     navBarTitle:{
         color:'#000'
