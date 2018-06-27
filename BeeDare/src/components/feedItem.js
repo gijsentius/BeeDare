@@ -11,7 +11,7 @@ export default class FeedItem extends Component {
         const ds = new ListView.DataSource({rowHasChanged: () => false});
         this.state = {
             dataSource: ds.cloneWithRows(this.props.pictures),
-            messageList: 'oi nibba'
+            messageList: 'Hier de messages'
         };
     }
 
@@ -24,10 +24,10 @@ export default class FeedItem extends Component {
                 </View>
                 <View style={Styles.bottom}>
                     <TouchableOpacity style={[MainStyles.flex, MainStyles.flexCenter]}>
-                        <Icon size={32} name="thumbs-up"/>
+                        <Icon size={24} name="thumbs-up"/>
                     </TouchableOpacity>
                     <TouchableOpacity style={[MainStyles.flex, MainStyles.flexCenter, Styles.messageButton]}>
-                        <Icon size={32} name="comment"/>
+                        <Icon size={24} name="comment"/>
                     </TouchableOpacity>
                 </View>
             </View>
