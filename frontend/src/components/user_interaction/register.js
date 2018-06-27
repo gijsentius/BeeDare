@@ -1,6 +1,5 @@
 import React from 'react';
 import "./login-register.css";
-import {UserContext} from "../UserProvider";
 
 export default class Register extends React.Component {
 
@@ -8,11 +7,12 @@ export default class Register extends React.Component {
         super(props);
         this.state = {
             password: "",
+            confirmpassword: "",
             email: "",
             firstname: "",
             lastname: "",
             username: "",
-            showLogEffect: false,
+            message: [],
         };
         this.handleRegister = this.handleRegister.bind(this);
         this.handleEmailChange = this.handleEmailChange.bind(this);
@@ -20,7 +20,7 @@ export default class Register extends React.Component {
         this.handleFirstnameChange = this.handleFirstnameChange.bind(this);
         this.handleLastnameChange = this.handleLastnameChange.bind(this);
         this.handleUsernameChange = this.handleUsernameChange.bind(this);
-        this.confirmPass = this.confirmPass.bind(this);
+        this.handleConfirmPasswordChange = this.handleConfirmPasswordChange.bind(this);
 
     }
 
@@ -28,6 +28,7 @@ export default class Register extends React.Component {
         event.preventDefault();
         let formData = new FormData();
         formData.append('password', this.state.password);
+        formData.append('confirmpassword', this.state.confirmpassword);
         formData.append('email', this.state.email);
         formData.append('firstname', this.state.firstname);
         formData.append('lastname', this.state.lastname);
@@ -37,9 +38,10 @@ export default class Register extends React.Component {
             method: 'POST',
             body: formData,
         })
+            .then(response => response.json())
+            .then(data => this.setState({message: data}))
             .catch(error => console.log(error));
     }
-
 
     handleEmailChange(e) {
         this.setState({email: e.target.value});
@@ -47,6 +49,10 @@ export default class Register extends React.Component {
 
     handlePasswordChange(e) {
         this.setState({password: e.target.value});
+    }
+
+    handleConfirmPasswordChange(e) {
+        this.setState({confirmpassword: e.target.value});
     }
 
     handleFirstnameChange(e) {
@@ -60,13 +66,6 @@ export default class Register extends React.Component {
     handleUsernameChange(e) {
         this.setState({username: e.target.value});
     }
-
-    confirmPass(e) {
-        if (e.target.value !== this.state.password) {
-            return <div><h1> wrong!!!!</h1></div>
-        }
-    }
-
 
     render() {
 

@@ -20,10 +20,8 @@ class ChallengeCard extends Component {
         if (this.state.username) {
             fetch('http://localhost:5000/profile/user/' + this.state.username + "/" + this.state.token)
                 .then(response => response.json())
-                .then(data => this.setState({profileInfo: data}))
+                .then(data => this.setState({profileInfo: data, renderOnce: false}))
                 .catch(error => console.log(error));
-
-            this.setState({renderOnce: false});
         }
     }
 
@@ -52,9 +50,9 @@ class ChallengeCard extends Component {
                     (context) => {
                         this.setState({
                             username: context.loggedInUsername,
-                            token: context.token
+                            token: context.token,
+                            renderOnce: false,
                         });
-                        this.fetchImportant();
                     }
                 }
                 </UserContext.Consumer>
