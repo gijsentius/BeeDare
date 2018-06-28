@@ -3,11 +3,20 @@ import React from 'react';
 class MessageItem extends React.Component {
 
     deleteItem() {
-
+        fetch('http://94.212.18.127/profile/delete/message/' + "/" + this.props.id + "/" + this.props.username + "/" + this.props.token)
+            .then(response => response.json())
+            .catch(error => console.log(error));
+        this.props.refresh();
     }
 
     confirmItem() {
-
+        fetch('http://94.212.18.127/profile/accept/friend/' + this.props.friendsRequest + "/" + this.props.username + "/" + this.props.token)
+            .then(response => response.json())
+            .catch(error => console.log(error));
+        fetch('http://94.212.18.127/profile/delete/message/' + "/" + this.props.id + "/" + this.props.username + "/" + this.props.token)
+            .then(response => response.json())
+            .catch(error => console.log(error));
+        this.props.refresh();
     }
 
     render() {

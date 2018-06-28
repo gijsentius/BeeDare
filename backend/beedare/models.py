@@ -100,8 +100,12 @@ class Comment(db.Model):
 class Message(db.Model):
     __tablename__ = 'messages'
     id = db.Column(db.Integer, primary_key=True, autoincrement=True)
-    sender = db.Column()
-    recipient = db.Column()
+    sender = db.Column(db.Integer, db.ForeignKey('users.id'))
+    recipient = db.Column(db.Integer, db.ForeignKey('users.id'))
+    read = db.Column(db.Boolean)
+    body = db.Column(db.Text)
+    title = db.Column(db.Text)
+    friendRequest = db.Column(db.Boolean)
 
 class Dare(db.Model):
     __tablename__ = 'dares'

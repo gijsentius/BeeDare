@@ -13,7 +13,7 @@ class MessageList extends React.Component {
     }
 
     fetchImportant() {
-        fetch('http://94.212.18.127/')
+        fetch('http://94.212.18.127/profile/messages' + this.state.username + "/" + this.state.token)
             .then(response => response.json())
             .then(data => this.setState({messages: data}))
             .catch(error => console.log(error));
@@ -38,7 +38,16 @@ class MessageList extends React.Component {
         let items = []
         for (message in messages) {
             let item = message.
-            items.append(<MessageItem text={} friendsRequest={}/>)
+            items.append(
+                <MessageItem  
+                    id={message.id} 
+                    text={message.title} 
+                    friendsRequest={message.friendsRequest}
+                    sender={message.sender}
+                    user={this.state.username}
+                    token={this.state.token}
+                />
+            )
         }
         return (
             <ul class="collection with-header">
