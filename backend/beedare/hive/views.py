@@ -15,11 +15,12 @@ def join():
         result = db.session.query(User).filter_by(id=content['user_id']).first()
         if result is not None:
             result = db.session.query(Hive).filter_by(id=content['hive_id']).first()
+            member = db.session.query(ColonyMembers).filter_by(follower_id=content['user_id']).filter_by(hive_id=content['hive_id']).first()
         else:
             return jsonify({"error": "'username' not given or invalid"}), 401
     except KeyError as e:
         return jsonify({"error": str(e) + " not given or invalid"}), 401
-    if result is not None:
+    if result is not None and member is None:
         time = datetime.datetime.utcnow()
         try:
             member = ColonyMembers(follower_id=content['user_id'], hive_id=content['hive_id'], timestamp=time)

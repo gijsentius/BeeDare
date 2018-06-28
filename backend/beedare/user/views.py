@@ -101,7 +101,7 @@ def editconfidential(username, token):
 
 
 @profile_blueprint.route('/hive/<hive_name>', methods=['GET'])
-def hive(hive_name):
+def get_hive(hive_name):
     try:
         hive = db.session.query(Hive).filter_by(hive_name=hive_name).first()
         keeper = db.session.query(User).filter_by(id=hive.beekeeper).first()
