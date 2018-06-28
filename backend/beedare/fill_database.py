@@ -36,9 +36,9 @@ def addDataToDB():
         for j in addToSession:
             db.session.add(j)
 
-    for i in range(2, 5):
-        friend = Friend(follower_id=1, followed_id=i)
-        db.session.add(friend)
+    # for i in range(2, 5):
+    #     friend = Friend(follower_id=1, followed_id=i)
+    #     db.session.add(friend)
 
     db.session.commit()
 

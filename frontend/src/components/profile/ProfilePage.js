@@ -17,6 +17,7 @@ class ProfilePage extends Component {
             username: null,
             token: null,
             renderOnce: true,
+            setRenderTrue: () => this.setState({renderOnce: true}),
         };
     }
 
