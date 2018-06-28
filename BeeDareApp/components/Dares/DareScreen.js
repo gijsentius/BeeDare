@@ -9,32 +9,37 @@ class DareScreen extends Component {
         super(props);
         this.state = {
             challenges: [],
+            cards: []
         }
     }
 
     componentDidMount() {
-        fetch('http://94.212.18.127:5000/dares/')
+        fetch('http://94.212.18.127/dares/')
             .then(response => response.json())
             .then(data => this.setState({challenges: data}))
             .catch(error => console.log(error));
     }
 
+    makeCards(){
+        let cards = [];
+        for(let challenge in this.state.challenges){
+            let card = {
+                id: challenge.id + "",
+                title: "This is a title",
+                //Title Should at least be 7 or 8 characters long! Otherwise it scales like crap
+                picture: require('../../images/logo2.png'),
+                content:<Text>{challenge.value}</Text>
+        };
+            cards.push(card);
+        }
+        return(cards);
+    }
+
     render() {
-        let challenges = this.state.challenges.map((challenge) =>
-            [
-                {
-                    id: "0",
-                    title: "Starry Night",
-                    picture: require('../../images/logo.png'),
-                    content: <Text>Starry Night</Text>
-
-                }
-            ]
-        );
-
+        let dares = this.makeCards();
         return (
             <View className="container" style={styles.container}>
-                <CardList cards={challenges}/>
+                <CardList className="test"  cards={dares}/>
             </View>
         );
     }
@@ -49,7 +54,7 @@ const styles = StyleSheet.create({
         justifyContent: 'center',
         alignItems: 'center',
         backgroundColor: '#ffe082',
-    }
+    },
 });
 
 
