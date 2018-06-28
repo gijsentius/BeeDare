@@ -15,7 +15,7 @@ class HivesPage extends React.Component {
 
 
     componentDidMount() {
-        fetch('http://localhost:5000/hive/hives')
+        fetch('http://94.212.18.127/hive/hives')
             .then(response => response.json())
             .then(data => this.setState({hives: data}))
             .catch(error => console.log(error));

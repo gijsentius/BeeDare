@@ -11,7 +11,7 @@ class ChallengeList extends Component {
     }
 
     componentDidMount() {
-        fetch('http://localhost:5000/dares/')
+        fetch('http://94.212.18.127/dares/')
             .then(response => response.json())
             .then(data => this.setState({challenges: data}))
             .catch(error => console.log(error)); // optioneel

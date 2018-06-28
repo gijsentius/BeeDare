@@ -16,28 +16,29 @@ def show_dares():
         list = []
         for item in result:
             list.append(
-            {
-                "name": item.name,
-                "id": item.id,
-                "images": item.image,
-                "body": item.body,
-                "body_html": item.body_html,
-                "value": item.value
+                {
+                    "name": item.name,
+                    "id": item.id,
+                    "images": item.image,
+                    "body": item.body,
+                    "body_html": item.body_html,
+                    "value": item.value
 
-            })
+                })
         return jsonify(
             list
         ), 200
     return jsonify({}), 401
 
 
-@dares_blueprint.route('/completeddares/<username>/<token>', methods=["GET"])
-def completed_user_dares(username, token):
+@dares_blueprint.route('/completed_dares/<username>', methods=["GET"])
+@dares_blueprint.route('/completed_dares/<username>/<token>', methods=["GET"])
+def completed_user_dares(username, token=None):
     try:
         user_data = db.session.query(User).filter_by(username=username).first()
     except KeyError as e:
         return jsonify({"error": str(e) + " not given or invalid"}), 401
-    if request.method == "GET" and user_data.check_loginrequired(token):
+    if request.method == "GET" and (user_data.check_loginrequired(token) or token is None):
         completed_dares_list = []
         try:
             user_dares = UserDares.query.filter_by(owner_id=user_data.id, achieved=True).all()
@@ -60,13 +61,14 @@ def completed_user_dares(username, token):
     return jsonify({}), 401
 
 
-@dares_blueprint.route('/opendares/<username>/<token>', methods=["GET"])
+@dares_blueprint.route('/open_dares/<username>', methods=["GET"])
+@dares_blueprint.route('/open_dares/<username>/<token>', methods=["GET"])
 def open_dares_user(username, token):
     try:
         user_data = db.session.query(User).filter_by(username=username).first()
     except KeyError as e:
         return jsonify({"error": str(e) + " not given or invalid"}), 401
-    if request.method == "GET" and user_data.check_loginrequired(token):
+    if request.method == "GET" and (user_data.check_loginrequired(token) or token is None):
         open_dares_list = []
         try:
             user_dares = UserDares.query.filter_by(owner_id=user_data.id, achieved=False).all()

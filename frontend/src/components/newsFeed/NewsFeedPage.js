@@ -48,6 +48,21 @@ class NewsFeedPage extends React.Component {
     }
 
     render() {
+        if (this.state.renderOnce) {
+            return (
+                <UserContext.Consumer>{
+                    (context) => {
+                        this.setState({
+                            username: context.loggedInUsername,
+                            token: context.token,
+                            renderOnce: false
+                        });
+                        this.fetchImportant();
+                    }
+                }
+                </UserContext.Consumer>
+            )
+        }
 
         if (this.state.renderOnce) {
             return (
@@ -111,7 +126,7 @@ class NewsFeedPage extends React.Component {
                                 </div>
                             </form>
                         </div>
-                        <Newsfeed messages={messages}/>
+                        <Newsfeed messages={messages} user={this.state.username} token={this.state.token}/>
                     </div>
                     <div className="col s12 m3 sticky">
                         <h6 className='center'>Hives</h6>
@@ -141,7 +156,7 @@ class NewsFeedPage extends React.Component {
         data.append('title', this.state.title);
         data.append('message', this.state.message);
 
-        fetch('http://localhost:5000/submit/message', {
+        fetch('http://94.212.18.127/submit/message', {
             method: 'POST',
             body: data,
         });
