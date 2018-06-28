@@ -223,6 +223,7 @@ def delete_message(message_id, username, token):
         return jsonify({"error": "'message id' not given or invalid"}), 401
     return jsonify({"error": "'user' not given or invalid"}), 401
 
+
 @profile_blueprint.route('/delete/friend/<friend>/<username>/<token>', methods=["GET"])
 def delete_friend(friend, username, token):
     try:
