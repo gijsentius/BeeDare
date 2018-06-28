@@ -1,7 +1,6 @@
 import React, {Component} from 'react';
 import {View, Text, ListView, ScrollView, Image, TouchableOpacity} from 'react-native';
 import Icon from 'react-native-vector-icons/FontAwesome';
-import _ from 'underscore';
 import Styles from '../styles/feed';
 import MainStyles from '../styles';
 
@@ -10,13 +9,12 @@ export default class FeedItem extends Component {
         super(props);
         const ds = new ListView.DataSource({rowHasChanged: () => false});
         this.state = {
-            dataSource: ds.cloneWithRows(this.props.pictures),
             messageList: 'Hier de messages'
         };
     }
 
 
-    renderItem(picture) {
+    renderItem() {
         return (
             <View style={[MainStyles.flex, MainStyles.flexCenter]}>
                 <View style={Styles.content}>

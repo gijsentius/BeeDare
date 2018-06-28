@@ -4,10 +4,16 @@ import {View, Text, StyleSheet, Image, TouchableOpacity, TextInput, KeyboardAvoi
 class Login extends Component {
     constructor(props) {
         super(props);
-        this.state = { loggedIn: false, password: '', email: ''};
+        this.state = { loggedIn: false,
+            password: '',
+            email: '',
+            username: "",
+            isAuthenticated: false,
+            token: null};
     }
 
     handleLogin() {
+        const {navigate} = this.props.navigation;
         let formData = new FormData();
         formData.append('password', this.state.password);
         formData.append('email', this.state.email);
@@ -16,7 +22,14 @@ class Login extends Component {
             body: formData,
         })
             .then(response => response.json())
-            .then(data => console.warn(data))
+            .then(data => this.setState({isAuthenticated:data['login'],
+            username:data['username'],
+            token: data['token']}));
+        if(this.state.token) {
+            navigate('Feed', {
+                token: this.state.token,
+            })
+        }
     }
 
     render() {
