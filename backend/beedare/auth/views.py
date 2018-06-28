@@ -58,20 +58,21 @@ def register_new():
 def register():
     content = request.form
     message = checkFormsInput(content)
-    try:
-        time = datetime.datetime.utcnow()
-        user = User(first_name=content['firstname'], last_name=content['lastname'], email=content['email'],
-                    username=content['username'], score=0,
-                    last_seen=time, rank='New Bee')
-        user.set_password(content['password'])
-    except KeyError as e:
-        return jsonify(message), 401
-    db.session.add(user)
-    try:
-        db.session.commit()
-        message.append({"message": "Succes!"})
-    except sqlalchemy.exc.IntegrityError:
-        return jsonify(message), 401
+    if not message:
+        try:
+            time = datetime.datetime.utcnow()
+            user = User(first_name=content['firstname'], last_name=content['lastname'], email=content['email'],
+                        username=content['username'], score=0, image='noneexistent',
+                        last_seen=time, rank='New Bee')
+            user.set_password(content['password'])
+        except KeyError as e:
+            return jsonify(message), 401
+        db.session.add(user)
+        try:
+            db.session.commit()
+            message.append({"message": "Succes!"})
+        except sqlalchemy.exc.IntegrityError:
+            return jsonify(message), 401
     return jsonify(
         message
     ), 200
@@ -108,32 +109,32 @@ def checkFormsInput(formcontent):
     message = []
     if formcontent['email'] is "":
         message.append({"message": "No email filled in!"})
-        if formcontent['password'] is "":
-            message.append({"message": "No password filled in!"})
-            if formcontent['confirmpassword'] is "":
-                message.append({"message": "No confirm password filled in!"})
-                if formcontent['username'] is "":
-                    message.append({"message": "No username filled in!"})
-                    if formcontent['firstname'] is "":
-                        message.append({"message": "No firstname filled in!"})
-                        if formcontent['lastname'] is "":
-                            message.append({"message": "No lastname filled in!"})
-                            if formcontent['password'] != formcontent['confirmpassword']:
-                                message.append({"message": "Password and confirmpassword are not the same!"})
-                                try:
-                                    result = db.session.query(User).filter_by(email=formcontent['email']).first()
-                                except KeyError as e:
-                                    return jsonify({"error": str(e) + " not given or invalid"}), 401
-                                if result is not None:
-                                    error = "Email already registered."
-                                    message.append({"message": error})
-                                try:
-                                    username = db.session.query(User).filter_by(email=formcontent['username']).first()
-                                except KeyError as e:
-                                    return jsonify({"error": str(e) + " not given or invalid"}), 401
-                                if username is not None:
-                                    error = "Username already in use"
-                                    message.append({"message": error})
-                                message.append({"test": "test"})
+    if formcontent['password'] is "":
+        message.append({"message": "No password filled in!"})
+    if formcontent['confirmpassword'] is "":
+        message.append({"message": "No confirm password filled in!"})
+    if formcontent['username'] is "":
+        message.append({"message": "No username filled in!"})
+    if formcontent['firstname'] is "":
+        message.append({"message": "No firstname filled in!"})
+    if formcontent['lastname'] is "":
+        message.append({"message": "No lastname filled in!"})
+    if formcontent['password'] != formcontent['confirmpassword']:
+        message.append({"message": "Password and confirmpassword are not the same!"})
+    try:
+        result = db.session.query(User).filter_by(email=formcontent['email']).first()
+    except KeyError as e:
+        return jsonify({"error": str(e) + " not given or invalid"}), 401
+    if result is not None:
+        error = "Email already registered."
+        message.append({"message": error})
+    try:
+        username = db.session.query(User).filter_by(email=formcontent['username']).first()
+    except KeyError as e:
+        return jsonify({"error": str(e) + " not given or invalid"}), 401
+    if username is not None:
+        error = "Username already in use"
+        message.append({"message": error})
+    message.append({"test": "test"})
     return message
 

@@ -72,8 +72,8 @@ class App extends Component {
                             <Route path="/signup" component={RegisterPage}/>
                             <Route path="/challenges" component={ChallengeList}/>
                             <PrivateRoute path="/newsfeed" component={NewsFeedPage}/>
-                            <PrivateRoute path="/profile" component={ProfilePage}/>
-                            <PrivateRoute path="/user/:user" component={ViewedProfilePage}/>
+                            {/*<PrivateRoute path="/profile" component={ProfilePage}/>*/}
+                            <PrivateRoute path="/profile/:user" component={ViewedProfilePage}/>
                             <Route path="/search" component={SearchPage}/>
                             <PrivateRoute path="/change-email" component={ChangeEmailPassword}/>
                             <PrivateRoute path="/edit-profile" component={EditProfilePage}/>
@@ -99,7 +99,7 @@ class App extends Component {
                 {(context => context.isAuthenticated ?
                     <React.Fragment>
                         <li><Link to="/newsfeed"><span className="text-color">Newsfeed</span></Link></li>
-                        <li><Link to="/profile"><span className="text-color">Profile</span></Link></li>
+                        <li><Link to={"/profile/" + context.loggedInUsername}><span className="text-color">Profile</span></Link></li>
                         <li onClick={context.signout}><Link to="/signin"><span className="text-color">
                             Sign out</span></Link></li>
                     </React.Fragment>
