@@ -131,7 +131,6 @@ class EditProfilePage extends React.Component {
                 {/* TODO fix user*/}
                 <Upload folder='users' user={this.state.username}/>
             </div>
-
         )
     }
 }

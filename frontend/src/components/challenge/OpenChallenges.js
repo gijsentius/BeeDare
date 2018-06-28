@@ -34,12 +34,10 @@ export default class OpenChallenges extends React.Component {
 
     closeMenu(event) {
 
-        if (!this.dropdownMenu.contains(event.target)) {
-
+        if (this.dropdownMenu !== null && !this.dropdownMenu.contains(event.target)) {
             this.setState({showMenu: false, currentId: ""}, () => {
                 document.removeEventListener('click', this.closeMenu);
             });
-
         }
     }
 
