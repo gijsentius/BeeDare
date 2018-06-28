@@ -105,9 +105,14 @@ class HivePage extends Component {
                     <div className="col s4 m6">
                         <h6 className="center">Members</h6>
                         <Members members={members}/>
-                        <input type='submit' value='Join!'
-                               className="waves-effect waves-light btn amber darken-1 center-component top-button"
-                               onClick={() => this.joinHive(profileInfo)}/>
+                        <div className='center-component'>
+                            <input type='submit' value='Join!'
+                                   className="waves-effect waves-light btn amber darken-1 top-button"
+                                   onClick={() => this.joinHive(profileInfo)}/>
+                            <input type='submit' value='Leave.'
+                                   className="waves-effect waves-light btn amber darken-1 top-button"
+                                   onClick={() => this.leaveHive(profileInfo)}/>
+                        </div>
                     </div>
                     {/*//*/}
                     <div className="col s2 m3">
@@ -124,6 +129,19 @@ class HivePage extends Component {
         data.append('user_id', profileInfo.id);
         data.append('hive_id', this.state.hiveInfo.hive[0]);
         fetch('http://localhost:5000/hive/join', {
+            method: 'POST',
+            body: data,
+        })
+            .then(response => response.json())
+            .then(data => this.setState({response: data.success}))
+            .catch(error => console.log(error));
+    }
+
+    leaveHive(profileInfo) {
+        let data = new FormData();
+        data.append('user_id', profileInfo.id);
+        data.append('hive_id', this.state.hiveInfo.hive[0]);
+        fetch('http://localhost:5000/hive/leave', {
             method: 'POST',
             body: data,
         })
