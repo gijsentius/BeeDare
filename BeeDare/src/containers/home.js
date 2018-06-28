@@ -11,14 +11,12 @@ import BottomTabs from '../components/bottomTabs';
 import Icon from 'react-native-vector-icons/FontAwesome';
 
 import data from '../data/users';
+import Login from "../components/login";
 class Home extends Component {
     
     render() {
         return (
-            <View style={MainStyles.container}>
-                <Feed feed={data}/>
-                <BottomTabs />
-            </View>
+            <Login/>
         )
     }
 }

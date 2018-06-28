@@ -4,8 +4,21 @@ import {View, Text, StyleSheet, Image, TouchableOpacity, TextInput, KeyboardAvoi
 class Login extends Component {
     constructor(props) {
         super(props);
-        this.state = { loggedIn: false };
+        this.state = { loggedIn: false, password: '', email: ''};
     }
+
+    handleLogin() {
+        let formData = new FormData();
+        formData.append('password', this.state.password);
+        formData.append('email', this.state.email);
+        fetch('http://94.212.18.127/auth/login',{
+            method: "POST",
+            body: formData,
+        })
+            .then(response => response.json())
+            .then(data => console.warn(data))
+    }
+
     render() {
         return (
             <View style={styles.container1}>
@@ -33,7 +46,7 @@ class Login extends Component {
                                    secureTextEntry/>
 
                         <TouchableOpacity style={styles.buttonContainer}
-                                          onPress={() => this.handleSettingsPress()}>
+                                          onPress={() => this.handleLogin()}>
                             <Text  style={styles.buttonText}>LOGIN</Text>
                         </TouchableOpacity>
                         <Text style={styles.bottomLink}>Sign Up for BeeDare</Text>
