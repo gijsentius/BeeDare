@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import {View, Text, StyleSheet, Image, TouchableOpacity, TextInput, KeyboardAvoidingView} from 'react-native';
+import Navbar from "./navbar";
 
 class TestPage extends Component {
     constructor(props) {
@@ -20,8 +21,10 @@ class TestPage extends Component {
     }
 
     render() {
+        const {navigate} = this.props.navigation;
         return (
             <View style={styles.container1}>
+                <Navbar go={navigate}/>
                 <Text>
                     Gijs houdt van BBCs
                 </Text>

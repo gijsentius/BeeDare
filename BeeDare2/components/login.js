@@ -26,11 +26,12 @@ class Login extends Component {
             .then(data => this.setState({isAuthenticated:data['login'],
             username:data['username'],
             token: data['token']}));
-        if(this.state.token) {
+        // if(this.state.token) {
             navigate('Feed', {
                 token: this.state.token,
+                username: this.state.username
             })
-        }
+        // }
     }
 
     render() {

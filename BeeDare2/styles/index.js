@@ -10,6 +10,8 @@ export default StyleSheet.create({
         alignItems: 'center',
         paddingBottom: 20,
         paddingTop: 20,
+        margin: 10,
+        backgroundColor: '#ffe082'
     },
     flexEnd: {
         justifyContent: 'flex-end'
@@ -29,5 +31,17 @@ export default StyleSheet.create({
     flexCenter: {
         justifyContent: 'center',
         alignItems: 'center'
+    },
+    niceText: {
+        color: '#000',
+        fontSize: 14
+    },
+    fixRow: {
+        flexDirection: 'row',
+        paddingHorizontal: 10
+    },
+    bodyText: {
+        color: '#000',
+        fontSize: 20
     }
 })

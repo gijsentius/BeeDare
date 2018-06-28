@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { AppRegistry, Text, View } from 'react-native';
-import {Tabs} from "./components/router";
 import {StackNav} from "./components/stacknavigator";
+import Navbar from "./components/navbar";
 
 
 export default class App extends Component {
