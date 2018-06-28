@@ -28,7 +28,7 @@ class DareScreen extends Component {
                 title: "This is a title",
                 //Title Should at least be 7 or 8 characters long! Otherwise it scales like crap
                 picture: require('../../images/logo2.png'),
-                content:<Text>{challenge.value}</Text>
+                content:<Text></Text>
         };
             cards.push(card);
         }
@@ -39,6 +39,7 @@ class DareScreen extends Component {
         let dares = this.makeCards();
         return (
             <View className="container" style={styles.container}>
+                <Text className="title" style={styles.title}>Dares</Text>
                 <CardList className="test"  cards={dares}/>
             </View>
         );
@@ -54,6 +55,9 @@ const styles = StyleSheet.create({
         justifyContent: 'center',
         alignItems: 'center',
         backgroundColor: '#ffe082',
+    },
+    title: {
+        fontSize: 20
     },
 });
 
