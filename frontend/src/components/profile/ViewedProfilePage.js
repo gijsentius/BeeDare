@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React, {Component} from 'react';
 import OpenChallenges from "../challenge/OpenChallenges";
 import Profile from "../user_interaction/Profile";
 import CompletedChallenges from "../challenge/completedChallenges";
@@ -16,40 +16,62 @@ class ViewedProfilePage extends Component {
             completedChallenges: [],
             profileInfo: [],
             activeFriends: [],
+            username: null,
+            token: null,
+            renderOnce: true,
         };
     }
 
-    componentDidMount()
-    {
-        fetch('http://localhost:5000/dares/')
-            .then(response => response.json())
-            .then(data => this.setState({openChallenges: data}))
-            .catch(error => console.log(error));
+    fetchImportant() {
+        if (this.state.username) {
+            fetch('http://localhost:5000/dares/opendares/' + this.state.username + "/" + this.state.token)
+                .then(response => response.json())
+                .then(data => this.setState({openChallenges: data}))
+                .catch(error => console.log(error));
 
-        fetch('http://localhost:5000/profile/user')
-            .then(response => response.json())
-            .then(data => this.setState({profileInfo: data}))
-            .catch(error => console.log(error));
+            fetch('http://localhost:5000/profile/user/' + this.state.username + "/" + this.state.token)
+                .then(response => response.json())
+                .then(data => this.setState({profileInfo: data}))
+                .catch(error => console.log(error));
 
-        fetch('http://localhost:5000/dares/')
-            .then(response => response.json())
-            .then(data => this.setState({completedChallenges: data}))
-            .catch(error => console.log(error));
+            fetch('http://localhost:5000/dares/completeddares/' + this.state.username + "/" + this.state.token)
+                .then(response => response.json())
+                .then(data => this.setState({completedChallenges: data}))
+                .catch(error => console.log(error));
 
-        fetch('https://jsonplaceholder.typicode.com/photos?albumId=20')
-            .then(response => response.json())
-            .then(data => this.setState({activeFriends: data}))
-            .catch(error => console.log(error));
+            this.setState({renderOnce: false});
+        }
     }
 
     render() {
 
-        if (!this.state.profileInfo){
-            return <div/>
+        // Het is lastig om met consumer te werken en state. Als je het in render plaatst blijft hij maar updaten
+        // op deze manier zorg je ervoor dat je het even weet, en daarna laadt hij de juiste context.
+        if (this.state.renderOnce) {
+            return (
+                <UserContext.Consumer>{
+                    (context) => {
+                        this.setState({
+                            username: context.loggedInUsername,
+                            token: context.token
+                        });
+                        this.fetchImportant();
+                    }
+                }
+                </UserContext.Consumer>
+            )
+        }
+
+
+        if (!this.state.profileInfo) {
+            return (
+                <div/>
+            )
             //    dit stukje code zorgt ervoor dat je geen undefined krijgt
         }
-        const {openChallenges, completedChallenges, activeFriends} = this.state;
-        const profileInfo = this.state.profileInfo[0];
+
+        const {openChallenges, completedChallenges} = this.state;
+        const profileInfo = this.state.profileInfo;
 
         return (
 

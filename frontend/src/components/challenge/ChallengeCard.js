@@ -1,6 +1,8 @@
 import React, {Component} from 'react';
 import './Challenge.css'
 import {UserContext} from "../UserProvider";
+import Redirect from "react-router-dom/es/Redirect";
+import Link from "react-router-dom/es/Link";
 
 class ChallengeCard extends Component {
     constructor(props) {
@@ -22,6 +24,7 @@ class ChallengeCard extends Component {
                 .then(response => response.json())
                 .then(data => this.setState({profileInfo: data, renderOnce: false}))
                 .catch(error => console.log(error));
+            this.setState({renderOnce: false});
         }
     }
 
@@ -42,18 +45,40 @@ class ChallengeCard extends Component {
             .catch(error => console.log(error));
     }
 
+    logged(context) {
+        this.setState({
+            username: context.loggedInUsername,
+            token: context.token
+        });
+        this.fetchImportant();
+    }
+
+    notLogged() {
+        return this.state.isExpanded ? (
+            <div className="card hoverable" onClick={this.handleCollapseInfo}>
+                <div className="card-content">
+                    <p className="text center-align"><b>Description</b></p>
+                    <p className="text center-align">{this.props.description}</p>
+                    <p className="text center-align"><b>Reward</b></p>
+                    <p className="text center-align">{this.props.reward}</p>
+                    <Link to={"/signin"} className="waves-effect waves-light btn amber darken-1 center-component">Dare</Link>
+                </div>
+            </div>
+        ) : (
+            <div className="card hoverable" onClick={this.handleExpandInfo}>
+                <div className="card-content">
+                    <h6 className="text center-align">{this.props.title}</h6>
+                    <img src={this.props.image} alt="" className="circle responsive-img center-component"/>
+                </div>
+            </div>
+        );
+    }
     render() {
 
         if (this.state.renderOnce) {
             return (
                 <UserContext.Consumer>{
-                    (context) => {
-                        this.setState({
-                            username: context.loggedInUsername,
-                            token: context.token,
-                            renderOnce: false,
-                        });
-                    }
+                    (context => context.isAuthenticated ? this.logged(context) : this.notLogged())
                 }
                 </UserContext.Consumer>
             )

@@ -7,7 +7,8 @@ class Upload extends Component {
         this.state = {
             pictures: [],
             result: '',
-            folder: this.props.folder
+            folder: this.props.folder,
+            user: this.props.user
         };
         this.onDrop = this.onDrop.bind(this);
     }
@@ -36,9 +37,12 @@ class Upload extends Component {
     }
 
     submit() {
+        // const profileInfo = this.state.profileInfo;
+
         let formData = new FormData();
         formData.append('image', this.state.pictures[0]);
-        formData.append('name', 'PietHenk');
+        // TODO Fix name!
+        formData.append('name', this.state.user);
         formData.append('folder', this.state.folder);
         fetch('http://127.0.0.1:5000/image', {
             method: 'POST',

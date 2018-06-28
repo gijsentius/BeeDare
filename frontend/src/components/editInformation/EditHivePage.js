@@ -9,7 +9,8 @@ class EditHivePage extends React.Component {
         this.state = {
             profileInfo: [],
             image: '',
-            name: this.props.match.params.name
+            name: this.props.match.params.name,
+            response: ''
         };
 
         this.editInformation = this.editInformation.bind(this);
@@ -35,8 +36,11 @@ class EditHivePage extends React.Component {
         fetch('http://localhost:5000/profile/hive/edit/' + hive_name, {
             method: 'POST',
             body: data,
-        });
-        window.location.reload()
+        })
+            .then(response => response.json())
+            .then(data => this.setState({response: data.success}))
+            .catch(error => console.log(error));
+        // window.location.reload()
     }
 
     render() {
@@ -77,6 +81,7 @@ class EditHivePage extends React.Component {
                     <div className="row">
                         <button className="btn amber darken-1">Save changes</button>
                     </div>
+                    <h6>{this.state.response}</h6>
                 </form>
                 <Upload folder='users'/>
             </div>
