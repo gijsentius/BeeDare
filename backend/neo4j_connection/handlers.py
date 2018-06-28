@@ -31,6 +31,19 @@ class Connection():
         except friend.DoesNotExist as e:
             print(e)
 
+    def is_friend(self, username, friend_username):
+        try:
+            user = User.nodes.get(username=username)
+            friend = User.nodes.get(username=friend_username)
+            if user.friends.is_connected(friend):
+                return True
+            else:
+                return False
+        except User.DoesNotExist as e:
+            print(e)
+        except friend.DoesNotExist as e:
+            print(e)
+
     def disconnect_users(self, username, friend_username):
         """Disconnect a user with another user
         Keyword arguments:

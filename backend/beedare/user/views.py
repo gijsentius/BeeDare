@@ -277,5 +277,29 @@ def get_messages(username, token):
                 return jsonify({"messages": message_list}), 200
             except sqlalchemy.exc.IntegrityError:
                 return jsonify({"error": "commit failed"}), 401
-        return jsonify({"error": "'message id' not given or invalid"}), 401
+        return jsonify({"error": "'User had no messages"}), 401
+    return jsonify({"error": "'user' not given or invalid"}), 401
+
+
+@profile_blueprint.route('/friend/<friend>/<username>/<token>', methods=["GET"])
+def is_friend(friend, username, token):
+    try:
+        result = User.query.filter_by(username=username).first()
+    except KeyError as e:
+        return jsonify({"error": str(e) + " not given or invalid"}), 401
+    if request.method == "GET" and result.check_loginrequired(token):
+        from beedare import neoconn
+        friend = User.query.filter_by(id=friend).first()  # could also be done with the username of the friend
+        # if neoconn.is_friend(username, friend.username):
+        #     return jsonify({
+        #         "friends": neoconn.is_friend(username, friend.username)
+        #     }), 200
+        if friend is not None:
+            return jsonify({
+                "friends": True
+            })
+        else:
+            return jsonify({
+                "friends": False
+            })
     return jsonify({"error": "'user' not given or invalid"}), 401
