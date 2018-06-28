@@ -8,16 +8,16 @@ from beedare import db, login_manager
 
 class Friend(db.Model):
     __tablename__ = 'friends'
-    follower_id = db.Column(db.Integer, db.ForeignKey('users.user_id'),
+    follower_id = db.Column(db.Integer, db.ForeignKey('users.id'),
                             primary_key=True)
-    followed_id = db.Column(db.Integer, db.ForeignKey('users.user_id'),
+    followed_id = db.Column(db.Integer, db.ForeignKey('users.id'),
                             primary_key=True)
     timestamp = db.Column(db.DateTime, default=datetime.datetime.now())
 
 
 class User(db.Model):
     __tablename__ = 'users'
-    user_id = db.Column(db.Integer, primary_key=True, unique=True, autoincrement=True)  # ID is de primary_key
+    id = db.Column(db.Integer, primary_key=True, unique=True, autoincrement=True)  # ID is de primary_key
     first_name = db.Column(db.String(255))  # 30 character genoeg? Nee. REEEEE
     last_name = db.Column(db.String(255))
     age_cat = db.Column(db.String(50))  # ageCat staat voor ageCategory. Bijvoorbeeld 5-10 15-20 etc...
@@ -39,13 +39,19 @@ class User(db.Model):
     def check_password(self, password):
         return check_password_hash(self.password_hash, password)
 
-    def generate_confirmation_token(self):
-        s = TimedSerializer(current_app.config['SECRET_KEY'], 'confirmation')
-        return s.dumps(self.id)
+    def generate_loginrequired_token(self):
+        s = TimedSerializer(current_app.config['SECRET_KEY'], 'loginrequired')
+        return s.dumps({'loginrequired': self.username})
 
-    def check_confirmation(self, token, expiration=3600):
-        s = TimedSerializer(current_app.config['SECRET_KEY'], 'confirmation')
-        return s.loads(token, max_age=expiration) == self.id
+    def check_loginrequired(self, token):
+        s = TimedSerializer(current_app.config['SECRET_KEY'], 'loginrequired')
+        try:
+            data = s.loads(token)
+        except:
+            return False
+        if data.get('loginrequired') != self.username:
+            return False
+        return True
 
     def confirm(self):
         self.confirmed = True
@@ -53,12 +59,6 @@ class User(db.Model):
     def ping(self):
         self.last_seen = datetime.datetime.now()
         db.session.add(self)
-
-    def is_active(self):
-        return self.is_active
-
-    def is_authenticated(self):
-        return self.is_authenticated
 
     def get_id(self):
         return self.user_id
@@ -80,7 +80,7 @@ class Message(db.Model):
     body = db.Column(db.Text)
     body_html = db.Column(db.Text)
     timestamp = db.Column(db.DateTime, index=True, default=datetime.datetime.now())
-    author_id = db.Column(db.Integer, db.ForeignKey('users.user_id'))
+    author_id = db.Column(db.Integer, db.ForeignKey('users.id'))
     comments = db.relationship('Comment', backref='post', lazy='dynamic')  # lazy??? backref???
 
     def __repr__(self):
@@ -94,7 +94,7 @@ class Comment(db.Model):
     body_html = db.Column(db.Text)
     timestamp = db.Column(db.DateTime, index=True, default=datetime.datetime.now())
     disabled = db.Column(db.Boolean)
-    author_id = db.Column(db.Integer, db.ForeignKey('users.user_id'))
+    author_id = db.Column(db.Integer, db.ForeignKey('users.id'))
     post_id = db.Column(db.Integer, db.ForeignKey('posts.id'))
 
 
@@ -111,7 +111,7 @@ class Dare(db.Model):
 class UserDares(db.Model):
     __tablename__ = 'userdares'
     id = db.Column(db.ForeignKey('dares.id'), primary_key=True)
-    owner_id = db.Column(db.Integer, db.ForeignKey('users.user_id'))
+    owner_id = db.Column(db.Integer, db.ForeignKey('users.id'))
     achieved = db.Column(db.Boolean)
 
 
@@ -121,13 +121,12 @@ class Hive(db.Model):
     hive_name = db.Column(db.String(128), unique=True)
     image = db.Column(db.String(255))
     total_score_members = db.Column(db.Integer)
-    beekeeper = db.Column(db.ForeignKey('users.user_id'))  # beekeeper is de hive eigenaar
+    beekeeper = db.Column(db.ForeignKey('users.id'))  # beekeeper is de hive eigenaar
 
 
 class ColonyMembers(db.Model):
     __tablename__ = 'colonymembers'
-    follower_id = db.Column(db.Integer, db.ForeignKey('users.user_id'),
-                            primary_key=True)
-    hive_id = db.Column(db.Integer, db.ForeignKey('hives.id'),
-                        primary_key=True)
+    match_id = db.Column(db.Integer, primary_key=True, unique=True, autoincrement=True)
+    follower_id = db.Column(db.Integer, db.ForeignKey('users.id'))
+    hive_id = db.Column(db.Integer, db.ForeignKey('hives.id'))
     timestamp = db.Column(db.DateTime, default=datetime.datetime.now())

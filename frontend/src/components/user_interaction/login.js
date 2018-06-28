@@ -14,6 +14,7 @@ export default class Login extends React.Component {
             email: "",
             showLogEffect: false,
         };
+
         this.handleForgottenPW = this.handleForgottenPW.bind(this);
         this.handleLogin = this.handleLogin.bind(this);
         this.handleEmailChange = this.handleEmailChange.bind(this);

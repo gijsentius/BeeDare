@@ -10,16 +10,17 @@ from . import *
 
 @hive_blueprint.route('/join', methods=["POST"])
 def join():
-    content = request.get_json()
+    content = request.form
     try:
         result = db.session.query(User).filter_by(id=content['user_id']).first()
         if result is not None:
             result = db.session.query(Hive).filter_by(id=content['hive_id']).first()
+            member = db.session.query(ColonyMembers).filter_by(follower_id=content['user_id']).filter_by(hive_id=content['hive_id']).first()
         else:
             return jsonify({"error": "'username' not given or invalid"}), 401
     except KeyError as e:
         return jsonify({"error": str(e) + " not given or invalid"}), 401
-    if result is not None:
+    if result is not None and member is None:
         time = datetime.datetime.utcnow()
         try:
             member = ColonyMembers(follower_id=content['user_id'], hive_id=content['hive_id'], timestamp=time)
@@ -33,7 +34,8 @@ def join():
         return jsonify({
             "follower_id": content['user_id'],
             "hive_id": content['hive_id'],
-            "timestamp": time
+            "timestamp": time,
+            "success": "Hive joined!"
         }), 200
     return jsonify({"error": "'hive' not given or invalid"}), 401
 
@@ -94,7 +96,7 @@ def getHives():
     if hives is not None:
         list = []
         for item in hives:
-            keeper = db.session.query(User).filter_by(user_id=item.id).first()
+            keeper = db.session.query(User).filter_by(id=item.id).first()
             list.append(
                 {
                     "hiveName": item.hive_name,
@@ -117,7 +119,7 @@ def getMembers(hive_id):
     if hives is not None:
         list = []
         for item in hives:
-            name = db.session.query(User).filter_by(user_id=item.follower_id).first()
+            name = db.session.query(User).filter_by(id=item.follower_id).first()
             list.append(name.username)
         return jsonify(
             list

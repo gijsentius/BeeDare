@@ -12,49 +12,71 @@ class EditProfilePage extends React.Component {
         super(props);
         this.state = {
             profileInfo: [],
-            image: ''
+            image: '',
+            username: null,
+            token: null,
+            renderOnce: true,
+            response: ''
         };
 
         this.editInformation = this.editInformation.bind(this);
     }
 
-    componentDidMount() {
-        // hier nog graag een API request die alleen op ID haalt, anders beetje zonde van data etc.
-        fetch('http://localhost:5000/profile/user')
-            .then(response => response.json())
-            .then(data => this.setState({profileInfo: data}))
-            .catch(error => console.log(error));
+    fetchImportant() {
+        if (this.state.username) {
+            // hier nog graag een API request die alleen op ID haalt, anders beetje zonde van data etc.
+            fetch('http://localhost:5000/profile/user/' + this.state.username + "/" + this.state.token)
+                .then(response => response.json())
+                .then(data => this.setState({profileInfo: data}))
+                .catch(error => console.log(error));
+
+            this.setState({renderOnce: false});
+        }
     }
 
     // source: https://medium.com/@everdimension/how-to-handle-forms-with-just-react-ac066c48bd4f
     // comment voor merge
 
-    editInformation(event, username) {
+    editInformation(event) {
         event.preventDefault();
 
         const form = event.target;
         const data = new FormData(form);
 
-        fetch('http://localhost:5000/profile/user/edit/' + username, {
+        fetch('http://localhost:5000/profile/user/edit/' + this.state.username + "/" + this.state.token, {
             method: 'POST',
             body: data,
-        });
-        window.location.reload()
+        })
+            .then(response => response.json())
+            .then(data => this.setState({response: data.success}))
+            .catch(error => console.log(error));
+        // window.location.reload()
     }
 
     render() {
-        if (!this.state.profileInfo[0]) {
+
+
+        if(this.state.renderOnce){
+            return(
+                <UserContext.Consumer>{
+                    (context) => { this.setState({username: context.loggedInUsername,
+                        token: context.token}); this.fetchImportant() ;}
+                }
+                </UserContext.Consumer>
+            )
+        }
+
+        if (!this.state.profileInfo) {
             return <div/>
         }
         // Het is dus van essentieel belang om hier const te gebruiken, anders krijg je undefined errors.
-        const profileInfo = this.state.profileInfo[0];
+        const profileInfo = this.state.profileInfo;
 
-        // alert(this.getImage(profileInfo));
 
         return (
 
             <div className="container">
-                <form onSubmit={(e) => this.editInformation(e, profileInfo.username)} className="col s12">
+                <form onSubmit={(e) => this.editInformation(e)} className="col s12">
                     <div className="row">
                         <div className="col 6">
                             <div style={{maxWidth: "10vw", maxHeight: "auto"}}>
@@ -105,8 +127,11 @@ class EditProfilePage extends React.Component {
                     {/*TODO: ervoor zorgen dat deze rechts op de pagina komt te staan*/}
                     <Link className="btn amber darken-1" to="/change-email">Edit Email and password</Link>
                 </div>
-                <Upload folder='users'/>
+                <h6>{this.state.response}</h6>
+                {/* TODO fix user*/}
+                <Upload folder='users' user={this.state.username}/>
             </div>
+
         )
     }
 }

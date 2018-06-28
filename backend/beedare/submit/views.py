@@ -4,13 +4,13 @@ import sqlalchemy
 from flask import jsonify, request
 
 from beedare import db
-from beedare.models import User, Dare, Hive, Message, Comment, UserDares
+from beedare.models import User, Dare, Hive, Message, Comment, UserDares, Friend
 from . import *
 
 
 @submit_blueprint.route('/message', methods=["POST"])
 def add_message():
-    content = request.get_json()
+    content = request.form
     try:
         result = db.session.query(User).filter_by(id=content['user_id']).first()
     except KeyError as e:
