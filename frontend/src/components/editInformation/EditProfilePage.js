@@ -5,7 +5,7 @@ import {Link} from "react-router-dom";
 import {UserContext} from "../UserProvider";
 import NotLogIn from "../ErrorMessages/NotLogIn";
 import Login from "../user_interaction/login";
-import Upload from "../upload/Upload"
+import Upload from "../upload/Upload";
 
 class EditProfilePage extends React.Component {
     constructor(props) {
