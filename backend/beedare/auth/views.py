@@ -135,6 +135,5 @@ def checkFormsInput(formcontent):
     if username is not None:
         error = "Username already in use"
         message.append({"message": error})
-    message.append({"test": "test"})
     return message
 
