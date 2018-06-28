@@ -24,7 +24,7 @@ class HivePage extends Component {
     }
 
     componentDidMount() {
-        fetch('http://localhost:5000/profile/hive/' + this.props.match.params.name)
+        fetch('http://94.212.18.127/profile/hive/' + this.props.match.params.name)
             .then(response => response.json())
             .then(data => this.setState({hiveInfo: data}))
             .catch(error => console.log(error));
@@ -32,13 +32,13 @@ class HivePage extends Component {
         // TODO Fix these fetches!
 
         // TODO make this open challenges for hives
-        fetch('http://localhost:5000/dares/')
+        fetch('http://94.212.18.127/dares/')
             .then(response => response.json())
             .then(data => this.setState({openChallenges: data}))
             .catch(error => console.log(error));
 
         // TODO get right challenges
-        fetch('http://localhost:5000/dares/')
+        fetch('http://94.212.18.127/dares/')
             .then(response => response.json())
             .then(data => this.setState({completedChallenges: data}))
             .catch(error => console.log(error));

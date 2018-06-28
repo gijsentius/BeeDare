@@ -20,7 +20,7 @@ class ChallengeCard extends Component {
 
     fetchImportant() {
         if (this.state.username) {
-            fetch('http://localhost:5000/profile/user/' + this.state.username + "/" + this.state.token)
+            fetch('http://94.212.18.127/profile/user/' + this.state.username + "/" + this.state.token)
                 .then(response => response.json())
                 .then(data => this.setState({profileInfo: data, renderOnce: false}))
                 .catch(error => console.log(error));
@@ -39,7 +39,7 @@ class ChallengeCard extends Component {
     handleClick(event, id) {
         event.preventDefault();
 
-        fetch('http://localhost:5000/dares/accept/' + id + "/" + this.state.username + "/" + this.state.token)
+        fetch('http://94.212.18.127/dares/accept/' + id + "/" + this.state.username + "/" + this.state.token)
             .then(response => response.json())
             .then(data => this.setState({openChallenges: data}))
             .catch(error => console.log(error));

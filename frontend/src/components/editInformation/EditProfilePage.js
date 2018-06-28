@@ -25,7 +25,7 @@ class EditProfilePage extends React.Component {
     fetchImportant() {
         if (this.state.username) {
             // hier nog graag een API request die alleen op ID haalt, anders beetje zonde van data etc.
-            fetch('http://localhost:5000/profile/user/' + this.state.username + "/" + this.state.token)
+            fetch('http://94.212.18.127/profile/user/' + this.state.username + "/" + this.state.token)
                 .then(response => response.json())
                 .then(data => this.setState({profileInfo: data}))
                 .catch(error => console.log(error));
@@ -43,7 +43,7 @@ class EditProfilePage extends React.Component {
         const form = event.target;
         const data = new FormData(form);
 
-        fetch('http://localhost:5000/profile/user/edit/' + this.state.username + "/" + this.state.token, {
+        fetch('http://94.212.18.127/profile/user/edit/' + this.state.username + "/" + this.state.token, {
             method: 'POST',
             body: data,
         })

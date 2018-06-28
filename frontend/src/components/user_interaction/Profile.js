@@ -26,30 +26,37 @@ class Profile extends Component {
 
         return (
             <div className="card">
-            <div className="card-content">
-                <div className="section" key={profile.id}>
-                    <div className="center" id='imgCH'>
-                        <Icon />
-                        {/*Hierboven nog toevoegen: image={profile.image}*/}
-                        <div className="rightnext">
-                            <li className="btn-floating btn-small amber darken-1">
-                                <Link to="/edit-profile"><i className="material-icons">edit</i></Link></li>
+                <div className="card-content">
+                    <div className="section" key={profile.id}>
+                        <div className="center" id='imgCH'>
+                            <Icon />
+                            {/*Hierboven nog toevoegen: image={profile.image}*/}
+                            {
+                                this.props.public ? (
+                                    null
+                                ) : (
+                                    <div className="rightnext">
+                                        <li className="btn-floating btn-small amber darken-1">
+                                            <Link to="/edit-profile"><i className="material-icons">edit</i></Link>
+                                        </li>
+                                    </div>
+                                )
+                            }
                         </div>
                     </div>
+                    <div className="divider"/>
+                    <div className="section center">
+                        <h6>{profile.username}</h6>
+                    </div>
+                    <div className="divider"/>
+                    <div className="section center">
+                        <a><Link to={"/friends/" + profile.id}><h6>{'Friends: ' + profile.id}</h6></Link></a>
+                    </div>
+                    <div className="divider"/>
+                    <div className="section center">
+                        <h6>Rank: {profile.rank}</h6>
+                    </div>
                 </div>
-                <div className="divider"/>
-                <div className="section center">
-                    <h6>{profile.username}</h6>
-                </div>
-                <div className="divider"/>
-                <div className="section center">
-                    <a><Link to={"/friends/" + profile.id}><h6>{'Friends: ' + profile.id}</h6></Link></a>
-                </div>
-                <div className="divider"/>
-                <div className="section center">
-                    <h6>Rank: {profile.rank}</h6>
-                </div>
-            </div>
             </div>
         );
 
