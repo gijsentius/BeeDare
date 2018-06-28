@@ -16,6 +16,7 @@ class EditProfilePage extends React.Component {
             username: null,
             token: null,
             renderOnce: true,
+            response: ''
         };
 
         this.editInformation = this.editInformation.bind(this);
@@ -45,8 +46,11 @@ class EditProfilePage extends React.Component {
         fetch('http://localhost:5000/profile/user/edit/' + this.state.username + "/" + this.state.token, {
             method: 'POST',
             body: data,
-        });
-        window.location.reload()
+        })
+            .then(response => response.json())
+            .then(data => this.setState({response: data.success}))
+            .catch(error => console.log(error));
+        // window.location.reload()
     }
 
     render() {
@@ -123,9 +127,11 @@ class EditProfilePage extends React.Component {
                     {/*TODO: ervoor zorgen dat deze rechts op de pagina komt te staan*/}
                     <Link className="btn amber darken-1" to="/change-email">Edit Email and password</Link>
                 </div>
+                <h6>{this.state.response}</h6>
                 {/* TODO fix user*/}
                 <Upload folder='users' user={this.state.username}/>
             </div>
+
         )
     }
 }

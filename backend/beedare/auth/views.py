@@ -57,36 +57,24 @@ def register_new():
 @auth_blueprint.route('/register', methods=['POST'])
 def register():
     content = request.form
+    message = checkFormsInput(content)
     try:
-        result = db.session.query(User).filter_by(email=content['email']).first()
+        time = datetime.datetime.utcnow()
+        user = User(first_name=content['firstname'], last_name=content['lastname'], email=content['email'],
+                    username=content['username'], score=0,
+                    last_seen=time, rank='New Bee')
+        user.set_password(content['password'])
     except KeyError as e:
-        return jsonify({"error": str(e) + " not given or invalid"}), 401
-    if result is not None:
-        error = "Email already registered."
-        return jsonify({"error": error}), 401
-    else:
-        try:
-            # TODO password
-            time = datetime.datetime.utcnow()
-            user = User(first_name=content['firstname'], last_name=content['lastname'], email=content['email'],
-                        username=content['username'], score=0, age_cat=content['age_cat'], location=content['location'],
-                        image=['images'], last_seen=time, rank='New Bee')
-        except KeyError as e:
-            return jsonify({"error": str(e) + " not given or invalid"}), 401
-        db.session.add(user)
-        try:
-            db.session.commit()
-        except sqlalchemy.exc.IntegrityError:
-            return jsonify({"error": "commit failed"}), 401
-        return jsonify({
-            "first_name": content['firstname'],
-            "last_name": content['lastname'],
-            "email": content['email'],
-            "username": content['username'],
-            "images": content['images'],
-            "location": content['location'],
-            "last_seen": time
-        }), 200
+        return jsonify(message), 401
+    db.session.add(user)
+    try:
+        db.session.commit()
+        message.append({"message": "Succes!"})
+    except sqlalchemy.exc.IntegrityError:
+        return jsonify(message), 401
+    return jsonify(
+        message
+    ), 200
 
 
 @auth_blueprint.route('/unconfirmed', methods=["GET"])
@@ -97,6 +85,7 @@ def unconfirmed():
     return jsonify({
         "error": "Account not confirmed. Please confirm your account by mail."
     }), 401
+
 
 # LET OP!!!!!!!!!! current_user kunnen wij niet gebruiken want REST is stateless
 @auth_blueprint.route('/confirm/<token>')
@@ -113,3 +102,38 @@ def confirm(token):
     else:
         flash('The confirmation link is invalid or has expired.')
     return redirect(url_for('core.index'))
+
+
+def checkFormsInput(formcontent):
+    message = []
+    if formcontent['email'] is None:
+        message.append({"message": "No email filled in!"})
+        if formcontent['password'] is None:
+            message.append({"message": "No password filled in!"})
+            if formcontent['confirmpassword'] is None:
+                message.append({"message": "No confirm password filled in!"})
+                if formcontent['username'] is None:
+                    message.append({"message": "No username filled in!"})
+                    if formcontent['firstname'] is None:
+                        message.append({"message": "No firstname filled in!"})
+                        if formcontent['lastname'] is None:
+                            message.append({"message": "No lastname filled in!"})
+                            if formcontent['password'] != formcontent['confirmpassword']:
+                                message.append({"message": "Password and confirmpassword are not the same!"})
+                                try:
+                                    result = db.session.query(User).filter_by(email=formcontent['email']).first()
+                                except KeyError as e:
+                                    return jsonify({"error": str(e) + " not given or invalid"}), 401
+                                if result is not None:
+                                    error = "Email already registered."
+                                    message.append({"message": error})
+                                try:
+                                    username = db.session.query(User).filter_by(email=formcontent['username']).first()
+                                except KeyError as e:
+                                    return jsonify({"error": str(e) + " not given or invalid"}), 401
+                                if username is not None:
+                                    error = "Username already in use"
+                                    message.append({"message": error})
+                                message.append({"test": "test"})
+    return message
+

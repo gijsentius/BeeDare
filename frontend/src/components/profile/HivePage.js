@@ -21,7 +21,7 @@ class HivePage extends Component {
     componentDidMount() {
         fetch('http://localhost:5000/profile/hive/' + this.props.match.params.name)
             .then(response => response.json())
-            .then(data => this.setState({profileInfo: data}))
+            .then(data => this.setState({hiveInfo: data}))
             .catch(error => console.log(error));
 
         // TODO Fix these fetches!
@@ -45,10 +45,10 @@ class HivePage extends Component {
             //    dit stukje code zorgt ervoor dat je geen undefined krijgt
         }
         const {openChallenges, completedChallenges, members} = this.state;
-        const profileInfo = this.state.profileInfo.hive;
+        const profileInfo = this.state.profileInfo;
 
-        if (this.state.profileInfo.hive) {
-            fetch('http://127.0.0.1:5000/hive/members/' + this.state.profileInfo.hive[0])
+        if (this.state.hiveInfo.hive) {
+            fetch('http://127.0.0.1:5000/hive/members/' + this.state.hiveInfo.hive[0])
                 .then(response => response.json())
                 .then(data => this.setState({members: data}))
                 .catch(error => console.log(error));
@@ -66,6 +66,8 @@ class HivePage extends Component {
                     <div className="col s4 m6">
                         <h6 className="center">Members</h6>
                         <Members members={members}/>
+                        <input type='submit' value='Join!' className="waves-effect waves-light btn amber darken-1 center-component top-button"
+                        onClick={() => this.joinHive()}/>
                     </div>
                     {/*//*/}
                     <div className="col s2 m3">
@@ -75,6 +77,19 @@ class HivePage extends Component {
                 </div>
             </div>
         );
+    }
+
+    joinHive(){
+        let data = new FormData();
+        data.append('user_id', this.state.profileInfo.id);
+        data.append('hive_id', this.state.hiveInfo.hive_id);
+        fetch('http://localhost:5000/hive/join', {
+            method: 'POST',
+            body: data,
+        })
+            .then(response => response.json())
+            .then(data => this.setState({response: data.success}))
+            .catch(error => console.log(error));
     }
 }
 

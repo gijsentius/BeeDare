@@ -146,4 +146,24 @@ def accept_dare(dareid, username, token):
             return jsonify(
                 {"result": "It worked! Dare is accepted"}
             ), 200
+    if request.method == "GET" and user_data.check_loginrequired(token):
+        open_dares_list = []
+        try:
+            user_dares = UserDares.query.filter_by(owner_id=user_data.id, achieved=False).all()
+            for opendare in user_dares:
+                dare = Dare.query.filter_by(id=opendare.id).first()
+                if dare is not None:
+                    open_dares_list.append({
+                        "name": dare.name,
+                        "id": dare.id,
+                        "images": dare.image,
+                        "body": dare.body,
+                        "body_html": dare.body_html,
+                        "value": dare.value
+                    })
+        except KeyError as e:
+            return jsonify({"error": str(e) + " not given or invalid"}), 401
+        return jsonify(
+            open_dares_list
+        ), 200
     return jsonify({}), 401

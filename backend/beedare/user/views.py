@@ -37,14 +37,17 @@ def editData(username, token):
     if request.method == "POST" and user.check_loginrequired(token):
         if user is not None:
             try:
-                user.first_name = content['firstName']
-                user.last_name = content['lastName']
-                user.username = content['userName']
+                if content['firstName'] is not "":
+                    user.first_name = content['firstName']
+                if content['lastName'] is not "":
+                    user.last_name = content['lastName']
+                if content['userName'] is not "":
+                    user.username = content['userName']
                 db.session.commit()
             except KeyError as e:
                 return jsonify({"error": str(e) + " not given or invalid"}), 401
             response = jsonify({
-                "succes": "Oui",
+                "success": "Successful edit!",
             })
             return response, 200
     return jsonify({}), 401
@@ -59,13 +62,17 @@ def editDataHive(hive_name):
         return jsonify({"error": str(e) + " not given or invalid"}), 401
     if hive is not None:
         try:
-            hive.hive_name = content['hive_name']
-            hive.beekeeper = content['beekeeper']
+            if content['hive_name'] is not "":
+                hive.hive_name = content['hive_name']
+            if content['beekeeper'] is not "":
+                result = db.session.query(User).filter_by(username=content['beekeeper']).first()
+                if result is not None:
+                    hive.beekeeper = result.id
             db.session.commit()
         except KeyError as e:
             return jsonify({"error": str(e) + " not given or invalid"}), 401
         response = jsonify({
-            "succes": "succes",
+            "success": "Successful edit!",
         })
         return response, 200
     return jsonify({}), 401
@@ -100,10 +107,12 @@ def hive(hive_name):
         keeper = db.session.query(User).filter_by(id=hive.beekeeper).first()
     except KeyError as e:
         return jsonify({"error": str(e) + " not given or invalid"}), 401
-    response = jsonify({
-        'hive': [hive.id, hive.hive_name, hive.image, hive.total_score_members, keeper.username],
-    })
-    return response, 200
+    if hive is not None and keeper is not None:
+        response = jsonify({
+            'hive': [hive.id, hive.hive_name, hive.image, hive.total_score_members, keeper.username],
+        })
+        return response, 200
+    return jsonify({"error": "error"}), 401
 
 
 @profile_blueprint.route('/newsfeed/<username>/<token>', methods=['GET'])

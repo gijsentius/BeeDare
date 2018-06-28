@@ -10,7 +10,7 @@ from . import *
 
 @hive_blueprint.route('/join', methods=["POST"])
 def join():
-    content = request.get_json()
+    content = request.form
     try:
         result = db.session.query(User).filter_by(id=content['user_id']).first()
         if result is not None:
@@ -33,7 +33,8 @@ def join():
         return jsonify({
             "follower_id": content['user_id'],
             "hive_id": content['hive_id'],
-            "timestamp": time
+            "timestamp": time,
+            "success": "Hive joined!"
         }), 200
     return jsonify({"error": "'hive' not given or invalid"}), 401
 

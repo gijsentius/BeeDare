@@ -19,6 +19,7 @@ manager.add_command('db', MigrateCommand)
 
 @manager.command
 def test():
+
     from beedare.fill_database import addDataToDB
     addDataToDB()
 
