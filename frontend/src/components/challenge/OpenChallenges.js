@@ -34,12 +34,10 @@ export default class OpenChallenges extends React.Component {
 
     closeMenu(event) {
 
-        if (!this.dropdownMenu.contains(event.target)) {
-
+        if (this.dropdownMenu !== null && !this.dropdownMenu.contains(event.target)) {
             this.setState({showMenu: false, currentId: ""}, () => {
                 document.removeEventListener('click', this.closeMenu);
             });
-
         }
     }
 
@@ -49,14 +47,15 @@ export default class OpenChallenges extends React.Component {
         this.setState({showMenu: false, currentId: ""}, () => {
             document.removeEventListener('click', this.closeMenu);
         });
+        this.props.fetch();
     }
-
     dareIsAchieved(event, id) {
         event.preventDefault();
         fetch('http://94.212.18.127/dares/achieved/' + id + "/" + this.state.username + "/" + this.state.token);
         this.setState({showMenu: false, currentId: ""}, () => {
             document.removeEventListener('click', this.closeMenu);
         });
+        this.props.fetch();
     }
 
 
@@ -127,13 +126,8 @@ export default class OpenChallenges extends React.Component {
                                                         <i className="material-icons">check</i></button>
                                                 </div>
                                             </div>
-                                        )
-                                        : (
-                                            null
-                                        )
+                                        ) : ( null )
                                 }
-
-                            </div>
                         </div>
                     </div>);
             }
@@ -146,7 +140,6 @@ export default class OpenChallenges extends React.Component {
                         {listItems}
                     </div>
                 </div>
-
             </div>
         )
     }

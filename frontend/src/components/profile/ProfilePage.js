@@ -59,7 +59,6 @@ class ProfilePage extends Component {
                 .then(response => response.json())
                 .then(data => this.setState({completedChallenges: data}))
                 .catch(error => console.log(error));
-
             this.setState({renderOnce: false});
         }
     }
@@ -74,7 +73,7 @@ class ProfilePage extends Component {
                     (context) => {
                         this.setState({
                             username: context.loggedInUsername,
-                            token: context.token
+                            token: context.token,
                         });
                         if (this.state.user === this.state.username) {
                             this.setState({public: false})

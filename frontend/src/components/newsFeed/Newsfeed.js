@@ -1,12 +1,13 @@
 import React, {Component} from 'react';
 import Message from './Message'
+import Icon from "../icon/Icon";
 
 
 class Newsfeed extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            messages: [],
+            messages: this.props.messages,
             number: 10,
             messageList: [],
 
@@ -22,11 +23,22 @@ class Newsfeed extends Component {
 
 
     render() {
-        this.state.messageList = this.state.messages.map((message) =>
+        // let list = [];
+        // for (let message in this.props.messages) {
+        //     console.log(this.props.messages);
+        //     list.push(<div className="message">
+        //         <Message
+        //             body={'test'}
+        //             name={'test2'}
+        //         />
+        //     </div>)
+        // }
+        this.state.messageList = this.props.messages.map((message) =>
             <div className="message">
                 <Message
-                    body={message.body}
-                    name={message.author}
+                    body={message.html}
+                    name={message.body}
+                    author={message.author}
                 />
             </div>
         );//end map

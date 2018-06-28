@@ -135,8 +135,7 @@ class Hive(db.Model):
 
 class ColonyMembers(db.Model):
     __tablename__ = 'colonymembers'
-    follower_id = db.Column(db.Integer, db.ForeignKey('users.id'),
-                            primary_key=True)
-    hive_id = db.Column(db.Integer, db.ForeignKey('hives.id'),
-                        primary_key=True)
+    match_id = db.Column(db.Integer, primary_key=True, unique=True, autoincrement=True)
+    follower_id = db.Column(db.Integer, db.ForeignKey('users.id'))
+    hive_id = db.Column(db.Integer, db.ForeignKey('hives.id'))
     timestamp = db.Column(db.DateTime, default=datetime.datetime.now())

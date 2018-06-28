@@ -23,16 +23,8 @@ class FriendPage extends React.Component {
             return <div/>
         }
 
-        let friends_list = [];
-
-        for(let friend in this.state.friends){
-            for(let item in friend){
-                friends_list.push(item)
-            }
-        }
-
         return(
-            <Friends friends={friends_list}/>
+            <Friends friends={this.state.friends}/>
         )
     }
 }

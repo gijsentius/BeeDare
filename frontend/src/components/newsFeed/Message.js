@@ -1,16 +1,18 @@
-import React, { Component } from 'react';
+import React, {Component} from 'react';
 import './Message.css'
 
 class Message extends Component {
-  constructor(props){
-    super(props);
-    this.state = {likes : 0};
-    this.incrementLikes = this.incrementLikes.bind(this);
-    this.reply = this.reply.bind(this);
-  }
+    constructor(props) {
+        super(props);
+        this.state = {
+            likes: 0,
+        };
+        this.incrementLikes = this.incrementLikes.bind(this);
+        this.reply = this.reply.bind(this);
+    }
 
-    incrementLikes(){
-        this.setState({likes: this.state.likes+1});
+    incrementLikes() {
+        this.setState({likes: this.state.likes + 1});
     }
 
     reply() {
@@ -27,11 +29,16 @@ class Message extends Component {
                         <div className="body">
                             {this.props.body}
                         </div>
+                        <div className="body">
+                            {this.props.author}
+                        </div>
 
                         <div className="card-action">
                             <div id="center-content">
-                                <button id="link-pointer" onClick={this.incrementLikes}><i className="material-icons text-hover">thumb_up</i></button>
-                                <button id="link-pointer" onClick={this.reply}><i className="material-icons text-hover">reply</i></button>
+                                <button id="link-pointer" onClick={this.incrementLikes}><i
+                                    className="material-icons text-hover">thumb_up</i></button>
+                                <button id="link-pointer" onClick={this.reply}><i
+                                    className="material-icons text-hover">reply</i></button>
                             </div>
                         </div>
                     </div>

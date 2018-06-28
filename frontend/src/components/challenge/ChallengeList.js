@@ -18,6 +18,11 @@ class ChallengeList extends Component {
     }
 
     render() {
+
+        if (!this.state.challenges){
+            return <div/>
+        }
+
         let challenges = this.state.challenges.map((challenge) =>
             <div className="dare-col">
                 <ChallengeCard
