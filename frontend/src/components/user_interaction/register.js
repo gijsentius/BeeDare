@@ -34,7 +34,7 @@ export default class Register extends React.Component {
         formData.append('lastname', this.state.lastname);
         formData.append('username', this.state.username);
 
-        fetch('http://localhost:5000/auth/register', {
+        fetch('http://94.212.18.127/auth/register', {
             method: 'POST',
             body: formData,
         })

@@ -28,19 +28,19 @@ class NewsFeedPage extends React.Component {
 
     fetchImportant() {
         if (this.state.username) {
-            fetch('http://localhost:5000/profile/user/' + this.state.username + "/" + this.state.token)
+            fetch('http://94.212.18.127/profile/user/' + this.state.username + "/" + this.state.token)
                 .then(response => response.json())
                 .then(data => this.setState({profileInfo: data}))
                 .catch(error => console.log(error));
 
-            fetch('http://localhost:5000/hive/hives')
+            fetch('http://94.212.18.127/hive/hives')
                 .then(response => response.json())
                 .then(data => this.setState({hives: data}))
                 .catch(error => console.log(error));
             this.setState({renderOnce: false});
 
             // TODO get right ID
-            fetch('http://localhost:5000/coll/messages/1')
+            fetch('http://94.212.18.127/coll/messages/1')
                 .then(response => response.json())
                 .then(data => this.setState({messages: data.result}))
                 .catch(error => console.log(error));
