@@ -4,7 +4,7 @@ import sqlalchemy
 from flask import jsonify, request
 
 from beedare import db
-from beedare.models import User, Dare, Hive, Message, Comment, UserDares, Friend
+from beedare.models import User, Dare, Hive, Message, Comment, UserDares, Friend, Post
 from . import *
 
 
@@ -18,7 +18,7 @@ def add_message():
     if result is not None:
         time = datetime.datetime.utcnow()
         try:
-            message = Message(body=content['title'], body_html=content['message'], author_id=content['user_id'],
+            message = Post(body=content['title'], body_html=content['message'], author_id=content['user_id'],
                               timestamp=time)
         except KeyError as e:
             return jsonify({"error": str(e) + " not given or invalid"}), 401

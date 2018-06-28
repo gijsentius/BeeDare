@@ -2,13 +2,18 @@ import React, {Component} from 'react';
 import Icon from "../icon/Icon";
 import '../challenge/Challenge.css';
 import {Link} from "react-router-dom";
+import {UserContext} from "../UserProvider";
 
 class Profile extends Component {
 
 
     constructor(props) {
         super(props);
-        this.state = {};
+        this.state = {
+            username: null,
+            token: null,
+            renderOnce: true,
+        };
     }
 
     sayHello(e) {
@@ -16,7 +21,33 @@ class Profile extends Component {
         console.log('hello');
     }
 
+    fetchImportant() {
+        if (this.state.username) {
+            // hier nog graag een API request die alleen op ID haalt, anders beetje zonde van data etc.
+            fetch('http://94.212.18.127/profile/user/' + this.state.username + "/" + this.state.token)
+                .then(response => response.json())
+                .then(data => this.setState({profileInfo: data}))
+                .catch(error => console.log(error));
+
+            this.setState({renderOnce: false});
+        }
+    }
+
     render() {
+        if (this.state.renderOnce) {
+            return (
+                <UserContext.Consumer>{
+                    (context) => {
+                        this.setState({
+                            username: context.loggedInUsername,
+                            token: context.token
+                        });
+                        this.fetchImportant();
+                    }
+                }
+                </UserContext.Consumer>
+            )
+        }
 
         if (!this.props.profileInfo) {
             return <div/>
@@ -24,12 +55,16 @@ class Profile extends Component {
 
         const profile = this.props.profileInfo;
 
+        if(this.state.profileInfo === undefined){
+            return <div/>
+        }
+
         return (
             <div className="card">
                 <div className="card-content">
                     <div className="section" key={profile.id}>
                         <div className="center" id='imgCH'>
-                            <Icon />
+                            <Icon image={"http://94.212.18.127/image/" + this.state.profileInfo.image + "/users"}/>
                             {/*Hierboven nog toevoegen: image={profile.image}*/}
                             {
                                 this.props.public ? (

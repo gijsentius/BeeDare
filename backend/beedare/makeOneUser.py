@@ -18,7 +18,7 @@ def addUserWithPassToDB():
     user.set_password("wachtwoord")
     addToSession.append(user)
 
-    message = Message(body=fakeDataFactory.text(max_nb_chars=200, ext_word_list=None), author_id=randint(1, 50), timestamp=(datetime.datetime.now()+datetime.timedelta(seconds=randint(1, 50))))
+    message = Post(body=fakeDataFactory.text(max_nb_chars=200, ext_word_list=None), author_id=randint(1, 50), timestamp=(datetime.datetime.now()+datetime.timedelta(seconds=randint(1, 50))))
     addToSession.append(message)
 
     comment = Comment(body=fakeDataFactory.sentence(nb_words=6, variable_nb_words=True, ext_word_list=None))

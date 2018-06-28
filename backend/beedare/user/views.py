@@ -6,7 +6,7 @@ from beedare.models import User, Hive, ColonyMembers, Dare, Message, Friend, Use
 from . import *
 
 
-@profile_blueprint.route('/user/public/<username>', methods=['GET'])
+@profile_blueprint.route('/public/user/<username>', methods=['GET'])
 @profile_blueprint.route('/user/<username>/<token>', methods=['POST', 'GET'])
 def user(username, token=None):
     if token is not None:
@@ -147,7 +147,7 @@ def news(username, token):
             friends = Friend.query.filter_by(follower_id=(user_data.id)).all()
             for friend in friends:
                 friend_data = User.query.filter_by(id=friend.followed_id).first()
-                messages = Message.query.filter_by(author_id=friend.followed_id).all()
+                messages = Post.query.filter_by(author_id=friend.followed_id).all()
                 for message in messages:
                     message_list.append(
                         {

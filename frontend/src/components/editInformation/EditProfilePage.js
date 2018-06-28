@@ -54,8 +54,6 @@ class EditProfilePage extends React.Component {
     }
 
     render() {
-
-
         if(this.state.renderOnce){
             return(
                 <UserContext.Consumer>{
@@ -72,31 +70,37 @@ class EditProfilePage extends React.Component {
         // Het is dus van essentieel belang om hier const te gebruiken, anders krijg je undefined errors.
         const profileInfo = this.state.profileInfo;
 
+        if(this.state.profileInfo.image === undefined){
+            return <div/>
+        }
 
         return (
-
             <div className="container">
                 <form onSubmit={(e) => this.editInformation(e)} className="col s12">
                     <div className="row">
                         <div className="col 6">
-                            <img src={EmployeeDagmar} alt="" className="circle responsive-img z-depth-1"
-                                 style={{maxWidth: "10vw", maxHeight: "auto"}}/>
+                            <div style={{maxWidth: "10vw", maxHeight: "auto"}}>
+                                <Icon image={"http://94.212.18.127/image/" + this.state.profileInfo.image + "/users"}/>
+                            </div>
+
+                            {/*<img src={EmployeeDagmar} alt="" className="circle responsive-img z-depth-1"*/}
+                                 {/*style={{maxWidth: "10vw", maxHeight: "auto"}}/>*/}
                         </div>
                         {/*Br is misschien wel heel lelijk, maar is voor nu een snelle oplossing*/}
                         <br/>
                         <br/>
 
-                        <form className="col s2">
-                            <div className="file-field input-field">
-                                <div className="btn btn-small amber darken-1">
-                                    <i className="material-icons">edit</i>
-                                    <input name="edit" type="file"/>
-                                </div>
-                                <div className="file-path-wrapper">
-                                    <input className="file-path"/>
-                                </div>
-                            </div>
-                        </form>
+                        {/*<form className="col s2">*/}
+                            {/*<div className="file-field input-field">*/}
+                                {/*<div className="btn btn-small amber darken-1">*/}
+                                    {/*<i className="material-icons">edit</i>*/}
+                                    {/*<input name="edit" type="file"/>*/}
+                                {/*</div>*/}
+                                {/*<div className="file-path-wrapper">*/}
+                                    {/*<input className="file-path"/>*/}
+                                {/*</div>*/}
+                            {/*</div>*/}
+                        {/*</form>*/}
 
                     </div>
                     <div className="row">
@@ -128,7 +132,7 @@ class EditProfilePage extends React.Component {
                 </div>
                 <h6>{this.state.response}</h6>
                 {/* TODO fix user*/}
-                <Upload folder='users' user={this.state.username}/>
+                <Upload folder='users' user={this.state.username} name={this.state.username}/>
             </div>
 
         )

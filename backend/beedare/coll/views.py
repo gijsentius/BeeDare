@@ -2,7 +2,7 @@ from flask import request, jsonify
 from flask_login import login_required
 
 from beedare import db
-from beedare.models import Friend, Message, User
+from beedare.models import Friend, Message, User, Post
 
 from beedare.models import UserDares
 from . import *
@@ -36,7 +36,7 @@ def dares():
 def messages(id):
     try:
         list = []
-        result = db.session.query(Message).filter_by(author_id=id).all()
+        result = db.session.query(Post).filter_by(author_id=id).all()
         author = db.session.query(User).filter_by(id=id).first()
         for item in result:
             list.append(

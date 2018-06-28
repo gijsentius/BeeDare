@@ -119,7 +119,8 @@ class Dare(db.Model):
 
 class UserDares(db.Model):
     __tablename__ = 'userdares'
-    id = db.Column(db.ForeignKey('dares.id'), primary_key=True)
+    pair_id = db.Column(db.Integer, primary_key=True, autoincrement=True)
+    id = db.Column(db.Integer, db.ForeignKey('dares.id'))
     owner_id = db.Column(db.Integer, db.ForeignKey('users.id'))
     achieved = db.Column(db.Boolean)
 
