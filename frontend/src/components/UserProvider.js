@@ -15,12 +15,8 @@ class UserProvider extends React.Component {
             token: null,
 
             authenticate: (data) => {
-<<<<<<< HEAD
                 console.log(data);
                 fetch('http://94.212.18.127/auth/login', {
-=======
-                fetch('http://localhost:5000/auth/login', {
->>>>>>> master
                     method: 'POST',
                     body: data,
                 })
