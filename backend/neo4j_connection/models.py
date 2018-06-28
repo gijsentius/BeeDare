@@ -16,3 +16,4 @@ class User(StructuredNode):
 
     # traverse outgoing IS_FROM relations, inflate to Country objects
     completed_dare = Relationship('Dare', 'Has_finished')
+    friends = Relationship('User', 'FRIEND')

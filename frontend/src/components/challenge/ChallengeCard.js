@@ -24,7 +24,6 @@ class ChallengeCard extends Component {
                 .then(response => response.json())
                 .then(data => this.setState({profileInfo: data, renderOnce: false}))
                 .catch(error => console.log(error));
-
             this.setState({renderOnce: false});
         }
     }
@@ -74,7 +73,6 @@ class ChallengeCard extends Component {
             </div>
         );
     }
-
     render() {
 
         if (this.state.renderOnce) {

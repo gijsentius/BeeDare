@@ -5,7 +5,6 @@ import {Link} from "react-router-dom";
 import {UserContext} from "../UserProvider";
 import NotLogIn from "../ErrorMessages/NotLogIn";
 import Login from "../user_interaction/login";
-import Upload from "../upload/Upload";
 
 class EditProfilePage extends React.Component {
     constructor(props) {
@@ -79,25 +78,24 @@ class EditProfilePage extends React.Component {
                 <form onSubmit={(e) => this.editInformation(e)} className="col s12">
                     <div className="row">
                         <div className="col 6">
-                            <div style={{maxWidth: "10vw", maxHeight: "auto"}}>
-                                <Icon image={'http://localhost:5000/image/' + profileInfo.image + '/users'}
-                                      action={() => alert(profileInfo.image)}/>
-                            </div>
+                            <img src={EmployeeDagmar} alt="" className="circle responsive-img z-depth-1"
+                                 style={{maxWidth: "10vw", maxHeight: "auto"}}/>
                         </div>
                         {/*Br is misschien wel heel lelijk, maar is voor nu een snelle oplossing*/}
                         <br/>
                         <br/>
-                        {/*<form className="col s2">*/}
-                            {/*<div className="file-field input-field">*/}
-                                {/*<div className="btn btn-small amber darken-1">*/}
-                                    {/*<i className="material-icons">edit</i>*/}
-                                    {/*<input name="edit" type="file"/>*/}
-                                {/*</div>*/}
-                                {/*<div className="file-path-wrapper">*/}
-                                    {/*<input className="file-path"/>*/}
-                                {/*</div>*/}
-                            {/*</div>*/}
-                        {/*</form>*/}
+
+                        <form className="col s2">
+                            <div className="file-field input-field">
+                                <div className="btn btn-small amber darken-1">
+                                    <i className="material-icons">edit</i>
+                                    <input name="edit" type="file"/>
+                                </div>
+                                <div className="file-path-wrapper">
+                                    <input className="file-path"/>
+                                </div>
+                            </div>
+                        </form>
 
                     </div>
                     <div className="row">
@@ -131,6 +129,7 @@ class EditProfilePage extends React.Component {
                 {/* TODO fix user*/}
                 <Upload folder='users' user={this.state.username}/>
             </div>
+
         )
     }
 }

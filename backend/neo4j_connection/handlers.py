@@ -16,6 +16,49 @@ class Connection():
         """
         new_user = User(username=username).save()
 
+    def connect_users(self, username, friend_username):
+        """Connect a user with another user
+        Keyword arguments:
+        username -- the username of the user to connect
+        friend -- the username of the friend to connect to
+        """
+        try:
+            user = User.nodes.get(username=username)
+            friend = User.nodes.get(username=friend_username)
+            user.friends.connect(friend)
+        except User.DoesNotExist as e:
+            print(e)
+        except friend.DoesNotExist as e:
+            print(e)
+
+    def is_friend(self, username, friend_username):
+        try:
+            user = User.nodes.get(username=username)
+            friend = User.nodes.get(username=friend_username)
+            if user.friends.is_connected(friend):
+                return True
+            else:
+                return False
+        except User.DoesNotExist as e:
+            print(e)
+        except friend.DoesNotExist as e:
+            print(e)
+
+    def disconnect_users(self, username, friend_username):
+        """Disconnect a user with another user
+        Keyword arguments:
+        username -- the username of the user to disconnect
+        friend -- the username of the friend to disconnect with
+        """
+        try:
+            user = User.nodes.get(username=username)
+            friend = User.nodes.get(username=friend_username)
+            user.friends.disconnect(friend)
+        except User.DoesNotExist as e:
+            print(e)
+        except friend.DoesNotExist as e:
+            print(e)
+
     def create_dare(self, code, score):
         """Create a dare in the database
         Keyword arguments:

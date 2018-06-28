@@ -74,7 +74,7 @@ def load_user(user_id):
 
 
 # source: https://github.com/miguelgrinberg/flasky/blob/master/app/models.py
-class Message(db.Model):
+class Post(db.Model):
     __tablename__ = 'posts'
     id = db.Column(db.Integer, primary_key=True, autoincrement=True)
     body = db.Column(db.Text)
@@ -84,7 +84,7 @@ class Message(db.Model):
     comments = db.relationship('Comment', backref='post', lazy='dynamic')  # lazy??? backref???
 
     def __repr__(self):
-        return '<Message %r>' % (self.body)
+        return '<Post %r>' % (self.body)
 
 
 class Comment(db.Model):
@@ -97,6 +97,15 @@ class Comment(db.Model):
     author_id = db.Column(db.Integer, db.ForeignKey('users.id'))
     post_id = db.Column(db.Integer, db.ForeignKey('posts.id'))
 
+class Message(db.Model):
+    __tablename__ = 'messages'
+    id = db.Column(db.Integer, primary_key=True, autoincrement=True)
+    sender = db.Column(db.Integer, db.ForeignKey('users.id'))
+    recipient = db.Column(db.Integer, db.ForeignKey('users.id'))
+    read = db.Column(db.Boolean)
+    body = db.Column(db.Text)
+    title = db.Column(db.Text)
+    friendRequest = db.Column(db.Boolean)
 
 class Dare(db.Model):
     __tablename__ = 'dares'

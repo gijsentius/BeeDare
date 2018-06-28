@@ -44,17 +44,19 @@ export default class OpenChallenges extends React.Component {
     deleteDare(id, event) {
         event.preventDefault();
         fetch('http://localhost:5000/dares/delete/' + id + "/" + this.state.username + "/" + this.state.token);
+
         this.setState({showMenu: false, currentId: ""}, () => {
             document.removeEventListener('click', this.closeMenu);
         });
+        this.props.fetch();
     }
-
     dareIsAchieved(event, id) {
         event.preventDefault();
         fetch('http://localhost:5000/dares/achieved/' + id + "/" + this.state.username + "/" + this.state.token);
         this.setState({showMenu: false, currentId: ""}, () => {
             document.removeEventListener('click', this.closeMenu);
         });
+        this.props.fetch();
     }
 
 

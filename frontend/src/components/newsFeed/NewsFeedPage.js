@@ -5,7 +5,6 @@ import Profile from "../user_interaction/Profile";
 import Newsfeed from "./Newsfeed";
 import './NewsFeed.css';
 import scrollToComponent from "react-scroll-to-component";
-import Upload from "../upload/Upload";
 import {UserContext} from "../UserProvider";
 
 
@@ -45,7 +44,6 @@ class NewsFeedPage extends React.Component {
                 .then(response => response.json())
                 .then(data => this.setState({messages: data.result}))
                 .catch(error => console.log(error));
-
         }
     }
 
@@ -79,7 +77,6 @@ class NewsFeedPage extends React.Component {
 
         const profileInfo = this.state.profileInfo;
         const messages = this.state.messages;
-
         return (
             <div className="customContainer">
                 <div className="row">
