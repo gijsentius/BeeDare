@@ -28,6 +28,26 @@ def user(username, token):
     return jsonify({}), 401
 
 
+@profile_blueprint.route('/user/public/<username>', methods=['GET'])
+def user(username):
+    try:
+        user_data = db.session.query(User).filter_by(username=username).first()
+    except KeyError as e:
+        return jsonify({"error": str(e) + " not given or invalid"}), 401
+    if request.method == "GET":
+        if user_data is not None:
+            return jsonify(
+                {
+                    "first_name": user_data.first_name,
+                    "username": user_data.username,
+                    "last_name": user_data.last_name,
+                    "image": user_data.image,
+                    "rank": user_data.rank,
+                }
+            ), 200
+    return jsonify({}), 401
+
+
 @profile_blueprint.route('/user/edit/<username>/<token>', methods=['POST'])
 def editData(username, token):
     content = request.form
