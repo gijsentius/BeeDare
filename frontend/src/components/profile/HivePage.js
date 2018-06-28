@@ -47,7 +47,7 @@ class HivePage extends Component {
     fetchImportant() {
         if (this.state.username) {
 
-            fetch('http://localhost:5000/profile/user/' + this.state.username + "/" + this.state.token)
+            fetch('http://94.212.18.127/profile/user/' + this.state.username + "/" + this.state.token)
                 .then(response => response.json())
                 .then(data => this.setState({profileInfo: data}))
                 .catch(error => console.log(error));
@@ -128,7 +128,7 @@ class HivePage extends Component {
         let data = new FormData();
         data.append('user_id', profileInfo.id);
         data.append('hive_id', this.state.hiveInfo.hive[0]);
-        fetch('http://localhost:5000/hive/join', {
+        fetch('http://94.212.18.127/hive/join', {
             method: 'POST',
             body: data,
         })
@@ -141,7 +141,7 @@ class HivePage extends Component {
         let data = new FormData();
         data.append('user_id', profileInfo.id);
         data.append('hive_id', this.state.hiveInfo.hive[0]);
-        fetch('http://localhost:5000/hive/leave', {
+        fetch('http://94.212.18.127/hive/leave', {
             method: 'POST',
             body: data,
         })
