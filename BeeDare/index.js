@@ -12,7 +12,7 @@ import navStyles from './src/styles/navStyles';
 const store = createStore(reducer, applyMiddleware(thunk));
 
 
-class BeeDare extends Component {
+export default class BeeDare extends Component {
     render() {
         return (
             <Provider store={store}>
@@ -27,4 +27,5 @@ class BeeDare extends Component {
 }
 
 AppRegistry.registerComponent('BeeDare', () => BeeDare);
+
 

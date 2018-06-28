@@ -2,6 +2,7 @@ import React, {Component} from 'react';
 import {View, Text, ListView, ScrollView, Image} from 'react-native';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
+import { Tabs2 } from "../router/router";
 
 import actionCreators from '../actions';
 import Tabs from 'react-native-tabs';
