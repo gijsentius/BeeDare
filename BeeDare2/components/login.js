@@ -4,7 +4,8 @@ import {View, Text, StyleSheet, Image, TouchableOpacity, TextInput, KeyboardAvoi
 class Login extends Component {
     constructor(props) {
         super(props);
-        this.state = { loggedIn: false,
+        this.state = {
+            loggedIn: false,
             password: '',
             email: '',
             username: "",
