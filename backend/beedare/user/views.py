@@ -153,7 +153,7 @@ def getFriends(user):
         friends = db.session.query(Friend).filter_by(followed_id=user).all()
     except KeyError as e:
         return jsonify({"error": str(e) + " not given or invalid"}), 401
-    if hive is not None:
+    if friends is not None:
         try:
             for friend in friends:
                 friend = db.session.query(User).filter_by(id=friend.follower_id).first()
