@@ -17,11 +17,20 @@ migrate = Migrate(app, db)  # Migrate instance used for migrating the database
 manager = Manager(app)  # Manager instance
 manager.add_command('db', MigrateCommand)
 
-
 @manager.command
 def test():
     from beedare.fill_database import addDataToDB
     addDataToDB()
+
+@manager.command
+def test_neo4j():
+    from beedare import neoconn
+    # conn.create_user(username='jelmer')
+    # conn.create_dare(code='test')
+    neoconn.completed_dare(username='jelmer', dare='test')
+    for dare in neoconn.get_completed_dares('jelmer'):
+        print(dare)
+
 
 if __name__ == "__main__":
     manager.run()

@@ -5,9 +5,11 @@ from flask_sqlalchemy import SQLAlchemy
 from flask_cors import CORS
 from config import config, MailConfig
 from flask_admin.contrib.sqla import ModelView
+from neo4j_connection.handlers import Connection
 
 
 db = SQLAlchemy()  # Database instance used for SQLAlchemy
+neoconn = Connection()
 login_manager = LoginManager()
 cors = CORS()
 

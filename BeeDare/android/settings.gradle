@@ -1,0 +1,3 @@
+rootProject.name = 'BeeDare'
+
+include ':app'

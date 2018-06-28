@@ -12,6 +12,7 @@ class Development(Config):
     SQLALCHEMY_DATABASE_URI = os.environ.get('SQLALCHEMY_DATABASE_URI') or 'sqlite:///' + \
                               os.path.join(basedir, 'data-dev.db')
     SQLALCHEMY_TRACK_MODIFICATIONS = False
+    NEO4J_URI = os.environ.get('NEO4J_URI')
 
 
 class MailConfig:
