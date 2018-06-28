@@ -6,46 +6,45 @@ from beedare.models import User, Hive, ColonyMembers, Dare, Message, Friend, Use
 from . import *
 
 
-@profile_blueprint.route('/user/<username>/<token>', methods=['POST', 'GET'])
-def user(username, token):
-    try:
-        user_data = db.session.query(User).filter_by(username=username).first()
-    except KeyError as e:
-        return jsonify({"error": str(e) + " not given or invalid"}), 401
-    if request.method == "GET" and user_data.check_loginrequired(token):
-        if user_data is not None:
-            return jsonify(
-                {
-                    "first_name": user_data.first_name,
-                    "username": user_data.username,
-                    "last_name": user_data.last_name,
-                    "email": user_data.email,
-                    "image": user_data.image,
-                    "id": user_data.id,
-                    "rank": user_data.rank,
-                }
-            ), 200
-    return jsonify({}), 401
-
-
 @profile_blueprint.route('/user/public/<username>', methods=['GET'])
-def user(username):
-    try:
-        user_data = db.session.query(User).filter_by(username=username).first()
-    except KeyError as e:
-        return jsonify({"error": str(e) + " not given or invalid"}), 401
-    if request.method == "GET":
-        if user_data is not None:
-            return jsonify(
-                {
-                    "first_name": user_data.first_name,
-                    "username": user_data.username,
-                    "last_name": user_data.last_name,
-                    "image": user_data.image,
-                    "rank": user_data.rank,
-                }
-            ), 200
-    return jsonify({}), 401
+@profile_blueprint.route('/user/<username>/<token>', methods=['POST', 'GET'])
+def user(username, token=None):
+    if token is not None:
+        try:
+            user_data = db.session.query(User).filter_by(username=username).first()
+        except KeyError as e:
+            return jsonify({"error": str(e) + " not given or invalid"}), 401
+        if request.method == "GET" and user_data.check_loginrequired(token):
+            if user_data is not None:
+                return jsonify(
+                    {
+                        "first_name": user_data.first_name,
+                        "username": user_data.username,
+                        "last_name": user_data.last_name,
+                        "email": user_data.email,
+                        "image": user_data.image,
+                        "id": user_data.id,
+                        "rank": user_data.rank,
+                    }
+                ), 200
+        return jsonify({}), 401
+    else:
+        try:
+            user_data = db.session.query(User).filter_by(username=username).first()
+        except KeyError as e:
+            return jsonify({"error": str(e) + " not given or invalid"}), 401
+        if request.method == "GET":
+            if user_data is not None:
+                return jsonify(
+                    {
+                        "first_name": user_data.first_name,
+                        "username": user_data.username,
+                        "last_name": user_data.last_name,
+                        "image": user_data.image,
+                        "rank": user_data.rank,
+                    }
+                ), 200
+        return jsonify({}), 401
 
 
 @profile_blueprint.route('/user/edit/<username>/<token>', methods=['POST'])
@@ -222,6 +221,7 @@ def delete_message(message_id, username, token):
             }), 200
         return jsonify({"error": "'message id' not given or invalid"}), 401
     return jsonify({"error": "'user' not given or invalid"}), 401
+
 
 @profile_blueprint.route('/delete/friend/<friend>/<username>/<token>', methods=["GET"])
 def delete_friend(friend, username, token):

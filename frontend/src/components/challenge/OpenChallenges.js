@@ -101,8 +101,9 @@ export default class OpenChallenges extends React.Component {
                             <div className="rightnext">
                                 {/*Gebruik van arrow functie om event en item.id mee te kunnen geven*/}
                                 <a id={item.id} onClick={(e) => this.showMenu(e, item.id)}
-                                className="btn-floating btn-small amber darken-1">
-                                    <i className="material-icons">edit</i></a>
+                                    className="btn-floating btn-small amber darken-1">
+                                    <i className="material-icons">edit</i>
+                                </a>
                                 {
                                     // onderstaande vergelijking is van essentieel belang, zodat er niet meerdere menu's
                                     // aangemaakt worden.
@@ -129,7 +130,8 @@ export default class OpenChallenges extends React.Component {
                                         ) : ( null )
                                 }
                         </div>
-                    </div>);
+                    </div>
+                </div>);
             }
         }
 
