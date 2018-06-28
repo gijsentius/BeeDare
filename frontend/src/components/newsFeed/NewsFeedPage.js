@@ -40,7 +40,7 @@ class NewsFeedPage extends React.Component {
             this.setState({renderOnce: false});
 
             // TODO get right ID
-            fetch('http://94.212.18.127/coll/messages/1')
+            fetch('http://94.212.18.127/coll/messages/' + this.state.profileInfo.id)
                 .then(response => response.json())
                 .then(data => this.setState({messages: data.result}))
                 .catch(error => console.log(error));
@@ -92,6 +92,7 @@ class NewsFeedPage extends React.Component {
 
         const profileInfo = this.state.profileInfo;
         const messages = this.state.messages;
+
         return (
             <div className="customContainer">
                 <div className="row">

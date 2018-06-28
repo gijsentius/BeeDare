@@ -50,8 +50,12 @@ class EditHivePage extends React.Component {
         // Het is dus van essentieel belang om hier const te gebruiken, anders krijg je undefined errors.
         const profileInfo = this.state.profileInfo;
 
-        return (
+        if(this.state.profileInfo === undefined){
+            return <div/>
+        }
 
+
+        return (
             <div className="container">
                 <form onSubmit={(e) => this.editInformation(e, profileInfo[1])} className="col s12">
                     <div className="row">
@@ -64,7 +68,6 @@ class EditHivePage extends React.Component {
                         {/*Br is misschien wel heel lelijk, maar is voor nu een snelle oplossing*/}
                         <br/>
                         <br/>
-
                     </div>
                     <div className="row">
                         <div className="input-field col s6">
@@ -83,7 +86,7 @@ class EditHivePage extends React.Component {
                     </div>
                     <h6>{this.state.response}</h6>
                 </form>
-                <Upload folder='users'/>
+                <Upload folder='users' name={profileInfo[1]}/>
             </div>
         )
     }

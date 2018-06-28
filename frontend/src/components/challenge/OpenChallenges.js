@@ -47,15 +47,16 @@ export default class OpenChallenges extends React.Component {
         this.setState({showMenu: false, currentId: ""}, () => {
             document.removeEventListener('click', this.closeMenu);
         });
-        this.props.fetch();
+        // this.props.fetch();
     }
+
     dareIsAchieved(event, id) {
         event.preventDefault();
         fetch('http://94.212.18.127/dares/achieved/' + id + "/" + this.state.username + "/" + this.state.token);
         this.setState({showMenu: false, currentId: ""}, () => {
             document.removeEventListener('click', this.closeMenu);
         });
-        this.props.fetch();
+        // this.props.fetch();
     }
 
 
@@ -83,7 +84,7 @@ export default class OpenChallenges extends React.Component {
             // .map is eigenlijk al een forloop. Het zorgt ervoor dat listItems een nieuwe
             // array wordt, maar hij loop dus over openChallenges en stopt er vervolgens listItems in.
             // div met de className center wordt gebruikt om de image in het midden te zetten
-            if(this.props.public) {
+            if (this.props.public) {
                 listItems = openChallenges.map((item) =>
                     <div className="section" key={item.id}>
                         <div className="center" id='imgCH'>
@@ -101,7 +102,7 @@ export default class OpenChallenges extends React.Component {
                             <div className="rightnext">
                                 {/*Gebruik van arrow functie om event en item.id mee te kunnen geven*/}
                                 <a id={item.id} onClick={(e) => this.showMenu(e, item.id)}
-                                    className="btn-floating btn-small amber darken-1">
+                                   className="btn-floating btn-small amber darken-1">
                                     <i className="material-icons">edit</i>
                                 </a>
                                 {
@@ -111,27 +112,27 @@ export default class OpenChallenges extends React.Component {
                                         ? (
                                             <div>
                                                 <div id={item.id}
-                                                    ref={(element) => {
-                                                        this.dropdownMenu = element;
-                                                    }}>
+                                                     ref={(element) => {
+                                                         this.dropdownMenu = element;
+                                                     }}>
                                                     <button className="btn-small waves-effect red buttonMargin"
                                                             id={item.id} onClick={(e) => this.deleteDare(item.id, e)}>
                                                         <i className="material-icons">delete</i></button>
                                                 </div>
                                                 < div id={item.id}
-                                                    ref={(element) => {
-                                                        this.dropdownMenu = element;
-                                                    }}>
+                                                      ref={(element) => {
+                                                          this.dropdownMenu = element;
+                                                      }}>
                                                     <button className="btn-small waves-effect green buttonMargin"
                                                             id={item.id} onClick={(e) => this.dareIsAchieved(e, item.id)}>
                                                         <i className="material-icons">check</i></button>
                                                 </div>
                                             </div>
-                                        ) : ( null )
+                                        ) : (null)
                                 }
+                            </div>
                         </div>
-                    </div>
-                </div>);
+                    </div>);
             }
         }
 
@@ -146,10 +147,3 @@ export default class OpenChallenges extends React.Component {
         )
     }
 }
-
-
-
-
-
-
-

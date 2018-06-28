@@ -26,9 +26,15 @@ def store():
     if name is not None and type(image) is not str:
         try:
             if image.filename != '' and allowed_image_format(image.filename):
-                newImage = name.lower() + '.' + image.filename.rsplit('.', 1)[1].lower()
+                newImage = name + '.' + image.filename.rsplit('.', 1)[1].lower()
                 image.save(os.path.join(app.config["UPLOAD_ROOT"], 'images/' + folder, newImage))
-                user = db.session.query(User).filter_by(username=name).first()
+                user = ''
+                if folder == 'users':
+                    user = db.session.query(User).filter_by(username=name).first()
+                if folder == 'dares':
+                    user = db.session.query(Dare).filter_by(name=name).first()
+                if folder == 'hives':
+                    user = db.session.query(Hive).filter_by(hive_name=name).first()
                 user.image = newImage
                 db.session.add(user)
                 db.session.commit()

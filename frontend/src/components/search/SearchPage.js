@@ -5,6 +5,7 @@ import Icon from "../icon/Icon";
 import Hive from "../hives/Hive";
 import ChallengeCard from "../challenge/ChallengeCard";
 import "../block/Block.css";
+import Link from "react-router-dom/es/Link";
 
 class SearchPage extends Component {
     constructor() {
@@ -63,9 +64,9 @@ class SearchPage extends Component {
 
         for (let i = 0; i < this.state.userResults.length; i++) {
             if (this.state.userResults[i][0].toLowerCase().startsWith(this.state.query.toLowerCase())) {
-                startUser.push(<div className='search-result-box item' style={{maxWidth: '15vw'}}><Icon
-                    action={() => alert(this.state.userResults[i][0])}/>
-                    <p className='text'>{this.state.userResults[i][0]}</p></div>)
+                startUser.push(<Link to={"/profile/" + this.state.userResults[i][0]} className='search-result-box item'
+                                     style={{maxWidth: '15vw'}}><Icon/>
+                    <p className='text'>{this.state.userResults[i][0]}</p></Link>)
             }
             else {
                 userList.push(<div className='search-result-box item' style={{maxWidth: '15vw'}}><Icon
