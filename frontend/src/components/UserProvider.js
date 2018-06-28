@@ -16,7 +16,7 @@ class UserProvider extends React.Component {
 
             authenticate: (data) => {
                 console.log(data);
-                fetch('http://localhost:5000/auth/login', {
+                fetch('http://94.212.18.127/auth/login', {
                     method: 'POST',
                     body: data,
                 })
@@ -28,7 +28,7 @@ class UserProvider extends React.Component {
 
             signout: () => {
 
-                fetch('http://localhost:5000/auth/logout/' +this.state.loggedInUsername + "/" + this.state.token)
+                fetch('http://94.212.18.127/auth/logout/' +this.state.loggedInUsername + "/" + this.state.token)
                     .then(response => response.json())
                     .then(data => this.setState({isAuthenticated: data['login'],
                         loggedInUsername: data['username']}))

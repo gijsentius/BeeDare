@@ -21,17 +21,17 @@ class ViewedProfilePage extends Component {
 
     componentDidMount()
     {
-        fetch('http://localhost:5000/dares/')
+        fetch('http://94.212.18.127/dares/')
             .then(response => response.json())
             .then(data => this.setState({openChallenges: data}))
             .catch(error => console.log(error));
 
-        fetch('http://localhost:5000/profile/user')
+        fetch('http://94.212.18.127/profile/user')
             .then(response => response.json())
             .then(data => this.setState({profileInfo: data}))
             .catch(error => console.log(error));
 
-        fetch('http://localhost:5000/dares/')
+        fetch('http://94.212.18.127/dares/')
             .then(response => response.json())
             .then(data => this.setState({completedChallenges: data}))
             .catch(error => console.log(error));

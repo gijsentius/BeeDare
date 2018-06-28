@@ -17,7 +17,7 @@ class EditHivePage extends React.Component {
 
     componentDidMount() {
         // hier nog graag een API request die alleen op ID haalt, anders beetje zonde van data etc.
-        fetch('http://localhost:5000/profile/hive/' + this.props.match.params.name)
+        fetch('http://94.212.18.127/profile/hive/' + this.props.match.params.name)
             .then(response => response.json())
             .then(data => this.setState({profileInfo: data.hive}))
             .catch(error => console.log(error));
@@ -32,7 +32,7 @@ class EditHivePage extends React.Component {
         const form = event.target;
         const data = new FormData(form);
 
-        fetch('http://localhost:5000/profile/hive/edit/' + hive_name, {
+        fetch('http://94.212.18.127/profile/hive/edit/' + hive_name, {
             method: 'POST',
             body: data,
         });
@@ -53,7 +53,7 @@ class EditHivePage extends React.Component {
                     <div className="row">
                         <div className="col 6">
                             <div style={{maxWidth: "10vw", maxHeight: "auto"}}>
-                                <Icon image={'http://localhost:5000/image/' + profileInfo[2] + '/hives'}
+                                <Icon image={'http://94.212.18.127/image/' + profileInfo[2] + '/hives'}
                                       action={() => alert(profileInfo.image)}/>
                             </div>
                         </div>

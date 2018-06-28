@@ -15,7 +15,7 @@ class Newsfeed extends Component {
 
     // componentDidMount() {
     //     let username = 'Vyxor';
-    //     fetch('http://localhost:5000/profile/newsfeed/' + username)
+    //     fetch('http://94.212.18.127/profile/newsfeed/' + username)
     //         .then(response => response.json())
     //         .then(data => this.setState({messages: data}));
     // }
