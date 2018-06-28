@@ -106,17 +106,17 @@ def confirm(token):
 
 def checkFormsInput(formcontent):
     message = []
-    if formcontent['email'] is None:
+    if formcontent['email'] is "":
         message.append({"message": "No email filled in!"})
-        if formcontent['password'] is None:
+        if formcontent['password'] is "":
             message.append({"message": "No password filled in!"})
-            if formcontent['confirmpassword'] is None:
+            if formcontent['confirmpassword'] is "":
                 message.append({"message": "No confirm password filled in!"})
-                if formcontent['username'] is None:
+                if formcontent['username'] is "":
                     message.append({"message": "No username filled in!"})
-                    if formcontent['firstname'] is None:
+                    if formcontent['firstname'] is "":
                         message.append({"message": "No firstname filled in!"})
-                        if formcontent['lastname'] is None:
+                        if formcontent['lastname'] is "":
                             message.append({"message": "No lastname filled in!"})
                             if formcontent['password'] != formcontent['confirmpassword']:
                                 message.append({"message": "Password and confirmpassword are not the same!"})
