@@ -3,7 +3,24 @@ from flask import jsonify, request
 
 from beedare import db
 from beedare.models import User, Hive, ColonyMembers, Dare, Message, Friend, UserDares
+
+from backend.beedare.models import Post
 from . import *
+
+
+@profile_blueprint.route('/add/post/<username>/<token>', methods=['POST'])
+def add_post(username, token):
+    try:
+        user_data = db.session.query(User).filter_by(username=username).first()
+    except KeyError as e:
+        return jsonify({"error": str(e) + " not given or invalid"}), 401
+    if request.method == "POST" and user_data.check_loginrequired(token):
+        body = request.form.get('body')
+        if body is not None:
+            post = Post(body=body, author_id=user_data.id)  # post model aanpassen
+            db.session.add(post)
+            db.session.commit()
+    return jsonify({}), 401
 
 
 @profile_blueprint.route('/public/user/<username>', methods=['GET'])
