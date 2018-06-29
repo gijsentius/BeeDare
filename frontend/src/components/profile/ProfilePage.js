@@ -24,17 +24,17 @@ class ProfilePage extends Component {
 
     fetchImportantPrivate() {
         if (this.state.username) {
-            fetch('http://94.212.18.127/dares/open_dares/' + this.state.username + "/" + this.state.token)
+            fetch('http://localhost:5000/dares/open_dares/' + this.state.username + "/" + this.state.token)
                 .then(response => response.json())
                 .then(data => this.setState({openChallenges: data}))
                 .catch(error => console.log(error));
 
-            fetch('http://94.212.18.127/profile/user/' + this.state.username + "/" + this.state.token)
+            fetch('http://localhost:5000/profile/user/' + this.state.username + "/" + this.state.token)
                 .then(response => response.json())
                 .then(data => this.setState({profileInfo: data}))
                 .catch(error => console.log(error));
 
-            fetch('http://94.212.18.127/dares/completed_dares/' + this.state.username + "/" + this.state.token)
+            fetch('http://localhost:5000/dares/completed_dares/' + this.state.username + "/" + this.state.token)
                 .then(response => response.json())
                 .then(data => this.setState({completedChallenges: data}))
                 .catch(error => console.log(error));
@@ -45,17 +45,17 @@ class ProfilePage extends Component {
 
     fetchImportantPublic(username) {
         if (username) {
-            fetch('http://94.212.18.127/dares/open_dares/' + username)
+            fetch('http://localhost:5000/dares/open_dares/' + username)
                 .then(response => response.json())
                 .then(data => this.setState({openChallenges: data}))
                 .catch(error => console.log(error));
 
-            fetch('http://94.212.18.127/profile/public/user/' + username)
+            fetch('http://localhost:5000/profile/public/user/' + username)
                 .then(response => response.json())
                 .then(data => this.setState({profileInfo: data}))
                 .catch(error => console.log(error));
 
-            fetch('http://94.212.18.127/dares/completed_dares/' + username)
+            fetch('http://localhost:5000/dares/completed_dares/' + username)
                 .then(response => response.json())
                 .then(data => this.setState({completedChallenges: data}))
                 .catch(error => console.log(error));

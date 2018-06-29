@@ -13,7 +13,7 @@ class MessageList extends React.Component {
     }
 
     fetchImportant() {
-        fetch('http://94.212.18.127/profile/messages' + this.state.username + "/" + this.state.token)
+        fetch('http://localhost:5000/profile/messages' + this.state.username + "/" + this.state.token)
             .then(response => response.json())
             .then(data => this.setState({messages: data}))
             .catch(error => console.log(error));

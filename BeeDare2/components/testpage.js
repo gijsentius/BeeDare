@@ -11,7 +11,7 @@ class TestPage extends Component {
         let formData = new FormData();
         formData.append('password', this.state.password);
         formData.append('email', this.state.email);
-        fetch('http://94.212.18.127/auth/login',{
+        fetch('http://localhost:5000/auth/login',{
             method: "POST",
             body: formData,
         })

@@ -16,7 +16,7 @@ export default class Feed extends Component {
     componentDidMount(){
         let username = 'james63';
         // console.warn(this.props.navigation.getParam('token'));
-        fetch('http://94.212.18.127/profile/newsfeed/' + username + "/" + this.props.navigation.getParam('token'))
+        fetch('http://localhost:5000/profile/newsfeed/' + username + "/" + this.props.navigation.getParam('token'))
             .then(response => response.json())
             .then(data => console.warn(data))
     }

@@ -11,7 +11,7 @@ class FriendPage extends React.Component {
     }
 
     componentWillMount() {
-        fetch('http://94.212.18.127/profile/friends/' + this.props.match.params.user)
+        fetch('http://localhost:5000/profile/friends/' + this.props.match.params.user)
             .then(response => response.json())
             .then(data => this.setState({friends: data.friends}))
             .catch(error => console.log(error));

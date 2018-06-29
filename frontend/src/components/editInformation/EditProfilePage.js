@@ -25,7 +25,7 @@ class EditProfilePage extends React.Component {
     fetchImportant() {
         if (this.state.username) {
             // hier nog graag een API request die alleen op ID haalt, anders beetje zonde van data etc.
-            fetch('http://94.212.18.127/profile/user/' + this.state.username + "/" + this.state.token)
+            fetch('http://localhost:5000/profile/user/' + this.state.username + "/" + this.state.token)
                 .then(response => response.json())
                 .then(data => this.setState({profileInfo: data}))
                 .catch(error => console.log(error));
@@ -43,7 +43,7 @@ class EditProfilePage extends React.Component {
         const form = event.target;
         const data = new FormData(form);
 
-        fetch('http://94.212.18.127/profile/user/edit/' + this.state.username + "/" + this.state.token, {
+        fetch('http://localhost:5000/profile/user/edit/' + this.state.username + "/" + this.state.token, {
             method: 'POST',
             body: data,
         })
@@ -80,7 +80,7 @@ class EditProfilePage extends React.Component {
                     <div className="row">
                         <div className="col 6">
                             <div style={{maxWidth: "10vw", maxHeight: "auto"}}>
-                                <Icon image={"http://94.212.18.127/image/" + this.state.profileInfo.image + "/users"}/>
+                                <Icon image={"http://localhost:5000/image/" + this.state.profileInfo.image + "/users"}/>
                             </div>
 
                             {/*<img src={EmployeeDagmar} alt="" className="circle responsive-img z-depth-1"*/}

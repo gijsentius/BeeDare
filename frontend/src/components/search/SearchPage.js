@@ -27,17 +27,17 @@ class SearchPage extends Component {
 
     fetchResults(searchQuery) {
         this.setState({query: searchQuery});
-        fetch('http://94.212.18.127/search/users/' + searchQuery)
+        fetch('http://localhost:5000/search/users/' + searchQuery)
             .then(response => response.json())
             .then(data => this.setState({userResults: data.result}))
             .catch(error => console.log(error));
 
-        fetch('http://94.212.18.127/search/hives/' + searchQuery)
+        fetch('http://localhost:5000/search/hives/' + searchQuery)
             .then(response => response.json())
             .then(data => this.setState({hiveResults: data.result}))
             .catch(error => console.log(error));
 
-        fetch('http://94.212.18.127/search/dares/' + searchQuery)
+        fetch('http://localhost:5000/search/dares/' + searchQuery)
             .then(response => response.json())
             .then(data => this.setState({dareResults: data.result}))
             .catch(error => console.log(error));

@@ -24,7 +24,7 @@ class Profile extends Component {
     fetchImportant() {
         if (this.state.username) {
             // hier nog graag een API request die alleen op ID haalt, anders beetje zonde van data etc.
-            fetch('http://94.212.18.127/profile/user/' + this.state.username + "/" + this.state.token)
+            fetch('http://localhost:5000/profile/user/' + this.state.username + "/" + this.state.token)
                 .then(response => response.json())
                 .then(data => this.setState({profileInfo: data}))
                 .catch(error => console.log(error));
@@ -64,7 +64,7 @@ class Profile extends Component {
                 <div className="card-content">
                     <div className="section" key={profile.id}>
                         <div className="center" id='imgCH'>
-                            <Icon image={"http://94.212.18.127/image/" + this.state.profileInfo.image + "/users"}/>
+                            <Icon image={"http://localhost:5000/image/" + this.state.profileInfo.image + "/users"}/>
                             {/*Hierboven nog toevoegen: image={profile.image}*/}
                             {
                                 this.props.public ? (
