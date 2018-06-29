@@ -161,18 +161,27 @@ def news(username, token):
     if request.method == "GET" and user_data.check_loginrequired(token):
         message_list = []
         try:
-            friends = Friend.query.filter_by(follower_id=(user_data.id)).all()
-            for friend in friends:
-                friend_data = User.query.filter_by(id=friend.followed_id).first()
-                messages = Post.query.filter_by(author_id=friend.followed_id).all()
-                for message in messages:
-                    message_list.append(
-                        {
-                            'author': friend_data.username,
-                            'body': message.body,
-                            'timestamp': message.timestamp
-                        }
-                    )
+            # friends = Friend.query.filter_by(follower_id=(user_data.id)).all()
+            # for friend in friends:
+            #     friend_data = User.query.filter_by(id=friend.followed_id).first()
+            #     messages = Post.query.filter_by(author_id=friend.followed_id).all()
+            #     for message in messages:
+            #         message_list.append(
+            #             {
+            #                 'author': friend_data.username,
+            #                 'body': message.body,
+            #                 'timestamp': message.timestamp
+            #             }
+            #         )
+            messages = Post.query.filter_by(auther_id=user_data.id)
+            for message in messages:
+                message_list.append(
+                    {
+                        'author': username,
+                        'body': message.body,
+                        'timestamp': message.timestamp
+                    }
+                )
             # message_list.sort(key=lambda m: m.timestamp)
         except KeyError as e:
             return jsonify({"error": str(e) + " not given or invalid"}), 401
