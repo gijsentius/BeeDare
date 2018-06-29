@@ -24,7 +24,7 @@ class ChallengeIconBox extends Component {
         let challenges = this.state.challenges.map((challenge) => 
             <div className="col s4 m2">
                 <ChallengeIcon
-                    image={challenge.url}
+                    image={'http://localhost:5000/image/' + challenge.images + '/dares'}
                 />
             </div>
         );

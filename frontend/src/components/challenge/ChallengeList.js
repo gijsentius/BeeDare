@@ -11,7 +11,7 @@ class ChallengeList extends Component {
     }
 
     componentDidMount() {
-        fetch('http://94.212.18.127/dares/')
+        fetch('http://localhost:5000/dares/')
             .then(response => response.json())
             .then(data => this.setState({challenges: data}))
             .catch(error => console.log(error)); // optioneel
@@ -26,11 +26,11 @@ class ChallengeList extends Component {
         let challenges = this.state.challenges.map((challenge) =>
             <div className="dare-col">
                 <ChallengeCard
-                    description={challenge.body}
+                    description={challenge.body_html}
                     reward={challenge.value}
-                    title={challenge.value}
+                    title={challenge.body}
                     id={challenge.id}
-                    image="https://placeimg.com/400/400/nature"
+                    image={'http://localhost:5000/image/' + challenge.images + '/dares'}
                 />
             </div>
         );

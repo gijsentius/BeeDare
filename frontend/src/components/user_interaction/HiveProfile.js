@@ -24,7 +24,7 @@ class HiveProfile extends Component {
                 <div className="card-content">
                     <div className="section" key={hive_profile[0]}>
                         <div className="center" id='imgCH'>
-                            <Icon image={hive_profile[2]}/>
+                            <Icon image={'http://localhost:5000/image/' + hive_profile[2] + '/hives'}/>
                             <div className="rightnext">
                                 <li className="btn-floating btn-small amber darken-1">
                                     <Link to={"/edit-hive/" + hive_profile[1]}><i className="material-icons">edit</i></Link></li>

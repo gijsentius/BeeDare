@@ -43,7 +43,7 @@ export default class OpenChallenges extends React.Component {
 
     deleteDare(id, event) {
         event.preventDefault();
-        fetch('http://94.212.18.127/dares/delete/' + id + "/" + this.state.username + "/" + this.state.token);
+        fetch('http://localhost:5000/dares/delete/' + id + "/" + this.state.username + "/" + this.state.token);
         this.setState({showMenu: false, currentId: ""}, () => {
             document.removeEventListener('click', this.closeMenu);
         });
@@ -52,7 +52,7 @@ export default class OpenChallenges extends React.Component {
 
     dareIsAchieved(event, id) {
         event.preventDefault();
-        fetch('http://94.212.18.127/dares/achieved/' + id + "/" + this.state.username + "/" + this.state.token);
+        fetch('http://localhost:5000/dares/achieved/' + id + "/" + this.state.username + "/" + this.state.token);
         this.setState({showMenu: false, currentId: ""}, () => {
             document.removeEventListener('click', this.closeMenu);
         });
@@ -88,7 +88,7 @@ export default class OpenChallenges extends React.Component {
                 listItems = openChallenges.map((item) =>
                     <div className="section" key={item.id}>
                         <div className="center" id='imgCH'>
-                            <ChallengeIcon/>
+                            <ChallengeIcon image={'http://localhost:5000/image/' + item.images + '/dares'}/>
                             {/*Hierboven moet image nog toegevoegd worden als deze klaar is!!!!!*/}
                         </div>
                     </div>
@@ -97,7 +97,7 @@ export default class OpenChallenges extends React.Component {
                 listItems = openChallenges.map((item) =>
                     <div className="section" key={item.id}>
                         <div className="center" id='imgCH'>
-                            <ChallengeIcon/>
+                            <ChallengeIcon image={'http://localhost:5000/image/' + item.images + '/dares'}/>
                             {/*Hierboven moet image nog toegevoegd worden als deze klaar is!!!!!*/}
                             <div className="rightnext">
                                 {/*Gebruik van arrow functie om event en item.id mee te kunnen geven*/}
