@@ -4,7 +4,6 @@ from flask_login import LoginManager
 from flask_sqlalchemy import SQLAlchemy
 from flask_cors import CORS
 
-from beedare.models import Post
 from config import config, MailConfig
 from flask_admin.contrib.sqla import ModelView
 from neo4j_connection.handlers import Connection
@@ -17,7 +16,7 @@ cors = CORS()
 
 
 def create_admin(app, database):
-    from beedare.models import User, Message, Comment, Dare, UserDares, Hive, ColonyMembers, Friend
+    from beedare.models import User, Message, Comment, Dare, UserDares, Hive, ColonyMembers, Friend, Post
 
     admin = Admin(app, name='beedare', template_mode='bootstrap3')
     admin.add_view(ModelView(User, database.session))
