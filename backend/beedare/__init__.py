@@ -3,6 +3,8 @@ from flask_admin import Admin
 from flask_login import LoginManager
 from flask_sqlalchemy import SQLAlchemy
 from flask_cors import CORS
+
+from beedare.models import Post
 from config import config, MailConfig
 from flask_admin.contrib.sqla import ModelView
 from neo4j_connection.handlers import Connection
@@ -26,6 +28,7 @@ def create_admin(app, database):
     admin.add_view(ModelView(Hive, database.session, endpoint='hive_date'))
     admin.add_view(ModelView(ColonyMembers, database.session))
     admin.add_view(ModelView(Friend, database.session))
+    admin.add_view(ModelView(Post,database.session ))
     
     return admin
 
