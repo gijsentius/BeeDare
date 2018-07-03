@@ -26,6 +26,14 @@ class NewsFeedPage extends React.Component {
         this.setMessage =this.setMessage.bind(this)
     }
 
+    componentDidMount(){
+        // TODO get right ID
+        fetch('http://localhost:5000/coll/messages/1')
+            .then(response => response.json())
+            .then(data => this.setState({messages: data.result}))
+            .catch(error => console.log(error));
+    }
+
     fetchImportant() {
         if (this.state.username) {
             fetch('http://localhost:5000/profile/user/' + this.state.username + "/" + this.state.token)
@@ -38,12 +46,6 @@ class NewsFeedPage extends React.Component {
                 .then(data => this.setState({hives: data}))
                 .catch(error => console.log(error));
             this.setState({renderOnce: false});
-
-            // TODO get right ID
-            fetch('http://localhost:5000/coll/messages/' + this.state.profileInfo.id)
-                .then(response => response.json())
-                .then(data => this.setState({messages: data.result}))
-                .catch(error => console.log(error));
         }
     }
 
@@ -153,11 +155,11 @@ class NewsFeedPage extends React.Component {
 
         const form = event.target;
         let data = new FormData(form);
-        data.append('user_id', 1);
+        // data.append('user_id', event.id);
         data.append('title', this.state.title);
-        data.append('message', this.state.message);
+        data.append('body', this.state.message);
 
-        fetch('http://localhost:5000/submit/message', {
+        fetch('http://localhost:5000/profile/add/post/' + this.state.username + '/' + this.state.token, {
             method: 'POST',
             body: data,
         });

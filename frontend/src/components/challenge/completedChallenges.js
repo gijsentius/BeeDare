@@ -10,18 +10,17 @@ export default class CompletedChallenges extends React.Component {
 
     render() {
 
-        if (this.props.completedChallenges === "undefined") {
+        if (this.props.completedChallenges === undefined) {
             return <div/>
         }
 
         let listItems;
 
         listItems = this.props.completedChallenges.map((challenge) => <div className="completedMH dare-col">
-            <ChallengeIcon image="https://placeimg.com/400/400/nature"/>
+            <ChallengeIcon image={'http://localhost:5000/image/' + challenge.images + '/dares'}/>
             {/*challenge.image*/}
             <p className="center-align">{challenge.value + ' points'}</p>
         </div>);
-
 
         return (
             <div>

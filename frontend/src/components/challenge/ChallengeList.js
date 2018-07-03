@@ -26,11 +26,11 @@ class ChallengeList extends Component {
         let challenges = this.state.challenges.map((challenge) =>
             <div className="dare-col">
                 <ChallengeCard
-                    description={challenge.body}
+                    description={challenge.body_html}
                     reward={challenge.value}
-                    title={challenge.value}
+                    title={challenge.body}
                     id={challenge.id}
-                    image="https://placeimg.com/400/400/nature"
+                    image={'http://localhost:5000/image/' + challenge.images + '/dares'}
                 />
             </div>
         );

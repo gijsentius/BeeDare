@@ -14,13 +14,13 @@ def add_post(username, token):
         user_data = db.session.query(User).filter_by(username=username).first()
     except KeyError as e:
         return jsonify({"error": str(e) + " not given or invalid"}), 401
-    if request.method == "POST" and user_data.check_loginrequired(token):
-        body = request.form.get('body')
+    if request.method == "POST": # and user_data.check_loginrequired(token):
+        body = request.form
         if body is not None:
-            post = Post(body=body, author_id=user_data.id)  # post model aanpassen
+            post = Post(body=body['body'], author_id=user_data.id)  # post model aanpassen
             db.session.add(post)
             db.session.commit()
-    return jsonify({}), 401
+    return jsonify({}), 200
 
 
 @profile_blueprint.route('/public/user/<username>', methods=['GET'])

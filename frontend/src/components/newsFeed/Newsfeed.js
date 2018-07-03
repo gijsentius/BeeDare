@@ -36,7 +36,7 @@ class Newsfeed extends Component {
         this.state.messageList = this.props.messages.map((message) =>
             <div className="message">
                 <Message
-                    body={message.html}
+                    body={message.body_html}
                     name={message.body}
                     author={message.author}
                 />
