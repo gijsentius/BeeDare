@@ -24,7 +24,7 @@ class HivePage extends Component {
     }
 
     componentDidMount() {
-        fetch('http://94.212.18.127/profile/hive/' + this.props.match.params.name)
+        fetch('http://localhost:5000/profile/hive/' + this.props.match.params.name)
             .then(response => response.json())
             .then(data => this.setState({hiveInfo: data}))
             .catch(error => console.log(error));
@@ -32,13 +32,13 @@ class HivePage extends Component {
         // TODO Fix these fetches!
 
         // TODO make this open challenges for hives
-        fetch('http://94.212.18.127/dares/')
+        fetch('http://localhost:5000/dares/')
             .then(response => response.json())
             .then(data => this.setState({openChallenges: data}))
             .catch(error => console.log(error));
 
         // TODO get right challenges
-        fetch('http://94.212.18.127/dares/')
+        fetch('http://localhost:5000/dares/')
             .then(response => response.json())
             .then(data => this.setState({completedChallenges: data}))
             .catch(error => console.log(error));
@@ -47,7 +47,7 @@ class HivePage extends Component {
     fetchImportant() {
         if (this.state.username) {
 
-            fetch('http://94.212.18.127/profile/user/' + this.state.username + "/" + this.state.token)
+            fetch('http://localhost:5000/profile/user/' + this.state.username + "/" + this.state.token)
                 .then(response => response.json())
                 .then(data => this.setState({profileInfo: data}))
                 .catch(error => console.log(error));
@@ -128,7 +128,7 @@ class HivePage extends Component {
         let data = new FormData();
         data.append('user_id', profileInfo.id);
         data.append('hive_id', this.state.hiveInfo.hive[0]);
-        fetch('http://94.212.18.127/hive/join', {
+        fetch('http://localhost:5000/hive/join', {
             method: 'POST',
             body: data,
         })
@@ -141,7 +141,7 @@ class HivePage extends Component {
         let data = new FormData();
         data.append('user_id', profileInfo.id);
         data.append('hive_id', this.state.hiveInfo.hive[0]);
-        fetch('http://94.212.18.127/hive/leave', {
+        fetch('http://localhost:5000/hive/leave', {
             method: 'POST',
             body: data,
         })

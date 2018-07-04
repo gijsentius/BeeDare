@@ -43,7 +43,7 @@ export default class OpenChallenges extends React.Component {
 
     deleteDare(id, event) {
         event.preventDefault();
-        fetch('http://94.212.18.127/dares/delete/' + id + "/" + this.state.username + "/" + this.state.token);
+        fetch('http://localhost:5000/dares/delete/' + id + "/" + this.state.username + "/" + this.state.token);
         this.setState({showMenu: false, currentId: ""}, () => {
             document.removeEventListener('click', this.closeMenu);
         });
@@ -52,7 +52,7 @@ export default class OpenChallenges extends React.Component {
 
     dareIsAchieved(event, id) {
         event.preventDefault();
-        fetch('http://94.212.18.127/dares/achieved/' + id + "/" + this.state.username + "/" + this.state.token);
+        fetch('http://localhost:5000/dares/achieved/' + id + "/" + this.state.username + "/" + this.state.token);
         this.setState({showMenu: false, currentId: ""}, () => {
             document.removeEventListener('click', this.closeMenu);
         });
