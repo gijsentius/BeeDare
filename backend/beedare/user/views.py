@@ -2,9 +2,8 @@ import sqlalchemy
 from flask import jsonify, request
 
 from beedare import db
-from beedare.models import User, Hive, ColonyMembers, Dare, Message, Friend, UserDares
+from beedare.models import User, Hive, ColonyMembers, Dare, Message, Friend, UserDares, Post
 
-from backend.beedare.models import Post
 from . import *
 
 
