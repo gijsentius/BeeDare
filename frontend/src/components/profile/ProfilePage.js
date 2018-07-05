@@ -18,7 +18,8 @@ class ProfilePage extends Component {
             token: null,
             renderOnce: true,
             user: this.props.match.params.user,  // the user in the url
-            public: false
+            public: false,
+            friendInfo: [],
         };
     }
 
@@ -39,12 +40,22 @@ class ProfilePage extends Component {
                 .then(data => this.setState({completedChallenges: data}))
                 .catch(error => console.log(error));
 
+            fetch('http://localhost:5000/profile/public/user/' + this.state.user)
+                .then(response => response.json())
+                .then(data => this.setState({friendInfo: data}))
+                .catch(error => console.log(error));
+
             this.setState({renderOnce: false});
         }
     }
 
     fetchImportantPublic(username) {
         if (username) {
+            fetch('http://localhost:5000/profile/user/' + this.state.username + "/" + this.state.token)
+                .then(response => response.json())
+                .then(data => this.setState({profileInfo: data}))
+                .catch(error => console.log(error));
+
             fetch('http://localhost:5000/dares/open_dares/' + username)
                 .then(response => response.json())
                 .then(data => this.setState({openChallenges: data}))
@@ -52,7 +63,7 @@ class ProfilePage extends Component {
 
             fetch('http://localhost:5000/profile/public/user/' + username)
                 .then(response => response.json())
-                .then(data => this.setState({profileInfo: data}))
+                .then(data => this.setState({friendInfo: data}))
                 .catch(error => console.log(error));
 
             fetch('http://localhost:5000/dares/completed_dares/' + username)
@@ -61,6 +72,20 @@ class ProfilePage extends Component {
                 .catch(error => console.log(error));
             this.setState({renderOnce: false});
         }
+    }
+
+    addFriend() {
+        let data = new FormData();
+        // data.append('user_id', event.id);
+
+        data.append('user_id', this.state.profileInfo.id);
+        data.append('friend_id', this.state.friendInfo.id);
+
+        fetch('http://127.0.0.1:5000/profile/accept/friend/' + this.state.friendInfo.id + '/' + this.state.profileInfo.id + '/' + this.state.token, {
+            method: 'GET',
+            // body: data,
+        });
+        this.setState({renderOnce: false});
     }
 
     render() {
@@ -75,20 +100,12 @@ class ProfilePage extends Component {
                             username: context.loggedInUsername,
                             token: context.token,
                         });
-                        if (this.state.user === this.state.username) {
-                            this.setState({public: false})
-                            this.fetchImportantPrivate();
-                        }
-                        else {
-                            this.setState({public: true})
-                            this.fetchImportantPublic(this.state.user);
-                        }
+                        this.fetchImportantPrivate();
                     }
                 }
                 </UserContext.Consumer>
             )
         }
-
 
         if (!this.state.profileInfo) {
             return (
@@ -111,13 +128,21 @@ class ProfilePage extends Component {
                         <h6 className="center">Achieved Dares</h6>
                         <CompletedChallenges completedChallenges={completedChallenges}/>
                     </div>
-                    <div className="col s2 m3">
+                    <div className="col s2 m3 center">
                         <h6 className="center">Profile</h6>
                         <Profile profileInfo={profileInfo}/>
+                        {this.friend_button()}
                     </div>
                 </div>
             </div>
         );
+    }
+
+    friend_button() {
+        if (this.state.user !== this.state.profileInfo.username) {
+            return <input className="btn amber darken-1" value='Add as a friend' type='button'
+                          onClick={() => this.addFriend()}/>
+        }
     }
 }
 

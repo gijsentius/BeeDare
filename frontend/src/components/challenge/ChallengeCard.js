@@ -48,7 +48,8 @@ class ChallengeCard extends Component {
     logged(context) {
         this.setState({
             username: context.loggedInUsername,
-            token: context.token
+            token: context.token,
+            renderOnce: false,
         });
         this.fetchImportant();
     }

@@ -22,17 +22,17 @@ class NewsFeedPage extends React.Component {
             renderOnce: true,
         };
 
-        this.setTitle =this.setTitle.bind(this)
-        this.setMessage =this.setMessage.bind(this)
+        this.setTitle = this.setTitle.bind(this)
+        this.setMessage = this.setMessage.bind(this)
     }
 
-    componentDidMount(){
-        // TODO get right ID
-        fetch('http://localhost:5000/coll/messages/1')
-            .then(response => response.json())
-            .then(data => this.setState({messages: data.result}))
-            .catch(error => console.log(error));
-    }
+    // componentDidMount(){
+    //     // TODO get right ID
+    //     fetch('http://localhost:5000/coll/messages/1')
+    //         .then(response => response.json())
+    //         .then(data => this.setState({messages: data.result}))
+    //         .catch(error => console.log(error));
+    // }
 
     fetchImportant() {
         if (this.state.username) {
@@ -46,25 +46,32 @@ class NewsFeedPage extends React.Component {
                 .then(data => this.setState({hives: data}))
                 .catch(error => console.log(error));
             this.setState({renderOnce: false});
+
+            // TODO get right ID
+            fetch('http://localhost:5000/coll/messages/' + this.state.profileInfo.id)
+                .then(response => response.json())
+                .then(data => this.setState({messages: data.result}))
+                .catch(error => console.log(error));
+            this.setState({renderOnce: false});
         }
     }
 
     render() {
-        if (this.state.renderOnce) {
-            return (
-                <UserContext.Consumer>{
-                    (context) => {
-                        this.setState({
-                            username: context.loggedInUsername,
-                            token: context.token,
-                            renderOnce: false
-                        });
-                        this.fetchImportant();
-                    }
-                }
-                </UserContext.Consumer>
-            )
-        }
+        // if (this.state.renderOnce) {
+        //     return (
+        //         <UserContext.Consumer>{
+        //             (context) => {
+        //                 this.setState({
+        //                     username: context.loggedInUsername,
+        //                     token: context.token,
+        //                     renderOnce: false
+        //                 });
+        //                 this.fetchImportant();
+        //             }
+        //         }
+        //         </UserContext.Consumer>
+        //     )
+        // }
 
         if (this.state.renderOnce) {
             return (
@@ -81,6 +88,12 @@ class NewsFeedPage extends React.Component {
             )
         }
 
+        if (!this.state.profileInfo) {
+            return (
+                <div/>
+            )
+            //    dit stukje code zorgt ervoor dat je geen undefined krijgt
+        }
 
         let listItems = this.state.hives.map((item) =>
             <div className='card-content'>
@@ -142,11 +155,11 @@ class NewsFeedPage extends React.Component {
         )
     }
 
-    setTitle(e){
+    setTitle(e) {
         this.setState({title: e.target.value})
     }
 
-    setMessage(e){
+    setMessage(e) {
         this.setState({message: e.target.value})
     }
 

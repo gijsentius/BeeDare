@@ -19,13 +19,14 @@ class FriendPage extends React.Component {
 
 
     render() {
-        if(!this.state.friends){
-            return <div/>
+        if(this.state.friends.length === 0){
+            return <h6 className='center'>You do not have friends yet!</h6>
         }
-
-        return(
-            <Friends friends={this.state.friends}/>
-        )
+        else{
+            return(
+                <Friends friends={this.state.friends}/>
+            )
+        }
     }
 }
 

@@ -69,9 +69,9 @@ class SearchPage extends Component {
                     <p className='text'>{this.state.userResults[i][0]}</p></Link>)
             }
             else {
-                userList.push(<div className='search-result-box item' style={{maxWidth: '15vw'}}><Icon
-                    action={() => alert(this.state.userResults[i][0])}/>
-                    <p className='text'>{this.state.userResults[i][0]}</p></div>)
+                userList.push(<Link to={"/profile/" + this.state.userResults[i][0]} className='search-result-box item'
+                                    style={{maxWidth: '15vw'}}><Icon/>
+                    <p className='text'>{this.state.userResults[i][0]}</p></Link>)
             }
         }
         for (let i = 0; i < this.state.hiveResults.length; i++) {

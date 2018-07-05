@@ -21,9 +21,9 @@ def add_post(username, token):
             db.session.add(post)
             db.session.commit()
     return jsonify({}), 200
-dt
 
-@profile_blueprint.route('/public/user/<username>', methods=['GET'])
+
+@profile_blueprint.route('/public/user/<username>', methods=['GET', 'POST'])
 @profile_blueprint.route('/user/<username>/<token>', methods=['POST', 'GET'])
 def user(username, token=None):
     if token is not None:
@@ -59,6 +59,7 @@ def user(username, token=None):
                         "last_name": user_data.last_name,
                         "image": user_data.image,
                         "rank": user_data.rank,
+                        "id": user_data.id,
                     }
                 ), 200
         return jsonify({}), 401
@@ -256,13 +257,15 @@ def delete_friend(friend, username, token):
     except KeyError as e:
         return jsonify({"error": str(e) + " not given or invalid"}), 401
     if request.method == "GET" and result.check_loginrequired(token):
-        from beedare import neoconn
-        friend_relation = Friend.query.filter_by(follower_id=friend).filter_by(followed_id=username).first()
+        # from beedare import neoconn
+        user_id = db.session.query(User).filter_by(username=username).first()
+        friend_id = db.session.query(User).filter_by(username=friend).first()
+        friend_relation = Friend.query.filter_by(follower_id=friend_id.id).filter_by(followed_id=user_id.id).first()
         if friend_relation is not None:
             try:
                 db.session.delete(friend_relation)
                 db.session.commit()
-                neoconn.discconnect_users(username, friend.username)
+                # neoconn.discconnect_users(username, friend.username)
             except sqlalchemy.exc.IntegrityError:
                 return jsonify({"error": "commit failed"}), 401
             return jsonify({
@@ -275,18 +278,21 @@ def delete_friend(friend, username, token):
 @profile_blueprint.route('/accept/friend/<friend>/<username>/<token>', methods=["GET"])
 def add_friend(friend, username, token):
     try:
-        result = User.query.filter_by(username=username).first()
+        result = User.query.filter_by(id=username).first()
     except KeyError as e:
         return jsonify({"error": str(e) + " not given or invalid"}), 401
+    if db.session.query(Friend).filter_by(follower_id=friend).filter_by(followed_id=username).first():
+        return jsonify({"error": "already friends"}), 401
     if request.method == "GET" and result.check_loginrequired(token):
         from beedare import neoconn
         friend = User.query.filter_by(id=friend).first()  # could also be done with the username of the friend
         if friend is not None:
             try:
-                friend_conn = Friend(friend.id, result.id)
+                # friend_conn = Friend(friend.id, result.id)
+                friend_conn = Friend(follower_id=friend.id, followed_id=result.id)
                 db.session.add(friend_conn)
                 db.session.commit()
-                neoconn.connect_users(username, friend.username)
+                # neoconn.connect_users(username, friend.username)
             except sqlalchemy.exc.IntegrityError:
                 return jsonify({"error": "commit failed"}), 401
             return jsonify({

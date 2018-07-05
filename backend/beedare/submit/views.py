@@ -19,7 +19,7 @@ def add_message():
         time = datetime.datetime.utcnow()
         try:
             message = Post(body=content['title'], body_html=content['message'], author_id=content['user_id'],
-                              timestamp=time)
+                           timestamp=time)
         except KeyError as e:
             return jsonify({"error": str(e) + " not given or invalid"}), 401
         db.session.add(message)
@@ -145,7 +145,7 @@ def dare_create():
 
 @submit_blueprint.route('/friend', methods=["POST"])
 def add_friend():
-    content = request.get_json()
+    content = request.form
     try:
         result = db.session.query(User).filter_by(id=content['user_id']).first()
         if result is not None:
@@ -154,10 +154,12 @@ def add_friend():
             return jsonify({"error": "user_not_found"}), 401
     except KeyError as e:
         return jsonify({"error": str(e) + " not given or invalid"}), 401
+    if db.session.query(Friend).filter_by(follower_id=content['friend_id']).filter_by(followed_id=content['user_id']).first():
+        return jsonify({"error": "already friends"}), 401
     if result is not None:
         time = datetime.datetime.utcnow()
         try:
-            friend = Friend(follower_id=content['user_id'], followed_id=content['friend_id'], timestamp=time)
+            friend = Friend(follower_id=content['friend_id'], followed_id=content['user_id'], timestamp=time)
         except KeyError as e:
             return jsonify({"error": str(e) + " not given or invalid"}), 401
         db.session.add(friend)

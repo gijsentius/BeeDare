@@ -20,7 +20,7 @@ class Friends extends React.Component {
     render() {
         return (
             <div className='row'>
-                <div className="col s12 m12">
+                <div className="col s12 m12 l12">
                     <h6 className="center">Friends</h6>
                     <Members members={this.props.friends}/>
                 </div>
