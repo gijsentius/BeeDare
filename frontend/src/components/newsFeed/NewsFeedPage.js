@@ -20,19 +20,12 @@ class NewsFeedPage extends React.Component {
             username: null,
             token: null,
             renderOnce: true,
+            running: true
         };
 
         this.setTitle = this.setTitle.bind(this)
         this.setMessage = this.setMessage.bind(this)
     }
-
-    // componentDidMount(){
-    //     // TODO get right ID
-    //     fetch('http://localhost:5000/coll/messages/1')
-    //         .then(response => response.json())
-    //         .then(data => this.setState({messages: data.result}))
-    //         .catch(error => console.log(error));
-    // }
 
     fetchImportant() {
         if (this.state.username) {
@@ -41,38 +34,24 @@ class NewsFeedPage extends React.Component {
                 .then(data => this.setState({profileInfo: data}))
                 .catch(error => console.log(error));
 
-            fetch('http://localhost:5000/hive/hives')
-                .then(response => response.json())
-                .then(data => this.setState({hives: data}))
-                .catch(error => console.log(error));
-            this.setState({renderOnce: false});
-
-            // TODO get right ID
-            fetch('http://localhost:5000/coll/messages/' + this.state.profileInfo.id)
-                .then(response => response.json())
-                .then(data => this.setState({messages: data.result}))
-                .catch(error => console.log(error));
             this.setState({renderOnce: false});
         }
     }
 
-    render() {
-        // if (this.state.renderOnce) {
-        //     return (
-        //         <UserContext.Consumer>{
-        //             (context) => {
-        //                 this.setState({
-        //                     username: context.loggedInUsername,
-        //                     token: context.token,
-        //                     renderOnce: false
-        //                 });
-        //                 this.fetchImportant();
-        //             }
-        //         }
-        //         </UserContext.Consumer>
-        //     )
-        // }
+    // componentDidMount(){
+    //     fetch('http://localhost:5000/hive/hives/user/' + this.state.profileInfo.id)
+    //         .then(response => response.json())
+    //         .then(data => this.setState({hives: data}))
+    //         .catch(error => console.log(error));
+    //
+    //     // TODO get right ID
+    //     fetch('http://localhost:5000/coll/messages/' + this.state.profileInfo.id)
+    //         .then(response => response.json())
+    //         .then(data => this.setState({messages: data.result}))
+    //         .catch(error => console.log(error));
+    // }
 
+    render() {
         if (this.state.renderOnce) {
             return (
                 <UserContext.Consumer>{
@@ -107,6 +86,20 @@ class NewsFeedPage extends React.Component {
 
         const profileInfo = this.state.profileInfo;
         const messages = this.state.messages;
+
+        if(profileInfo.id && this.state.running) {
+            fetch('http://localhost:5000/hive/hives/user/' + profileInfo.id)
+                .then(response => response.json())
+                .then(data => this.setState({hives: data}))
+                .catch(error => console.log(error));
+
+            // TODO get right ID
+            fetch('http://localhost:5000/coll/messages/' + profileInfo.id)
+                .then(response => response.json())
+                .then(data => this.setState({messages: data.result}))
+                .catch(error => console.log(error));
+            this.setState({running: false})
+        }
 
         return (
             <div className="customContainer">

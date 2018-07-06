@@ -112,6 +112,30 @@ def getHives():
     return jsonify({"error": "user_not_found"}), 401
 
 
+@hive_blueprint.route('/hives/user/<user_id>', methods=["GET"])
+def getHivesUser(user_id):
+    try:
+        joined = db.session.query(ColonyMembers).filter_by(follower_id=user_id).all()
+        if joined is not None:
+            list = []
+            for item in joined:
+                hive = db.session.query(Hive).filter_by(id=item.hive_id).first()
+                keeper = db.session.query(User).filter_by(id=hive.id).first()
+                list.append(
+                    {
+                        "hiveName": hive.hive_name,
+                        "images": hive.image,
+                        "totalScore": hive.total_score_members,
+                        "beekeeper": keeper.username,
+                    })
+            return jsonify(
+                list
+            ), 200
+    except KeyError as e:
+        return jsonify({"error": str(e) + " not given or invalid"}), 401
+    return jsonify({"error": "user_not_found"}), 401
+
+
 @hive_blueprint.route('/members/<hive_id>', methods=["GET"])
 def getMembers(hive_id):
     try:
