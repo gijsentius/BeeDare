@@ -2,9 +2,10 @@ import React, {Component} from 'react';
 import OpenChallenges from "../challenge/OpenChallenges";
 import './Common.css'
 import HiveProfile from "../user_interaction/HiveProfile";
-import Members from "./Members";
+import FriendsList from "./FriendsList";
 import {UserContext} from "../UserProvider";
 import Redirect from "react-router-dom/es/Redirect";
+import Members from "./Members";
 
 class HivePage extends Component {
 
@@ -14,12 +15,13 @@ class HivePage extends Component {
             openChallenges: [],
             completedChallenges: [],
             hiveInfo: [],
-            members: [],
+            members: {'items': []},
             profileInfo: [],
             name: this.props.name,
             username: null,
             token: null,
             renderOnce: true,
+            running: true,
         };
     }
 
@@ -64,6 +66,30 @@ class HivePage extends Component {
         this.fetchImportant();
     }
 
+    place_button(profileInfo, members) {
+        let found = false;
+        for (let i = 0; i < members.length; i++) {
+            if (profileInfo.username === members[i]) {
+                found = true
+            }
+        }
+        if (found) {
+            return (<div>
+                    <input type='submit' value='Leave.'
+                           className="waves-effect waves-light btn amber darken-1 top-button"
+                           onClick={() => this.leaveHive(profileInfo)}/></div>
+            )
+        }
+        else {
+            return (<div>
+                    <input type='submit' value='Join!'
+                           className="waves-effect waves-light btn amber darken-1 top-button"
+                           onClick={() => this.joinHive(profileInfo)}/></div>
+            )
+        }
+
+    }
+
     render() {
         // Het is lastig om met consumer te werken en state. Als je het in render plaatst blijft hij maar updaten
         // op deze manier zorg je ervoor dat je het even weet, en daarna laadt hij de juiste context.
@@ -86,10 +112,10 @@ class HivePage extends Component {
         const hiveInfo = this.state.hiveInfo.hive;
         const profileInfo = this.state.profileInfo;
 
-        if (this.state.hiveInfo.hive) {
+        if (this.state.hiveInfo.hive && this.state.running) {
             fetch('http://127.0.0.1:5000/hive/members/' + this.state.hiveInfo.hive[0])
                 .then(response => response.json())
-                .then(data => this.setState({members: data}))
+                .then(data => this.setState({members: data, running: false}))
                 .catch(error => console.log(error));
         }
 
@@ -104,14 +130,9 @@ class HivePage extends Component {
                     </div>
                     <div className="col s4 m6">
                         <h6 className="center">Members</h6>
-                        <Members members={members}/>
+                        <Members members={members.items}/>
                         <div className='center-component'>
-                            <input type='submit' value='Join!'
-                                   className="waves-effect waves-light btn amber darken-1 top-button"
-                                   onClick={() => this.joinHive(profileInfo)}/>
-                            <input type='submit' value='Leave.'
-                                   className="waves-effect waves-light btn amber darken-1 top-button"
-                                   onClick={() => this.leaveHive(profileInfo)}/>
+                            {this.place_button(profileInfo, members.items)}
                         </div>
                     </div>
                     {/*//*/}

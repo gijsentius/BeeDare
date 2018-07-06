@@ -123,7 +123,7 @@ def getMembers(hive_id):
         for item in hives:
             name = db.session.query(User).filter_by(id=item.follower_id).first()
             list.append(name.username)
-        return jsonify(
-            list
-        ), 200
+        return jsonify({
+            'items': list
+        }), 200
     return jsonify({"error": "user_not_found"}), 401
