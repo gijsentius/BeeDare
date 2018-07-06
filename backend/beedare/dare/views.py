@@ -63,7 +63,7 @@ def completed_user_dares(username, token=None):
 
 @dares_blueprint.route('/open_dares/<username>', methods=["GET"])
 @dares_blueprint.route('/open_dares/<username>/<token>', methods=["GET"])
-def open_dares_user(username, token):
+def open_dares_user(username, token=None):
     try:
         user_data = db.session.query(User).filter_by(username=username).first()
     except KeyError as e:

@@ -23,53 +23,35 @@ class ProfilePage extends Component {
         };
     }
 
-    fetchImportantPrivate() {
-        if (this.state.username) {
-            fetch('http://localhost:5000/dares/open_dares/' + this.state.username + "/" + this.state.token)
-                .then(response => response.json())
-                .then(data => this.setState({openChallenges: data}))
-                .catch(error => console.log(error));
-
-            fetch('http://localhost:5000/profile/user/' + this.state.username + "/" + this.state.token)
-                .then(response => response.json())
-                .then(data => this.setState({profileInfo: data}))
-                .catch(error => console.log(error));
-
-            fetch('http://localhost:5000/dares/completed_dares/' + this.state.username + "/" + this.state.token)
-                .then(response => response.json())
-                .then(data => this.setState({completedChallenges: data}))
-                .catch(error => console.log(error));
-
-            fetch('http://localhost:5000/profile/public/user/' + this.state.user)
-                .then(response => response.json())
-                .then(data => this.setState({friendInfo: data}))
-                .catch(error => console.log(error));
-
-            this.setState({renderOnce: false});
+    fetchImportant() {
+        let state;
+        if (this.state.user !== this.state.profileInfo.username) {
+            state = this.state.user
         }
-    }
+        else{
+            state = this.state.username + "/" + this.state.token
+        }
+        if (this.state.username) {
+            fetch('http://localhost:5000/dares/open_dares/' + state)
+                .then(response => response.json())
+                .then(data => this.setState({openChallenges: data}))
+                .catch(error => console.log(error));
 
-    fetchImportantPublic(username) {
-        if (username) {
             fetch('http://localhost:5000/profile/user/' + this.state.username + "/" + this.state.token)
                 .then(response => response.json())
                 .then(data => this.setState({profileInfo: data}))
                 .catch(error => console.log(error));
 
-            fetch('http://localhost:5000/dares/open_dares/' + username)
+            fetch('http://localhost:5000/dares/completed_dares/' + state)
                 .then(response => response.json())
-                .then(data => this.setState({openChallenges: data}))
+                .then(data => this.setState({completedChallenges: data}))
                 .catch(error => console.log(error));
 
-            fetch('http://localhost:5000/profile/public/user/' + username)
+            fetch('http://localhost:5000/profile/user/' + this.state.user)
                 .then(response => response.json())
                 .then(data => this.setState({friendInfo: data}))
                 .catch(error => console.log(error));
 
-            fetch('http://localhost:5000/dares/completed_dares/' + username)
-                .then(response => response.json())
-                .then(data => this.setState({completedChallenges: data}))
-                .catch(error => console.log(error));
             this.setState({renderOnce: false});
         }
     }
@@ -100,7 +82,7 @@ class ProfilePage extends Component {
                             username: context.loggedInUsername,
                             token: context.token,
                         });
-                        this.fetchImportantPrivate();
+                        this.fetchImportant();
                     }
                 }
                 </UserContext.Consumer>

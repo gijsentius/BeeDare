@@ -23,7 +23,7 @@ def add_post(username, token):
     return jsonify({}), 200
 
 
-@profile_blueprint.route('/public/user/<username>', methods=['GET', 'POST'])
+@profile_blueprint.route('/user/<username>', methods=['GET', 'POST'])
 @profile_blueprint.route('/user/<username>/<token>', methods=['POST', 'GET'])
 def user(username, token=None):
     if token is not None:
