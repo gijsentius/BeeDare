@@ -25,12 +25,12 @@ class Message extends Component {
             <div className="section center">
                 <div className="messageCard">
                     <div className="card amber lighten-1">
-                        <span className="username">{this.props.name}</span>
+                        <span className="username">{this.props.body}</span>
                         <div className="body">
-                            {this.props.body}
+                            {this.props.name}
                         </div>
                         <div className="body">
-                            {this.props.author}
+                            Author: {this.props.author}
                         </div>
 
                         <div className="card-action">

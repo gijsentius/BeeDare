@@ -14,31 +14,14 @@ class Newsfeed extends Component {
         }
     }
 
-    // componentDidMount() {
-    //     let username = 'Vyxor';
-    //     fetch('http://localhost:5000/profile/newsfeed/' + username)
-    //         .then(response => response.json())
-    //         .then(data => this.setState({messages: data}));
-    // }
-
-
     render() {
-        // let list = [];
-        // for (let message in this.props.messages) {
-        //     console.log(this.props.messages);
-        //     list.push(<div className="message">
-        //         <Message
-        //             body={'test'}
-        //             name={'test2'}
-        //         />
-        //     </div>)
-        // }
         this.state.messageList = this.props.messages.map((message) =>
             <div className="message">
                 <Message
-                    body={message.body_html}
-                    name={message.body}
+                    body={message.body}
+                    name={message.body_html}
                     author={message.author}
+                    time={message.time}
                 />
             </div>
         );//end map

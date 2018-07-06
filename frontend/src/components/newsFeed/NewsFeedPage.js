@@ -20,7 +20,9 @@ class NewsFeedPage extends React.Component {
             username: null,
             token: null,
             renderOnce: true,
-            running: true
+            running: true,
+            friends: [],
+            collecting: true
         };
 
         this.setTitle = this.setTitle.bind(this)
@@ -37,19 +39,6 @@ class NewsFeedPage extends React.Component {
             this.setState({renderOnce: false});
         }
     }
-
-    // componentDidMount(){
-    //     fetch('http://localhost:5000/hive/hives/user/' + this.state.profileInfo.id)
-    //         .then(response => response.json())
-    //         .then(data => this.setState({hives: data}))
-    //         .catch(error => console.log(error));
-    //
-    //     // TODO get right ID
-    //     fetch('http://localhost:5000/coll/messages/' + this.state.profileInfo.id)
-    //         .then(response => response.json())
-    //         .then(data => this.setState({messages: data.result}))
-    //         .catch(error => console.log(error));
-    // }
 
     render() {
         if (this.state.renderOnce) {
@@ -92,7 +81,6 @@ class NewsFeedPage extends React.Component {
 
 
         const profileInfo = this.state.profileInfo;
-        const messages = this.state.messages;
 
         if(profileInfo.id && this.state.running) {
             fetch('http://localhost:5000/hive/hives/user/' + profileInfo.id)
@@ -105,8 +93,30 @@ class NewsFeedPage extends React.Component {
                 .then(response => response.json())
                 .then(data => this.setState({messages: data.result}))
                 .catch(error => console.log(error));
+
+            fetch('http://localhost:5000/profile/friends/' + profileInfo.id)
+                .then(response => response.json())
+                .then(data => this.setState({friends: data.friends_id}))
+                .catch(error => console.log(error));
+
             this.setState({running: false})
         }
+
+        if(this.state.friends.length !== 0 && this.state.collecting) {
+            for (let i = 0; i < this.state.friends.length; i++) {
+                fetch('http://localhost:5000/coll/messages/' + this.state.friends[i])
+                    .then(response => response.json())
+                    .then(data => this.setState({messages: this.state.messages.concat(data.result)}))
+                    .catch(error => console.log(error));
+            }
+            this.setState({collecting: false})
+        }
+
+        // for(let x = 0; x < this.state.messages.length; x++){
+        //     alert(this.state.messages[x])
+        // }
+
+        let messages = this.state.messages;
 
         return (
             <div className="customContainer">
@@ -169,8 +179,8 @@ class NewsFeedPage extends React.Component {
         const form = event.target;
         let data = new FormData(form);
         // data.append('user_id', event.id);
-        data.append('title', this.state.title);
-        data.append('body', this.state.message);
+        data.append('body', this.state.title);
+        data.append('body_html', this.state.message);
 
         fetch('http://localhost:5000/profile/add/post/' + this.state.username + '/' + this.state.token, {
             method: 'POST',

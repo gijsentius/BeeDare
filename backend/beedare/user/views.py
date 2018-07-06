@@ -17,7 +17,7 @@ def add_post(username, token):
     if request.method == "POST": # and user_data.check_loginrequired(token):
         body = request.form
         if body is not None:
-            post = Post(body=body['body'], author_id=user_data.id)  # post model aanpassen
+            post = Post(body=body['body'], body_html=body['body_html'], author_id=user_data.id)  # post model aanpassen
             db.session.add(post)
             db.session.commit()
     return jsonify({}), 200
@@ -196,6 +196,7 @@ def news(username, token):
 @profile_blueprint.route('/friends/<user>', methods=['GET'])
 def getFriends(user):
     friend_list = []
+    friend_list_id = []
     try:
         friends = db.session.query(Friend).filter_by(followed_id=user).all()
     except KeyError as e:
@@ -207,10 +208,14 @@ def getFriends(user):
                 friend_list.append(
                     friend.username
                 )
+                friend_list_id.append(
+                    friend.id
+                )
         except KeyError as e:
             return jsonify({"error": str(e) + " not given or invalid"}), 401
         response = jsonify({
             "friends": friend_list,
+            "friends_id": friend_list_id
         })
         return response, 200
     return jsonify({}), 401

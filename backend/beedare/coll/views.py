@@ -10,13 +10,13 @@ from . import *
 
 @coll_blueprint.route('/friends', methods=["POST"])
 def friends():
-    content = request.get_json()
+    content = request.form
     try:
-        result = db.session.query(Friend).filter(Friend.follower_id.like("%" + content['id'] + "%")).all()
+        result = db.session.query(Friend).filter_by(followed_id=content['id']).all()
     except KeyError as e:
         return jsonify({"error": str(e) + " not given or invalid"}), 401
     return jsonify({
-        "result": [[item.id] for item in result]
+        "result": [[item.follower_id] for item in result]
     }), 200
 
 
@@ -36,11 +36,11 @@ def dares():
 def messages(id):
     try:
         list = []
-        result = db.session.query(Post).all()
-        # author = db.session.query(User).filter_by(id=id).first()
+        result = db.session.query(Post).filter_by(author_id=id).all()
         for item in result:
+            author = db.session.query(User).filter_by(id=item.author_id).first()
             list.append(
-                {'body': item.body, 'html': item.body_html}
+                {'body': item.body, 'body_html': item.body_html, 'author': author.username, 'time': item.timestamp}
             )
     except KeyError as e:
         return jsonify({"error": str(e) + " not given or invalid"}), 401
