@@ -74,14 +74,21 @@ class NewsFeedPage extends React.Component {
             //    dit stukje code zorgt ervoor dat je geen undefined krijgt
         }
 
-        let listItems = this.state.hives.map((item) =>
-            <div className='card-content'>
-                <div style={{cursor: 'pointer'}} className='item'>
-                    <Hive name={item.hiveName} content={item.totalScore} image="https://placeimg.com/400/400/nature"
-                          beekeeper={item.beekeeper}/>
+        let listItems;
+
+        if(this.state.hives.length === 0){
+            listItems = <h6>No hives joined yet!</h6>
+        }
+        else{
+            listItems = this.state.hives.map((item) =>
+                <div className='card-content'>
+                    <div style={{cursor: 'pointer'}} className='item'>
+                        <Hive name={item.hiveName} content={item.totalScore} image="https://placeimg.com/400/400/nature"
+                              beekeeper={item.beekeeper}/>
+                    </div>
                 </div>
-            </div>
-        );
+            );
+        }
 
 
         const profileInfo = this.state.profileInfo;
