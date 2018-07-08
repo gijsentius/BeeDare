@@ -42,6 +42,7 @@ def user(username, token=None):
                         "image": user_data.image,
                         "id": user_data.id,
                         "rank": user_data.rank,
+                        "score": user_data.score,
                     }
                 ), 200
         return jsonify({}), 401
@@ -60,6 +61,7 @@ def user(username, token=None):
                         "image": user_data.image,
                         "rank": user_data.rank,
                         "id": user_data.id,
+                        "score": user_data.score,
                     }
                 ), 200
         return jsonify({}), 401

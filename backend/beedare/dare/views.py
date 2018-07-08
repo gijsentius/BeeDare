@@ -115,6 +115,7 @@ def delete_dare(dareid, username, token):
 def achieved_dare(dareid, username, token):
     try:
         user_data = db.session.query(User).filter_by(username=username).first()
+        dare = db.session.query(Dare).filter_by(id=dareid).first()
     except KeyError as e:
         return jsonify({"error": str(e) + " not given or invalid"}), 401
     if request.method == "GET" and user_data.check_loginrequired(token):
@@ -124,6 +125,7 @@ def achieved_dare(dareid, username, token):
             return jsonify({"error": str(e) + " not given or invalid"}), 401
         if userdare is not None:
             userdare.achieved = True
+            user_data.score = user_data.score + dare.value
             db.session.commit()
             return jsonify(
                 {"result": "It worked! Dare is deleted"}

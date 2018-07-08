@@ -90,12 +90,31 @@ class Profile extends Component {
                     </div>
                     <div className="divider"/>
                     <div className="section center">
-                        <h6>Rank: {profile.rank}</h6>
+                        <h6>Rank: {this.getRank(profile.score)}</h6>
+                    </div>
+                    <div className="divider"/>
+                    <div className="section center">
+                        <h6>Score: {profile.score}</h6>
                     </div>
                 </div>
             </div>
         );
 
+    }
+
+    getRank(score){
+        if(score < 20){
+            return <h6>New Bee</h6>
+        }
+        else if(score < 50 && score >= 20){
+            return <h6>Worker</h6>
+        }
+        else if(score < 100 && score >= 50){
+            return <h6>Warrior</h6>
+        }
+        else if(score >= 100){
+            return <h6>Queen</h6>
+        }
     }
 }
 

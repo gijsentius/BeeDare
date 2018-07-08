@@ -126,7 +126,7 @@ class HivePage extends Component {
                     {/*Change*/}
                     <div className="col s2 m3">
                         <h6 className="center">Harvest Dares</h6>
-                        <OpenChallenges openChallenges={openChallenges}/>
+                        <OpenChallenges openChallenges={openChallenges} owned={false}/>
                     </div>
                     <div className="col s4 m6">
                         <h6 className="center">Members</h6>
@@ -138,7 +138,7 @@ class HivePage extends Component {
                     {/*//*/}
                     <div className="col s2 m3">
                         <h6 className="center">Hive</h6>
-                        <HiveProfile profileInfo={hiveInfo}/>
+                        <HiveProfile profileInfo={hiveInfo} owned={false}/>
                     </div>
                 </div>
             </div>
