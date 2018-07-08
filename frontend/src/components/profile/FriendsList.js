@@ -3,6 +3,7 @@ import Block from "../block/Block";
 import Icon from "../icon/Icon";
 import Link from "react-router-dom/es/Link";
 import {UserContext} from "../UserProvider";
+import Redirect from "react-router-dom/es/Redirect";
 
 class FriendsList extends React.Component {
     constructor(props) {
@@ -11,6 +12,7 @@ class FriendsList extends React.Component {
             username: null,
             token: null,
             renderOnce: true,
+            owned: this.props.owned
         }
     }
 
@@ -20,24 +22,43 @@ class FriendsList extends React.Component {
                 .then(response => response.json())
                 .then(data => this.setState({profileInfo: data}))
                 .catch(error => console.log(error));
+            this.setState({renderOnce: false})
         }
+    }
+
+    logged(context) {
+        this.setState({
+            username: context.loggedInUsername,
+            token: context.token
+        });
+        this.fetchImportant();
     }
 
     render() {
         if (this.state.renderOnce) {
-            return (
-                <UserContext.Consumer>{
-                    (context) => {
-                        this.setState({
-                            username: context.loggedInUsername,
-                            token: context.token,
-                            renderOnce: false
-                        });
-                        this.fetchImportant();
+            return (<div>
+                    <UserContext.Consumer>{
+                        (context => context.isAuthenticated ? this.logged(context) : <Redirect to={{
+                            pathname: '/signin',
+                        }}/>)
                     }
-                }
-                </UserContext.Consumer>
+                    </UserContext.Consumer>
+                    <UserContext.Consumer>{
+                        (context) => {
+                            this.setState({
+                                username: context.loggedInUsername,
+                                token: context.token,
+                            });
+                            this.fetchImportant();
+                        }
+                    }
+                    </UserContext.Consumer>
+                </div>
             )
+        }
+
+        if (!this.state.profileInfo) {
+            return (<div/>)
         }
 
         const members = this.props.members;
@@ -47,13 +68,19 @@ class FriendsList extends React.Component {
             list.push(<div className='item col s4 m3 l2 center'><Link to={"/profile/" + members[i]}>
                 <Icon/>{members[i]}
             </Link>
-                <input className="btn amber darken-1" value='Remove friend' type='button'
-                       onClick={() => this.remove_friend(members[i])}/>
+                {this.placeButton(members[i])}
             </div>)
         }
         return <div className='card dare-cols'>
             <div>{list}</div>
         </div>
+    }
+
+    placeButton(member) {
+        if (this.state.profileInfo.id === parseInt(this.props.user)) {
+            return <input className="btn amber darken-1" value='Remove friend' type='button'
+                          onClick={() => this.remove_friend(member)}/>
+        }
     }
 
     remove_friend(member) {

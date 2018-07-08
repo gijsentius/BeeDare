@@ -22,7 +22,7 @@ class Friends extends React.Component {
             <div className='row'>
                 <div className="col s12 m12 l12">
                     <h6 className="center">Friends</h6>
-                    <FriendsList members={this.props.friends}/>
+                    <FriendsList members={this.props.friends} user={this.props.user}/>
                 </div>
             </div>
         );

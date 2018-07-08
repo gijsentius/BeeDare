@@ -24,7 +24,7 @@ class FriendPage extends React.Component {
         }
         else{
             return(
-                <Friends friends={this.state.friends}/>
+                <Friends friends={this.state.friends} user={this.props.match.params.user}/>
             )
         }
     }
