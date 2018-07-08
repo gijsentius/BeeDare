@@ -21,15 +21,22 @@ class ProfilePage extends Component {
             public: false,
             friendInfo: [],
         };
+        this.owned = true
     }
 
     fetchImportant() {
         let state;
-        if (this.state.user !== this.state.profileInfo.username) {
-            state = this.state.user
+        if (this.state.username !== null) {
+            if (this.state.user !== this.state.username) {
+                this.owned = false
+            }
         }
-        else{
-            state = this.state.username + "/" + this.state.token
+        if (this.state.user !== this.state.profileInfo.username) {
+            state = this.state.user;
+        }
+        else {
+            // state = this.state.username + "/" + this.state.token;
+            state = this.state.user;
         }
         if (this.state.username) {
             fetch('http://localhost:5000/dares/open_dares/' + state)
@@ -89,7 +96,7 @@ class ProfilePage extends Component {
             )
         }
 
-        if (!this.state.profileInfo) {
+        if (!this.state.friendInfo) {
             return (
                 <div/>
             )
@@ -97,14 +104,14 @@ class ProfilePage extends Component {
         }
 
         const {openChallenges, completedChallenges} = this.state;
-        const profileInfo = this.state.profileInfo;
+        const profileInfo = this.state.friendInfo;
 
         return (
             <div>
                 <div className="row">
                     <div className="col s2 m3">
                         <h6 className="center">Open Dares</h6>
-                        <OpenChallenges openChallenges={openChallenges}/>
+                        <OpenChallenges openChallenges={openChallenges} owned={this.owned}/>
                     </div>
                     <div className="col s4 m6">
                         <h6 className="center">Achieved Dares</h6>
@@ -112,7 +119,7 @@ class ProfilePage extends Component {
                     </div>
                     <div className="col s2 m3 center">
                         <h6 className="center">Profile</h6>
-                        <Profile profileInfo={profileInfo}/>
+                        <Profile profileInfo={profileInfo} owned={this.owned}/>
                         {this.friend_button()}
                     </div>
                 </div>

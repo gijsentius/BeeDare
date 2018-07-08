@@ -18,6 +18,7 @@ export default class OpenChallenges extends React.Component {
             username: null,
             token: null,
             renderOnce: true,
+            owned: this.props.owned
         };
 
         this.showMenu = this.showMenu.bind(this);
@@ -57,6 +58,16 @@ export default class OpenChallenges extends React.Component {
             document.removeEventListener('click', this.closeMenu);
         });
         // this.props.fetch();
+    }
+
+    placeButton(item) {
+        if(this.state.owned) {
+            return <div>{/*Gebruik van arrow functie om event en item.id mee te kunnen geven*/}
+                <a id={item.id} onClick={(e) => this.showMenu(e, item.id)}
+                   className="btn-floating btn-small amber darken-1">
+                    <i className="material-icons">edit</i>
+                </a></div>
+        }
     }
 
 
@@ -100,11 +111,7 @@ export default class OpenChallenges extends React.Component {
                             <ChallengeIcon image={'http://localhost:5000/image/' + item.images + '/dares'}/>
                             {/*Hierboven moet image nog toegevoegd worden als deze klaar is!!!!!*/}
                             <div className="rightnext">
-                                {/*Gebruik van arrow functie om event en item.id mee te kunnen geven*/}
-                                <a id={item.id} onClick={(e) => this.showMenu(e, item.id)}
-                                   className="btn-floating btn-small amber darken-1">
-                                    <i className="material-icons">edit</i>
-                                </a>
+                                {this.placeButton(item)}
                                 {
                                     // onderstaande vergelijking is van essentieel belang, zodat er niet meerdere menu's
                                     // aangemaakt worden.

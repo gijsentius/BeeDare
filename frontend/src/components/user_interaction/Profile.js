@@ -13,6 +13,7 @@ class Profile extends Component {
             username: null,
             token: null,
             renderOnce: true,
+            owned: this.props.owned
         };
     }
 
@@ -30,6 +31,16 @@ class Profile extends Component {
                 .catch(error => console.log(error));
 
             this.setState({renderOnce: false});
+        }
+    }
+
+    placeButton() {
+        if(this.state.owned){
+            return <div className="rightnext">
+                <li className="btn-floating btn-small amber darken-1">
+                    <Link to="/edit-profile"><i className="material-icons">edit</i></Link>
+                </li>
+            </div>
         }
     }
 
@@ -55,7 +66,7 @@ class Profile extends Component {
 
         const profile = this.props.profileInfo;
 
-        if(this.state.profileInfo === undefined){
+        if (this.state.profileInfo === undefined) {
             return <div/>
         }
 
@@ -66,17 +77,7 @@ class Profile extends Component {
                         <div className="center" id='imgCH'>
                             <Icon image={"http://localhost:5000/image/" + this.state.profileInfo.image + "/users"}/>
                             {/*Hierboven nog toevoegen: image={profile.image}*/}
-                            {
-                                this.props.public ? (
-                                    null
-                                ) : (
-                                    <div className="rightnext">
-                                        <li className="btn-floating btn-small amber darken-1">
-                                            <Link to="/edit-profile"><i className="material-icons">edit</i></Link>
-                                        </li>
-                                    </div>
-                                )
-                            }
+                            {this.placeButton()}
                         </div>
                     </div>
                     <div className="divider"/>
