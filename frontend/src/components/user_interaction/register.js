@@ -1,5 +1,6 @@
 import React from 'react';
 import "./login-register.css";
+import Redirect from "react-router-dom/es/Redirect";
 
 export default class Register extends React.Component {
 
@@ -68,10 +69,17 @@ export default class Register extends React.Component {
     }
 
     render() {
-
         let errors;
         if (this.state.message) {
             errors = this.state.message.map((mes) => <div>{mes.message}</div>);
+        }
+
+        let error;
+        if (this.state.message) {
+            error = this.state.message.map((mes) => mes.message);
+            if (error[0] === "Success!") {
+                return <Redirect to='/signin'/>
+            }
         }
 
         return (

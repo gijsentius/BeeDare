@@ -70,7 +70,7 @@ def register():
         db.session.add(user)
         try:
             db.session.commit()
-            message.append({"message": "Succes!"})
+            message.append({"message": "Success!"})
         except sqlalchemy.exc.IntegrityError:
             return jsonify(message), 401
     return jsonify(
