@@ -13,7 +13,7 @@ class Icon extends React.Component {
     }
 
     componentDidMount() {
-        if (this.state.image === undefined || this.state.image === null || this.state.image === "noneexistent") {
+        if (this.state.image === undefined || this.state.image === null || this.state.image.includes("http://localhost:5000/image/noneexistent/")) {
             this.setState({image: personPlaceholder});
         }
         if (this.state.online === undefined) {

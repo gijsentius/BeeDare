@@ -4,6 +4,7 @@ import Profile from "../user_interaction/Profile";
 import CompletedChallenges from "../challenge/completedChallenges";
 import {UserContext} from "../UserProvider";
 import './Common.css'
+import Link from "react-router-dom/es/Link";
 
 class ProfilePage extends Component {
 
@@ -20,6 +21,8 @@ class ProfilePage extends Component {
             user: this.props.match.params.user,  // the user in the url
             public: false,
             friendInfo: [],
+            setRenderTrue: () => this.setState({renderOnce: true}),
+
         };
         this.owned = true
     }
@@ -111,7 +114,7 @@ class ProfilePage extends Component {
                 <div className="row">
                     <div className="col s2 m3">
                         <h6 className="center">Open Dares</h6>
-                        <OpenChallenges openChallenges={openChallenges} owned={this.owned}/>
+                        <OpenChallenges fetch={this.state.setRenderTrue} openChallenges={openChallenges} owned={this.owned}/>
                     </div>
                     <div className="col s4 m6">
                         <h6 className="center">Achieved Dares</h6>
@@ -129,8 +132,8 @@ class ProfilePage extends Component {
 
     friend_button() {
         if (this.state.user !== this.state.profileInfo.username) {
-            return <input className="btn amber darken-1" value='Add as a friend' type='button'
-                          onClick={() => this.addFriend()}/>
+            return <Link to={'/friends/' + this.state.profileInfo.id}><input className="btn amber darken-1" value='Add as a friend' type='button'
+                                onClick={() => this.addFriend()}/></Link>
         }
     }
 }

@@ -66,7 +66,7 @@ class FriendsList extends React.Component {
         let list = [];
         for (let i = 0; i < members.length; i++) {
             list.push(<div className='item col s4 m3 l2 center'><Link to={"/profile/" + members[i]}>
-                <Icon/>{members[i]}
+                <Icon image={"http://localhost:5000/image/" + this.props.images[i] + "/users"}/>{members[i]}
             </Link>
                 {this.placeButton(members[i])}
             </div>)
@@ -78,8 +78,8 @@ class FriendsList extends React.Component {
 
     placeButton(member) {
         if (this.state.profileInfo.id === parseInt(this.props.user)) {
-            return <input className="btn amber darken-1" value='Remove friend' type='button'
-                          onClick={() => this.remove_friend(member)}/>
+            return <Link to={'/profile/' + this.state.username}><input className="btn amber darken-1" value='Remove friend' type='button'
+                                onClick={() => this.remove_friend(member)}/></Link>
         }
     }
 

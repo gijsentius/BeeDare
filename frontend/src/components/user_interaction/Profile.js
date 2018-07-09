@@ -75,8 +75,7 @@ class Profile extends Component {
                 <div className="card-content">
                     <div className="section" key={profile.id}>
                         <div className="center" id='imgCH'>
-                            <Icon image={"http://localhost:5000/image/" + this.state.profileInfo.image + "/users"}/>
-                            {/*Hierboven nog toevoegen: image={profile.image}*/}
+                            <Icon image={"http://localhost:5000/image/" + profile.image + "/users"}/>
                             {this.placeButton()}
                         </div>
                     </div>

@@ -18,7 +18,7 @@ def search_users(query):
         return jsonify({"error": str(e) + " not given or invalid"}), 401
     if result is not None:
         return jsonify({
-            "result": [[item.username, item.first_name, item.last_name] for item in result]
+            "result": [[item.username, item.first_name, item.last_name, item.image] for item in result]
         }), 200
     return jsonify({}), 401
 
@@ -31,7 +31,7 @@ def search_hives(query):
         return jsonify({"error": str(e) + " not given or invalid"}), 401
     if result is not None:
         return jsonify({
-            "result": [[item.hive_name, item.image, item.total_score_members, item.beekeeper] for item in result]
+            "result": [[item.hive_name, item.image, item.total_score_members, item.beekeeper, item.image] for item in result]
         }), 200
     return jsonify({}), 401
 

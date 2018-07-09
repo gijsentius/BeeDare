@@ -22,17 +22,12 @@ class HivePage extends Component {
             token: null,
             renderOnce: true,
             running: true,
+            setRenderTrue: () => this.setState({renderOnce: true}),
         };
+        this.owned = false;
     }
 
     componentDidMount() {
-        fetch('http://localhost:5000/profile/hive/' + this.props.match.params.name)
-            .then(response => response.json())
-            .then(data => this.setState({hiveInfo: data}))
-            .catch(error => console.log(error));
-
-        // TODO Fix these fetches!
-
         // TODO make this open challenges for hives
         fetch('http://localhost:5000/dares/')
             .then(response => response.json())
@@ -48,6 +43,11 @@ class HivePage extends Component {
 
     fetchImportant() {
         if (this.state.username) {
+
+            fetch('http://localhost:5000/profile/hive/' + this.props.match.params.name)
+                .then(response => response.json())
+                .then(data => this.setState({hiveInfo: data}))
+                .catch(error => console.log(error));
 
             fetch('http://localhost:5000/profile/user/' + this.state.username + "/" + this.state.token)
                 .then(response => response.json())
@@ -108,6 +108,7 @@ class HivePage extends Component {
             return <div/>
             //    dit stukje code zorgt ervoor dat je geen undefined krijgt
         }
+
         const {openChallenges, completedChallenges, members} = this.state;
         const hiveInfo = this.state.hiveInfo.hive;
         const profileInfo = this.state.profileInfo;
@@ -121,9 +122,7 @@ class HivePage extends Component {
 
         return (
             <div>
-                {/*<h1>{this.props.match.params.name}</h1>*/}
                 <div className="row">
-                    {/*Change*/}
                     <div className="col s2 m3">
                         <h6 className="center">Harvest Dares</h6>
                         <OpenChallenges openChallenges={openChallenges} owned={false}/>
@@ -135,7 +134,6 @@ class HivePage extends Component {
                             {this.place_button(profileInfo, members.items)}
                         </div>
                     </div>
-                    {/*//*/}
                     <div className="col s2 m3">
                         <h6 className="center">Hive</h6>
                         <HiveProfile profileInfo={hiveInfo} owned={false}/>
@@ -156,6 +154,7 @@ class HivePage extends Component {
             .then(response => response.json())
             .then(data => this.setState({response: data.success}))
             .catch(error => console.log(error));
+        this.setState({running: true});
     }
 
     leaveHive(profileInfo) {
@@ -169,6 +168,7 @@ class HivePage extends Component {
             .then(response => response.json())
             .then(data => this.setState({response: data.success}))
             .catch(error => console.log(error));
+        this.setState({running: true});
     }
 }
 

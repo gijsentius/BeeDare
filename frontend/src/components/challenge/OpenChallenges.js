@@ -48,7 +48,7 @@ export default class OpenChallenges extends React.Component {
         this.setState({showMenu: false, currentId: ""}, () => {
             document.removeEventListener('click', this.closeMenu);
         });
-        // this.props.fetch();
+        this.props.fetch();
     }
 
     dareIsAchieved(event, id) {
@@ -57,7 +57,7 @@ export default class OpenChallenges extends React.Component {
         this.setState({showMenu: false, currentId: ""}, () => {
             document.removeEventListener('click', this.closeMenu);
         });
-        // this.props.fetch();
+        this.props.fetch();
     }
 
     placeButton(item) {

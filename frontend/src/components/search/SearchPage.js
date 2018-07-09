@@ -15,7 +15,8 @@ class SearchPage extends Component {
             userResults: [],
             hiveResults: [],
             dareResults: [],
-            query: ''
+            query: '',
+            content: <div/>
         };
         this.search = this.search.bind(this);
     }
@@ -46,10 +47,14 @@ class SearchPage extends Component {
     render() {
         return (
             <div>
-                <SearchBar search={this.search}/>
+                <div className='row'>
+                    <SearchBar search={this.search}/>
+                    <input type='button' className="btn amber darken-1" value='Search' onClick={() => this.getItems()}/>
+                </div>
                 {/*<SearchResults results={this.state.searchResults}/>*/}
-                {console.log(this.state.hiveResults)}
-                {this.getItems()}
+                {/*{console.log(this.state.hiveResults)}*/}
+                {/*{this.getItems()}*/}
+                {this.state.content}
             </div>
         );
     }
@@ -65,12 +70,14 @@ class SearchPage extends Component {
         for (let i = 0; i < this.state.userResults.length; i++) {
             if (this.state.userResults[i][0].toLowerCase().startsWith(this.state.query.toLowerCase())) {
                 startUser.push(<Link to={"/profile/" + this.state.userResults[i][0]} className='search-result-box item'
-                                     style={{maxWidth: '15vw'}}><Icon/>
+                                     style={{maxWidth: '15vw'}}><Icon
+                    image={"http://localhost:5000/image/" + this.state.userResults[i][3] + "/users"}/>
                     <p className='text'>{this.state.userResults[i][0]}</p></Link>)
             }
             else {
                 userList.push(<Link to={"/profile/" + this.state.userResults[i][0]} className='search-result-box item'
-                                    style={{maxWidth: '15vw'}}><Icon/>
+                                    style={{maxWidth: '15vw'}}><Icon
+                    image={"http://localhost:5000/image/" + this.state.userResults[i][3] + "/users"}/>
                     <p className='text'>{this.state.userResults[i][0]}</p></Link>)
             }
         }
@@ -80,7 +87,7 @@ class SearchPage extends Component {
                     <div style={{cursor: 'pointer'}}>
                         <div className="item dare-col">
                             <Hive name={this.state.hiveResults[i][0]} content={this.state.hiveResults[i][2]}
-                                  image="https://placeimg.com/400/400/nature"/>
+                                  image={"http://localhost:5000/image/" + this.state.hiveResults[i][4] + "/hives"}/>
                         </div>
                     </div>)
                 //     <div className='search-result-box item'>
@@ -88,7 +95,8 @@ class SearchPage extends Component {
                 // </div>)
             }
             else {
-                hiveList.push(<div className='search-result-box item'><Hive name={this.state.hiveResults[i][0]}/>
+                hiveList.push(<div className='search-result-box item'><Hive name={this.state.hiveResults[i][0]}
+                                                                            image={"http://localhost:5000/image/" + this.state.hiveResults[i][4] + "/hives"}/>
                 </div>)
             }
         }
@@ -108,23 +116,25 @@ class SearchPage extends Component {
                 </div>)
             }
         }
-        return <div>
-            <div className='card'>
-                <h6 className="center">Users</h6>
-                <div className="search-results row">{startUser}{userList}</div>
-                <br/>
+        this.setState({
+            content: <div>
+                <div className='card'>
+                    <h6 className="center">Users</h6>
+                    <div className="search-results row">{startUser}{userList}</div>
+                    <br/>
+                </div>
+                <div className='card'>
+                    <h6 className="center">Hives</h6>
+                    <div className="search-results">{startHive}{hiveList}</div>
+                    <br/>
+                </div>
+                <div className='card'>
+                    <h6 className="center">Dares</h6>
+                    <div className="search-results">{startDare}{dareList}</div>
+                    <br/>
+                </div>
             </div>
-            <div className='card'>
-                <h6 className="center">Hives</h6>
-                <div className="search-results">{startHive}{hiveList}</div>
-                <br/>
-            </div>
-            <div className='card'>
-                <h6 className="center">Dares</h6>
-                <div className="search-results">{startDare}{dareList}</div>
-                <br/>
-            </div>
-        </div>
+        })
     }
 }
 

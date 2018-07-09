@@ -199,6 +199,7 @@ def news(username, token):
 def getFriends(user):
     friend_list = []
     friend_list_id = []
+    friend_list_image = []
     try:
         friends = db.session.query(Friend).filter_by(followed_id=user).all()
     except KeyError as e:
@@ -208,16 +209,20 @@ def getFriends(user):
             for friend in friends:
                 friend = db.session.query(User).filter_by(id=friend.follower_id).first()
                 friend_list.append(
-                    friend.username
+                    friend.username,
                 )
                 friend_list_id.append(
                     friend.id
+                )
+                friend_list_image.append(
+                    friend.image
                 )
         except KeyError as e:
             return jsonify({"error": str(e) + " not given or invalid"}), 401
         response = jsonify({
             "friends": friend_list,
-            "friends_id": friend_list_id
+            "friends_id": friend_list_id,
+            "friend_image": friend_list_image
         })
         return response, 200
     return jsonify({}), 401
