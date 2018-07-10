@@ -15,7 +15,7 @@ class Members extends React.Component {
 
         let list = [];
         for (let i = 0; i < members.length; i++) {
-            list.push(<Link to={"/profile/" + members[i]}><div className='item col s4 m3 l2'><Icon/>{members[i]}</div></Link>)
+            list.push(<Link to={"/profile/" + members[i]}><div className='item col s4 m3 l2'><Icon image={"http://localhost:5000/image/noneexistent/users"}/>{members[i]}</div></Link>)
         }
         return <div className='card dare-cols'>
             <div>{list}</div>

@@ -72,7 +72,7 @@ class NewsFeedPage extends React.Component {
             listItems = this.state.hives.map((item) =>
                 <div className='card-content'>
                     <div style={{cursor: 'pointer'}} className='item'>
-                        <Hive name={item.hiveName} content={item.totalScore} image="https://placeimg.com/400/400/nature"
+                        <Hive name={item.hiveName} content={item.totalScore} image={"http://localhost:5000/image/" + item.images + "/hives"}
                               beekeeper={item.beekeeper}/>
                     </div>
                 </div>

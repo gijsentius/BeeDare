@@ -25,7 +25,7 @@ class Hive extends React.Component {
                 <div className="col s8 section">
                     <b className="text">{this.state.name}</b>
                     <p className="text">Score: {this.state.content}</p>
-                    <p className="text">{this.state.beekeeper}</p>
+                    <p className="text">Beekeeper: {this.state.beekeeper}</p>
                 </div>
                 <div className="col s4">
                     <Icon image={this.state.image} action={undefined}/>

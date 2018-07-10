@@ -3,6 +3,7 @@ import './Challenge.css'
 import {UserContext} from "../UserProvider";
 import Redirect from "react-router-dom/es/Redirect";
 import Link from "react-router-dom/es/Link";
+import Icon from "../icon/Icon";
 
 class ChallengeCard extends Component {
     constructor(props) {
@@ -69,7 +70,7 @@ class ChallengeCard extends Component {
             <div className="card hoverable" onClick={this.handleExpandInfo}>
                 <div className="card-content">
                     <h6 className="text center-align">{this.props.title}</h6>
-                    <img src={this.props.image} alt="" className="circle responsive-img center-component"/>
+                    <Icon image={this.props.image}/>
                 </div>
             </div>
         );
@@ -100,7 +101,7 @@ class ChallengeCard extends Component {
             <div className="card hoverable" onClick={this.handleExpandInfo}>
                 <div className="card-content">
                     <h6 className="text center-align">{this.props.title}</h6>
-                    <img src={this.props.image} alt="" className="circle responsive-img center-component"/>
+                    <Icon image={this.props.image}/>
                 </div>
             </div>
         );

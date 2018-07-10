@@ -65,7 +65,7 @@ class FriendsList extends React.Component {
 
         let list = [];
         for (let i = 0; i < members.length; i++) {
-            list.push(<div className='item col s4 m3 l2 center'><Link to={"/profile/" + members[i]}>
+            list.push(<div className='item col s4 m3 l2 center' style={{minWidth: '14vw'}}><Link to={"/profile/" + members[i]}>
                 <Icon image={"http://localhost:5000/image/" + this.props.images[i] + "/users"}/>{members[i]}
             </Link>
                 {this.placeButton(members[i])}

@@ -2,6 +2,7 @@ import React from 'react';
 import './Challenge.css';
 import ChallengeIcon from "./ChallengeIcon";
 import {UserContext} from "../UserProvider";
+import Icon from "../icon/Icon";
 
 
 // source code = https://github.com/reactjs/react-modal
@@ -108,8 +109,8 @@ export default class OpenChallenges extends React.Component {
                 listItems = openChallenges.map((item) =>
                     <div className="section" key={item.id}>
                         <div className="center" id='imgCH'>
-                            <ChallengeIcon image={'http://localhost:5000/image/' + item.images + '/dares'}/>
-                            {/*Hierboven moet image nog toegevoegd worden als deze klaar is!!!!!*/}
+                            <Icon action={() => alert(item.body)} image={'http://localhost:5000/image/' + item.images + '/dares'}/>
+                            <h6>{item.value} points</h6>
                             <div className="rightnext">
                                 {this.placeButton(item)}
                                 {

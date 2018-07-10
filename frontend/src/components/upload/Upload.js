@@ -1,5 +1,7 @@
 import React, {Component} from 'react';
 import ReactImageUploadComponent from './UploadHelper.js';
+import Redirect from "react-router-dom/es/Redirect";
+import Link from "react-router-dom/es/Link";
 
 class Upload extends Component {
     constructor(props) {
@@ -31,8 +33,8 @@ class Upload extends Component {
                     maxFileSize={5242880}
                     withPreview={true}
                 />
-                <input className='waves-effect waves-light btn amber darken-1 center-component top-button' type="button"
-                       value='Submit change' onClick={() => this.submit()}/>
+                <Link to={'/profile/' + this.state.user}><input className='waves-effect waves-light btn amber darken-1 center-component top-button' type="button"
+                             value='Submit change' onClick={() => this.submit()}/></Link>
             </div>
         );
     }
